@@ -1,0 +1,17 @@
+---
+$schema: https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json
+version: "0.2"
+import:
+  - https://cdn.jsdelivr.net/npm/@cspell/dict-fr-fr/cspell-ext.json
+language: fr, fr_FR
+words:
+  - Symfony
+ignorePaths:
+  - "**/*.sql"
+  - "**/*.sh"
+  - "**/*.yaml"
+languageSettings:
+  - languageId: markdown
+    ignoreRegExpList:
+      - "/^```[\s\S]*?^```/gm"
+      - "/\*+[^\n]*?\*+/g"

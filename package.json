@@ -1,0 +1,26 @@
+{
+  "name": "mes-amis",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^10",
+    "commander": "^14",
+    "csv-writer": "^1.6",
+    "jstat": "^1.9.6",
+    "neo4j-driver": "^6",
+    "random-js": "^2.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.13.3",
+    "eslint": "^9",
+    "prettier": "^3",
+    "tsx": "^4",
+    "typescript": "^5.9"
+  }
+}
