@@ -47,7 +47,7 @@ export class Random {
      */
     static choice<T>(array: readonly T[]): T {
 
-        if (array.length === 0)
+        if (!array || array.length === 0)
             throw new Error("Empty array");
 
         return array[this.int(0, array.length - 1)];

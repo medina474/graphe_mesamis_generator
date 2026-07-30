@@ -1,6 +1,8 @@
 import { Person } from "../models/Person.js";
 
 import { AgePyramid } from "../stats/AgePyramid.js";
+import { FirstnamePool } from "../stats/FirstnamePool.js";
+
 import { AgeDistribution } from "../distributions/AgeDistribution.js";
 import { GenderDistribution } from "../distributions/GenderDistribution.js";
 import { FirstnameDistribution } from "../distributions/FirstnameDistribution.js";
@@ -28,12 +30,13 @@ export class PersonGenerator {
 
   constructor(
     private readonly pyramid: AgePyramid,
+    private readonly firstnames: FirstnamePool[],
     minAge = 18,
     maxAge = Number.MAX_SAFE_INTEGER,
   ) {
     this.ageDistribution = new AgeDistribution(pyramid, minAge);
     this.genderDistribution = new GenderDistribution(pyramid);
-    this.firstnameDistribution = new FirstnameDistribution();
+    this.firstnameDistribution = new FirstnameDistribution(firstnames);
     this.lastnameDistribution = new LastnameDistribution();
     this.educationDistribution = new EducationDistribution();
     this.wealthDistribution = new WealthDistribution();

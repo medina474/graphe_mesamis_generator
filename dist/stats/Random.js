@@ -37,7 +37,7 @@ export class Random {
      * Choix uniforme.
      */
     static choice(array) {
-        if (array.length === 0)
+        if (!array || array.length === 0)
             throw new Error("Empty array");
         return array[this.int(0, array.length - 1)];
     }
