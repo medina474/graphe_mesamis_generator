@@ -1,3 +1,4 @@
+import { mkdirSync } from "node:fs";
 import { PersonGenerator } from "./generators/PersonGenerator.js";
 import { AgePyramidLoader } from "./stats/loaders/AgePyramidLoader.js";
 import { FirstnameLoader } from "./stats/loaders/FirstnameLoader.js";
@@ -13,6 +14,8 @@ const generator = new PersonGenerator(
 const population = generator.generateMany(5000);
 
 console.log(population.slice(0, 10));
+
+mkdirSync("output", { recursive: true });
 
 const exporter = new CsvPersonExporter();
 

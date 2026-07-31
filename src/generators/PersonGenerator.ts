@@ -2,6 +2,7 @@ import { Person } from "../models/Person.js";
 
 import { AgePyramid } from "../stats/AgePyramid.js";
 import { FirstnamePool } from "../stats/FirstnamePool.js";
+import { LastnamePool } from "../stats/LastnamePool.js";
 
 import { AgeDistribution } from "../distributions/AgeDistribution.js";
 import { GenderDistribution } from "../distributions/GenderDistribution.js";

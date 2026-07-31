@@ -10,6 +10,7 @@ import { MusicDistribution } from "../distributions/MusicDistribution.js";
 export class PersonGenerator {
     pyramid;
     firstnames;
+    lastnames;
     ageDistribution;
     genderDistribution;
     firstnameDistribution;
@@ -19,13 +20,14 @@ export class PersonGenerator {
     sportDistribution;
     readingDistribution;
     musicDistribution;
-    constructor(pyramid, firstnames, minAge = 18, maxAge = Number.MAX_SAFE_INTEGER) {
+    constructor(pyramid, firstnames, lastnames, minAge = 18, maxAge = Number.MAX_SAFE_INTEGER) {
         this.pyramid = pyramid;
         this.firstnames = firstnames;
+        this.lastnames = lastnames;
         this.ageDistribution = new AgeDistribution(pyramid, minAge);
         this.genderDistribution = new GenderDistribution(pyramid);
         this.firstnameDistribution = new FirstnameDistribution(firstnames);
-        this.lastnameDistribution = new LastnameDistribution();
+        this.lastnameDistribution = new LastnameDistribution(lastnames);
         this.educationDistribution = new EducationDistribution();
         this.wealthDistribution = new WealthDistribution();
         this.sportDistribution = new SportDistribution();
@@ -64,7 +66,7 @@ export class PersonGenerator {
      */
     generateMany(count) {
         const persons = [];
-        for (let i = 0; i < count; i++) {
+        for (let i = 1; i <= count; i++) {
             persons.push(this.generate(i));
         }
         return persons;
