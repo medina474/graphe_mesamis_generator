@@ -19,23 +19,21 @@ export enum Wealth {
 
 export interface Person {
 
-    id:number;
+    id: number;
 
-    firstname:string;
-    lastname:string;
+    firstname: string;
+    lastname: string;
 
-    gender:Gender;
+    gender: Gender;
 
-    age:number;
+    age: number;
 
-    education:Education;
+    education: Education;
+    wealth: Wealth;
 
-    wealth:Wealth;
+    sport: number;
+    reading: number;
+    music: number;
 
-    sport:number;
-
-    reading:number;
-
-    music:number;
-
+    edges: number;
 }

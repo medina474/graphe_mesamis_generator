@@ -12,6 +12,7 @@
     "@faker-js/faker": "^10",
     "commander": "^14",
     "csv-writer": "^1.6",
+    "graphology": "^0.26.0",
     "jstat": "^1.9.6",
     "neo4j-driver": "^6",
     "random-js": "^2.1.0"

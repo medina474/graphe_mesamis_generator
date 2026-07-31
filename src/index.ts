@@ -13,7 +13,7 @@ const generator = new PersonGenerator(
 
 const population = generator.generateMany(5000);
 
-console.log(population.slice(0, 10));
+console.log(population.slice(0, 3));
 
 mkdirSync("output", { recursive: true });
 
@@ -23,3 +23,6 @@ await exporter.export(
     population,
     "output/persons.csv"
 );
+
+const relationshipGenerator = new RelationshipGenerator(population);
+graph = relationshipGenerator.generateMany();
