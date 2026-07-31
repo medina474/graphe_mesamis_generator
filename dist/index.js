@@ -1,11 +1,12 @@
+import { mkdirSync } from "node:fs";
 import { PersonGenerator } from "./generators/PersonGenerator.js";
 import { AgePyramidLoader } from "./stats/loaders/AgePyramidLoader.js";
 import { FirstnameLoader } from "./stats/loaders/FirstnameLoader.js";
+import { LastnameLoader } from "./stats/loaders/LastnameLoader.js";
 import { CsvPersonExporter } from "./exporters/CsvPersonExporter.js";
-const pyramid = AgePyramidLoader.load("data/age-pyramid-guadeloupe.json");
-const firstnames = FirstnameLoader.load("data/prenoms.json");
-const generator = new PersonGenerator(pyramid, firstnames, 18, 79);
+const generator = new PersonGenerator(AgePyramidLoader.load("data/age-pyramid-guadeloupe.json"), FirstnameLoader.load("data/prenoms.json"), LastnameLoader.load("data/noms.csv"), 18, 79);
 const population = generator.generateMany(5000);
 console.log(population.slice(0, 10));
+mkdirSync("output", { recursive: true });
 const exporter = new CsvPersonExporter();
 await exporter.export(population, "output/persons.csv");

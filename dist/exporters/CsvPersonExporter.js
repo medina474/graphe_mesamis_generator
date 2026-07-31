@@ -19,6 +19,7 @@ export class CsvPersonExporter {
         const records = persons.map((person) => ({
             id: person.id,
             firstname: person.firstname,
+            lastname: person.lastname,
             gender: person.gender,
             age: person.age,
             education: person.education,
