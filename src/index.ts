@@ -1,9 +1,11 @@
 import { mkdirSync } from "node:fs";
 import { PersonGenerator } from "./generators/PersonGenerator.js";
+import { RelationshipGenerator } from "./generators/RelationshipGenerator.js";
 import { AgePyramidLoader } from "./stats/loaders/AgePyramidLoader.js";
 import { FirstnameLoader } from "./stats/loaders/FirstnameLoader.js";
 import { LastnameLoader } from "./stats/loaders/LastnameLoader.js";
 import { CsvPersonExporter } from "./exporters/CsvPersonExporter.js";
+import { GraphExporter } from "./exporters/GraphExporter.js";
 
 const generator = new PersonGenerator(
     AgePyramidLoader.load("data/age-pyramid-guadeloupe.json"),
@@ -25,4 +27,7 @@ await exporter.export(
 );
 
 const relationshipGenerator = new RelationshipGenerator(population);
-graph = relationshipGenerator.generateMany();
+const graph = relationshipGenerator.generateMany();
+
+const graphExporter = new GraphExporter();
+await graphExporter.export(graph, "output/graph.json");
