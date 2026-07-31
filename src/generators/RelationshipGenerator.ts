@@ -1,6 +1,5 @@
-import { Person } from "../models/Person.js";
+import { Gender, Person } from "../models/Person.js";
 import { UndirectedGraph } from "graphology";
-import type Graph from "graphology";
 
 export class RelationshipGenerator {
 
@@ -10,17 +9,26 @@ export class RelationshipGenerator {
 
     private graph: UndirectedGraph;
 
+    private hommes: Person[];
+    private femmes: Person[];
+
     constructor(private individus: Person[]) {
         this.graph = new UndirectedGraph;
+
+        for (let k = 0 ; k < this.individus.length ; k++) {
+            this.graph.addNode(this.individus[k].id, 
+                { 'firstname': this.individus[k].firstname,
+                  'lastname': this.individus[k].lastname  
+                })
+        }
+
+        this.hommes = individus.filter(i => i.gender === Gender.Male)
+        this.femmes = individus.filter(i => i.gender === Gender.Female)
     }
 
-    generateMany() :UndirectedGraph
+    generateFriends()
     {
         const N = this.individus.length;
-
-        for (let k = 0 ; k < N ; k++) {
-            this.graph.addNode(String(k), { 'firstname': this.individus[k].firstname })
-        }
 
         for (let k = 0 ; k < N * 15 ; k++) {
 
@@ -74,7 +82,62 @@ export class RelationshipGenerator {
                 this.graph.addEdge(String(i), String(j));
             }
         }
+    }
+
+    generateCouple(minAge: number, maxAge: number, celibacyRate: number)
+    {
+        const femmes = this.femmes.filter(
+            f => f.married === false && f.age >= minAge && f.age <= maxAge
+        );
+
+        for (const femme of femmes) {
+
+            // Cette personne reste célibataire
+            if (Math.random() < celibacyRate) {
+                continue;
+            }
+
+            // Recherche des hommes compatibles. Hommes non mariés pas moins de 5 ans de moins
+            // que la femme et au plus 10 ans de plus
+            // Trier par écart d'age
+            // ToDo : ajouter le niveau d'étude qui est très déterminant.
+            const candidats = this.hommes.filter(h => !h.married)
+                .map(homme => ({
+                    homme,
+                    ecartAge: Math.abs(femme.age - homme.age)
+                }))
+                .filter(c => c.homme.age > femme.age - 5 && c.homme.age < femme.age + 10)
+                .sort((a, b) => a.ecartAge - b.ecartAge);
+
+            if (candidats.length === 0) {
+                continue;
+            }
+
+            // Pour l'instant : choisir aléatoirement parmi
+            // les trois meilleurs candidats
+            const nb = Math.min(3, candidats.length);
+            const candidat = candidats[Math.floor(Math.random() * nb)];
+
+            const homme = candidat.homme;
+
+            this.graph.addEdge(femme.id, homme.id, {
+                type: "marriage"
+            });
+
+            // Une personne ne peut être marié qu'une fois
+            homme.married = true;
+            femme.married = true;
+        }
+    }
+
+    generateMany() :UndirectedGraph
+    {
+        this.generateCouple(65, 120, 0.3);
 
         return this.graph;
+    }
+
+    export(): object {
+        return this.graph.export();
     }
 }

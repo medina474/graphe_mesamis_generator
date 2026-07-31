@@ -36,4 +36,9 @@ export interface Person {
     music: number;
 
     edges: number;
+    married: boolean;
+
+    label: string;
+    x: number;
+    y: number;
 }

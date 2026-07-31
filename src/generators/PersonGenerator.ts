@@ -59,6 +59,10 @@ export class PersonGenerator {
      */
     const person = {
       id,
+      edges: 0,
+      married: false,
+      x: Math.random(),
+      y: Math.random()
     } as Person;
 
     // Caractéristiques démographiques
@@ -85,6 +89,7 @@ export class PersonGenerator {
 
     person.music = this.musicDistribution.sample(person);
 
+    person.label = `${person.firstname} ${person.lastname}`;
     return person;
   }
 
