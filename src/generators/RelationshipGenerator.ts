@@ -18,6 +18,10 @@ export class RelationshipGenerator {
     {
         const N = this.individus.length;
 
+        for (let k = 0 ; k < N ; k++) {
+            this.graph.addNode(String(k), { 'firstname': this.individus[k].firstname })
+        }
+
         for (let k = 0 ; k < N * 15 ; k++) {
 
             const i = Math.floor(Math.random() * N);
