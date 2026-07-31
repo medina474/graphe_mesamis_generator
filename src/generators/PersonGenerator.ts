@@ -31,13 +31,14 @@ export class PersonGenerator {
   constructor(
     private readonly pyramid: AgePyramid,
     private readonly firstnames: FirstnamePool[],
+    private readonly lastnames: LastnamePool[],
     minAge = 18,
     maxAge = Number.MAX_SAFE_INTEGER,
   ) {
     this.ageDistribution = new AgeDistribution(pyramid, minAge);
     this.genderDistribution = new GenderDistribution(pyramid);
     this.firstnameDistribution = new FirstnameDistribution(firstnames);
-    this.lastnameDistribution = new LastnameDistribution();
+    this.lastnameDistribution = new LastnameDistribution(lastnames);
     this.educationDistribution = new EducationDistribution();
     this.wealthDistribution = new WealthDistribution();
     this.sportDistribution = new SportDistribution();
