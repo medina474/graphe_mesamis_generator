@@ -1,5 +1,5 @@
 import { Distribution } from "./Distribution.js";
-import { Gender, Person } from "../models/Person.js";
+import { Person } from "../models/Person.js";
 import { Random } from "../stats/Random.js";
 import { FirstnamePool } from "../stats/FirstnamePool.js";
 
@@ -20,6 +20,10 @@ export class FirstnameDistribution
         const pool = this.firstnames.find(p => person.age! <= p.maxAge && person.gender == p.genre);
         if (typeof pool == 'undefined') return 'Inconnu';
 
-        return Random.choice(pool.firstnames);
+        const values = pool.firstnames.map((e) => e.firstname);
+        const weights = pool.firstnames.map((e) => e.count);
+
+        //console.log(pool);
+        return Random.weightedChoice(values, weights);
     }
 }

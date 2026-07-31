@@ -92,7 +92,7 @@ export class PersonGenerator {
   generateMany(count: number): Person[] {
     const persons: Person[] = [];
 
-    for (let i = 0; i < count; i++) {
+    for (let i = 1; i <= count; i++) {
       persons.push(this.generate(i));
     }
 
