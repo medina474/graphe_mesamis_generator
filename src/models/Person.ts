@@ -37,8 +37,5 @@ export interface Person {
 
     edges: number;
     married: boolean;
-
-    label: string;
-    x: number;
-    y: number;
+    child: boolean;
 }

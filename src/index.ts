@@ -5,16 +5,15 @@ import { AgePyramidLoader } from "./stats/loaders/AgePyramidLoader.js";
 import { FirstnameLoader } from "./stats/loaders/FirstnameLoader.js";
 import { LastnameLoader } from "./stats/loaders/LastnameLoader.js";
 import { CsvPersonExporter } from "./exporters/CsvPersonExporter.js";
-import { GraphExporter } from "./exporters/GraphExporter.js";
 import fs from 'fs';
 
 const generator = new PersonGenerator(
     AgePyramidLoader.load("data/age-pyramid-guadeloupe.json"),
     FirstnameLoader.load("data/prenoms.json"),
     LastnameLoader.load("data/noms.csv"),
-    18, 79);
+    0, 85);
 
-const population = generator.generateMany(5000);
+const population = generator.generateMany(100);
 
 console.log(population.slice(0, 3));
 
