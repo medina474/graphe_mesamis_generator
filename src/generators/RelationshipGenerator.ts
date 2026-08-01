@@ -2,6 +2,8 @@ import { Console } from "console";
 import { CsvPersonExporter } from "../exporters/CsvPersonExporter.js";
 import { Gender, Person } from "../models/Person.js";
 import { UndirectedGraph } from "graphology";
+import { ClubPool } from "../stats/ClubPool.js";
+import { exit } from "process";
 
 export class RelationshipGenerator {
   private p_pref = 0.45; // 0.45
@@ -13,7 +15,10 @@ export class RelationshipGenerator {
   private hommes: Person[];
   private femmes: Person[];
 
-  constructor(private individus: Person[]) {
+  constructor(
+    private individus: Person[],
+    private clubs: ClubPool[]
+  ) {
     this.graph = new UndirectedGraph();
 
     for (let k = 0; k < this.individus.length; k++) {
@@ -25,13 +30,24 @@ export class RelationshipGenerator {
         x: Math.random() * 100,
         y: Math.random() * 100,
         label: `${p.firstname} ${p.lastname} ${p.age}`,
-        size: 1,
+        size: 3,
         color: p.gender === Gender.Male ? "#4A90E2" : "#FF69B4",
       });
     }
 
     this.hommes = individus.filter((i) => i.gender === Gender.Male);
     this.femmes = individus.filter((i) => i.gender === Gender.Female);
+
+    for (const club of this.clubs) {
+      this.graph.addNode(club.id, {
+        name: club.name,
+        label: club.name,
+        x: Math.random() * 100,
+        y: Math.random() * 100,
+        size: 6,
+        color: "#82ff69",
+      });
+    }
   }
 
   generateFriends() {
@@ -190,25 +206,25 @@ export class RelationshipGenerator {
     fecondityRate: number,
   ) {
     console.log(`----------------------------------------`);
-    console.log(`Génération: ${minAge} - ${maxAge}`);
-    console.log(`Taux de célibat attendu: ${celibacyRate}`);
-    console.log(`Taux de fécondité attendu: ${fecondityRate}`);
+    console.log(`Génération : ${minAge} - ${maxAge} ans`);
+    console.log(`Taux de célibat attendu   : ${celibacyRate * 100} %`);
+    console.log(`Taux de fécondité attendu : ${fecondityRate} enfants par femme`);
 
     // Chercher des femmes non mariées
     const femmes = this.femmes.filter(
       (f) => f.married === false && f.age >= minAge && f.age < maxAge,
     );
 
-    console.log(`Nombre de femmes : ${femmes.length}`);
+    console.log(`Nombre de femmes dans la population : ${femmes.length}`);
 
     const nombreCouplesCible = Math.ceil(femmes.length * (1 - celibacyRate));
 
     let nombreCouples = 0;
-    console.log(`Nombre de couples à atteindre : ${nombreCouplesCible}`);
+    console.log(`Nombre de couples à atteindre       : ${nombreCouplesCible}`);
     console.log(`**********`);
 
     for (const femme of femmes) {
-      console.log(`- Femme ${femme.firstname} ${femme.lastname}`);
+      console.log(`- Femme ${femme.firstname} ${femme.lastname} (${femme.age} ans)`);
 
       if (nombreCouples >= nombreCouplesCible) {
         console.log(`Le nombre de couples est atteint.`);
@@ -220,7 +236,7 @@ export class RelationshipGenerator {
       // Trier par écart d'age
       // ToDo : ajouter le niveau d'étude qui est très déterminant.
       const candidats = this.hommes
-        .filter((h) => !h.married && !this.sontApparentes(femme, h))
+        .filter((h) => !h.married && !this.sontApparentes(femme, h) && h.age > 20)
         .map((homme) => ({
           homme,
           ecartAge: Math.abs(femme.age - homme.age),
@@ -269,22 +285,23 @@ export class RelationshipGenerator {
     console.log(`**********`);
     console.log(`Nombre de mariages : ${nombreCouples}`);
     console.log(
-      `Taux de célibat réel : ${tauxCelibataires.toFixed(2)} / ${celibacyRate}`,
+      `Taux de célibat réel : ${(tauxCelibataires * 100).toFixed(2)} % / ${celibacyRate * 100} %`,
     );
     console.log(
-      `Taux de fécondité des couples : ${feconditeCouples.toFixed(2)}`,
+      `Taux de fécondité des couples : ${feconditeCouples.toFixed(2)} enfants par femme`,
     );
     console.log(`**********`);
 
     const femmesMariees = femmes.filter((femme) => femme.married);
 
     let indexCouple = 1;
+    let nbEnfants = 0;
 
     for (const femme of femmesMariees) {
       const epoux = this.getPartner(femme);
 
       console.log(
-        `- Couple ${indexCouple} : ${femme.firstname} ${femme.lastname} / ${epoux.firstname} ${epoux.lastname}`,
+        `- Couple ${indexCouple} : ${femme.firstname} ${femme.lastname} (${femme.age} ans) / ${epoux.firstname} ${epoux.lastname} (${epoux.age} ans)`,
       );
 
       // Pas déja enfant d'une autre femme et age compatible
@@ -312,7 +329,6 @@ export class RelationshipGenerator {
         console.log(`* ${enfant.firstname} (${enfant.age} ans)`);
 
         enfant.child = true;
-
         enfant.lastname = epoux.lastname;
 
         this.graph.addEdge(femme.id, enfant.id, {
@@ -329,9 +345,33 @@ export class RelationshipGenerator {
           lastname: enfant.lastname,
           label: `${enfant.firstname} ${enfant.lastname} ${enfant.age}`,
         });
+
+        nbEnfants++;
       }
 
       indexCouple++;
+    }
+
+    console.log("**********")
+    console.log(`Fécondité générale : ${(nbEnfants / femmes.length).toFixed(2)} / ${fecondityRate}`)
+    console.log(`Fécondité par couple : ${(nbEnfants / femmesMariees.length).toFixed(2)} / ${feconditeCouples.toFixed(2)}`)
+  }
+
+  /**
+   * Club
+   */
+  clubAffiliate() {
+
+    for (const individu of this.individus) {
+
+      if (Math.random() > 0.1) continue;
+
+      const club = this.clubs[Math.floor(Math.random() * this.clubs.length)]
+
+      this.graph.addEdge(individu.id, club.id, {
+          relation: "club",
+          weight: 1,
+        });
     }
   }
 
@@ -344,9 +384,12 @@ export class RelationshipGenerator {
     this.generateCouple(25, 30, 0.3, 1);
     this.generateCouple(18, 25, 0.5, 0.4);
 
+    this.clubAffiliate();
+
     return this.graph;
   }
 
+  
   export(): object {
     return this.graph.export();
   }

@@ -1,0 +1,52 @@
+[
+    {
+        "id": "club-rugby",
+        "name": "Rugby Club",
+        "tags": ["sport", "collectif"]
+    },
+    {
+        "id": "club-tennis",
+        "name": "Tennis Club",
+        "tags": ["sport", "individuel"]
+    },
+    {
+        "id": "club-theatre",
+        "name": "Troupe de Théâtre",
+        "tags": ["culture"]
+    },
+    {
+        "id": "club-photo",
+        "name": "Club Photo",
+        "tags": ["culture", "artistique"]
+    },
+    {
+        "id": "club-handball",
+        "name": "Club Handball",
+        "tags": ["sport", "collectif"]
+    },
+    {
+        "id": "club-rando",
+        "name": "Randonnée",
+        "tags": ["sport", "nature"]
+    },
+    {
+        "id": "club-cyclo",
+        "name": "Union cycliste",
+        "tags": ["sport", "individuel"]
+    },
+    {
+        "id": "club-golf",
+        "name": "Golf Club",
+        "tags": ["sport", "individuel"]
+    },
+    {
+        "id": "club-jazz",
+        "name": "Jazz Attitude",
+        "tags": ["culture", "musique"]
+    },
+    {
+        "id": "club-cinema",
+        "name": "Art et Essai",
+        "tags": ["culture", "cinéma"]
+    }
+]

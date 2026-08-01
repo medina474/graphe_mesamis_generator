@@ -6,6 +6,7 @@ import { FirstnameLoader } from "./stats/loaders/FirstnameLoader.js";
 import { LastnameLoader } from "./stats/loaders/LastnameLoader.js";
 import { CsvPersonExporter } from "./exporters/CsvPersonExporter.js";
 import fs from 'fs';
+import { ClubLoader } from "./stats/loaders/ClubLoader.js";
 
 const generator = new PersonGenerator(
     AgePyramidLoader.load("data/age-pyramid-guadeloupe.json"),
@@ -26,7 +27,11 @@ await exporter.export(
     "output/persons.csv"
 );
 
-const relationshipGenerator = new RelationshipGenerator(population);
+const relationshipGenerator = new RelationshipGenerator(
+    population,
+    ClubLoader.load("data/clubs.json")
+    );
+
 relationshipGenerator.generateMany();
 
 await fs.writeFile(
