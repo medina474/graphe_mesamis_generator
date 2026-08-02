@@ -2,7 +2,7 @@ import { Console } from "console";
 import { CsvPersonExporter } from "../exporters/CsvPersonExporter.js";
 import { Gender, Person } from "../models/Person.js";
 import { UndirectedGraph } from "graphology";
-import { Club } from "../stats/ClubPool.js";
+import { Club } from "../models/Club.js";
 import { exit } from "process";
 import { nodeCrypto } from "random-js";
 
@@ -429,7 +429,7 @@ export class RelationshipGenerator {
 
       // Les clubs ont une capacité maximale. 
       // Calculons la capacité réelle
-      const capacite_reelle = Math.floor(club.capacite * (Math.random() / 3 + 0.7)) 
+      const capacite_reelle = Math.floor(club.capacity * (Math.random() / 3 + 0.7)) 
 
       // Choisir les candidats :
       // - Ils ne doivent pas déja appartenir au club
@@ -445,7 +445,7 @@ export class RelationshipGenerator {
             score: this.scoreClub(i, club)
           }))
           .sort((a, b) => b.score - a.score)
-          .slice(0, club.capacite * 5)
+          .slice(0, club.capacity * 5)
       )
 
       // Finalement ne garder que le nombre corresopndant à la capacité

@@ -1,4 +1,4 @@
-import { Club } from "../stats/ClubPool.js";
+import { Club } from "./Club.js";
 
 export enum Gender {
     Male = "M",

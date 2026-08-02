@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 
-import { Club } from "../ClubPool.js";
+import { Club } from "../../models/Club.js";
 
 export class ClubLoader {
   static load(path: string): Club[] {

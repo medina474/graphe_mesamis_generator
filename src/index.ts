@@ -9,7 +9,7 @@ import fs from 'fs';
 import { ClubLoader } from "./stats/loaders/ClubLoader.js";
 
 const generator = new PersonGenerator(
-    AgePyramidLoader.load("data/age-pyramid-guadeloupe.json"),
+    AgePyramidLoader.load("data/age-pyramid-guyane.json"),
     FirstnameLoader.load("data/prenoms.json"),
     LastnameLoader.load("data/noms.csv"),
     0, 85);
