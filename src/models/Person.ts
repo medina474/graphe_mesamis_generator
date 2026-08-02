@@ -1,4 +1,4 @@
-import { ClubPool } from "../stats/ClubPool.js";
+import { Club } from "../stats/ClubPool.js";
 
 export enum Gender {
     Male = "M",
@@ -42,5 +42,5 @@ export interface Person {
     married: boolean;
     child: boolean;
 
-    clubs: ClubPool[];
+    clubs: Club[];
 }

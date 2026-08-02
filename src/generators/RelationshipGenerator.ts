@@ -2,7 +2,7 @@ import { Console } from "console";
 import { CsvPersonExporter } from "../exporters/CsvPersonExporter.js";
 import { Gender, Person } from "../models/Person.js";
 import { UndirectedGraph } from "graphology";
-import { ClubPool } from "../stats/ClubPool.js";
+import { Club } from "../stats/ClubPool.js";
 import { exit } from "process";
 import { nodeCrypto } from "random-js";
 
@@ -18,7 +18,7 @@ export class RelationshipGenerator {
 
   constructor(
     private individus: Person[],
-    private clubs: ClubPool[]
+    private clubs: Club[]
   ) {
     this.graph = new UndirectedGraph();
 
@@ -214,7 +214,7 @@ export class RelationshipGenerator {
       });
   }
 
-  private isAffiliate(personne: Person, club: ClubPool): boolean {
+  private isAffiliate(personne: Person, club: Club): boolean {
     return this.getClubs(personne.id).includes(club.id);
   }
 
@@ -402,7 +402,7 @@ export class RelationshipGenerator {
    */
   private scoreClub(
     personne: Person,
-    club: ClubPool
+    club: Club
 ): number {
 
     let score;

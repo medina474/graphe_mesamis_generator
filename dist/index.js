@@ -7,7 +7,7 @@ import { LastnameLoader } from "./stats/loaders/LastnameLoader.js";
 import { CsvPersonExporter } from "./exporters/CsvPersonExporter.js";
 import fs from 'fs';
 import { ClubLoader } from "./stats/loaders/ClubLoader.js";
-const generator = new PersonGenerator(AgePyramidLoader.load("data/age-pyramid-guadeloupe.json"), FirstnameLoader.load("data/prenoms.json"), LastnameLoader.load("data/noms.csv"), 0, 85);
+const generator = new PersonGenerator(AgePyramidLoader.load("data/age-pyramid-guyane.json"), FirstnameLoader.load("data/prenoms.json"), LastnameLoader.load("data/noms.csv"), 0, 85);
 const population = generator.generateMany(100);
 console.log(population.slice(0, 3));
 mkdirSync("output", { recursive: true });

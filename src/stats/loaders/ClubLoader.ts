@@ -1,10 +1,10 @@
 import { readFileSync } from "node:fs";
 
-import { ClubPool } from "../ClubPool.js";
+import { Club } from "../ClubPool.js";
 
 export class ClubLoader {
-  static load(path: string): ClubPool[] {
+  static load(path: string): Club[] {
     const json = readFileSync(path, "utf8");
-    return JSON.parse(json) as ClubPool[];
+    return JSON.parse(json) as Club[];
   }
 }
