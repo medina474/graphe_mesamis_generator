@@ -4,6 +4,7 @@ import { Gender, Person } from "../models/Person.js";
 import { UndirectedGraph } from "graphology";
 import { ClubPool } from "../stats/ClubPool.js";
 import { exit } from "process";
+import { nodeCrypto } from "random-js";
 
 export class RelationshipGenerator {
   private p_pref = 0.45; // 0.45
@@ -24,6 +25,7 @@ export class RelationshipGenerator {
     for (let k = 0; k < this.individus.length; k++) {
       const p = this.individus[k];
       this.graph.addNode(p.id, {
+        category: 'person',
         firstname: p.firstname,
         lastname: p.lastname,
         age: p.age,
@@ -39,12 +41,14 @@ export class RelationshipGenerator {
     this.femmes = individus.filter((i) => i.gender === Gender.Female);
 
     for (const club of this.clubs) {
+      club.size = 1;
       this.graph.addNode(club.id, {
+        category: 'club',
         name: club.name,
         label: club.name,
         x: Math.random() * 100,
         y: Math.random() * 100,
-        size: 6,
+        size: 1,
         color: "#82ff69",
       });
     }
@@ -113,7 +117,11 @@ export class RelationshipGenerator {
       if (r < p) {
         this.individus[i].edges++;
         this.individus[j].edges++;
-        this.graph.addEdge(String(i), String(j));
+        this.graph.addEdge(String(i), String(j),{
+          relation: "friends",
+          category: "friends",
+          weight: 3,
+        });
       }
     }
   }
@@ -179,6 +187,23 @@ export class RelationshipGenerator {
     const parents2 = this.getParents(personne2.id);
 
     return parents1.some((parent) => parents2.includes(parent));
+  }
+
+  private getClubs(personId: number): string[] {
+    return this.graph
+      .edges(personId)
+      .filter((edge) => {
+        const attributes = this.graph.getEdgeAttributes(edge);
+        return attributes.relation === "club";
+      })
+      .map((edge) => {
+        const [source, target] = this.graph.extremities(edge);
+        return source === personId.toString() ? target : source;
+      });
+  }
+
+  private isAffiliate(personne: Person, club: ClubPool): boolean {
+    return this.getClubs(personne.id).includes(club.id);
   }
 
   private getPartner(person: Person): Person {
@@ -267,6 +292,7 @@ export class RelationshipGenerator {
 
       this.graph.addEdge(femme.id, epoux.id, {
         relation: "marriage",
+        category: "family",
         weight: 3,
       });
 
@@ -333,11 +359,13 @@ export class RelationshipGenerator {
 
         this.graph.addEdge(femme.id, enfant.id, {
           relation: "parent",
+          category: "family",
           weight: 2,
         });
 
         this.graph.addEdge(epoux.id, enfant.id, {
           relation: "parent",
+          category: "family",
           weight: 2,
         });
 
@@ -362,16 +390,38 @@ export class RelationshipGenerator {
    */
   clubAffiliate() {
 
-    for (const individu of this.individus) {
+    for (const club of this.clubs) {
 
-      if (Math.random() > 0.1) continue;
+      // Les clubs ont une capacité maximale. 
+      // Calculons la capacité réelle
 
-      const club = this.clubs[Math.floor(Math.random() * this.clubs.length)]
+      const capacite_reelle = Math.floor(club.capacite * (Math.random() / 3 + 0.7)) 
 
-      this.graph.addEdge(individu.id, club.id, {
-          relation: "club",
-          weight: 1,
-        });
+      console.log(`${club.name} : ${capacite_reelle} adhérents`)
+
+      for (let k = 0 ; k < capacite_reelle ; k++)
+      {
+        // Choisir les individus
+        const individu = this.individus[Math.floor(Math.random() * this.individus.length)]
+        
+        if (this.isAffiliate(individu, club))
+        {
+          continue;
+        }
+
+        club.size++;
+
+        this.graph.addEdge(individu.id, club.id, {
+            relation: "club",
+            category: "club",
+            weight: 1,
+          });
+  
+        this.graph.mergeNodeAttributes(club.id, {
+            size: club.size,
+          });
+      }
+
     }
   }
 

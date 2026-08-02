@@ -2,51 +2,55 @@
     {
         "id": "club-rugby",
         "name": "Rugby Club",
-        "tags": ["sport", "collectif"]
+        "tags": ["sport", "collectif"],
+        "capacite": 15
     },
     {
         "id": "club-tennis",
         "name": "Tennis Club",
-        "tags": ["sport", "individuel"]
+        "tags": ["sport", "individuel"],
+        "capacite": 6
     },
     {
         "id": "club-theatre",
         "name": "Troupe de Théâtre",
-        "tags": ["culture"]
-    },
-    {
-        "id": "club-photo",
-        "name": "Club Photo",
-        "tags": ["culture", "artistique"]
+        "tags": ["culture"],
+        "capacite": 5
     },
     {
         "id": "club-handball",
         "name": "Club Handball",
-        "tags": ["sport", "collectif"]
+        "tags": ["sport", "collectif"],
+        "capacite": 11
     },
     {
         "id": "club-rando",
         "name": "Randonnée",
-        "tags": ["sport", "nature"]
+        "tags": ["sport", "nature"],
+        "capacite": 5
     },
     {
         "id": "club-cyclo",
         "name": "Union cycliste",
-        "tags": ["sport", "individuel"]
+        "tags": ["sport", "individuel"],
+        "capacite": 5
     },
     {
         "id": "club-golf",
         "name": "Golf Club",
-        "tags": ["sport", "individuel"]
+        "tags": ["sport", "individuel"],
+        "capacite": 5
     },
     {
         "id": "club-jazz",
         "name": "Jazz Attitude",
-        "tags": ["culture", "musique"]
+        "tags": ["culture", "musique"],
+        "capacite": 5
     },
     {
         "id": "club-cinema",
         "name": "Art et Essai",
-        "tags": ["culture", "cinéma"]
+        "tags": ["culture", "cinéma"],
+        "capacite": 5
     }
 ]

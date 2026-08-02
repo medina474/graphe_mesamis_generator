@@ -46,6 +46,9 @@ export class PersonGenerator {
          */
         const person = {
             id,
+            edges: 0,
+            married: false,
+            child: false,
         };
         // Caractéristiques démographiques
         person.age = this.ageDistribution.sample(person);
