@@ -1,9 +1,9 @@
 import { readFileSync } from "node:fs";
 
-import { LastnamePool } from "../LastnamePool.js";
+import { Lastname } from "../../models/Family.js";
 
 export class LastnameLoader {
-  static load(path: string): LastnamePool[] {
+  static load(path: string): Lastname[] {
     const csv = readFileSync(path, "utf8");
 
     return csv
@@ -19,8 +19,8 @@ export class LastnameLoader {
           return null;
         }
 
-        return new LastnamePool(name, count);
+        return new Lastname(name, count);
       })
-      .filter((item): item is LastnamePool => item !== null);
+      .filter((item): item is Lastname => item !== null);
   }
 }

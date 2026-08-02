@@ -1,7 +1,7 @@
 import { Distribution } from "./Distribution.js";
 import { Person } from "../models/Person.js";
 import { Random } from "../stats/Random.js";
-import { FirstnamePool } from "../stats/FirstnamePool.js";
+import { FirstnameGeneration } from "../models/Family.js";
 
 /**
  * https://www.insee.fr/fr/statistiques/3532172
@@ -9,9 +9,9 @@ import { FirstnamePool } from "../stats/FirstnamePool.js";
 export class FirstnameDistribution
     implements Distribution<string>{
 
-    private readonly firstnames: FirstnamePool[];
+    private readonly firstnames: FirstnameGeneration[];
 
-    constructor (firstnames: FirstnamePool[]) {
+    constructor (firstnames: FirstnameGeneration[]) {
         this.firstnames = firstnames
     }
 

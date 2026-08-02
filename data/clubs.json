@@ -3,19 +3,35 @@
         "id": "club-rugby",
         "name": "Rugby Club",
         "tags": ["sport", "collectif"],
-        "capacite": 15
+        "capacite": 15,
+        "genre": "M",
+        "gender": {
+            "male": 1,
+            "female": 0
+        },
+        "criteria": {
+            "sport": 0.8
+        }
     },
     {
         "id": "club-tennis",
         "name": "Tennis Club",
         "tags": ["sport", "individuel"],
-        "capacite": 10
+        "capacite": 10,
+        "gender": {
+            "male": 0.5,
+            "female": 0.5
+        }
     },
     {
         "id": "club-theatre",
         "name": "Troupe de Théâtre",
         "tags": ["culture"],
-        "capacite": 8
+        "capacite": 8,
+        "gender": {
+            "male": 0.5,
+            "female": 0.5
+        }
     },
     {
         "id": "club-handball",
@@ -27,30 +43,81 @@
         "id": "club-rando",
         "name": "Randonnée",
         "tags": ["sport", "nature"],
-        "capacite": 8
+        "capacite": 8,
+        "gender": {
+            "male": 0.5,
+            "female": 0.5
+        }
     },
     {
         "id": "club-cyclo",
         "name": "Union cycliste",
         "tags": ["sport", "individuel"],
-        "capacite": 10
+        "capacite": 10,
+        "gender": {
+            "male": 0.8,
+            "female": 0.2
+        }
+    },
+    {
+        "id": "club-danse",
+        "name": "Danse",
+        "tags": ["sport"],
+        "capacite": 15,
+        "genre": "F",
+        "gender": {
+            "male": 0.05,
+            "female": 0.95
+        }
     },
     {
         "id": "club-golf",
         "name": "Golf Club",
         "tags": ["sport", "individuel"],
-        "capacite": 8
+        "capacite": 8,
+        "gender": {
+            "male": 0.5,
+            "female": 0.5
+        }
     },
     {
         "id": "club-jazz",
         "name": "Jazz Attitude",
         "tags": ["culture", "musique"],
-        "capacite": 8
+        "capacite": 8,
+        "gender": {
+            "male": 0.5,
+            "female": 0.5
+        }
     },
     {
         "id": "club-cinema",
         "name": "Art et Essai",
         "tags": ["culture", "cinéma"],
-        "capacite": 8
+        "capacite": 8,
+        "gender": {
+            "male": 0.5,
+            "female": 0.5
+        }
+    },
+    {
+        "id": "club-volley",
+        "name": "Club Volley",
+        "tags": ["sport", "collectif"],
+        "capacite": 15,
+        "gender": {
+            "male": 0.5,
+            "female": 0.5
+        }
+    },
+    {
+        "id": "club-basketball",
+        "name": "Club Basket",
+        "tags": ["sport", "collectif"],
+        "capacite": 15,
+        "gender": {
+            "male": 0.75,
+            "female": 0.25
+        }
     }
 ]

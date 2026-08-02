@@ -1,10 +1,10 @@
 import { readFileSync } from "node:fs";
 
-import { FirstnamePool } from "../FirstnamePool.js";
+import { FirstnameGeneration } from "../../models/Family.js";
 
 export class FirstnameLoader {
-  static load(path: string): FirstnamePool[] {
+  static load(path: string): FirstnameGeneration[] {
     const json = readFileSync(path, "utf8");
-    return JSON.parse(json) as FirstnamePool[];
+    return JSON.parse(json) as FirstnameGeneration[];
   }
 }
