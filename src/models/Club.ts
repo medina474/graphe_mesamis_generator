@@ -14,8 +14,9 @@ export class Club {
 
     criteria?: {
         sport?: number;
-        richesse?: number;
+        wealth?: number;
         education?: number;
+        music?: number;
     };
 
     constructor(id: string, name: string, capacity: number) {

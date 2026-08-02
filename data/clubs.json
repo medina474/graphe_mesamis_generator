@@ -10,7 +10,7 @@
             "female": 0
         },
         "criteria": {
-            "sport": 0.8
+            "sport": 1
         }
     },
     {
@@ -18,20 +18,29 @@
         "name": "Tennis Club",
         "tags": ["sport", "individuel"],
         "exclusive": ["sport"],
-        "capacity": 10
+        "capacity": 10,
+        "criteria": {
+            "sport": 1
+        }
     },
     {
         "id": "club-theatre",
         "name": "Troupe de Théâtre",
         "tags": ["culture"],
-        "capacity": 8
+        "capacity": 8,
+        "criteria": {
+            "education": 1
+        }
     },
     {
         "id": "club-handball",
         "name": "Club Handball",
         "tags": ["sport", "collectif"],
         "exclusive": ["sport"],
-        "capacity": 15
+        "capacity": 15,
+        "criteria": {
+            "sport": 1
+        }
     },
     {
         "id": "club-rando",
@@ -48,6 +57,9 @@
         "gender": {
             "male": 0.8,
             "female": 0.2
+        },
+        "criteria": {
+            "sport": 1
         }
     },
     {
@@ -57,34 +69,50 @@
         "capacity": 15,
         "genre": "F",
         "gender": {
-            "male": 0.05,
-            "female": 0.95
+            "male": 0.20,
+            "female": 0.80
+        },
+        "criteria": {
+            "sport": 0.8
         }
     },
     {
         "id": "club-golf",
         "name": "Golf Club",
         "tags": ["sport", "individuel"],
-        "capacity": 8
+        "capacity": 8,
+        "criteria": {
+            "sport": 0.8,
+            "wealth": 1
+        }
     },
     {
         "id": "club-jazz",
         "name": "Jazz Attitude",
         "tags": ["culture", "musique"],
-        "capacity": 8
+        "capacity": 8,
+        "criteria": {
+            "music": 0.8
+        }
     },
     {
         "id": "club-cinema",
         "name": "Art et Essai",
         "tags": ["culture", "cinéma"],
-        "capacity": 8
+        "capacity": 8,
+        "criteria": {
+            "education": 1
+        }
     },
     {
         "id": "club-volley",
         "name": "Club Volley",
         "tags": ["sport", "collectif"],
         "exclusive": ["sport"],
-        "capacity": 15
+        "capacity": 15,
+        "criteria": {
+            "sport": 1
+        }
     },
     {
         "id": "club-basketball",
@@ -95,6 +123,18 @@
         "gender": {
             "male": 0.75,
             "female": 0.25
+        },
+        "criteria": {
+            "sport": 1
+        }
+    },
+    {
+        "id": "club-jeux",
+        "name": "Trolls du Donjon",
+        "tags": ["jeux"],
+        "capacity": 15,
+        "criteria": {
+            "education": 1
         }
     }
 ]

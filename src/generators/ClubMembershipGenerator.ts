@@ -13,29 +13,7 @@ export class ClubMembershipGenerator {
 
     private scoreClub(personne: Person, club: Club): number {
 
-      let score = 1;
-
-      /*
-      if (club.tags.includes("sport")) {
-        // Les clubs de sport sont exclusifs. Une personne ne peut pas adhérer à deux clubs de sport
-        score = (personne.clubs.some(c => c.tags.includes("sport"))) ?
-        0 :
-        personne.sport;
-        }
-        else if (club.tags.includes("musique")) {
-        score = personne.music
-        }
-        else {
-        score = Math.random();
-        }
-      */
-
-      // Genre
-      if (club.gender) {
-          score *= personne.gender === Gender.Male
-              ? club.gender.male ?? 0
-              : club.gender.female ?? 0;
-      }
+      let score = Math.random();
 
       // Sport
       if (club.criteria?.sport) {
@@ -43,13 +21,20 @@ export class ClubMembershipGenerator {
       }
 
       // Richesse
-      if (club.criteria?.richesse) {
-          score += personne.wealth * club.criteria.richesse;
+      if (club.criteria?.wealth) {
+          score += personne.wealth * club.criteria.wealth;
       }
 
       // Éducation
       if (club.criteria?.education) {
           score += personne.education * club.criteria.education;
+      }
+
+      // Genre
+      if (club.gender) {
+          score *= personne.gender === Gender.Male
+              ? club.gender.male ?? 0
+              : club.gender.female ?? 0;
       }
 
       return score;
@@ -76,7 +61,7 @@ export class ClubMembershipGenerator {
       }
 
       // Trier les candidats suivant le score Club 
-      // Sélectionner une population 5 fois plus grande.
+      // Sélectionner une population 2 fois plus grande.
       // Les trier aléatoirement
       let retenus = Random.shuffle(
         candidats

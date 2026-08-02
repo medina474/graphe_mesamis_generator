@@ -1,8 +1,26 @@
 [
-    "Conserverie Parmentier", 
-    "Au Pain Levant",
-    "Le Saigneur des Agneaux",
-    "Diminutif",
-    "L'Assiette Dorée",
-    "Royal Casino"
+    { 
+        "name": "Conserverie"
+    }, 
+    { 
+        "name": "Au Pain Levant"
+    },
+    { 
+        "name": "Boucherie de la côte"
+    },
+    { 
+        "name": "Coiffeur"
+    },
+    { 
+        "name": "L'Assiette Dorée"
+    },
+    { 
+        "name": "Crêperie du phare"
+    },
+    { 
+        "name": "Royal Casino"
+    },
+    {
+        "name": "Cabinet d'ingénierie"
+    }
 ]

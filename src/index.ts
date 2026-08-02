@@ -19,7 +19,7 @@ const generator = new PersonGenerator(
     LastnameLoader.load("data/noms.csv"),
     0, 85);
 
-const population = generator.generateMany(100);
+const population = generator.generateMany(250);
 
 console.log(population.slice(0, 3));
 
