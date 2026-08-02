@@ -1,7 +1,7 @@
 import { mkdirSync } from "node:fs";
 import { Gender } from "./models/Person.js";
 import { PersonGenerator } from "./generators/PersonGenerator.js";
-import { RelationshipGenerator } from "./generators/RelationshipGenerator.js";
+import { ClubMembershipGenerator } from "./generators/ClubMembershipGenerator.js";
 import { AgePyramidLoader } from "./stats/loaders/AgePyramidLoader.js";
 import { FirstnameLoader } from "./stats/loaders/FirstnameLoader.js";
 import { LastnameLoader } from "./stats/loaders/LastnameLoader.js";
@@ -27,8 +27,21 @@ for (let p of population) {
         color: p.gender === Gender.Male ? "#4A90E2" : "#FF69B4",
     });
 }
-const relationshipGenerator = new RelationshipGenerator(graph, population, ClubLoader.load("data/clubs.json"));
-relationshipGenerator.generateMany();
+/* Clubs */
+const clubs = ClubLoader.load("data/clubs.json");
+for (const club of clubs) {
+    graph.addNode(club.id, {
+        category: 'club',
+        name: club.name,
+        label: club.name,
+        x: Math.random() * 100,
+        y: Math.random() * 100,
+        size: 1,
+        color: "#82ff69",
+    });
+}
+const clubMembershipGenerator = new ClubMembershipGenerator(graph, population, clubs);
+clubMembershipGenerator.generate();
 /* Export */
 mkdirSync("output", { recursive: true });
 const exporter = new CsvPersonExporter();

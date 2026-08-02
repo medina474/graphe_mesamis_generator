@@ -1,7 +1,7 @@
 import { mkdirSync } from "node:fs";
 import { Gender } from "./models/Person.js";
 import { PersonGenerator } from "./generators/PersonGenerator.js";
-import { RelationshipGenerator } from "./generators/RelationshipGenerator.js";
+import { ClubMembershipGenerator } from "./generators/ClubMembershipGenerator.js";
 import { AgePyramidLoader } from "./stats/loaders/AgePyramidLoader.js";
 import { FirstnameLoader } from "./stats/loaders/FirstnameLoader.js";
 import { LastnameLoader } from "./stats/loaders/LastnameLoader.js";
@@ -9,6 +9,7 @@ import { CsvPersonExporter } from "./exporters/CsvPersonExporter.js";
 import fs from 'fs';
 import { ClubLoader } from "./stats/loaders/ClubLoader.js";
 import { UndirectedGraph } from "graphology";
+import { FamilyGenerator } from "./generators/FamilyGenerator.js";
 
 const graph: UndirectedGraph = new UndirectedGraph();
 
@@ -23,7 +24,8 @@ const population = generator.generateMany(100);
 console.log(population.slice(0, 3));
 
 /* Ajouter la population au graphe */
-for (let p of population) {
+for (let p of population) 
+{
     graph.addNode(
         p.id, 
         {
@@ -40,13 +42,43 @@ for (let p of population) {
     );
 }
 
-const relationshipGenerator = new RelationshipGenerator(
+/* Familles */
+const familyGenerator = new FamilyGenerator(
+    graph,
+    population
+);
+
+familyGenerator.generate();
+
+/* Clubs */
+const clubs = ClubLoader.load("data/clubs.json")
+
+console.log(clubs.slice(0, 1))
+
+for (const club of clubs) 
+{
+    club.size = 1
+    graph.addNode(
+        club.id, 
+        {
+            category: 'club',
+            name: club.name,
+            label: club.name,
+            x: Math.random() * 100,
+            y: Math.random() * 100,
+            size: 1,
+            color: "#82ff69",
+        }
+    );
+}
+
+const clubMembershipGenerator = new ClubMembershipGenerator(
     graph,
     population,
-    ClubLoader.load("data/clubs.json")
+    clubs
     );
 
-relationshipGenerator.generateMany();
+clubMembershipGenerator.generate();
 
 /* Export */
 

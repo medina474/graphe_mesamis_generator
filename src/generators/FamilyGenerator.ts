@@ -229,20 +229,20 @@ export class FamilyGenerator {
             enfant.lastname = epoux.lastname;
 
             this.graph.addEdge(femme.id, enfant.id, {
-            relation: "parent",
-            category: "family",
-            weight: 2,
+                relation: "parent",
+                category: "family",
+                weight: 2,
             });
 
             this.graph.addEdge(epoux.id, enfant.id, {
-            relation: "parent",
-            category: "family",
-            weight: 2,
+                relation: "parent",
+                category: "family",
+                weight: 2,
             });
 
             this.graph.mergeNodeAttributes(enfant.id, {
-            lastname: enfant.lastname,
-            label: `${enfant.firstname} ${enfant.lastname} ${enfant.age}`,
+                lastname: enfant.lastname,
+                label: `${enfant.firstname} ${enfant.lastname} ${enfant.age}`,
             });
 
             nbEnfants++;

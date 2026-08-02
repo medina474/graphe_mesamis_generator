@@ -22,7 +22,6 @@ export class Club {
         this.name = name
         this.capacity = capacity
         this.tags = []
-        this.size = 0;
+        this.size = 1;
     }
 }
-
