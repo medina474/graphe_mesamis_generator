@@ -1,6 +1,9 @@
+import { ClubPool } from "../stats/ClubPool.js";
+
 export enum Gender {
     Male = "M",
-    Female = "F"
+    Female = "F",
+    Unknown = "X"
 }
 
 export enum Education {
@@ -38,4 +41,6 @@ export interface Person {
     edges: number;
     married: boolean;
     child: boolean;
+
+    clubs: ClubPool[];
 }

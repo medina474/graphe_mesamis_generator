@@ -9,48 +9,48 @@
         "id": "club-tennis",
         "name": "Tennis Club",
         "tags": ["sport", "individuel"],
-        "capacite": 6
+        "capacite": 10
     },
     {
         "id": "club-theatre",
         "name": "Troupe de Théâtre",
         "tags": ["culture"],
-        "capacite": 5
+        "capacite": 8
     },
     {
         "id": "club-handball",
         "name": "Club Handball",
         "tags": ["sport", "collectif"],
-        "capacite": 11
+        "capacite": 15
     },
     {
         "id": "club-rando",
         "name": "Randonnée",
         "tags": ["sport", "nature"],
-        "capacite": 5
+        "capacite": 8
     },
     {
         "id": "club-cyclo",
         "name": "Union cycliste",
         "tags": ["sport", "individuel"],
-        "capacite": 5
+        "capacite": 10
     },
     {
         "id": "club-golf",
         "name": "Golf Club",
         "tags": ["sport", "individuel"],
-        "capacite": 5
+        "capacite": 8
     },
     {
         "id": "club-jazz",
         "name": "Jazz Attitude",
         "tags": ["culture", "musique"],
-        "capacite": 5
+        "capacite": 8
     },
     {
         "id": "club-cinema",
         "name": "Art et Essai",
         "tags": ["culture", "cinéma"],
-        "capacite": 5
+        "capacite": 8
     }
 ]

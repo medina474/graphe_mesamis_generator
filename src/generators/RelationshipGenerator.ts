@@ -54,6 +54,18 @@ export class RelationshipGenerator {
     }
   }
 
+  shuffle<T>(array: T[]): T[] {
+    const result = [...array];
+
+    for (let i = result.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+
+        [result[i], result[j]] = [result[j], result[i]];
+    }
+
+    return result;
+  }
+
   generateFriends() {
     const N = this.individus.length;
 
@@ -388,40 +400,73 @@ export class RelationshipGenerator {
   /**
    * Club
    */
+  private scoreClub(
+    personne: Person,
+    club: ClubPool
+): number {
+
+    let score;
+
+    if (club.tags.includes("sport")) {
+      // Les clubs de sport sont exclusifs. Une personne ne peut pas adhérer à deux clubs de sport
+      score = (personne.clubs.some(c => c.tags.includes("sport"))) ?
+      0 :
+      personne.sport;
+    }
+    else if (club.tags.includes("musique")) {
+      score = personne.music
+    }
+    else {
+      score = Math.random();
+    }
+
+    return score;
+}
+
   clubAffiliate() {
 
     for (const club of this.clubs) {
 
       // Les clubs ont une capacité maximale. 
       // Calculons la capacité réelle
-
       const capacite_reelle = Math.floor(club.capacite * (Math.random() / 3 + 0.7)) 
 
-      console.log(`${club.name} : ${capacite_reelle} adhérents`)
+      // Choisir les candidats :
+      // - Ils ne doivent pas déja appartenir au club
+      let candidats: Person[] = this.individus.filter(i => !i.clubs.includes(club));
+      
+      // Trier les candidats suivant le score Club 
+      // Sélectionner une population 5 fois plus grande.
+      // Les trier aléatoirement
+      let retenus = this.shuffle(
+        candidats
+          .map(i => ({
+            personne: i,
+            score: this.scoreClub(i, club)
+          }))
+          .sort((a, b) => b.score - a.score)
+          .slice(0, club.capacite * 5)
+      )
 
-      for (let k = 0 ; k < capacite_reelle ; k++)
+      // Finalement ne garder que le nombre corresopndant à la capacité
+      for (let r of retenus.slice(0, capacite_reelle - 1))
       {
-        // Choisir les individus
-        const individu = this.individus[Math.floor(Math.random() * this.individus.length)]
-        
-        if (this.isAffiliate(individu, club))
-        {
-          continue;
-        }
+        r.personne.clubs.push(club)
 
-        club.size++;
-
-        this.graph.addEdge(individu.id, club.id, {
+        this.graph.addEdge(r.personne.id, club.id, {
             relation: "club",
             category: "club",
             weight: 1,
           });
-  
+
         this.graph.mergeNodeAttributes(club.id, {
             size: club.size,
           });
+
+        club.size++;
       }
 
+      console.log(`${club.name} : ${club.size} adhérents`)
     }
   }
 

@@ -1,3 +1,4 @@
+import { Gender } from "../models/Person.js";
 import { AgeDistribution } from "../distributions/AgeDistribution.js";
 import { GenderDistribution } from "../distributions/GenderDistribution.js";
 import { FirstnameDistribution } from "../distributions/FirstnameDistribution.js";
@@ -49,6 +50,16 @@ export class PersonGenerator {
             edges: 0,
             married: false,
             child: false,
+            clubs: [],
+            firstname: '',
+            lastname: '',
+            gender: Gender.Unknown,
+            education: 0,
+            wealth: 0,
+            sport: 0,
+            music: 0,
+            reading: 0,
+            age: 0,
         };
         // Caractéristiques démographiques
         person.age = this.ageDistribution.sample(person);

@@ -1,4 +1,4 @@
-import { Person } from "../models/Person.js";
+import { Gender, Person } from "../models/Person.js";
 
 import { AgePyramid } from "../stats/AgePyramid.js";
 import { FirstnamePool } from "../stats/FirstnamePool.js";
@@ -62,6 +62,16 @@ export class PersonGenerator {
       edges: 0,
       married: false,
       child: false,
+      clubs: [],
+      firstname: '',
+      lastname: '',
+      gender: Gender.Unknown,
+      education: 0,
+      wealth: 0,
+      sport: 0,
+      music: 0,
+      reading: 0,
+      age: 0,
     } as Person;
 
     // Caractéristiques démographiques

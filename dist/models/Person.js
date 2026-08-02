@@ -2,6 +2,7 @@ export var Gender;
 (function (Gender) {
     Gender["Male"] = "M";
     Gender["Female"] = "F";
+    Gender["Unknown"] = "X";
 })(Gender || (Gender = {}));
 export var Education;
 (function (Education) {
