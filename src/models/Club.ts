@@ -3,6 +3,7 @@ export class Club {
     name: string;
     capacity: number;
     tags: string[];
+    exclusive?: string[];  
     size: number;
 
     // Contraintes / biais

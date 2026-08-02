@@ -1,42 +1,22 @@
-import { UndirectedGraph } from "graphology";
+import { DirectedGraph } from "graphology";
 import { Gender, Person } from "../models/Person.js";
 import { Club } from "../models/Club.js";
 import { Random } from "../stats/Random.js";
 
 export class ClubMembershipGenerator {
     constructor(
-        private graph: UndirectedGraph,
+        private graph: DirectedGraph,
         private individus: Person[],
         private clubs: Club[],
-    ) {      
-
+    ) {
     }
 
-    private getClubs(personId: number): string[] {
-        return this.graph
-          .edges(personId)
-          .filter((edge) => {
-            const attributes = this.graph.getEdgeAttributes(edge);
-            return attributes.relation === "club";
-          })
-          .map((edge) => {
-            const [source, target] = this.graph.extremities(edge);
-            return source === personId.toString() ? target : source;
-          });
-      }
-    
-      private isAffiliate(personne: Person, club: Club): boolean {
-        return this.getClubs(personne.id).includes(club.id);
-      }
+    private scoreClub(personne: Person, club: Club): number {
 
-    private scoreClub(
-        personne: Person,
-        club: Club
-    ): number {
+      let score = 1;
 
-        let score;
-
-        if (club.tags.includes("sport")) {
+      /*
+      if (club.tags.includes("sport")) {
         // Les clubs de sport sont exclusifs. Une personne ne peut pas adhérer à deux clubs de sport
         score = (personne.clubs.some(c => c.tags.includes("sport"))) ?
         0 :
@@ -48,10 +28,33 @@ export class ClubMembershipGenerator {
         else {
         score = Math.random();
         }
+      */
 
-        return score;
-    }
+      // Genre
+      if (club.gender) {
+          score *= personne.gender === Gender.Male
+              ? club.gender.male ?? 0
+              : club.gender.female ?? 0;
+      }
 
+      // Sport
+      if (club.criteria?.sport) {
+          score += personne.sport * club.criteria.sport;
+      }
+
+      // Richesse
+      if (club.criteria?.richesse) {
+          score += personne.wealth * club.criteria.richesse;
+      }
+
+      // Éducation
+      if (club.criteria?.education) {
+          score += personne.education * club.criteria.education;
+      }
+
+      return score;
+  }
+  
   generate() {
 
     for (const club of this.clubs) {
@@ -60,10 +63,18 @@ export class ClubMembershipGenerator {
       // Calculons la capacité réelle
       const capacite_reelle = Math.floor(club.capacity * (Math.random() / 3 + 0.7)) 
 
+      console.log(`${club.name} ****************************************`) 
+
       // Choisir les candidats :
-      // - Ils ne doivent pas déja appartenir au club
+      // - Ils ne doivent pas déja appartenir au club.
       let candidats: Person[] = this.individus.filter(i => !i.clubs.includes(club));
       
+      // - Si un seul membre du tableau exclusive se retrouve dans les tags de la personne,
+      // elle est exclue. Une personne ne peut appartenir à des clubs fortement concurentiels.
+      if (club.exclusive) {
+        candidats = candidats.filter(p => !club.exclusive!.some(t => p.tags.has(t)));
+      }
+
       // Trier les candidats suivant le score Club 
       // Sélectionner une population 5 fois plus grande.
       // Les trier aléatoirement
@@ -74,7 +85,7 @@ export class ClubMembershipGenerator {
             score: this.scoreClub(i, club)
           }))
           .sort((a, b) => b.score - a.score)
-          .slice(0, club.capacity * 5)
+          .slice(0, club.capacity * 2)
       )
 
       // Finalement ne garder que le nombre corresopndant à la capacité
@@ -82,8 +93,13 @@ export class ClubMembershipGenerator {
       {
         r.personne.clubs.push(club)
 
+        for (let t of club.tags) {
+          r.personne.tags.add(t)
+        }
+
+        console.log(`${r.personne.firstname} ${r.personne.sport.toFixed(2)}`)
         this.graph.addEdge(r.personne.id, club.id, {
-            relation: "club",
+            relation: "member",
             category: "club",
             weight: 1,
           });
@@ -95,7 +111,7 @@ export class ClubMembershipGenerator {
         club.size++;
       }
 
-      console.log(`${club.name} : ${club.size} adhérents`)
+      console.log(`${club.size} adhérents`)
     }
   }
 }

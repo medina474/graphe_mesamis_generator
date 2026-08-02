@@ -43,4 +43,5 @@ export interface Person {
     child: boolean;
 
     clubs: Club[];
+    tags: Set<string>;
 }

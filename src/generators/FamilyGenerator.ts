@@ -1,5 +1,5 @@
 import { Gender, Person } from "../models/Person.js";
-import { UndirectedGraph } from "graphology";
+import { DirectedGraph } from "graphology";
 
 export class FamilyGenerator {
 
@@ -7,7 +7,7 @@ export class FamilyGenerator {
     private femmes: Person[];
 
     constructor(
-        private graph: UndirectedGraph,
+        private graph: DirectedGraph,
         private individus: Person[],
     ) {      
         this.hommes = individus.filter((i) => i.gender === Gender.Male);
@@ -229,13 +229,25 @@ export class FamilyGenerator {
             enfant.lastname = epoux.lastname;
 
             this.graph.addEdge(femme.id, enfant.id, {
-                relation: "parent",
+                relation: "mother",
+                category: "family",
+                weight: 2,
+            });
+
+            this.graph.addEdge(enfant.id, femme.id, {
+                relation: "child",
                 category: "family",
                 weight: 2,
             });
 
             this.graph.addEdge(epoux.id, enfant.id, {
-                relation: "parent",
+                relation: "father",
+                category: "family",
+                weight: 2,
+            });
+
+            this.graph.addEdge(enfant.id, epoux.id, {
+                relation: "child",
                 category: "family",
                 weight: 2,
             });

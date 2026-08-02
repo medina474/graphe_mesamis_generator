@@ -8,10 +8,10 @@ import { LastnameLoader } from "./stats/loaders/LastnameLoader.js";
 import { CsvPersonExporter } from "./exporters/CsvPersonExporter.js";
 import fs from 'fs';
 import { ClubLoader } from "./stats/loaders/ClubLoader.js";
-import { UndirectedGraph } from "graphology";
+import { DirectedGraph } from "graphology";
 import { FamilyGenerator } from "./generators/FamilyGenerator.js";
 
-const graph: UndirectedGraph = new UndirectedGraph();
+const graph: DirectedGraph = new DirectedGraph();
 
 const generator = new PersonGenerator(
     AgePyramidLoader.load("data/age-pyramid-guyane.json"),

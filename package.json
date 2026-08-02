@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "tsx src/index.ts",
     "build": "tsc",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "test": "vitest",
+    "test:run": "vitest run"
   },
   "dependencies": {
     "@faker-js/faker": "^10",
@@ -22,6 +24,7 @@
     "eslint": "^9",
     "prettier": "^3",
     "tsx": "^4",
-    "typescript": "^5.9"
+    "typescript": "^5.9",
+    "vitest": "^4.1.10"
   }
 }

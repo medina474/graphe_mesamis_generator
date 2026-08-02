@@ -63,6 +63,7 @@ export class PersonGenerator {
       married: false,
       child: false,
       clubs: [],
+      tags: new Set<string>(),
       firstname: '',
       lastname: '',
       gender: Gender.Unknown,
