@@ -52,7 +52,9 @@ export class ClubMembershipGenerator {
 
       // Choisir les candidats :
       // - Ils ne doivent pas déja appartenir au club.
-      let candidats: Person[] = this.individus.filter(i => !i.clubs.includes(club));
+      let candidats: Person[] = this.individus.filter(i => !i.clubs.includes(club) &&
+        i.age > 18
+      );
       
       // - Si un seul membre du tableau exclusive se retrouve dans les tags de la personne,
       // elle est exclue. Une personne ne peut appartenir à des clubs fortement concurentiels.

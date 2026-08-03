@@ -61,15 +61,21 @@ export class WorkGenerator {
                 poste: emploi.poste,
             });
 
+            this.graph.addEdge(candidat.id, emploi.enterprise.id, {
+              relation: "work",
+              category: "work",
+              weight: 1,
+            });
+
             const index = disponibles.indexOf(candidat);
             disponibles.splice(index, 1);
         }
     }
 
     private meilleurCandidat(
-    poste: Poste,
-    personnes: Person[],
-  ): Person | null {
+      poste: Poste,
+      personnes: Person[],
+    ): Person | null {
 
     const candidats = personnes.filter(personne =>
       this.estCompatible(poste, personne)

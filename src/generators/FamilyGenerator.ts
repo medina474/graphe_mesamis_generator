@@ -101,6 +101,7 @@ export class FamilyGenerator {
         celibacyRate: number,
         fecondityRate: number,
     ) {
+        console.log('');
         console.log(`----------------------------------------`);
         console.log(`Génération : ${minAge} - ${maxAge} ans`);
         console.log(`Taux de célibat attendu   : ${celibacyRate * 100} %`);
@@ -117,15 +118,15 @@ export class FamilyGenerator {
 
         let nombreCouples = 0;
         console.log(`Nombre de couples à atteindre       : ${nombreCouplesCible}`);
-        console.log(`**********`);
+        console.log(`----------------------------------------`);
 
         for (const femme of femmes) {
-        console.log(`- Femme ${femme.firstname} ${femme.lastname} (${femme.age} ans)`);
+            console.log(`- Femme ${femme.firstname} ${femme.lastname} (${femme.age} ans)`);
 
-        if (nombreCouples >= nombreCouplesCible) {
-            console.log(`Le nombre de couples est atteint.`);
-            break;
-        }
+            if (nombreCouples >= nombreCouplesCible) {
+                console.log(`Le nombre de couples est atteint.`);
+                break;
+            }
 
         // Recherche des hommes compatibles. Hommes non mariés pas moins de 5 ans de moins
         // que la femme et au plus 10 ans de plus
@@ -179,15 +180,15 @@ export class FamilyGenerator {
 
         const feconditeCouples = fecondityRate / (1 - tauxCelibataires);
 
-        console.log(`**********`);
+        console.log(`----------------------------------------`);
         console.log(`Nombre de mariages : ${nombreCouples}`);
         console.log(
-        `Taux de célibat réel : ${(tauxCelibataires * 100).toFixed(2)} % / ${celibacyRate * 100} %`,
+        `Taux de célibat réel : ${(tauxCelibataires * 100).toFixed(2)} % / ${((celibacyRate - tauxCelibataires) * 100).toFixed(2)} %`,
         );
         console.log(
         `Taux de fécondité des couples : ${feconditeCouples.toFixed(2)} enfants par femme`,
         );
-        console.log(`**********`);
+        console.log(`----------------------------------------`);
 
         const femmesMariees = femmes.filter((femme) => femme.isMarried);
 
@@ -263,13 +264,14 @@ export class FamilyGenerator {
         indexCouple++;
         }
 
-        console.log("**********")
+        console.log('');
+        console.log(`----------------------------------------`)
         console.log(`Fécondité générale : ${(nbEnfants / femmes.length).toFixed(2)} / ${fecondityRate}`)
         console.log(`Fécondité par couple : ${(nbEnfants / femmesMariees.length).toFixed(2)} / ${feconditeCouples.toFixed(2)}`)
     }
 
     generate():void  {
-        this.generateCouple(65, 120, 0.2, 2.2);
+        this.generateCouple(65, 120, 0.2, 3);
         this.generateCouple(55, 65, 0.2, 2.0);
         this.generateCouple(45, 55, 0.15, 1.9);
         this.generateCouple(35, 45, 0.1, 1.9);

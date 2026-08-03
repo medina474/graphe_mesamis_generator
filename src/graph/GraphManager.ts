@@ -3,7 +3,7 @@ import { Gender, Person } from "../models/Person.js";
 import { Club } from "../models/Club.js";
 import { Enterprise } from "../models/Enterprise.js";
 
-export class GraphNodeBuilder {
+export class GraphManager {
 
     constructor(
         private readonly graph: DirectedGraph
