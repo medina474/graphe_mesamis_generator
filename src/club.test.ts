@@ -10,8 +10,8 @@ describe("Club", () => {
     const person = {
           id: 1,
           edges: 0,
-          married: false,
-          child: false,
+          isMarried: false,
+          isChild: false,
           clubs: [],
           tags: new Set<string>(),
           firstname: 'Marc',

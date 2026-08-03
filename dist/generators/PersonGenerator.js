@@ -51,6 +51,7 @@ export class PersonGenerator {
             married: false,
             child: false,
             clubs: [],
+            tags: new Set(),
             firstname: '',
             lastname: '',
             gender: Gender.Unknown,

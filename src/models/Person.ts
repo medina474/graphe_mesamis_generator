@@ -39,8 +39,8 @@ export interface Person {
     music: number;
 
     edges: number;
-    married: boolean;
-    child: boolean;
+    isMarried: boolean;
+    isChild: boolean;
 
     clubs: Club[];
     tags: Set<string>;

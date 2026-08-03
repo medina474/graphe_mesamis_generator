@@ -108,7 +108,7 @@ export class FamilyGenerator {
 
         // Chercher des femmes non mariées
         const femmes = this.femmes.filter(
-        (f) => f.married === false && f.age >= minAge && f.age < maxAge,
+        (f) => f.isMarried === false && f.age >= minAge && f.age < maxAge,
         );
 
         console.log(`Nombre de femmes dans la population : ${femmes.length}`);
@@ -132,7 +132,7 @@ export class FamilyGenerator {
         // Trier par écart d'age
         // ToDo : ajouter le niveau d'étude qui est très déterminant.
         const candidats = this.hommes
-            .filter((h) => !h.married && !this.sontApparentes(femme, h) && h.age > 20)
+            .filter((h) => !h.isMarried && !this.sontApparentes(femme, h) && h.age > 20)
             .map((homme) => ({
             homme,
             ecartAge: Math.abs(femme.age - homme.age),
@@ -168,12 +168,12 @@ export class FamilyGenerator {
         });
 
         // Une personne ne peut être marié qu'une fois
-        epoux.married = true;
-        femme.married = true;
+        epoux.isMarried = true;
+        femme.isMarried = true;
         nombreCouples++;
         }
 
-        const celibataires = femmes.filter((f) => !f.married).length;
+        const celibataires = femmes.filter((f) => !f.isMarried).length;
 
         const tauxCelibataires = celibataires / femmes.length;
 
@@ -189,7 +189,7 @@ export class FamilyGenerator {
         );
         console.log(`**********`);
 
-        const femmesMariees = femmes.filter((femme) => femme.married);
+        const femmesMariees = femmes.filter((femme) => femme.isMarried);
 
         let indexCouple = 1;
         let nbEnfants = 0;
@@ -203,7 +203,7 @@ export class FamilyGenerator {
 
         // Pas déja enfant d'une autre femme et age compatible
         const candidatsEnfants = this.individus.filter(
-            (c) => !c.child && c.age >= femme.age - 40 && c.age <= femme.age - 22,
+            (c) => !c.isChild && c.age >= femme.age - 40 && c.age <= femme.age - 22,
         );
 
         console.log(
@@ -225,7 +225,7 @@ export class FamilyGenerator {
         for (const enfant of enfants) {
             console.log(`* ${enfant.firstname} (${enfant.age} ans)`);
 
-            enfant.child = true;
+            enfant.isChild = true;
             enfant.lastname = epoux.lastname;
 
             this.graph.addEdge(femme.id, enfant.id, {

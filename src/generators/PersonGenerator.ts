@@ -52,7 +52,7 @@ export class PersonGenerator {
    */
   generate(id: number): Person {
     /*
-     * On construit progressivement l'individu.
+     * On construit progressivement l'individu (interface + partial plutôt que class).
      *
      * Les distributions peuvent utiliser
      * les propriétés déjà présentes.
@@ -60,19 +60,19 @@ export class PersonGenerator {
     const person = {
       id,
       edges: 0,
-      married: false,
-      child: false,
+      isMarried: false,
+      isChild: false,
       clubs: [],
       tags: new Set<string>(),
       firstname: '',
       lastname: '',
       gender: Gender.Unknown,
+      age: 0,
       education: 0,
       wealth: 0,
       sport: 0,
       music: 0,
       reading: 0,
-      age: 0,
     } as Person;
 
     // Caractéristiques démographiques
@@ -84,6 +84,8 @@ export class PersonGenerator {
     person.firstname = this.firstnameDistribution.sample(person);
 
     person.lastname = this.lastnameDistribution.sample(person);
+
+    if (person.age < 18) return person;
 
     // Caractéristiques sociales
 
