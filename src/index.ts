@@ -1,5 +1,7 @@
 import { mkdirSync } from "node:fs";
 import { Gender } from "./models/Person.js";
+import { Club } from "./models/Club.js";
+import { Enterprise } from "./models/Enterprise.js";
 import { PersonGenerator } from "./generators/PersonGenerator.js";
 import { ClubMembershipGenerator } from "./generators/ClubMembershipGenerator.js";
 import { AgePyramidLoader } from "./loaders/AgePyramidLoader.js";
@@ -7,7 +9,7 @@ import { FirstnameLoader } from "./loaders/FirstnameLoader.js";
 import { LastnameLoader } from "./loaders/LastnameLoader.js";
 import { CsvPersonExporter } from "./exporters/CsvPersonExporter.js";
 import fs from 'fs';
-import { ClubLoader } from "./loaders/ClubLoader.js";
+import { JsonLoader } from "./loaders/JsonLoader.js";
 import { DirectedGraph } from "graphology";
 import { FamilyGenerator } from "./generators/FamilyGenerator.js";
 
@@ -49,7 +51,7 @@ const familyGenerator = new FamilyGenerator(
 familyGenerator.generate();
 
 /* Clubs */
-const clubs = ClubLoader.load("data/clubs.json")
+const clubs = JsonLoader.load("data/clubs.json", Club)
 
 console.log(clubs.slice(0, 1))
 

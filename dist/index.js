@@ -1,19 +1,19 @@
 import { mkdirSync } from "node:fs";
 import { Gender } from "./models/Person.js";
+import { Club } from "./models/Club.js";
 import { PersonGenerator } from "./generators/PersonGenerator.js";
 import { ClubMembershipGenerator } from "./generators/ClubMembershipGenerator.js";
-import { AgePyramidLoader } from "./stats/loaders/AgePyramidLoader.js";
-import { FirstnameLoader } from "./stats/loaders/FirstnameLoader.js";
-import { LastnameLoader } from "./stats/loaders/LastnameLoader.js";
+import { AgePyramidLoader } from "./loaders/AgePyramidLoader.js";
+import { FirstnameLoader } from "./loaders/FirstnameLoader.js";
+import { LastnameLoader } from "./loaders/LastnameLoader.js";
 import { CsvPersonExporter } from "./exporters/CsvPersonExporter.js";
 import fs from 'fs';
-import { ClubLoader } from "./stats/loaders/ClubLoader.js";
+import { JsonLoader } from "./loaders/JsonLoader.js";
 import { DirectedGraph } from "graphology";
 import { FamilyGenerator } from "./generators/FamilyGenerator.js";
 const graph = new DirectedGraph();
 const generator = new PersonGenerator(AgePyramidLoader.load("data/age-pyramid-guyane.json"), FirstnameLoader.load("data/prenoms.json"), LastnameLoader.load("data/noms.csv"), 0, 85);
 const population = generator.generateMany(250);
-console.log(population.slice(0, 3));
 /* Ajouter la population au graphe */
 for (let p of population) {
     graph.addNode(p.id, {
@@ -32,7 +32,7 @@ for (let p of population) {
 const familyGenerator = new FamilyGenerator(graph, population);
 familyGenerator.generate();
 /* Clubs */
-const clubs = ClubLoader.load("data/clubs.json");
+const clubs = JsonLoader.load("data/clubs.json", Club);
 console.log(clubs.slice(0, 1));
 for (const club of clubs) {
     club.size = 1;

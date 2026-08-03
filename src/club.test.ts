@@ -26,13 +26,14 @@ describe("Club", () => {
         } as Person;
     const persons: Person[] = [person];
 
-    const club = new Club("club-test", "Test", 1);
-    club.gender = {
-        male:1, female: 0
-    }
-    club.criteria = {
-        sport: 1
-    }
+    const club = new Club("club-test", "Test", 1, [], [],
+      {
+          male:1, female: 0
+      }
+      ,{
+          sport: 1
+      }
+    );
     const clubs: Club[] = [club];
     
     const clubMembershipGenerator = new ClubMembershipGenerator(graph, persons , clubs);

@@ -5,40 +5,27 @@ export interface PlageRichesse {
   max: number;
 }
 
-interface Poste {
-  /**
-   * Nombre de personnes recherchées pour ce poste.
-   */
-  effectif: number;
-
-  /**
-   * Nombre de personnes recherchées pour ce poste.
-   */
-  niveauEtude: Education | null;
-
-   /**
-   * Âge minimum.
-   * null = pas de contrainte.
-   */
-  ageMin: number | null;
-
-  /**
-   * Âge maximum.
-   * null = pas de contrainte.
-   */
-  ageMax: number | null;
+class Poste {
   
-  /**
-   * Richesse associée au poste.
-   * Un nombre = richesse fixe.
-   * Une plage = richesse tirée aléatoirement.
-   */
-  richesse: number | PlageRichesse;
+  constructor(
+    public readonly effectif: number,
+    public readonly niveauEtude: Education | null,
+    public readonly richesse: number | PlageRichesse,
+    ageMin?: number,
+    ageMax?: number,
+    public readonly commentaire?: string,
+  ) {
+  }
 
-  /**
-   * Description du poste.
-   */
-  commentaire?: string;
+  static fromJson(json: any): Poste {
+    return new Poste(
+            json.effectif,
+            json.niveauEtude,
+            json.richesse,
+            json.ageMin,
+            json.ageMax,
+        );
+  }
 }
 
 export class Enterprise {
@@ -50,13 +37,21 @@ export class Enterprise {
     ) {
     }
 
-  /**
-   * Effectif total prévu de l'entreprise.
-   */
-  get effectif(): number {
-    return this.postes.reduce(
-      (total, poste) => total + poste.effectif,
-      0,
-    );
-  }
+    static fromJson(json: any): Enterprise {
+        return new Enterprise(
+            json.id,
+            json.name,
+            json.postes.map((p: any) => Poste.fromJson(p)),
+        );
+    }
+
+    /**
+     * Effectif total prévu de l'entreprise.
+     */
+    get effectif(): number {
+      return this.postes.reduce(
+        (total, poste) => total + poste.effectif,
+        0,
+      );
+    }
 }
