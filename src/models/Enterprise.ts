@@ -16,6 +16,18 @@ interface Poste {
    */
   niveauEtude: Education | null;
 
+   /**
+   * Âge minimum.
+   * null = pas de contrainte.
+   */
+  ageMin: number | null;
+
+  /**
+   * Âge maximum.
+   * null = pas de contrainte.
+   */
+  ageMax: number | null;
+  
   /**
    * Richesse associée au poste.
    * Un nombre = richesse fixe.
