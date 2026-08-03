@@ -1,26 +1,54 @@
 [
     { 
-        "name": "Conserverie"
+        "name": "Conserverie",
+        "postes": [
+            {
+                "effectif": 1,
+                "richesse": 4,
+                "commentaire": "patron"
+            }
+        ]
     }, 
     { 
-        "name": "Au Pain Levant"
+        "name": "Au Pain Levant",
+        "postes": []
     },
     { 
-        "name": "Boucherie de la côte"
+        "name": "Boucherie de la côte",
+        "postes": []
     },
     { 
-        "name": "Coiffeur"
+        "name": "Coiffeur",
+        "postes": []
     },
     { 
-        "name": "L'Assiette Dorée"
+        "name": "L'Assiette Dorée",
+        "postes": []
     },
     { 
-        "name": "Crêperie du phare"
+        "name": "Crêperie du phare",
+        "postes": []
     },
     { 
-        "name": "Royal Casino"
+        "name": "Royal Casino",
+        "postes": [
+            {
+                "effectif": 1,
+                "richesse": 4,
+                "commentaire": "patron"
+            }
+        ]
     },
     {
-        "name": "Cabinet d'ingénierie"
+        "id": "ent-engineering",
+        "name": "Cabinet d'ingénierie",
+        "postes": [
+            {
+                "effectif": 7,
+                "niveauEtude": 3,
+                "richesse": 3,
+                "commentaire": "Ingénieurs"
+            }
+        ]
     }
 ]

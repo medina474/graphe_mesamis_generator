@@ -21,8 +21,6 @@ const generator = new PersonGenerator(
 
 const population = generator.generateMany(250);
 
-console.log(population.slice(0, 3));
-
 /* Ajouter la population au graphe */
 for (let p of population) 
 {
