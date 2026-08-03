@@ -1,41 +1,74 @@
 [
     { 
+        "id": "ent-conserverie",
         "name": "Conserverie",
         "postes": [
             {
                 "effectif": 1,
                 "richesse": 4,
+                "ageMinimum": 55,
                 "commentaire": "patron"
+            },
+            {
+                "effectif": 25,
+                "richesse": 1,
+                "commentaire": "ouvrier"
             }
         ]
     }, 
     { 
+        "id": "ent-boulangerie",
         "name": "Au Pain Levant",
-        "postes": []
+        "postes": [
+            {
+                "effectif": 1,
+                "richesse": { min: 3, max: 4 },
+                "ageMinimum": 25,
+                "commentaire": "patron"
+            }
+            {
+                "effectif": 1,
+                "richesse": 0,
+                "education": 0,
+                "ageMaximum": 20,
+                "commentaire": "apprenti"
+            },
+            {
+              "effectif": 3,
+              "richesse": 2,
+              "commentaire": "vendeur",
+            }
+        ]
     },
     { 
+        "id": "ent-boucherie",
         "name": "Boucherie de la côte",
         "postes": []
     },
     { 
+        "id": "ent-coiffeur",
         "name": "Coiffeur",
         "postes": []
     },
     { 
+        "id": "ent-restaurant",
         "name": "L'Assiette Dorée",
         "postes": []
     },
     { 
+        "id": "ent-creperie",
         "name": "Crêperie du phare",
         "postes": []
     },
     { 
+        "id": "ent-casino",
         "name": "Royal Casino",
         "postes": [
             {
                 "effectif": 1,
                 "richesse": 4,
                 "commentaire": "patron"
+                "ageMinimum": 40,
             }
         ]
     },
@@ -47,6 +80,8 @@
                 "effectif": 7,
                 "niveauEtude": 3,
                 "richesse": 3,
+                "ageMinimum": 25,
+                "ageMaximum": 42,
                 "commentaire": "Ingénieurs"
             }
         ]
