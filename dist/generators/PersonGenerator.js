@@ -84,7 +84,7 @@ export class PersonGenerator {
     generateMany(count) {
         const persons = [];
         for (let i = 1; i <= count; i++) {
-            persons.push(this.generate(i));
+            persons.push(this.generate(i.toString()));
         }
         return persons;
     }

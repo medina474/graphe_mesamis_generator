@@ -8,7 +8,7 @@ describe("Club", () => {
   it("exclut les personnes ayant une catégorie du club", () => {
     const graph = new DirectedGraph()
     const person = {
-          id: 1,
+          id: "1",
           edges: 0,
           isMarried: false,
           isChild: false,

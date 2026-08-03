@@ -42,10 +42,12 @@ export class WorkGenerator {
 
     generate() {
 
-        const disponibles = [...this.individus];
+        const disponibles = [...this.individus.filter(i => i.age > 20 && i.age < 65)];
         const affectations: Affectation[] = [];
 
         for (const emploi of this.emplois) {
+          console.log(`${emploi.enterprise.name} - ${emploi.poste.commentaire}`)
+          for (let k = 0 ; k < emploi.poste.effectif ; k++) {
             const candidat = this.meilleurCandidat(
                 emploi.poste,
                 disponibles,
@@ -69,6 +71,7 @@ export class WorkGenerator {
 
             const index = disponibles.indexOf(candidat);
             disponibles.splice(index, 1);
+          }
         }
     }
 

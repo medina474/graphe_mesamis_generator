@@ -32,7 +32,7 @@ export class FamilyGenerator {
         return this.individus.find((i) => i.id.toString() === partnerId)!;
     }
 
-    private getParents(personId: number): string[] {
+    private getParents(personId: string): string[] {
         return this.graph
         .edges(personId)
         .filter((edge) => {

@@ -15,6 +15,7 @@ import { FamilyGenerator } from "./generators/FamilyGenerator.js";
 import { WorkGenerator } from "./generators/WorkGenerator.js";
 import { GraphManager } from "./graph/GraphManager.js";
 import { exit } from "node:process";
+import { FriendsGenerator } from "./generators/FriendsGenerator.js";
 
 const graph: DirectedGraph = new DirectedGraph();
 const graphManager = new GraphManager(graph);
@@ -37,8 +38,6 @@ const familyGenerator = new FamilyGenerator(
 
 familyGenerator.generate();
 
-
-
 /* Clubs */
 const clubs = JsonLoader.load("data/clubs.json", Club)
 
@@ -51,6 +50,7 @@ const clubMembershipGenerator = new ClubMembershipGenerator(
 );
 
 clubMembershipGenerator.generate();
+graphManager.updateClubs(clubs);
 
 /* Entreprises */
 const enterprises = JsonLoader.load("data/entreprises.json", Enterprise);
@@ -60,6 +60,10 @@ graphManager.addEnterprises(enterprises);
 const workGenerator = new WorkGenerator(graph, population, enterprises);
 
 workGenerator.generate();
+graphManager.updateEnterprises(enterprises);
+
+const friendsGenerator = new FriendsGenerator(graph, population);
+friendsGenerator.generate();
 
 /* Export 
 

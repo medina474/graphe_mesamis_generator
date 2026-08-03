@@ -1,57 +1,50 @@
-import { mkdirSync } from "node:fs";
-import { Gender } from "./models/Person.js";
 import { Club } from "./models/Club.js";
+import { Enterprise } from "./models/Enterprise.js";
 import { PersonGenerator } from "./generators/PersonGenerator.js";
 import { ClubMembershipGenerator } from "./generators/ClubMembershipGenerator.js";
 import { AgePyramidLoader } from "./loaders/AgePyramidLoader.js";
 import { FirstnameLoader } from "./loaders/FirstnameLoader.js";
 import { LastnameLoader } from "./loaders/LastnameLoader.js";
-import { CsvPersonExporter } from "./exporters/CsvPersonExporter.js";
 import fs from 'fs';
 import { JsonLoader } from "./loaders/JsonLoader.js";
 import { DirectedGraph } from "graphology";
 import { FamilyGenerator } from "./generators/FamilyGenerator.js";
+import { WorkGenerator } from "./generators/WorkGenerator.js";
+import { GraphManager } from "./graph/GraphManager.js";
+import { FriendsGenerator } from "./generators/FriendsGenerator.js";
 const graph = new DirectedGraph();
-const generator = new PersonGenerator(AgePyramidLoader.load("data/age-pyramid-guyane.json"), FirstnameLoader.load("data/prenoms.json"), LastnameLoader.load("data/noms.csv"), 0, 85);
+const graphManager = new GraphManager(graph);
+const generator = new PersonGenerator(AgePyramidLoader.load("data/age-pyramid-guyane.json"), FirstnameLoader.load("data/prenoms.json"), LastnameLoader.load("data/noms.csv"), 1, 85);
 const population = generator.generateMany(250);
-/* Ajouter la population au graphe */
-for (let p of population) {
-    graph.addNode(p.id, {
-        category: 'person',
-        firstname: p.firstname,
-        lastname: p.lastname,
-        age: p.age,
-        x: Math.random() * 100,
-        y: Math.random() * 100,
-        label: `${p.firstname} ${p.lastname} ${p.age}`,
-        size: 3,
-        color: p.gender === Gender.Male ? "#4A90E2" : "#FF69B4",
-    });
-}
+graphManager.addPersons(population);
 /* Familles */
 const familyGenerator = new FamilyGenerator(graph, population);
 familyGenerator.generate();
 /* Clubs */
 const clubs = JsonLoader.load("data/clubs.json", Club);
-console.log(clubs.slice(0, 1));
-for (const club of clubs) {
-    club.size = 1;
-    graph.addNode(club.id, {
-        category: 'club',
-        name: club.name,
-        label: club.name,
-        x: Math.random() * 100,
-        y: Math.random() * 100,
-        size: 1,
-        color: "#82ff69",
-    });
-}
+graphManager.addClubs(clubs);
 const clubMembershipGenerator = new ClubMembershipGenerator(graph, population, clubs);
 clubMembershipGenerator.generate();
-/* Export */
+graphManager.updateClubs(clubs);
+/* Entreprises */
+const enterprises = JsonLoader.load("data/entreprises.json", Enterprise);
+graphManager.addEnterprises(enterprises);
+const workGenerator = new WorkGenerator(graph, population, enterprises);
+workGenerator.generate();
+graphManager.updateEnterprises(enterprises);
+const friendsGenerator = new FriendsGenerator(graph, population);
+friendsGenerator.generate();
+/* Export
+
 mkdirSync("output", { recursive: true });
+
 const exporter = new CsvPersonExporter();
-await exporter.export(population, "output/persons.csv");
+
+await exporter.export(
+    population,
+    "output/persons.csv"
+);
+*/
 await fs.writeFile("./output/relationships.json", JSON.stringify(graph.export(), null, 2), (err) => err && console.error(err));
 /*
 const graphExporter = new GraphExporter();

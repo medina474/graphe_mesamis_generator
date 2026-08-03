@@ -43,22 +43,42 @@
     { 
         "id": "ent-boucherie",
         "name": "Boucherie de la côte",
-        "postes": []
+        "postes": [
+            {
+                "effectif": 4,
+                "commentaire": "Salarié"
+            }
+        ]
     },
     { 
         "id": "ent-coiffeur",
         "name": "Coiffeur",
-        "postes": []
+        "postes": [
+            {
+                "effectif": 3,
+                "commentaire": "Salarié"
+            }
+        ]
     },
     { 
         "id": "ent-restaurant",
         "name": "L'Assiette Dorée",
-        "postes": []
+        "postes": [
+            {
+                "effectif": 8,
+                "commentaire": "Salarié"
+            }
+        ]
     },
     { 
         "id": "ent-creperie",
         "name": "Crêperie du phare",
-        "postes": []
+        "postes": [
+            {
+                "effectif": 3,
+                "commentaire": "Salarié"
+            }
+        ]
     },
     { 
         "id": "ent-casino",
@@ -69,6 +89,11 @@
                 "richesse": 4,
                 "commentaire": "patron",
                 "ageMinimum": 40
+            },
+            {
+                "effectif": 20,
+                "richesse": 2,
+                "commentaire": "-"
             }
         ]
     },
@@ -83,6 +108,26 @@
                 "ageMinimum": 25,
                 "ageMaximum": 42,
                 "commentaire": "Ingénieurs"
+            }
+        ]
+    },
+    {
+        "id": "ent-banque-ouest",
+        "name": "Banque de l'Ouest",
+        "postes": [
+            {
+                "effectif": 5,
+                "commentaire": "-"
+            }
+        ]
+    },
+    {
+        "id": "ent-banque-littoral",
+        "name": "Banque du littoral",
+        "postes": [
+            {
+                "effectif": 6,
+                "commentaire": "-"
             }
         ]
     }

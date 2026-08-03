@@ -22,7 +22,7 @@ export enum Wealth {
 
 export interface Person {
 
-    id: number;
+    id: string;
 
     firstname: string;
     lastname: string;

@@ -91,10 +91,6 @@ export class ClubMembershipGenerator {
             weight: 1,
           });
 
-        this.graph.mergeNodeAttributes(club.id, {
-            size: club.size,
-          });
-
         club.size++;
       }
 

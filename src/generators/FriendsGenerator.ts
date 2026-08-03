@@ -1,2 +1,286 @@
+import { Person } from "../models/Person.js";
+import { UndirectedGraph } from "graphology";
+
 export class FriendsGenerator {
+
+    constructor(
+        private readonly graph: UndirectedGraph,
+        private readonly individus: Person[],
+        private readonly iterations = 5000,
+    ) {}
+
+    generate(): void {
+
+        for (let k = 0; k < this.iterations; k++) {
+
+            const a = this.randomPerson();
+
+            const b = this.preferentialPerson(a);
+
+            if (!b) {
+                continue;
+            }
+
+            const idA = a.id;
+            const idB = b.id;
+
+            if (idA === idB) {
+                continue;
+            }
+
+            if (this.graph.hasEdge(idA, idB)) {
+                continue;
+            }
+
+            const similarity = this.similarity(a, b);
+            const age = this.ageAffinity(a, b);
+            const gender = this.genderAffinity(a, b);
+
+            const triadic = this.triadicScore(idA, idB);
+            const interaction = this.interactionScore(idA, idB);
+
+            /*
+             * Affinité intrinsèque
+             */
+            const affinity =
+                similarity *
+                age *
+                gender;
+
+            /*
+             * Opportunités sociales
+             */
+            const opportunity =
+                1 +
+                interaction * 2 +
+                triadic * 2;
+
+            /*
+             * Probabilité finale
+             */
+            const p =
+                0.03 *
+                affinity *
+                opportunity;
+
+            if (Math.random() < p) {
+
+                a.edges++;
+                b.edges++;
+
+                console.log(idA)
+                this.graph.addEdge(
+                    idA,
+                    idB,
+                    {
+                        relation: "friends",
+                        category: "friends",
+                        weight: 3,
+                    }
+                );
+            }
+        }
+    }
+
+    private randomPerson(): Person {
+        return this.individus[
+            Math.floor(Math.random() * this.individus.length)
+        ];
+    }
+
+    private preferentialPerson(exclude: Person): Person | null {
+
+        const candidates = this.individus.filter(
+            person =>
+                person.id !== exclude.id &&
+                !this.graph.hasEdge(exclude.id, person.id)
+        );
+
+        if (candidates.length === 0) {
+            return null;
+        }
+
+        const weights = candidates.map(
+            person =>
+                Math.pow(
+                    this.graph.degree(person.id) + 1,
+                    0.5 // alpha
+                )
+        );
+
+        const total = weights.reduce(
+            (sum, weight) => sum + weight,
+            0
+        );
+
+        let random = Math.random() * total;
+
+        for (let i = 0; i < candidates.length; i++) {
+
+            random -= weights[i];
+
+            if (random <= 0) {
+                return candidates[i];
+            }
+        }
+
+        return candidates[candidates.length - 1];
+    }
+
+    private vector(person: Person): number[] {
+        return [
+            person.reading,
+            person.music,
+            person.sport,
+            person.education / 3,
+            person.wealth / 3,
+        ];
+    }
+
+    private similarity(a: Person, b: Person): number {
+
+        const va = this.vector(a);
+        const vb = this.vector(b);
+
+        let dot = 0;
+        let normA = 0;
+        let normB = 0;
+
+        for (let i = 0; i < va.length; i++) {
+            dot += va[i] * vb[i];
+            normA += va[i] ** 2;
+            normB += vb[i] ** 2;
+        }
+
+        if (normA === 0 || normB === 0) {
+            return 0;
+        }
+
+        return dot /
+            (Math.sqrt(normA) * Math.sqrt(normB));
+    }
+
+    private ageAffinity(a: Person, b: Person): number {
+
+        const difference = Math.abs(a.age - b.age);
+
+        return Math.exp(-difference / 15);
+    }
+
+    private genderAffinity(a: Person, b: Person): number {
+
+        return a.gender === b.gender
+            ? 1
+            : 0.7;
+    }
+
+    private triadicScore(a: string, b: string): number {
+
+        const neighborsA = new Set(
+            this.graph.neighbors(a)
+        );
+
+        const neighborsB = new Set(
+            this.graph.neighbors(b)
+        );
+
+        let common = 0;
+
+        for (const neighbor of neighborsA) {
+
+            if (neighborsB.has(neighbor)) {
+                common++;
+            }
+        }
+
+        return 1 - Math.exp(-common / 2);
+    }
+
+    private getNeighborsByCategory(
+        personId: string,
+        category: string
+    ): Set<string> {
+
+        const result = new Set<string>();
+
+        for (const neighbor of this.graph.neighbors(personId)) {
+
+            if (
+                this.graph.getNodeAttribute(
+                    neighbor,
+                    "category"
+                ) === category
+            ) {
+                result.add(neighbor);
+            }
+        }
+
+        return result;
+    }
+
+    private intersectionSize(
+        a: Set<string>,
+        b: Set<string>
+    ): number {
+
+        let count = 0;
+
+        for (const value of a) {
+            if (b.has(value)) {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
+    private interactionScore(a: string, b: string): number {
+        let score = 0;
+
+        // Famille
+        if (this.graph.hasEdge(a, b)) {
+            const relation = this.graph.getEdgeAttribute(
+                a,
+                b,
+                "relation"
+            );
+
+            if (
+                relation === "parent" ||
+                relation === "child" ||
+                relation === "siblings"
+            ) {
+                score += 0.6;
+            }
+        }
+
+        // Clubs communs
+        const clubsA = this.getNeighborsByCategory(a, "club");
+        const clubsB = this.getNeighborsByCategory(b, "club");
+
+        const commonClubs = this.intersectionSize(clubsA, clubsB);
+
+        if (commonClubs > 0) {
+            score += 0.35 * (1 - Math.exp(-commonClubs));
+        }
+
+        // Entreprise commune
+        const enterprisesA =
+            this.getNeighborsByCategory(a, "enterprise");
+
+        const enterprisesB =
+            this.getNeighborsByCategory(b, "enterprise");
+
+        const commonEnterprises =
+            this.intersectionSize(
+                enterprisesA,
+                enterprisesB
+            );
+
+        if (commonEnterprises > 0) {
+            score += 0.35 * (1 - Math.exp(-commonEnterprises));
+        }
+
+        return Math.min(score, 1);
+    }
 }

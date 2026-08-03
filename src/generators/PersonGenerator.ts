@@ -50,7 +50,7 @@ export class PersonGenerator {
   /**
    * Génère un individu complet
    */
-  generate(id: number): Person {
+  generate(id: string): Person {
     /*
      * On construit progressivement l'individu (interface + partial plutôt que class).
      *
@@ -111,7 +111,7 @@ export class PersonGenerator {
     const persons: Person[] = [];
 
     for (let i = 1; i <= count; i++) {
-      persons.push(this.generate(i));
+      persons.push(this.generate(i.toString()));
     }
 
     return persons;

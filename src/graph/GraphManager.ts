@@ -75,4 +75,20 @@ export class GraphManager {
             this.addEnterprise(enterprise);
         }
     }
+
+    updateClubs(clubs: Club[]): void {
+        for (const club of clubs) {
+            this.graph.mergeNodeAttributes(club.id, {
+                size: Math.ceil(club.size / 3.0),
+            });
+        }
+    }
+
+    updateEnterprises(enterprises: Enterprise[]): void {
+        for (const enterprise of enterprises) {
+            this.graph.mergeNodeAttributes(enterprise.id, {
+                size: Math.ceil(enterprise.effectif / 3.0),
+            });
+        }
+    }
 }
