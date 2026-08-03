@@ -13,8 +13,10 @@ import { JsonLoader } from "./loaders/JsonLoader.js";
 import { DirectedGraph } from "graphology";
 import { FamilyGenerator } from "./generators/FamilyGenerator.js";
 import { WorkGenerator } from "./generators/WorkGenerator.js";
+import { GraphNodeBuilder } from "./graph/GraphNodeBuilder.js";
 
 const graph: DirectedGraph = new DirectedGraph();
+const nodeBuilder = new GraphNodeBuilder(graph);
 
 const generator = new PersonGenerator(
     AgePyramidLoader.load("data/age-pyramid-guyane.json"),
@@ -24,24 +26,7 @@ const generator = new PersonGenerator(
 
 const population = generator.generateMany(250);
 
-/* Ajouter la population au graphe */
-for (let p of population) 
-{
-    graph.addNode(
-        p.id, 
-        {
-            category: 'person',
-            firstname: p.firstname,
-            lastname: p.lastname,
-            age: p.age,
-            x: Math.random() * 100,
-            y: Math.random() * 100,
-            label: `${p.firstname} ${p.lastname} ${p.age}`,
-            size: 3,
-            color: p.gender === Gender.Male ? "#4A90E2" : "#FF69B4",
-        }
-    );
-}
+nodeBuilder.addPersons(population);
 
 /* Familles */
 const familyGenerator = new FamilyGenerator(
@@ -54,24 +39,7 @@ familyGenerator.generate();
 /* Clubs */
 const clubs = JsonLoader.load("data/clubs.json", Club)
 
-console.log(clubs.slice(0, 1))
-
-for (const club of clubs) 
-{
-    club.size = 1
-    graph.addNode(
-        club.id, 
-        {
-            category: 'club',
-            name: club.name,
-            label: club.name,
-            x: Math.random() * 100,
-            y: Math.random() * 100,
-            size: 1,
-            color: "#82ff69",
-        }
-    );
-}
+nodeBuilder.addClubs(clubs);
 
 const clubMembershipGenerator = new ClubMembershipGenerator(
     graph,
@@ -84,24 +52,11 @@ clubMembershipGenerator.generate();
 /* Entreprises */
 const enterprises = JsonLoader.load("data/entreprises.json", Enterprise)
 
-for (const enterprise of enterprises) 
-{
-    graph.addNode(
-        enterprise.id, 
-        {
-            category: 'enterprise',
-            name: enterprise.name,
-            label: enterprise.name,
-            x: Math.random() * 100,
-            y: Math.random() * 100,
-            size: 1,
-            color: "#ffd035",
-        }
-    );
-}
+nodeBuilder.addEnterprises(enterprises);
 
 const workGenerator = new WorkGenerator(graph, population, enterprises)
 
+workGenerator.generate();
 
 /* Export */
 
