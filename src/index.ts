@@ -12,6 +12,7 @@ import fs from 'fs';
 import { JsonLoader } from "./loaders/JsonLoader.js";
 import { DirectedGraph } from "graphology";
 import { FamilyGenerator } from "./generators/FamilyGenerator.js";
+import { WorkGenerator } from "./generators/WorkGenerator.js";
 
 const graph: DirectedGraph = new DirectedGraph();
 
@@ -79,6 +80,28 @@ const clubMembershipGenerator = new ClubMembershipGenerator(
     );
 
 clubMembershipGenerator.generate();
+
+/* Entreprises */
+const enterprises = JsonLoader.load("data/entreprises.json", Enterprise)
+
+for (const enterprise of enterprises) 
+{
+    graph.addNode(
+        enterprise.id, 
+        {
+            category: 'enterprise',
+            name: enterprise.name,
+            label: enterprise.name,
+            x: Math.random() * 100,
+            y: Math.random() * 100,
+            size: 1,
+            color: "#ffd035",
+        }
+    );
+}
+
+const workGenerator = new WorkGenerator(graph, population, enterprises)
+
 
 /* Export */
 

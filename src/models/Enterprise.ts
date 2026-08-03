@@ -5,26 +5,27 @@ export interface PlageRichesse {
   max: number;
 }
 
-class Poste {
+export class Poste {
   
   constructor(
     public readonly effectif: number,
     public readonly niveauEtude: Education | null,
     public readonly richesse: number | PlageRichesse,
-    ageMin?: number,
-    ageMax?: number,
+    public readonly ageMin?: number,
+    public readonly ageMax?: number,
     public readonly commentaire?: string,
   ) {
   }
 
   static fromJson(json: any): Poste {
     return new Poste(
-            json.effectif,
-            json.niveauEtude,
-            json.richesse,
-            json.ageMin,
-            json.ageMax,
-        );
+      json.effectif,
+      json.niveauEtude,
+      json.richesse,
+      json.ageMin,
+      json.ageMax,
+      json.commentaire,
+    );
   }
 }
 

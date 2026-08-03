@@ -22,10 +22,10 @@
         "postes": [
             {
                 "effectif": 1,
-                "richesse": { min: 3, max: 4 },
+                "richesse": { "min": 3, "max": 4 },
                 "ageMinimum": 25,
                 "commentaire": "patron"
-            }
+            },
             {
                 "effectif": 1,
                 "richesse": 0,
@@ -36,7 +36,7 @@
             {
               "effectif": 3,
               "richesse": 2,
-              "commentaire": "vendeur",
+              "commentaire": "vendeur"
             }
         ]
     },
@@ -67,8 +67,8 @@
             {
                 "effectif": 1,
                 "richesse": 4,
-                "commentaire": "patron"
-                "ageMinimum": 40,
+                "commentaire": "patron",
+                "ageMinimum": 40
             }
         ]
     },
