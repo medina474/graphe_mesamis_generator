@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 
-import { Lastname } from "../../models/Family.js";
+import { Lastname } from "../models/Family.js";
 
 export class LastnameLoader {
   static load(path: string): Lastname[] {

@@ -2,12 +2,12 @@ import { mkdirSync } from "node:fs";
 import { Gender } from "./models/Person.js";
 import { PersonGenerator } from "./generators/PersonGenerator.js";
 import { ClubMembershipGenerator } from "./generators/ClubMembershipGenerator.js";
-import { AgePyramidLoader } from "./stats/loaders/AgePyramidLoader.js";
-import { FirstnameLoader } from "./stats/loaders/FirstnameLoader.js";
-import { LastnameLoader } from "./stats/loaders/LastnameLoader.js";
+import { AgePyramidLoader } from "./loaders/AgePyramidLoader.js";
+import { FirstnameLoader } from "./loaders/FirstnameLoader.js";
+import { LastnameLoader } from "./loaders/LastnameLoader.js";
 import { CsvPersonExporter } from "./exporters/CsvPersonExporter.js";
 import fs from 'fs';
-import { ClubLoader } from "./stats/loaders/ClubLoader.js";
+import { ClubLoader } from "./loaders/ClubLoader.js";
 import { DirectedGraph } from "graphology";
 import { FamilyGenerator } from "./generators/FamilyGenerator.js";
 
