@@ -1,6 +1,6 @@
 import { DirectedGraph } from "graphology";
-import { Gender, Person, Education } from "../models/Person.js";
-import { Enterprise, Poste } from "../models/Enterprise.js";
+import { Gender, Person, Education, Wealth } from "../models/Person.js";
+import { Enterprise, PlageRichesse, Poste } from "../models/Enterprise.js";
 import { Random } from "../stats/Random.js";
 
 interface Emploi {
@@ -25,6 +25,7 @@ export class WorkGenerator {
     ) {        
         this.emplois = [];
 
+        // Extraire les emplois pour affecter les postes les plus contraints en premier
         for (const enterprise of this.enterprises) {
             for (const poste of enterprise.postes) {
                 this.emplois.push({
@@ -35,6 +36,7 @@ export class WorkGenerator {
             }
         }
 
+        // Trier par niveau d'etudes décroissant
         this.emplois = this.emplois.sort((a, b) => {
             return b.niveau - a.niveau;
         });
@@ -43,10 +45,11 @@ export class WorkGenerator {
     generate() {
 
         const disponibles = [...this.individus.filter(i => i.age > 20 && i.age < 65)];
+        const nbDisponibles = disponibles.length
+        console.log(`Population en âge de travailler : ${nbDisponibles}`)
         const affectations: Affectation[] = [];
 
         for (const emploi of this.emplois) {
-          console.log(`${emploi.enterprise.name} - ${emploi.poste.commentaire}`)
           for (let k = 0 ; k < emploi.poste.effectif ; k++) {
             const candidat = this.meilleurCandidat(
                 emploi.poste,
@@ -54,6 +57,7 @@ export class WorkGenerator {
             );
 
             if (candidat === null) {
+                console.log(`pas de candidat disponible pour le poste de ${emploi.poste.name} ${emploi.enterprise.name}`)
                 continue;
             }
 
@@ -62,6 +66,10 @@ export class WorkGenerator {
                 enterprise: emploi.enterprise,
                 poste: emploi.poste,
             });
+
+            if (emploi.poste.richesse) {
+              candidat.wealth = this.tirerRichesse(emploi.poste.richesse)
+            }
 
             this.graph.addEdge(candidat.id, emploi.enterprise.id, {
               relation: "work",
@@ -73,6 +81,9 @@ export class WorkGenerator {
             disponibles.splice(index, 1);
           }
         }
+
+        console.log(`Population en activité : ${affectations.length}`)
+        console.log(`Taux d'activité : ${(affectations.length / nbDisponibles * 100).toFixed(2)}`)
     }
 
     private meilleurCandidat(
@@ -165,5 +176,16 @@ export class WorkGenerator {
     }
 
     return score;
+  }
+
+  private tirerRichesse(richesse: number | PlageRichesse): number  {
+    
+    if (typeof richesse === "number") {
+      return richesse;
+    }
+
+    return Math.floor(
+      Math.random() * (richesse.max - richesse.min + 1)
+    ) + richesse.min;
   }
 }

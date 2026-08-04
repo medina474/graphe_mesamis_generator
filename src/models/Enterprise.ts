@@ -13,7 +13,7 @@ export class Poste {
     public readonly richesse: number | PlageRichesse,
     public readonly ageMin?: number,
     public readonly ageMax?: number,
-    public readonly commentaire?: string,
+    public readonly name?: string,
   ) {
   }
 
@@ -24,7 +24,7 @@ export class Poste {
       json.richesse,
       json.ageMin,
       json.ageMax,
-      json.commentaire,
+      json.name,
     );
   }
 }

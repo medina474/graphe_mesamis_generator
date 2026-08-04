@@ -1,8 +1,8 @@
-import { NormalDistribution } from "../stats/NormalDistribution.js";
+import { Random } from "../stats/Random.js";
 export class WealthDistribution {
     sample(person) {
         // Ajoute un bruit gaussien (moyenne 0, écart-type 0.7)
-        const wealthCont = person.education / 2 + NormalDistribution.sample(0.2, 0.9);
+        const wealthCont = person.education / 2 + Random.normal(0.2, 0.9);
         // Classification en 4 niveaux selon la valeur continue
         let wealth;
         if (wealthCont < 0.5) {

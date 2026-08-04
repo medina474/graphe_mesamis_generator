@@ -48,7 +48,8 @@ export class ClubMembershipGenerator {
       // Calculons la capacité réelle
       const capacite_reelle = Math.floor(club.capacity * (Math.random() / 3 + 0.7)) 
 
-      console.log(`${club.name} ****************************************`) 
+      console.log("----------------------------------------")
+      console.log(`${club.name}`) 
 
       // Choisir les candidats :
       // - Ils ne doivent pas déja appartenir au club.
@@ -84,7 +85,6 @@ export class ClubMembershipGenerator {
           r.personne.tags.add(t)
         }
 
-        console.log(`${r.personne.firstname} ${r.personne.sport.toFixed(2)}`)
         this.graph.addEdge(r.personne.id, club.id, {
             relation: "member",
             category: "club",

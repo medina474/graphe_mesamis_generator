@@ -5,14 +5,20 @@
         "postes": [
             {
                 "effectif": 1,
-                "richesse": 4,
+                "richesse": 3,
                 "ageMinimum": 55,
-                "commentaire": "patron"
+                "name": "patron"
+            },
+            {
+                "effectif": 2,
+                "richesse": 2,
+                "ageMinimum": 30,
+                "name": "cadre"
             },
             {
                 "effectif": 25,
-                "richesse": 1,
-                "commentaire": "ouvrier"
+                "richesse": { "min": 0, "max": 1 },
+                "name": "ouvrier"
             }
         ]
     }, 
@@ -22,21 +28,21 @@
         "postes": [
             {
                 "effectif": 1,
-                "richesse": { "min": 3, "max": 4 },
+                "richesse": { "min": 2, "max": 3 },
                 "ageMinimum": 25,
-                "commentaire": "patron"
+                "name": "patron"
             },
             {
                 "effectif": 1,
                 "richesse": 0,
                 "education": 0,
                 "ageMaximum": 20,
-                "commentaire": "apprenti"
+                "name": "apprenti"
             },
             {
               "effectif": 3,
-              "richesse": 2,
-              "commentaire": "vendeur"
+              "richesse": { "min": 0, "max": 1 },
+              "name": "vendeur"
             }
         ]
     },
@@ -46,7 +52,7 @@
         "postes": [
             {
                 "effectif": 4,
-                "commentaire": "Salarié"
+                "name": "Salarié"
             }
         ]
     },
@@ -55,8 +61,19 @@
         "name": "Coiffeur",
         "postes": [
             {
-                "effectif": 3,
-                "commentaire": "Salarié"
+                "effectif": 1,
+                "name": "patron"
+            },
+            {
+                "effectif": 1,
+                "richesse": 0,
+                "education": 0,
+                "ageMaximum": 20,
+                "name": "apprenti"
+            },
+            {
+                "effectif": 1,
+                "name": "coiffeur"
             }
         ]
     },
@@ -65,8 +82,32 @@
         "name": "L'Assiette Dorée",
         "postes": [
             {
-                "effectif": 8,
-                "commentaire": "Salarié"
+                "effectif": 1,
+                "richesse": 3 ,
+                "name": "patron"
+            },
+            {
+                "effectif": 1,
+                "richesse": 2,
+                "ageMinimum": 35,
+                "name": "chef"
+            },
+            {
+                "effectif": 1,
+                "richesse": 0,
+                "education": 0,
+                "ageMaximum": 20,
+                "name": "apprenti"
+            },
+            {
+                "effectif": 2,
+                "richesse": { "min": 1, "max": 2 },
+                "name": "cuisinier"
+            },
+            {
+                "effectif": 5,
+                "richesse": { "min": 0, "max": 1 },
+                "name": "serveur"
             }
         ]
     },
@@ -76,7 +117,7 @@
         "postes": [
             {
                 "effectif": 3,
-                "commentaire": "Salarié"
+                "name": "Salarié"
             }
         ]
     },
@@ -86,14 +127,20 @@
         "postes": [
             {
                 "effectif": 1,
-                "richesse": 4,
-                "commentaire": "patron",
+                "richesse": 3,
+                "name": "patron",
                 "ageMinimum": 40
             },
             {
-                "effectif": 20,
-                "richesse": 2,
-                "commentaire": "-"
+                "effectif": 1,
+                "richesse": { "min": 1, "max": 2 },
+                "name": "banqier",
+                "ageMinimum": 40
+            },
+            {
+                "effectif": 19,
+                "richesse": { "min": 0, "max": 1 },
+                "name": "croupier"
             }
         ]
     },
@@ -104,10 +151,10 @@
             {
                 "effectif": 7,
                 "niveauEtude": 3,
-                "richesse": 3,
+                "richesse": { "min": 2, "max": 3 },
                 "ageMinimum": 25,
                 "ageMaximum": 42,
-                "commentaire": "Ingénieurs"
+                "name": "Ingénieurs"
             }
         ]
     },
@@ -117,7 +164,7 @@
         "postes": [
             {
                 "effectif": 5,
-                "commentaire": "-"
+                "name": "-"
             }
         ]
     },
@@ -127,7 +174,30 @@
         "postes": [
             {
                 "effectif": 6,
-                "commentaire": "-"
+                "name": "-"
+            }
+        ]
+    },
+    {
+        "id": "ent-chantier",
+        "name": "Chantier naval",
+        "postes": [
+            {
+                "effectif": 1,
+                "richesse": 3,
+                "ageMinimum": 55,
+                "name": "patron"
+            },
+            {
+                "effectif": 6,
+                "richesse": 2,
+                "ageMinimum": 30,
+                "name": "ouvrier spécialisé"
+            },
+            {
+                "effectif": 13,
+                "richesse": { "min": 0, "max": 1 },
+                "name": "ouvrier"
             }
         ]
     }

@@ -64,6 +64,21 @@ export class Random {
         }
         return result;
     }
+    /**
+     * Distribution normale (gaussien) entre 0 et 1
+     * @returns number
+     */
+    static normal(mean, sigma) {
+        let u = 0;
+        let v = 0;
+        while (u === 0)
+            u = Random.next();
+        while (v === 0)
+            v = Random.next();
+        const z = Math.sqrt(-2 * Math.log(u))
+            * Math.cos(2 * Math.PI * v);
+        return mean + sigma * z;
+    }
     cosineSimilarity(a, b) {
         let dot = 0;
         let normA = 0;
