@@ -1,8 +1,10 @@
 import { Book, Library } from '../models/Book.js';
+import { DirectedGraph } from "graphology";
 
 export class LibrariesGenerator {
 
   constructor(
+    private graph: DirectedGraph,
     private readonly books: Book[],
     private readonly libraries: Library[],
   ) {}
@@ -14,16 +16,11 @@ export class LibrariesGenerator {
       oeuvre.tags.some(tag => library.tags.includes(tag))
     );
 
-    console.log(`${library.id} ${library.tags} ${library.size}/${disponibles.length} `);
-
-    const liste = this.tirerPondere(
+    return this.tirerPondere(
       disponibles,
       library.tags,
       library.size,
     );
-
-    console.log(liste);
-    return liste;
   }
 
   private score(oeuvre: Book, tags: string[]): number {
@@ -51,7 +48,6 @@ export class LibrariesGenerator {
       );
 
       let tirage = Math.random() * total;
-
       let index = 0;
 
       for (; index < disponibles.length; index++) {
@@ -71,7 +67,7 @@ export class LibrariesGenerator {
 
   generateAll() {
     for (const library of this.libraries) {
-      this.generate(library)
+      library.books = this.generate(library)
     }
   }
 }

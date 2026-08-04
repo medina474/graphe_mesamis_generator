@@ -1,123 +1,123 @@
 id,Auteur,Titre,Genre
-L001,Stephen King,Ça,horreur
-L002,Victor Hugo,Les Misérables,classique
-L003,Alexandre Dumas,Le comte de Monte-Cristo,classique
-L004,Emily Brontë,Les Hauts de Hurle-Vent,classique
-L005,Jules Vernes,Voyage au centre de la terre,classique
-L006,J.R.R. Tolkien,Le Seigneur des anneaux,fantasy
-L007,Robin Hobb,L'Assassin royal,fantasy
-L008,Sarah Rivens,Captive,dark romance
-L009,Colleen Hoover,Jamais plus,dark romance
-L010,Joyce Kitten,Borderline,dark romance
-L011,Chloé Wallerand,Jamais plus,dark romance
-L012,Alexiane Thill,Le dernier conte,romantasy
-L013,Isabelle Lesteplume,La guerre des ombres,romantasy
-L014,Romain Lucazeau,Latium,science-fiction
-L015,Romain Benassaya,Pyramide,science-fiction
-L016,Anne Rice,Entretien avec un vampire,bitlit
-L017,Victor Dixen,Vampyria,bitlit
-L018,John Ajvide Lindqvist,Laisse-moi entrer,horreur
-L019,Tom Clancy,Octobre rouge,espionnage
-L020,Jean-Christophe Grangé,Les Rivières pourpres,thriller
-L021,Olivier Norek,Dans les brumes de Capelans,policier
-L022,Dan Brown,Da Vinci Code,thriller
-L023,Pierre Boulle,La planète des singes,science-fiction
-L024,Pierre Bordage,Les guerriers du silence,science-fiction
-L025,Neal Stephenson,L'Âge de diamant,science-fiction
-L026,Vernor Vinge,Au tréfonds du ciel,science-fiction
-L027,Paolo Bacigalupi,La Fille automate,science-fiction
-L028,William Gibson,Neuromancien,science-fiction
-L029,Orson Scott Card,La Stratégie Ender,science-fiction
-L030,Victor Hugo,Notre-Dame de Paris,roman
-L031,Alexandre Dumas,Les Trois Mousquetaires,aventure
-L032,Honoré de Balzac,Le Père Goriot,roman
-L033,Honoré de Balzac,Eugénie Grandet,roman
-L034,Gustave Flaubert,Madame Bovary,roman
-L035,Gustave Flaubert,L'Éducation sentimentale,roman
-L036,Émile Zola,Germinal,roman
-L037,Émile Zola,L'Assommoir,roman
-L038,Guy de Maupassant,Bel-Ami,roman
-L039,Guy de Maupassant,Le Horla,Fantastique
-L040,Stendhal,Le Rouge et le Noir,Roman
-L041,Stendhal,La Chartreuse de Parme,Roman
-L042,Voltaire,Candide,Conte philosophique
-L043,Albert Camus,L'Étranger,Roman
-L044,Albert Camus,La Peste,Roman
-L045,André Malraux,La Condition humaine,Roman
-L046,Antoine de Saint-Exupéry,Le Petit Prince,Conte
-L047,Antoine de Saint-Exupéry,Terre des hommes,Récit
-L048,Marcel Pagnol,La Gloire de mon père,Autobiographie
-L049,Marcel Pagnol,Le Château de ma mère,Autobiographie
-L050,Marcel Pagnol,Jean de Florette,Roman
-L051,Marcel Pagnol,Manon des Sources,Roman
-L052,Boris Vian,L'Écume des jours,Roman
-L053,Raymond Queneau,Zazie dans le métro,Roman
-L054,Louis-Ferdinand Céline,Voyage au bout de la nuit,Roman
-L055,Charles Baudelaire,Les Fleurs du mal,Poésie
-L056,Arthur Rimbaud,Une saison en enfer,Poésie
-L057,Edmond Rostand,Cyrano de Bergerac,Théâtre
-L058,Pierre Corneille,Le Cid,Théâtre
-L059,Molière,L'Avare,Théâtre
-L060,François Rabelais,Gargantua,roman
-L061,Alain-Fournier,Le Grand Meaulnes,roman
-L062,Romain Gary,La Promesse de l'aube,roman
-L063,Françoise Sagan,Bonjour tristesse,roman
-L064,Marguerite Duras,L'Amant,roman
-L065,Pierre Lemaitre,Au revoir là-haut,roman
-L066,Leïla Slimani,Chanson douce,roman
-L067,Bernard Werber,Les Fourmis,science-fiction
-L068,J. K. Rowling,Harry Potter à l'école des sorciers,fantasy
-L069,Richard Matheson,Je suis une Légende,science-fiction
-L070,George Orwell,1984,science-fiction
-L071,Isaac Asimov,Fondation,science-fiction
-L072,Umberto Eco,Le Nom de la rose,policier
-L073,Georges Simenon,Le Chien jaune,policier
-L074,Georges Simenon,Pietr-le-Letton,policier
-L075,Gaston Leroux,Le Mystère de la chambre jaune,Enquête
-L076,Gaston Leroux,Le Fantôme de l'Opéra,Mystère
-L077,Maurice Leblanc," Arsène Lupin,gentleman-cambrioleur",policier
-L078,Maurice Leblanc,L'Aiguille creuse,policier
-L079,Fred Vargas,Pars vite et reviens tard,policier|Enquête
-L080,Fred Vargas,L'Homme aux cercles bleus,policier|Enquête
-L081,Jean-Christophe Grangé,Les Rivières pourpres,thriller
-L082,Pierre Lemaitre,Alex,thriller|policier
-L083,Henri Vernes,La Vallée infernale,aventure
-L084,Henri Vernes,Le Sultan de Jarawak,aventure
-L085,Henri Vernes,La Couronne de Golconde,aventure
-L086,Henri Vernes,Les guerriers de l'Ombre Jaune,aventure
-L087,Henri Vernes,Terreur à la Manicouagan,aventure
-L088,Jean Ray,Harry Dickson – La Chambre 113,policier|fantastique
-L089,Jean Ray,Harry Dickson – Le Théâtre de la peur,policier|fantastique
-L090,Gustave Le Rouge,Le Mystérieux Docteur Cornélius,aventure|fantastique
-L091,Paul Féval,Les Habits noirs,aventure|policier
-L092,Paul Féval,Le Bossu,aventure historique
-L093,Michel Zévaco,Les Pardaillan,aventure historique
-L094,Michel Zévaco,Le Capitan,aventure historique
-L095,Régine Deforges,La bicyclette bleue,romance|historique
-L096,Françoise Chandernagor,L'Allée du roi,romance|historique
-L097,Mireille Calmel,Le Lit d'Aliénor,romance|historique
-L098,Mireille Calmel,Lady Pirate,romance|historique
-L099,René Barjavel,La Nuit des temps,romance|science-fiction
-L100,Francis Lai|Claude Lelouch,Un homme et une femme,romance
-L101,Marc Levy,Et si c'était vrai...,romance
-L102,Marc Levy,Vous revoir,romance
-L103,Anna Gavalda,Je voudrais que quelqu'un m'attende quelque part,romance|Nouvelles
-L104,Anna Gavalda,"Ensemble, c'est tout",romance
-L105,Frédéric Beigbeder,L'Amour dure trois ans,romance|Comédie
-L106,Anne Golon,"Angélique, marquise des anges",romance|historique
-L107,Anne Golon,Le chemin de Versailles,romance|historique
-L108,Anne Golon,Angélique et le Roy,romance|historique
-L109,Anne Golon,Indomptable Angélique,romance|historique
-L110,Anne Golon,Angélique se révolte,romance|historique
-L111,Juliette Benzoni,Catherine,romance|historique
-L112,Jeanne Bourin,La Chambre des dames,romance|historique
-L113,Juliette Benzoni,La Florentine,romance|historique
-L114,Stephen King,Christine,horreur
-L115,Jean Bruce,OSS 117 : Atout coeur à Tokyo,espionnage
-L116,Jean Bruce,OSS 117 : Gâchis à Karachi,espionnage
-L117,Jean Bruce,OSS 117 : Les monstres du Holy Loch,espionnage
-L118,Jean Bruce,OSS 117 : Cache cache au Cachemire,espionnage
-L119,Jean Bruce,OSS 117 : Lila de Calcutta,espionnage
-L120,Émile Querbalec,Quitter les monts d'automne,science-fiction
-L121,Julia Verlanger,L'autoroute sauvage,science-fiction
-L122,Ayerdhal,Mytale,science-fiction
+B001,Stephen King,Ça,horreur
+B002,Victor Hugo,Les Misérables,classique
+B003,Alexandre Dumas,Le comte de Monte-Cristo,classique
+B004,Emily Brontë,Les Hauts de Hurle-Vent,classique
+B005,Jules Vernes,Voyage au centre de la terre,classique
+B006,J.R.R. Tolkien,Le Seigneur des anneaux,fantasy
+B007,Robin Hobb,L'Assassin royal,fantasy
+B008,Sarah Rivens,Captive,dark romance
+B009,Colleen Hoover,Jamais plus,dark romance
+B010,Joyce Kitten,Borderline,dark romance
+B011,Chloé Wallerand,Jamais plus,dark romance
+B012,Alexiane Thill,Le dernier conte,romantasy
+B013,Isabelle Lesteplume,La guerre des ombres,romantasy
+B014,Romain Lucazeau,Latium,science-fiction
+B015,Romain Benassaya,Pyramide,science-fiction
+B016,Anne Rice,Entretien avec un vampire,bitlit
+B017,Victor Dixen,Vampyria,bitlit
+B018,John Ajvide Lindqvist,Laisse-moi entrer,horreur
+B019,Tom Clancy,Octobre rouge,espionnage
+B020,Jean-Christophe Grangé,Les Rivières pourpres,thriller
+B021,Olivier Norek,Dans les brumes de Capelans,policier
+B022,Dan Brown,Da Vinci Code,thriller
+B023,Pierre Boulle,La planète des singes,science-fiction
+B024,Pierre Bordage,Les guerriers du silence,science-fiction
+B025,Neal Stephenson,L'Âge de diamant,science-fiction
+B026,Vernor Vinge,Au tréfonds du ciel,science-fiction
+B027,Paolo Bacigalupi,La Fille automate,science-fiction
+B028,William Gibson,Neuromancien,science-fiction
+B029,Orson Scott Card,La Stratégie Ender,science-fiction
+B030,Victor Hugo,Notre-Dame de Paris,roman
+B031,Alexandre Dumas,Les Trois Mousquetaires,aventure
+B032,Honoré de Balzac,Le Père Goriot,roman
+B033,Honoré de Balzac,Eugénie Grandet,roman
+B034,Gustave Flaubert,Madame Bovary,roman
+B035,Gustave Flaubert,L'Éducation sentimentale,roman
+B036,Émile Zola,Germinal,roman
+B037,Émile Zola,L'Assommoir,roman
+B038,Guy de Maupassant,Bel-Ami,roman
+B039,Guy de Maupassant,Le Horla,Fantastique
+B040,Stendhal,Le Rouge et le Noir,Roman
+B041,Stendhal,La Chartreuse de Parme,Roman
+B042,Voltaire,Candide,Conte philosophique
+B043,Albert Camus,L'Étranger,Roman
+B044,Albert Camus,La Peste,Roman
+B045,André Malraux,La Condition humaine,Roman
+B046,Antoine de Saint-Exupéry,Le Petit Prince,Conte
+B047,Antoine de Saint-Exupéry,Terre des hommes,Récit
+B048,Marcel Pagnol,La Gloire de mon père,Autobiographie
+B049,Marcel Pagnol,Le Château de ma mère,Autobiographie
+B050,Marcel Pagnol,Jean de Florette,Roman
+B051,Marcel Pagnol,Manon des Sources,Roman
+B052,Boris Vian,L'Écume des jours,Roman
+B053,Raymond Queneau,Zazie dans le métro,Roman
+B054,Louis-Ferdinand Céline,Voyage au bout de la nuit,Roman
+B055,Charles Baudelaire,Les Fleurs du mal,Poésie
+B056,Arthur Rimbaud,Une saison en enfer,Poésie
+B057,Edmond Rostand,Cyrano de Bergerac,Théâtre
+B058,Pierre Corneille,Le Cid,Théâtre
+B059,Molière,L'Avare,Théâtre
+B060,François Rabelais,Gargantua,roman
+B061,Alain-Fournier,Le Grand Meaulnes,roman
+B062,Romain Gary,La Promesse de l'aube,roman
+B063,Françoise Sagan,Bonjour tristesse,roman
+B064,Marguerite Duras,L'Amant,roman
+B065,Pierre Lemaitre,Au revoir là-haut,roman
+B066,Leïla Slimani,Chanson douce,roman
+B067,Bernard Werber,Les Fourmis,science-fiction
+B068,J. K. Rowling,Harry Potter à l'école des sorciers,fantasy
+B069,Richard Matheson,Je suis une Légende,science-fiction
+B070,George Orwell,1984,science-fiction
+B071,Isaac Asimov,Fondation,science-fiction
+B072,Umberto Eco,Le Nom de la rose,policier
+B073,Georges Simenon,Le Chien jaune,policier
+B074,Georges Simenon,Pietr-le-Letton,policier
+B075,Gaston Leroux,Le Mystère de la chambre jaune,Enquête
+B076,Gaston Leroux,Le Fantôme de l'Opéra,Mystère
+B077,Maurice Leblanc," Arsène Lupin,gentleman-cambrioleur",policier
+B078,Maurice Leblanc,L'Aiguille creuse,policier
+B079,Fred Vargas,Pars vite et reviens tard,policier|Enquête
+B080,Fred Vargas,L'Homme aux cercles bleus,policier|Enquête
+B081,Jean-Christophe Grangé,Les Rivières pourpres,thriller
+B082,Pierre Lemaitre,Alex,thriller|policier
+B083,Henri Vernes,La Vallée infernale,aventure
+B084,Henri Vernes,Le Sultan de Jarawak,aventure
+B085,Henri Vernes,La Couronne de Golconde,aventure
+B086,Henri Vernes,Les guerriers de l'Ombre Jaune,aventure
+B087,Henri Vernes,Terreur à la Manicouagan,aventure
+B088,Jean Ray,Harry Dickson – La Chambre 113,policier|fantastique
+B089,Jean Ray,Harry Dickson – Le Théâtre de la peur,policier|fantastique
+B090,Gustave Le Rouge,Le Mystérieux Docteur Cornélius,aventure|fantastique
+B091,Paul Féval,Les Habits noirs,aventure|policier
+B092,Paul Féval,Le Bossu,aventure historique
+B093,Michel Zévaco,Les Pardaillan,aventure historique
+B094,Michel Zévaco,Le Capitan,aventure historique
+B095,Régine Deforges,La bicyclette bleue,romance|historique
+B096,Françoise Chandernagor,L'Allée du roi,romance|historique
+B097,Mireille Calmel,Le Lit d'Aliénor,romance|historique
+B098,Mireille Calmel,Lady Pirate,romance|historique
+B099,René Barjavel,La Nuit des temps,romance|science-fiction
+B100,Francis Lai|Claude Lelouch,Un homme et une femme,romance
+B101,Marc Levy,Et si c'était vrai...,romance
+B102,Marc Levy,Vous revoir,romance
+B103,Anna Gavalda,Je voudrais que quelqu'un m'attende quelque part,romance|Nouvelles
+B104,Anna Gavalda,"Ensemble, c'est tout",romance
+B105,Frédéric Beigbeder,L'Amour dure trois ans,romance|Comédie
+B106,Anne Golon,"Angélique, marquise des anges",romance|historique
+B107,Anne Golon,Le chemin de Versailles,romance|historique
+B108,Anne Golon,Angélique et le Roy,romance|historique
+B109,Anne Golon,Indomptable Angélique,romance|historique
+B110,Anne Golon,Angélique se révolte,romance|historique
+B111,Juliette Benzoni,Catherine,romance|historique
+B112,Jeanne Bourin,La Chambre des dames,romance|historique
+B113,Juliette Benzoni,La Florentine,romance|historique
+B114,Stephen King,Christine,horreur
+B115,Jean Bruce,OSS 117 : Atout coeur à Tokyo,espionnage
+B116,Jean Bruce,OSS 117 : Gâchis à Karachi,espionnage
+B117,Jean Bruce,OSS 117 : Les monstres du Holy Loch,espionnage
+B118,Jean Bruce,OSS 117 : Cache cache au Cachemire,espionnage
+B119,Jean Bruce,OSS 117 : Lila de Calcutta,espionnage
+B120,Émile Querbalec,Quitter les monts d'automne,science-fiction
+B121,Julia Verlanger,L'autoroute sauvage,science-fiction
+B122,Ayerdhal,Mytale,science-fiction

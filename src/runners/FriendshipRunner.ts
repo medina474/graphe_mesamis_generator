@@ -1,0 +1,24 @@
+import { DirectedGraph } from "graphology";
+import { FriendsGenerator } from "../generators/FriendsGenerator.js";
+import { Person } from "../models/Person.js";
+
+export class FriendshipRunner {
+
+    constructor(
+        private readonly graph: DirectedGraph
+    ) {}
+
+    public run(population: Person[]) {
+        const friendsGenerator = new FriendsGenerator(this.graph, population);
+        friendsGenerator.generate();
+        this.updatePersons(population);
+    }
+
+    updatePersons(personnes: Person[]): void {
+        for (const personne of personnes) {
+            this.graph.mergeNodeAttributes(personne.id, {
+                size: Math.ceil(personne.edges / 1.0),
+            });
+        }
+    }
+}

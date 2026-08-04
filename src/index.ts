@@ -6,6 +6,7 @@ import { ClubMembershipGenerator } from "./generators/ClubMembershipGenerator.js
 import { AgePyramidLoader } from "./loaders/AgePyramidLoader.js";
 import { FirstnameLoader } from "./loaders/FirstnameLoader.js";
 import { LastnameLoader } from "./loaders/LastnameLoader.js";
+import { FriendshipRunner } from "./runners/FriendshipRunner.js";
 import { LibrariesRunner } from "./runners/LibrariesRunner.js";
 import { CsvPersonExporter } from "./exporters/CsvPersonExporter.js";
 import { JsonLoader } from "./loaders/JsonLoader.js";
@@ -13,7 +14,6 @@ import { DirectedGraph } from "graphology";
 import { FamilyGenerator } from "./generators/FamilyGenerator.js";
 import { WorkGenerator } from "./generators/WorkGenerator.js";
 import { GraphManager } from "./graph/GraphManager.js";
-import { FriendsGenerator } from "./generators/FriendsGenerator.js";
 
 function runMembership() {
     const clubs = JsonLoader.load("data/clubs.json", Club)
@@ -30,11 +30,7 @@ function runMembership() {
     graphManager.updateClubs(clubs);
 }
 
-function runFriendship() {
-    const friendsGenerator = new FriendsGenerator(graph, population);
-    friendsGenerator.generate();
-    graphManager.updatePersons(population);
-}
+
 
 const graph: DirectedGraph = new DirectedGraph();
 const graphManager = new GraphManager(graph);
@@ -50,6 +46,7 @@ const population = generator.generateMany(250);
 graphManager.addPersons(population);
 
 /* Familles */
+
 const familyGenerator = new FamilyGenerator(
     graph,
     population
@@ -57,7 +54,8 @@ const familyGenerator = new FamilyGenerator(
 
 await familyGenerator.generate();
 
-/* Entreprises 
+/* Entreprises */
+
 const enterprises = JsonLoader.load("data/entreprises.json", Enterprise);
 
 graphManager.addEnterprises(enterprises);
@@ -66,9 +64,14 @@ const workGenerator = new WorkGenerator(graph, population, enterprises);
 
 workGenerator.generate();
 graphManager.updateEnterprises(enterprises);
-*/
 
-LibrariesRunner.run();
+runMembership();
+
+const friendshipRunner = new FriendshipRunner(graph);
+friendshipRunner.run(population);
+
+const librariesRunner = new LibrariesRunner(graph);
+await librariesRunner.run()
 
 /* Export 
 
