@@ -4,6 +4,7 @@ import { Enterprise } from "./models/Enterprise.js";
 import { Book, Bibliotheque } from "./models/Book.js";
 import { PersonGenerator } from "./generators/PersonGenerator.js";
 import { ClubMembershipGenerator } from "./generators/ClubMembershipGenerator.js";
+import { BibliothequeGenerator } from "./generators/BibliothequeGenerator.js";
 import { AgePyramidLoader } from "./loaders/AgePyramidLoader.js";
 import { FirstnameLoader } from "./loaders/FirstnameLoader.js";
 import { LastnameLoader } from "./loaders/LastnameLoader.js";
@@ -37,7 +38,7 @@ const familyGenerator = new FamilyGenerator(
 
 familyGenerator.generate();
 
-/* Clubs */
+/* Clubs 
 const clubs = JsonLoader.load("data/clubs.json", Club)
 
 graphManager.addClubs(clubs);
@@ -50,8 +51,9 @@ const clubMembershipGenerator = new ClubMembershipGenerator(
 
 clubMembershipGenerator.generate();
 graphManager.updateClubs(clubs);
+*/
 
-/* Entreprises */
+/* Entreprises 
 const enterprises = JsonLoader.load("data/entreprises.json", Enterprise);
 
 graphManager.addEnterprises(enterprises);
@@ -60,10 +62,12 @@ const workGenerator = new WorkGenerator(graph, population, enterprises);
 
 workGenerator.generate();
 graphManager.updateEnterprises(enterprises);
-
+*/
+/*
 const friendsGenerator = new FriendsGenerator(graph, population);
 friendsGenerator.generate();
 graphManager.updatePersons(population);
+*/
 
 const books = BookLoader.load("data/livres.csv")
 console.log(books.slice(0, 1));

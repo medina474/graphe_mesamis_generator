@@ -13,6 +13,8 @@ export class BibliothequeGenerator {
       oeuvre.tags.some(tag => bibliotheque.tags.includes(tag))
     );
 
+    console.log(`${bibliotheque.tags} ${bibliotheque.size}/${disponibles.length} `);
+
     return this.tirerPondere(
       disponibles,
       bibliotheque.tags,
