@@ -1,13 +1,13 @@
-import { Book, Bibliotheque } from '../models/Book.js';
+import { LiteraryWork, Bibliotheque } from '../models/Book.js';
 
 export class BibliothequeGenerator {
 
   constructor(
-    private readonly oeuvres: Book[],
+    private readonly oeuvres: LiteraryWork[],
     private readonly bibliotheque: Bibliotheque[],
   ) {}
 
-  generer(bibliotheque: Bibliotheque): Book[] {
+  generer(bibliotheque: Bibliotheque): LiteraryWork[] {
 
     const disponibles = this.oeuvres.filter(oeuvre =>
       oeuvre.tags.some(tag => bibliotheque.tags.includes(tag))
@@ -22,18 +22,18 @@ export class BibliothequeGenerator {
     );
   }
 
-  private score(oeuvre: Book, tags: string[]): number {
+  private score(oeuvre: LiteraryWork, tags: string[]): number {
     return oeuvre.tags.filter(tag => tags.includes(tag)).length;
   }
 
   private tirerPondere(
-    oeuvres: Book[],
+    oeuvres: LiteraryWork[],
     tags: string[],
     nombre: number,
-  ): Book[] {
+  ): LiteraryWork[] {
 
     const disponibles = [...oeuvres];
-    const resultat: Book[] = [];
+    const resultat: LiteraryWork[] = [];
 
     while (disponibles.length > 0 && resultat.length < nombre) {
 
@@ -65,7 +65,7 @@ export class BibliothequeGenerator {
     return resultat;
   }
 
-  generateAll(): Book[] {
+  generateAll(): LiteraryWork[] {
     for (const bibliotheque of this.bibliotheque) {
       this.generer(bibliotheque)
     }

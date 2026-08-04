@@ -1,7 +1,7 @@
 import { DirectedGraph } from "graphology";
 import { Gender, Person } from "../models/Person.js";
 import { Club } from "../models/Club.js";
-import { Book } from "../models/Book.js";
+import { LiteraryWork } from "../models/Book.js";
 import { Enterprise } from "../models/Enterprise.js";
 
 export class GraphManager {
@@ -59,7 +59,7 @@ export class GraphManager {
         );
     }
 
-    addBook(book: Book): void {
+    addBook(book: LiteraryWork): void {
         this.graph.addNode(
             book.id,
             {

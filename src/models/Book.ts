@@ -1,4 +1,4 @@
-export class Book {
+export class LiteraryWork {
     constructor(
         public readonly id:string,
         public readonly author:string,

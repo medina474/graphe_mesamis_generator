@@ -1,27 +1,24 @@
-import { readFileSync } from "node:fs";
+import * as fs from 'fs/promises';
+import { parse } from 'csv/sync';
 
 import { Lastname } from "../models/Family.js";
+import { NOMEM } from 'dns';
 
 export class LastnameLoader {
-  static load(path: string): Lastname[] {
-    const csv = readFileSync(path, "utf8");
+  static async load(path: string): Promise<Lastname[]> {
+    const contenu = await fs.readFile(path, 'utf-8');
+    
+    const records = parse(contenu, {
+      columns: true,           
+      skip_empty_lines: true 
+    });
 
-    return csv
-      .split(/\r?\n/)
-      .map((line) => line.trim())
-      .filter(Boolean)
-      .slice(1)
-      .map((line) => {
-        const [rawName, rawCount] = line.split(",");
-        const name = rawName?.trim();
-        const count = Number(rawCount?.replace(/\s/g, ""));
-
-        if (!name || Number.isNaN(count)) {
-          return null;
-        }
-
-        return new Lastname(name, count);
-      })
-      .filter((item): item is Lastname => item !== null);
+    return records
+      .map((record: any) => 
+        new Lastname(
+          record.Nom?.trim(), 
+          Number(record.Nombre?.replace(/\s/g, ""))
+        )
+      );
   }
 }
