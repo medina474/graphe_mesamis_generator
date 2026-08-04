@@ -18,11 +18,15 @@ export class LibrariesRunner {
             this.addBook(book)
         }
 
-        const uniqueTags = new Map<string, number>();
-
+        const uniqueTags = new Map<string, [string, number]>();
+        let index = 1;
         for (const b of books) {
             for (const tag of b.tags) {
-                uniqueTags.set(tag, (uniqueTags.get(tag) ?? 0) + 1);
+                if (uniqueTags.has(tag)) {
+                    uniqueTags.set(tag, [uniqueTags.get(tag)![0], (uniqueTags.get(tag)![1] ?? 0) + 1]);
+                } else {
+                    uniqueTags.set(tag, [`T${index++}`, 1]);
+                }
             }
         }
 
@@ -30,6 +34,28 @@ export class LibrariesRunner {
             this.addTag(tag)
         }
 
+        for (const book of books) {
+            for (const tag of book.tags) {
+                this.tagBook(book.id, uniqueTags.get(tag)![0])
+            }
+        }
+
+        const uniqueAuthors = new Map<string, string>();
+        let authorIndex = 1;
+        for (const book of books) {
+            if (!uniqueAuthors.has(book.author)) {
+                uniqueAuthors.set(book.author, `A${authorIndex++}`);
+            }
+        }
+
+        for (const [author, authorId] of uniqueAuthors) {
+            this.addAuthor(author, authorId);
+        }
+
+        for (const book of books) {
+            this.writeBook(book, uniqueAuthors.get(book.author)!);
+        }
+        
         const libraries = JsonLoader.load("data/libraries.json", Library);
 
         for (const library of libraries) {
@@ -40,11 +66,8 @@ export class LibrariesRunner {
         librariesGenerator.generateAll();
 
         for (const library of libraries) {
-            for (const book of books) {
+            for (const book of library.books) {
                 this.addOwnership(book, library)
-                for (const tag of book.tags) {
-                    
-                }
             }
         }
     }
@@ -63,18 +86,41 @@ export class LibrariesRunner {
         );
     }
 
-    addTag(tag: [string, number]): void {
+    addTag(tag: [string, [string, number]]): void {
         this.graph.addNode(
-            `T${tag[0]}}`,
+            tag[1][0],
             {
                 category: "tag",
-                label: tag[1],
+                label: tag[0],
                 x: Math.random() * 100,
                 y: Math.random() * 100,
-                size: 1,
+                size: Math.ceil(tag[1][1] / 3.0),
                 color: "#940b0b",
             }
         );
+    }
+
+    addAuthor(author: string, authorId: string): void {
+        this.graph.addNode(
+            authorId,
+            {
+                category: "author",
+                label: author,
+                name: author,
+                x: Math.random() * 100,
+                y: Math.random() * 100,
+                size: 1,
+                color: "#35a8ff",
+            }
+        );
+    }
+
+    writeBook(book: Book, authorId: string): void {
+        this.graph.addEdge(authorId, book.id, {
+            relation: "write",
+            category: "book",
+            weight: 2,
+        });
     }
 
     addLibrary(library: Library): void {
@@ -97,6 +143,13 @@ export class LibrariesRunner {
             category: "book",
             weight: 3,
         });
-        console.log(`${book.id} -> ${library.id}`)
+    }
+
+    tagBook(bookId: string, tagId: string): void {
+        this.graph.addEdge(bookId, tagId, {
+            relation: "tag",
+            category: "book",
+            weight: 1,
+        });
     }
 }

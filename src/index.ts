@@ -30,8 +30,6 @@ function runMembership() {
     graphManager.updateClubs(clubs);
 }
 
-
-
 const graph: DirectedGraph = new DirectedGraph();
 const graphManager = new GraphManager(graph);
 
@@ -69,6 +67,7 @@ runMembership();
 
 const friendshipRunner = new FriendshipRunner(graph);
 friendshipRunner.run(population);
+
 
 const librariesRunner = new LibrariesRunner(graph);
 await librariesRunner.run()
