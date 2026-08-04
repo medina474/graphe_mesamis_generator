@@ -69,6 +69,17 @@ graphManager.updatePersons(population);
 const books = BookLoader.load("data/livres.csv")
 console.log(books.slice(0, 20));
 
+const genres = new Map<int, string>()
+for(let b of books) {
+    for(let g of b.genres) {
+        genres[g] = (genres[g] ?? 0) + 1;
+    }
+}
+
+for(let g of genres) {
+    conole.log(g)
+}
+
 const bibliotheque = JsonLoader.load("data/bibliotheques.json", Bibliotheque)
 
 /* Export 
