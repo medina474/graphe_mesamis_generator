@@ -64,6 +64,7 @@ graphManager.updateEnterprises(enterprises);
 
 const friendsGenerator = new FriendsGenerator(graph, population);
 friendsGenerator.generate();
+graphManager.updatePersons(population);
 
 /* Export 
 

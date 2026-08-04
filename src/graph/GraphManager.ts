@@ -91,4 +91,12 @@ export class GraphManager {
             });
         }
     }
+
+    updatePersons(personnes: Person[]): void {
+        for (const personne of personnes) {
+            this.graph.mergeNodeAttributes(personne.id, {
+                size: Math.ceil(personne.edges / 1.0),
+            });
+        }
+    }
 }
