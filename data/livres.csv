@@ -29,7 +29,7 @@ L027,Paolo Bacigalupi,La Fille automate,science-fiction
 L028,William Gibson,Neuromancien,science-fiction
 L029,Orson Scott Card,La Stratégie Ender,science-fiction
 L030,Victor Hugo,Notre-Dame de Paris,roman
-L031,Alexandre Dumas,Les Trois Mousquetaires,Aventure
+L031,Alexandre Dumas,Les Trois Mousquetaires,aventure
 L032,Honoré de Balzac,Le Père Goriot,roman
 L033,Honoré de Balzac,Eugénie Grandet,roman
 L034,Gustave Flaubert,Madame Bovary,roman
@@ -66,52 +66,52 @@ L064,Marguerite Duras,L'Amant,roman
 L065,Pierre Lemaitre,Au revoir là-haut,roman
 L066,Leïla Slimani,Chanson douce,roman
 L067,Bernard Werber,Les Fourmis,science-fiction
-L068,J. K. Rowling,Harry Potter à l'école des sorciers,Fantasy
+L068,J. K. Rowling,Harry Potter à l'école des sorciers,fantasy
 L069,Richard Matheson,Je suis une Légende,science-fiction
 L070,George Orwell,1984,science-fiction
 L071,Isaac Asimov,Fondation,science-fiction
-L072,Umberto Eco,Le Nom de la rose,Policier
-L073,Georges Simenon,Le Chien jaune,Policier
-L074,Georges Simenon,Pietr-le-Letton,Policier
+L072,Umberto Eco,Le Nom de la rose,policier
+L073,Georges Simenon,Le Chien jaune,policier
+L074,Georges Simenon,Pietr-le-Letton,policier
 L075,Gaston Leroux,Le Mystère de la chambre jaune,Enquête
 L076,Gaston Leroux,Le Fantôme de l'Opéra,Mystère
-L077,Maurice Leblanc," Arsène Lupin,gentleman-cambrioleur",Policier
-L078,Maurice Leblanc,L'Aiguille creuse,Policier
-L079,Fred Vargas,Pars vite et reviens tard,Policier / Enquête
-L080,Fred Vargas,L'Homme aux cercles bleus,Policier / Enquête
-L081,Jean-Christophe Grangé,Les Rivières pourpres,Thriller
-L082,Pierre Lemaitre,Alex,Thriller / Policier
-L083,Henri Vernes,La Vallée infernale,Aventure
-L084,Henri Vernes,Le Sultan de Jarawak,Aventure
-L085,Henri Vernes,La Couronne de Golconde,Aventure
-L086,Henri Vernes,Les guerriers de l'Ombre Jaune,Aventure
-L087,Henri Vernes,Terreur à la Manicouagan,Aventure
-L088,Jean Ray,Harry Dickson – La Chambre 113,Policier / Fantastique
-L089,Jean Ray,Harry Dickson – Le Théâtre de la peur,Policier / Fantastique
-L090,Gustave Le Rouge,Le Mystérieux Docteur Cornélius,Aventure / Fantastique
-L091,Paul Féval,Les Habits noirs,aventure / policier
-L092,Paul Féval,Le Bossu,Aventure historique
-L093,Michel Zévaco,Les Pardaillan,Aventure historique
-L094,Michel Zévaco,Le Capitan,Aventure historique
-L095,Régine Deforges,La bicyclette bleue,romance historique
-L096,Françoise Chandernagor,L'Allée du roi,romance historique
-L097,Mireille Calmel,Le Lit d'Aliénor,romance historique
-L098,Mireille Calmel,Lady Pirate,romance historique
+L077,Maurice Leblanc," Arsène Lupin,gentleman-cambrioleur",policier
+L078,Maurice Leblanc,L'Aiguille creuse,policier
+L079,Fred Vargas,Pars vite et reviens tard,policier|Enquête
+L080,Fred Vargas,L'Homme aux cercles bleus,policier|Enquête
+L081,Jean-Christophe Grangé,Les Rivières pourpres,thriller
+L082,Pierre Lemaitre,Alex,thriller|policier
+L083,Henri Vernes,La Vallée infernale,aventure
+L084,Henri Vernes,Le Sultan de Jarawak,aventure
+L085,Henri Vernes,La Couronne de Golconde,aventure
+L086,Henri Vernes,Les guerriers de l'Ombre Jaune,aventure
+L087,Henri Vernes,Terreur à la Manicouagan,aventure
+L088,Jean Ray,Harry Dickson – La Chambre 113,policier|fantastique
+L089,Jean Ray,Harry Dickson – Le Théâtre de la peur,policier|fantastique
+L090,Gustave Le Rouge,Le Mystérieux Docteur Cornélius,aventure|fantastique
+L091,Paul Féval,Les Habits noirs,aventure|policier
+L092,Paul Féval,Le Bossu,aventure historique
+L093,Michel Zévaco,Les Pardaillan,aventure historique
+L094,Michel Zévaco,Le Capitan,aventure historique
+L095,Régine Deforges,La bicyclette bleue,romance|historique
+L096,Françoise Chandernagor,L'Allée du roi,romance|historique
+L097,Mireille Calmel,Le Lit d'Aliénor,romance|historique
+L098,Mireille Calmel,Lady Pirate,romance|historique
 L099,René Barjavel,La Nuit des temps,romance|science-fiction
-L100,Francis Lai / Claude Lelouch,Un homme et une femme,romance
+L100,Francis Lai|Claude Lelouch,Un homme et une femme,romance
 L101,Marc Levy,Et si c'était vrai...,romance
 L102,Marc Levy,Vous revoir,romance
-L103,Anna Gavalda,Je voudrais que quelqu'un m'attende quelque part,Romance / Nouvelles
+L103,Anna Gavalda,Je voudrais que quelqu'un m'attende quelque part,romance|Nouvelles
 L104,Anna Gavalda,"Ensemble, c'est tout",romance
-L105,Frédéric Beigbeder,L'Amour dure trois ans,romance / Comédie
-L106,Anne Golon,"Angélique, marquise des anges",romance historique
-L107,Anne Golon,Le chemin de Versailles,romance historique
-L108,Anne Golon,Angélique et le Roy,romance historique
-L109,Anne Golon,Indomptable Angélique,romance historique
-L110,Anne Golon,Angélique se révolte,romance historique
-L111,Juliette Benzoni,Catherine,romance historique
-L112,Jeanne Bourin,La Chambre des dames,romance historique
-L113,Juliette Benzoni,La Florentine,romance historique
+L105,Frédéric Beigbeder,L'Amour dure trois ans,romance|Comédie
+L106,Anne Golon,"Angélique, marquise des anges",romance|historique
+L107,Anne Golon,Le chemin de Versailles,romance|historique
+L108,Anne Golon,Angélique et le Roy,romance|historique
+L109,Anne Golon,Indomptable Angélique,romance|historique
+L110,Anne Golon,Angélique se révolte,romance|historique
+L111,Juliette Benzoni,Catherine,romance|historique
+L112,Jeanne Bourin,La Chambre des dames,romance|historique
+L113,Juliette Benzoni,La Florentine,romance|historique
 L114,Stephen King,Christine,horreur
 L115,Jean Bruce,OSS 117 : Atout coeur à Tokyo,espionnage
 L116,Jean Bruce,OSS 117 : Gâchis à Karachi,espionnage

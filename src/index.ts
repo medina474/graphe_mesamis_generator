@@ -2,7 +2,7 @@ import fs from 'fs';
 import { Gender } from "./models/Person.js";
 import { Club } from "./models/Club.js";
 import { Enterprise } from "./models/Enterprise.js";
-import { Book } from "./models/Book.js";
+import { Book, Bibliotheque } from "./models/Book.js";
 import { PersonGenerator } from "./generators/PersonGenerator.js";
 import { ClubMembershipGenerator } from "./generators/ClubMembershipGenerator.js";
 import { AgePyramidLoader } from "./loaders/AgePyramidLoader.js";
@@ -68,6 +68,8 @@ graphManager.updatePersons(population);
 
 const books = BookLoader.load("data/livres.csv")
 console.log(books.slice(0, 20));
+
+const bibliotheque = JsonLoader.load("data/bibliotheques.json", Bibliotheque)
 
 /* Export 
 
