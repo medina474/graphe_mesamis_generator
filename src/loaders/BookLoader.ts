@@ -10,6 +10,7 @@ export class BookLoader {
       .split(/\r?\n/)
       .map((line) => line.trim())
       .filter(Boolean)
+      .slice(1)
       .map((line) => {
         const [rawId, rawAuthor, rawTitle, rawTags] = line.split(",");
         const id = rawId?.trim();

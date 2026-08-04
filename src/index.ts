@@ -1,5 +1,4 @@
 import fs from 'fs';
-import { Gender } from "./models/Person.js";
 import { Club } from "./models/Club.js";
 import { Enterprise } from "./models/Enterprise.js";
 import { Book, Bibliotheque } from "./models/Book.js";
@@ -67,7 +66,7 @@ friendsGenerator.generate();
 graphManager.updatePersons(population);
 
 const books = BookLoader.load("data/livres.csv")
-console.log(books.slice(0, 20));
+console.log(books.slice(0, 1));
 
 const genres = new Map<int, string>()
 for(let b of books) {
@@ -81,6 +80,8 @@ for(let g of genres) {
 }
 
 const bibliotheque = JsonLoader.load("data/bibliotheques.json", Bibliotheque)
+const bibliothequeGenerator = new BibliothequeGenerator(books, bibliotheque);
+bibliothequeGenerator.generateAll();
 
 /* Export 
 

@@ -10,6 +10,7 @@ export class LastnameLoader {
       .split(/\r?\n/)
       .map((line) => line.trim())
       .filter(Boolean)
+      .slice(1)
       .map((line) => {
         const [rawName, rawCount] = line.split(",");
         const name = rawName?.trim();

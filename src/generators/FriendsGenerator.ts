@@ -66,9 +66,9 @@ export class FriendsGenerator {
                 affinity *
                 opportunity;
 
-            console.log(`affinity = ${affinity.toFixed(2)} : ${similarity.toFixed(2)} * ${age.toFixed(2)} * ${gender.toFixed(2)}`);
-            console.log(`opportunity = ${opportunity.toFixed(2)} : 1 + ${interaction.toFixed(2)} * 2 + ${triadic.toFixed(2)} * 2`);
-            console.log(`p = ${p.toFixed(2)} : 0.03 * ${affinity.toFixed(2)} * ${opportunity.toFixed(2)}`);
+            //console.log(`affinity = ${affinity.toFixed(2)} : ${similarity.toFixed(2)} * ${age.toFixed(2)} * ${gender.toFixed(2)}`);
+            //console.log(`opportunity = ${opportunity.toFixed(2)} : 1 + ${interaction.toFixed(2)} * 2 + ${triadic.toFixed(2)} * 2`);
+            //console.log(`p = ${p.toFixed(2)} : 0.03 * ${affinity.toFixed(2)} * ${opportunity.toFixed(2)}`);
 
             if (Math.random() < p) {
 

@@ -11,7 +11,7 @@ export class Book {
 export class Bibliotheque {
     constructor(
         public readonly id:string,
-        public readonly size:string,
+        public readonly size:number,
         public readonly tags:string[],
     ) {
     }
