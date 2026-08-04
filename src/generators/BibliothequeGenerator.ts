@@ -1,25 +1,30 @@
-import { LiteraryWork, Bibliotheque } from '../models/Book.js';
+import { listenerCount } from 'process';
+import { LiteraryWork, Library } from '../models/Book.js';
 
 export class BibliothequeGenerator {
 
   constructor(
-    private readonly oeuvres: LiteraryWork[],
-    private readonly bibliotheque: Bibliotheque[],
+    private readonly books: LiteraryWork[],
+    private readonly libraries: Library[],
   ) {}
 
-  generer(bibliotheque: Bibliotheque): LiteraryWork[] {
+  generer(library: Library): LiteraryWork[] {
 
-    const disponibles = this.oeuvres.filter(oeuvre =>
-      oeuvre.tags.some(tag => bibliotheque.tags.includes(tag))
+    // Au moins un des tags fait partie de la luste des tags de la bibliothèque
+    const disponibles = this.books.filter(oeuvre =>
+      oeuvre.tags.some(tag => library.tags.includes(tag))
     );
 
-    console.log(`${bibliotheque.tags} ${bibliotheque.size}/${disponibles.length} `);
+    console.log(`${library.id} ${library.tags} ${library.size}/${disponibles.length} `);
 
-    return this.tirerPondere(
+    const liste = this.tirerPondere(
       disponibles,
-      bibliotheque.tags,
-      bibliotheque.size,
+      library.tags,
+      library.size,
     );
+
+    console.log(liste);
+    return liste;
   }
 
   private score(oeuvre: LiteraryWork, tags: string[]): number {
@@ -66,7 +71,7 @@ export class BibliothequeGenerator {
   }
 
   generateAll(): LiteraryWork[] {
-    for (const bibliotheque of this.bibliotheque) {
+    for (const bibliotheque of this.libraries) {
       this.generer(bibliotheque)
     }
     return[];

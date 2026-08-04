@@ -1,14 +1,12 @@
 import fs from 'fs';
 import { Club } from "./models/Club.js";
 import { Enterprise } from "./models/Enterprise.js";
-import { LiteraryWork, Bibliotheque } from "./models/Book.js";
 import { PersonGenerator } from "./generators/PersonGenerator.js";
 import { ClubMembershipGenerator } from "./generators/ClubMembershipGenerator.js";
-import { BibliothequeGenerator } from "./generators/BibliothequeGenerator.js";
 import { AgePyramidLoader } from "./loaders/AgePyramidLoader.js";
 import { FirstnameLoader } from "./loaders/FirstnameLoader.js";
 import { LastnameLoader } from "./loaders/LastnameLoader.js";
-import { LiteraryWorkLoader } from "./loaders/LiteraryWork.js";
+import { BookRunner } from "./runners/BookRunner.js";
 import { CsvPersonExporter } from "./exporters/CsvPersonExporter.js";
 import { JsonLoader } from "./loaders/JsonLoader.js";
 import { DirectedGraph } from "graphology";
@@ -38,26 +36,7 @@ function runFriendship() {
     graphManager.updatePersons(population);
 }
 
-async function runBookExchange() {
-    const literaryWorks = await LiteraryWorkLoader.load("data/livres.csv")
-    console.log(literaryWorks.slice(0, 1));
 
-    const uniqueTags = new Map<string, number>();
-
-    for (const w of literaryWorks) {
-        for (const tag of w.tags) {
-            uniqueTags.set(tag, (uniqueTags.get(tag) ?? 0) + 1);
-        }
-    }
-
-    for(let tag of uniqueTags) {
-        console.log(tag)
-    }
-
-    const bibliotheque = JsonLoader.load("data/bibliotheques.json", Bibliotheque)
-    const bibliothequeGenerator = new BibliothequeGenerator(literaryWorks, bibliotheque);
-    bibliothequeGenerator.generateAll();
-}
 
 const graph: DirectedGraph = new DirectedGraph();
 const graphManager = new GraphManager(graph);
@@ -91,8 +70,7 @@ workGenerator.generate();
 graphManager.updateEnterprises(enterprises);
 */
 
-runBookExchange();
-
+BookRunner.run();
 
 /* Export 
 
