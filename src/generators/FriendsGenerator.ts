@@ -1,3 +1,4 @@
+import { Random } from "../stats/Random.js";
 import { Person } from "../models/Person.js";
 import { UndirectedGraph } from "graphology";
 
@@ -14,10 +15,10 @@ export class FriendsGenerator {
         for (let k = 0; k < this.iterations; k++) {
 
             const a = this.randomPerson();
-
             const b = this.preferentialPerson(a);
 
             if (!b) {
+                console.log(`${k} pas de personne préférentielle`)
                 continue;
             }
 
@@ -25,10 +26,12 @@ export class FriendsGenerator {
             const idB = b.id;
 
             if (idA === idB) {
+                console.log(`${k} personne identique`)
                 continue;
             }
 
             if (this.graph.hasEdge(idA, idB)) {
+                console.log(`${k} personnes déja liées`)
                 continue;
             }
 
@@ -63,12 +66,16 @@ export class FriendsGenerator {
                 affinity *
                 opportunity;
 
+            console.log(`affinity = ${affinity.toFixed(2)} : ${similarity.toFixed(2)} * ${age.toFixed(2)} * ${gender.toFixed(2)}`);
+            console.log(`opportunity = ${opportunity.toFixed(2)} : 1 + ${interaction.toFixed(2)} * 2 + ${triadic.toFixed(2)} * 2`);
+            console.log(`p = ${p.toFixed(2)} : 0.03 * ${affinity.toFixed(2)} * ${opportunity.toFixed(2)}`);
+
             if (Math.random() < p) {
 
                 a.edges++;
                 b.edges++;
 
-                console.log(idA)
+                console.log(`${idA} -> ${idB}`)
                 this.graph.addEdge(
                     idA,
                     idB,
@@ -142,22 +149,7 @@ export class FriendsGenerator {
         const va = this.vector(a);
         const vb = this.vector(b);
 
-        let dot = 0;
-        let normA = 0;
-        let normB = 0;
-
-        for (let i = 0; i < va.length; i++) {
-            dot += va[i] * vb[i];
-            normA += va[i] ** 2;
-            normB += vb[i] ** 2;
-        }
-
-        if (normA === 0 || normB === 0) {
-            return 0;
-        }
-
-        return dot /
-            (Math.sqrt(normA) * Math.sqrt(normB));
+        return Random.cosineSimilarity(va, vb) 
     }
 
     private ageAffinity(a: Person, b: Person): number {

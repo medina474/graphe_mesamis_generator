@@ -79,7 +79,7 @@ export class Random {
             * Math.cos(2 * Math.PI * v);
         return mean + sigma * z;
     }
-    cosineSimilarity(a, b) {
+    static cosineSimilarity(a, b) {
         let dot = 0;
         let normA = 0;
         let normB = 0;
