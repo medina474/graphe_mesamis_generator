@@ -6,7 +6,7 @@ import { ClubMembershipGenerator } from "./generators/ClubMembershipGenerator.js
 import { AgePyramidLoader } from "./loaders/AgePyramidLoader.js";
 import { FirstnameLoader } from "./loaders/FirstnameLoader.js";
 import { LastnameLoader } from "./loaders/LastnameLoader.js";
-import { BookRunner } from "./runners/BookRunner.js";
+import { LibrariesRunner } from "./runners/LibrariesRunner.js";
 import { CsvPersonExporter } from "./exporters/CsvPersonExporter.js";
 import { JsonLoader } from "./loaders/JsonLoader.js";
 import { DirectedGraph } from "graphology";
@@ -35,8 +35,6 @@ function runFriendship() {
     friendsGenerator.generate();
     graphManager.updatePersons(population);
 }
-
-
 
 const graph: DirectedGraph = new DirectedGraph();
 const graphManager = new GraphManager(graph);
@@ -70,7 +68,7 @@ workGenerator.generate();
 graphManager.updateEnterprises(enterprises);
 */
 
-BookRunner.run();
+LibrariesRunner.run();
 
 /* Export 
 

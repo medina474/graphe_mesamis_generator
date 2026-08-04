@@ -1,9 +1,9 @@
 import * as fs from 'fs/promises';
 import { parse } from 'csv/sync';
-import { LiteraryWork } from "../models/Book.js";
+import { Book } from "../models/Book.js";
 
-export class LiteraryWorkLoader {
-  static async load(path: string): Promise<LiteraryWork[]> {
+export class BooksLoader {
+  static async load(path: string): Promise<Book[]> {
     const contenu = await fs.readFile(path, 'utf-8');
 
     const records = parse(contenu, {
@@ -13,7 +13,7 @@ export class LiteraryWorkLoader {
 
     return records
       .map((record: any) => 
-        new LiteraryWork(
+        new Book(
           record.id, 
           record.Auteur, 
           record.Titre.trim(), 

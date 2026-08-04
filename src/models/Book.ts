@@ -1,4 +1,4 @@
-export class LiteraryWork {
+export class Book {
     constructor(
         public readonly id:string,
         public readonly author:string,
@@ -10,7 +10,7 @@ export class LiteraryWork {
 
 export class Library {
 
-    public books: LiteraryWork[]
+    public books: Book[]
 
     constructor(
         public readonly id:string,
