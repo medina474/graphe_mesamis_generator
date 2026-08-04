@@ -1,7 +1,7 @@
 id,Auteur,Titre,Genre
 L001,Stephen King,çà,horreur
 L002,Victor Hugo,Les Misérables,classique
-L003,Alexandre Dumas,Le comte de Monte Cristo,classique
+L003,Alexandre Dumas,Le comte de Monte-Cristo,classique
 L004,Emily Brontë,Les Hauts de Hurle-Vent,classique
 L005,Jules Vernes,Voyage au centre de la terre,classique
 L006,J.R.R. Tolkien,Le Seigneur des anneaux,fantasy
@@ -28,94 +28,93 @@ L026,Vernor Vinge,Au tréfonds du ciel,science-fiction
 L027,Paolo Bacigalupi,La Fille automate,science-fiction
 L028,William Gibson,Neuromancien,science-fiction
 L029,Orson Scott Card,La Stratégie Ender,science-fiction
-| ID     | Livre                               | Auteur                   | Année | Genre               |
-| ------ | ----------------------------------- | ------------------------ | ----: | ------------------- |
-| `L001` | Les Misérables                      | Victor Hugo              |  1862 | Roman               |
-| `L002` | Notre-Dame de Paris                 | Victor Hugo              |  1831 | Roman               |
-| `L003` | Le Comte de Monte-Cristo            | Alexandre Dumas          |  1844 | Aventure            |
-| `L004` | Les Trois Mousquetaires             | Alexandre Dumas          |  1844 | Aventure            |
-| `L005` | Le Père Goriot                      | Honoré de Balzac         |  1835 | Roman               |
-| `L006` | Eugénie Grandet                     | Honoré de Balzac         |  1833 | Roman               |
-| `L007` | Madame Bovary                       | Gustave Flaubert         |  1857 | Roman               |
-| `L008` | L'Éducation sentimentale            | Gustave Flaubert         |  1869 | Roman               |
-| `L009` | Germinal                            | Émile Zola               |  1885 | Roman               |
-| `L010` | L'Assommoir                         | Émile Zola               |  1877 | Roman               |
-| `L011` | Bel-Ami                             | Guy de Maupassant        |  1885 | Roman               |
-| `L012` | Le Horla                            | Guy de Maupassant        |  1887 | Fantastique         |
-| `L013` | Le Rouge et le Noir                 | Stendhal                 |  1830 | Roman               |
-| `L014` | La Chartreuse de Parme              | Stendhal                 |  1839 | Roman               |
-| `L015` | Candide                             | Voltaire                 |  1759 | Conte philosophique |
-| `L016` | L'Étranger                          | Albert Camus             |  1942 | Roman               |
-| `L017` | La Peste                            | Albert Camus             |  1947 | Roman               |
-| `L018` | La Condition humaine                | André Malraux            |  1933 | Roman               |
-| `L019` | Le Petit Prince                     | Antoine de Saint-Exupéry |  1943 | Conte               |
-| `L020` | Terre des hommes                    | Antoine de Saint-Exupéry |  1939 | Récit               |
-| `L021` | La Gloire de mon père               | Marcel Pagnol            |  1957 | Autobiographie      |
-| `L022` | Le Château de ma mère               | Marcel Pagnol            |  1958 | Autobiographie      |
-| `L023` | Jean de Florette                    | Marcel Pagnol            |  1962 | Roman               |
-| `L024` | Manon des Sources                   | Marcel Pagnol            |  1963 | Roman               |
-| `L025` | L'Écume des jours                   | Boris Vian               |  1947 | Roman               |
-| `L026` | Zazie dans le métro                 | Raymond Queneau          |  1959 | Roman               |
-| `L027` | Voyage au bout de la nuit           | Louis-Ferdinand Céline   |  1932 | Roman               |
-| `L028` | Les Fleurs du mal                   | Charles Baudelaire       |  1857 | Poésie              |
-| `L029` | Une saison en enfer                 | Arthur Rimbaud           |  1873 | Poésie              |
-| `L030` | Cyrano de Bergerac                  | Edmond Rostand           |  1897 | Théâtre             |
-| `L031` | Le Cid                              | Pierre Corneille         |  1637 | Théâtre             |
-| `L032` | L'Avare                             | Molière                  |  1668 | Théâtre             |
-| `L033` | Gargantua                           | François Rabelais        |  1534 | Roman               |
-| `L034` | Le Grand Meaulnes                   | Alain-Fournier           |  1913 | Roman               |
-| `L035` | La Promesse de l'aube               | Romain Gary              |  1960 | Roman               |
-| `L036` | Bonjour tristesse                   | Françoise Sagan          |  1954 | Roman               |
-| `L037` | L'Amant                             | Marguerite Duras         |  1984 | Roman               |
-| `L038` | Au revoir là-haut                   | Pierre Lemaitre          |  2013 | Roman               |
-| `L039` | Chanson douce                       | Leïla Slimani            |  2016 | Roman               |
-| `L040` | Les Fourmis                         | Bernard Werber           |  1991 | Science-fiction     |
-| `L041` | Harry Potter à l'école des sorciers | J. K. Rowling            |  1997 | Fantasy             |
-| `L042` | Le Seigneur des anneaux             | J. R. R. Tolkien         |  1954 | Fantasy             |
-| `L043` | 1984                                | George Orwell            |  1949 | Science-fiction     |
-| `L044` | Fondation                           | Isaac Asimov             |  1951 | Science-fiction     |
-| `L045` | Le Nom de la rose                   | Umberto Eco              |  1980 | Policier            |
-L041	Le Chien jaune	Georges Simenon	Policier
-L042	Pietr-le-Letton	Georges Simenon	Policier
-L043	Le Mystère de la chambre jaune	Gaston Leroux	Enquête
-L044	Le Fantôme de l'Opéra	Gaston Leroux	Mystère
-L045	Arsène Lupin, gentleman-cambrioleur	Maurice Leblanc	Policier
-L046	L'Aiguille creuse	Maurice Leblanc	Policier
-L047	Pars vite et reviens tard	Fred Vargas	Policier / Enquête
-L048	L'Homme aux cercles bleus	Fred Vargas	Policier / Enquête
-L049	Les Rivières pourpres	Jean-Christophe Grangé	Thriller
-L050	Alex	Pierre Lemaitre	Thriller / Policier
-| ID   | Œuvre                                     | Auteur           | Genre                  |
-| ---- | ----------------------------------------- | ---------------- | ---------------------- |
-| L051 | **La Vallée infernale**                   | Henri Vernes     | Aventure               |
-| L052 | **Le Sultan de Jarawak**                  | Henri Vernes     | Aventure               |
-| L053 | **La Couronne de Golconde**               | Henri Vernes     | Aventure               |
-| L054 | **Harry Dickson – La Chambre 113**        | Jean Ray         | Policier / Fantastique |
-| L055 | **Harry Dickson – Le Théâtre de la peur** | Jean Ray         | Policier / Fantastique |
-| L056 | **Le Mystérieux Docteur Cornélius**       | Gustave Le Rouge | Aventure / Fantastique |
-| L057 | **Les Habits noirs**                      | Paul Féval       | Aventure / Policier    |
-| L058 | **Le Bossu**                              | Paul Féval       | Aventure historique    |
-| L059 | **Les Pardaillan**                        | Michel Zévaco    | Aventure historique    |
-| L060 | **Le Capitan**                            | Michel Zévaco    | Aventure historique    |
-
-| ID   | Œuvre                                                | Auteur                       | Genre                     |
-| ---- | ---------------------------------------------------- | ---------------------------- | ------------------------- |
-| L061 | **La bicyclette bleue**                              | Régine Deforges              | Romance / Saga historique |
-| L062 | **L'Allée du roi**                                   | Françoise Chandernagor       | Romance historique        |
-| L063 | **Le Lit d'Aliénor**                                 | Mireille Calmel              | Romance historique        |
-| L064 | **La Nuit des temps**                                | René Barjavel                | Romance / Science-fiction |
-| L065 | **Un homme et une femme**                            | Francis Lai / Claude Lelouch | Romance                   |
-| L066 | **Et si c'était vrai...**                            | Marc Levy                    | Romance                   |
-| L067 | **Vous revoir**                                      | Marc Levy                    | Romance                   |
-| L068 | **Je voudrais que quelqu'un m'attende quelque part** | Anna Gavalda                 | Romance / Nouvelles       |
-| L069 | **Ensemble, c'est tout**                             | Anna Gavalda                 | Romance                   |
-| L070 | **L'Amour dure trois ans**                           | Frédéric Beigbeder           | Romance / Comédie         |
-
-| ID   | Œuvre                             | Auteur           | Genre              |
-| ---- | --------------------------------- | ---------------- | ------------------ |
-| L071 | **Angélique, marquise des anges** | Anne Golon       | Romance historique |
-| L072 | **Angélique et le Roy**           | Anne Golon       | Romance historique |
-| L073 | **Catherine**                     | Juliette Benzoni | Romance historique |
-| L074 | **La Chambre des dames**          | Jeanne Bourin    | Romance historique |
-| L075 | **La Florentine**                 | Juliette Benzoni | Romance historique |
-
+L030,Victor Hugo,Notre-Dame de Paris,Roman
+L031,Alexandre Dumas,Les Trois Mousquetaires,Aventure
+L032,Honoré de Balzac,Le Père Goriot,Roman
+L033,Honoré de Balzac,Eugénie Grandet,Roman
+L034,Gustave Flaubert,Madame Bovary,Roman
+L035,Gustave Flaubert,L'Éducation sentimentale,Roman
+L036,Émile Zola,Germinal,Roman
+L037,Émile Zola,L'Assommoir,Roman
+L038,Guy de Maupassant,Bel-Ami,Roman
+L039,Guy de Maupassant,Le Horla,Fantastique
+L040,Stendhal,Le Rouge et le Noir,Roman
+L041,Stendhal,La Chartreuse de Parme,Roman
+L042,Voltaire,Candide,Conte philosophique
+L043,Albert Camus,L'Étranger,Roman
+L044,Albert Camus,La Peste,Roman
+L045,André Malraux,La Condition humaine,Roman
+L046,Antoine de Saint-Exupéry,Le Petit Prince,Conte
+L047,Antoine de Saint-Exupéry,Terre des hommes,Récit
+L048,Marcel Pagnol,La Gloire de mon père,Autobiographie
+L049,Marcel Pagnol,Le Château de ma mère,Autobiographie
+L050,Marcel Pagnol,Jean de Florette,Roman
+L051,Marcel Pagnol,Manon des Sources,Roman
+L052,Boris Vian,L'Écume des jours,Roman
+L053,Raymond Queneau,Zazie dans le métro,Roman
+L054,Louis-Ferdinand Céline,Voyage au bout de la nuit,Roman
+L055,Charles Baudelaire,Les Fleurs du mal,Poésie
+L056,Arthur Rimbaud,Une saison en enfer,Poésie
+L057,Edmond Rostand,Cyrano de Bergerac,Théâtre
+L058,Pierre Corneille,Le Cid,Théâtre
+L059,Molière,L'Avare,Théâtre
+L060,François Rabelais,Gargantua,Roman
+L061,Alain-Fournier,Le Grand Meaulnes,Roman
+L062,Romain Gary,La Promesse de l'aube,Roman
+L063,Françoise Sagan,Bonjour tristesse,Roman
+L064,Marguerite Duras,L'Amant,Roman
+L065,Pierre Lemaitre,Au revoir là-haut,Roman
+L066,Leïla Slimani,Chanson douce,Roman
+L067,Bernard Werber,Les Fourmis,Science-fiction
+L068,J. K. Rowling,Harry Potter à l'école des sorciers,Fantasy
+L069,Richard Matheson,Je suis une Légende,Science-fiction
+L070,George Orwell,1984,Science-fiction
+L071,Isaac Asimov,Fondation,Science-fiction
+L072,Umberto Eco,Le Nom de la rose,Policier
+L073,Georges Simenon,Le Chien jaune,Policier
+L074,Georges Simenon,Pietr-le-Letton,Policier
+L075,Gaston Leroux,Le Mystère de la chambre jaune,Enquête
+L076,Gaston Leroux,Le Fantôme de l'Opéra,Mystère
+L077,Maurice Leblanc," Arsène Lupin,gentleman-cambrioleur",Policier
+L078,Maurice Leblanc,L'Aiguille creuse,Policier
+L079,Fred Vargas,Pars vite et reviens tard,Policier / Enquête
+L080,Fred Vargas,L'Homme aux cercles bleus,Policier / Enquête
+L081,Jean-Christophe Grangé,Les Rivières pourpres,Thriller
+L082,Pierre Lemaitre,Alex,Thriller / Policier
+L083,Henri Vernes,La Vallée infernale,Aventure
+L084,Henri Vernes,Le Sultan de Jarawak,Aventure
+L085,Henri Vernes,La Couronne de Golconde,Aventure
+L086,Henri Vernes,Les guerriers de l'Ombre Jaune,Aventure
+L087,Henri Vernes,Terreur à la Manicouagan,Aventure
+L088,Jean Ray,Harry Dickson – La Chambre 113,Policier / Fantastique
+L089,Jean Ray,Harry Dickson – Le Théâtre de la peur,Policier / Fantastique
+L090,Gustave Le Rouge,Le Mystérieux Docteur Cornélius,Aventure / Fantastique
+L091,Paul Féval,Les Habits noirs,Aventure / Policier
+L092,Paul Féval,Le Bossu,Aventure historique
+L093,Michel Zévaco,Les Pardaillan,Aventure historique
+L094,Michel Zévaco,Le Capitan,Aventure historique
+L095,Régine Deforges,La bicyclette bleue,Romance / Saga historique
+L096,Françoise Chandernagor,L'Allée du roi,Romance historique
+L097,Mireille Calmel,Le Lit d'Aliénor,Romance historique
+L098,Mireille Calmel,Lady Pirate,Romance historique
+L099,René Barjavel,La Nuit des temps,Romance / Science-fiction
+L100,Francis Lai / Claude Lelouch,Un homme et une femme,Romance
+L101,Marc Levy,Et si c'était vrai...,Romance
+L102,Marc Levy,Vous revoir,Romance
+L103,Anna Gavalda,Je voudrais que quelqu'un m'attende quelque part,Romance / Nouvelles
+L104,Anna Gavalda,"Ensemble, c'est tout",Romance
+L105,Frédéric Beigbeder,L'Amour dure trois ans,Romance / Comédie
+L106,Anne Golon,"Angélique, marquise des anges",Romance historique
+L107,Anne Golon,Le chemin de Versailles,Romance historique
+L108,Anne Golon,Angélique et le Roy,Romance historique
+L109,Anne Golon,Indomptable Angélique,Romance historique
+L110,Anne Golon,Angélique se révolte,Romance historique
+L111,Juliette Benzoni,Catherine,Romance historique
+L112,Jeanne Bourin,La Chambre des dames,Romance historique
+L113,Juliette Benzoni,La Florentine,Romance historique
+L114,Stephen King,Christine,horreur
+L115,Jean Bruce,OSS 117 : Atout coeur à Tokyo,espionnage
+L116,Jean Bruce,OSS 117 : Gâchis à Karachi,espionnage
+L117,Jean Bruce,OSS 117 : Les monstres du Holy Loch,espionnage
+L118,Jean Bruce,OSS 117 : Cache cache au Cachemire,espionnage
+L119,Jean Bruce,OSS 117 : Lila de Calcutta,espionnage
