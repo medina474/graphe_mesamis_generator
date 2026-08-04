@@ -1,20 +1,20 @@
-import { mkdirSync } from "node:fs";
+import fs from 'fs';
 import { Gender } from "./models/Person.js";
 import { Club } from "./models/Club.js";
 import { Enterprise } from "./models/Enterprise.js";
+import { Book } from "./models/Book.js";
 import { PersonGenerator } from "./generators/PersonGenerator.js";
 import { ClubMembershipGenerator } from "./generators/ClubMembershipGenerator.js";
 import { AgePyramidLoader } from "./loaders/AgePyramidLoader.js";
 import { FirstnameLoader } from "./loaders/FirstnameLoader.js";
 import { LastnameLoader } from "./loaders/LastnameLoader.js";
+import { BookLoader } from "./loaders/BookLoader.js";
 import { CsvPersonExporter } from "./exporters/CsvPersonExporter.js";
-import fs from 'fs';
 import { JsonLoader } from "./loaders/JsonLoader.js";
 import { DirectedGraph } from "graphology";
 import { FamilyGenerator } from "./generators/FamilyGenerator.js";
 import { WorkGenerator } from "./generators/WorkGenerator.js";
 import { GraphManager } from "./graph/GraphManager.js";
-import { exit } from "node:process";
 import { FriendsGenerator } from "./generators/FriendsGenerator.js";
 
 const graph: DirectedGraph = new DirectedGraph();
@@ -65,6 +65,9 @@ graphManager.updateEnterprises(enterprises);
 const friendsGenerator = new FriendsGenerator(graph, population);
 friendsGenerator.generate();
 graphManager.updatePersons(population);
+
+const books = BookLoader.load("data/livres.csv")
+console.log(books.slice(0, 20));
 
 /* Export 
 

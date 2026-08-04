@@ -62,7 +62,7 @@ export class FriendsGenerator {
              * Probabilité finale
              */
             const p =
-                0.03 *
+                0.3 *
                 affinity *
                 opportunity;
 

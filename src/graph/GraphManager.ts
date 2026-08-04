@@ -1,6 +1,7 @@
 import { DirectedGraph } from "graphology";
 import { Gender, Person } from "../models/Person.js";
 import { Club } from "../models/Club.js";
+import { Book } from "../models/Book.js";
 import { Enterprise } from "../models/Enterprise.js";
 
 export class GraphManager {
@@ -54,6 +55,21 @@ export class GraphManager {
                 y: Math.random() * 100,
                 size: 1,
                 color: "#ffd035",
+            }
+        );
+    }
+
+    addBook(book: Book): void {
+        this.graph.addNode(
+            book.id,
+            {
+                category: "book",
+                name: book.title,
+                label: book.title,
+                x: Math.random() * 100,
+                y: Math.random() * 100,
+                size: 1,
+                color: "#bc35ff",
             }
         );
     }

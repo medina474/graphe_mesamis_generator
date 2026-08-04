@@ -28,15 +28,15 @@ L026,Vernor Vinge,Au tréfonds du ciel,science-fiction
 L027,Paolo Bacigalupi,La Fille automate,science-fiction
 L028,William Gibson,Neuromancien,science-fiction
 L029,Orson Scott Card,La Stratégie Ender,science-fiction
-L030,Victor Hugo,Notre-Dame de Paris,Roman
+L030,Victor Hugo,Notre-Dame de Paris,roman
 L031,Alexandre Dumas,Les Trois Mousquetaires,Aventure
-L032,Honoré de Balzac,Le Père Goriot,Roman
-L033,Honoré de Balzac,Eugénie Grandet,Roman
-L034,Gustave Flaubert,Madame Bovary,Roman
-L035,Gustave Flaubert,L'Éducation sentimentale,Roman
-L036,Émile Zola,Germinal,Roman
-L037,Émile Zola,L'Assommoir,Roman
-L038,Guy de Maupassant,Bel-Ami,Roman
+L032,Honoré de Balzac,Le Père Goriot,roman
+L033,Honoré de Balzac,Eugénie Grandet,roman
+L034,Gustave Flaubert,Madame Bovary,roman
+L035,Gustave Flaubert,L'Éducation sentimentale,roman
+L036,Émile Zola,Germinal,roman
+L037,Émile Zola,L'Assommoir,roman
+L038,Guy de Maupassant,Bel-Ami,roman
 L039,Guy de Maupassant,Le Horla,Fantastique
 L040,Stendhal,Le Rouge et le Noir,Roman
 L041,Stendhal,La Chartreuse de Parme,Roman
@@ -58,18 +58,18 @@ L056,Arthur Rimbaud,Une saison en enfer,Poésie
 L057,Edmond Rostand,Cyrano de Bergerac,Théâtre
 L058,Pierre Corneille,Le Cid,Théâtre
 L059,Molière,L'Avare,Théâtre
-L060,François Rabelais,Gargantua,Roman
-L061,Alain-Fournier,Le Grand Meaulnes,Roman
-L062,Romain Gary,La Promesse de l'aube,Roman
-L063,Françoise Sagan,Bonjour tristesse,Roman
-L064,Marguerite Duras,L'Amant,Roman
-L065,Pierre Lemaitre,Au revoir là-haut,Roman
-L066,Leïla Slimani,Chanson douce,Roman
-L067,Bernard Werber,Les Fourmis,Science-fiction
+L060,François Rabelais,Gargantua,roman
+L061,Alain-Fournier,Le Grand Meaulnes,roman
+L062,Romain Gary,La Promesse de l'aube,roman
+L063,Françoise Sagan,Bonjour tristesse,roman
+L064,Marguerite Duras,L'Amant,roman
+L065,Pierre Lemaitre,Au revoir là-haut,roman
+L066,Leïla Slimani,Chanson douce,roman
+L067,Bernard Werber,Les Fourmis,science-fiction
 L068,J. K. Rowling,Harry Potter à l'école des sorciers,Fantasy
-L069,Richard Matheson,Je suis une Légende,Science-fiction
-L070,George Orwell,1984,Science-fiction
-L071,Isaac Asimov,Fondation,Science-fiction
+L069,Richard Matheson,Je suis une Légende,science-fiction
+L070,George Orwell,1984,science-fiction
+L071,Isaac Asimov,Fondation,science-fiction
 L072,Umberto Eco,Le Nom de la rose,Policier
 L073,Georges Simenon,Le Chien jaune,Policier
 L074,Georges Simenon,Pietr-le-Letton,Policier
@@ -89,29 +89,29 @@ L087,Henri Vernes,Terreur à la Manicouagan,Aventure
 L088,Jean Ray,Harry Dickson – La Chambre 113,Policier / Fantastique
 L089,Jean Ray,Harry Dickson – Le Théâtre de la peur,Policier / Fantastique
 L090,Gustave Le Rouge,Le Mystérieux Docteur Cornélius,Aventure / Fantastique
-L091,Paul Féval,Les Habits noirs,Aventure / Policier
+L091,Paul Féval,Les Habits noirs,aventure / policier
 L092,Paul Féval,Le Bossu,Aventure historique
 L093,Michel Zévaco,Les Pardaillan,Aventure historique
 L094,Michel Zévaco,Le Capitan,Aventure historique
-L095,Régine Deforges,La bicyclette bleue,Romance / Saga historique
-L096,Françoise Chandernagor,L'Allée du roi,Romance historique
-L097,Mireille Calmel,Le Lit d'Aliénor,Romance historique
-L098,Mireille Calmel,Lady Pirate,Romance historique
-L099,René Barjavel,La Nuit des temps,Romance / Science-fiction
-L100,Francis Lai / Claude Lelouch,Un homme et une femme,Romance
-L101,Marc Levy,Et si c'était vrai...,Romance
-L102,Marc Levy,Vous revoir,Romance
+L095,Régine Deforges,La bicyclette bleue,romance historique
+L096,Françoise Chandernagor,L'Allée du roi,romance historique
+L097,Mireille Calmel,Le Lit d'Aliénor,romance historique
+L098,Mireille Calmel,Lady Pirate,romance historique
+L099,René Barjavel,La Nuit des temps,romance|science-fiction
+L100,Francis Lai / Claude Lelouch,Un homme et une femme,romance
+L101,Marc Levy,Et si c'était vrai...,romance
+L102,Marc Levy,Vous revoir,romance
 L103,Anna Gavalda,Je voudrais que quelqu'un m'attende quelque part,Romance / Nouvelles
-L104,Anna Gavalda,"Ensemble, c'est tout",Romance
-L105,Frédéric Beigbeder,L'Amour dure trois ans,Romance / Comédie
-L106,Anne Golon,"Angélique, marquise des anges",Romance historique
-L107,Anne Golon,Le chemin de Versailles,Romance historique
-L108,Anne Golon,Angélique et le Roy,Romance historique
-L109,Anne Golon,Indomptable Angélique,Romance historique
-L110,Anne Golon,Angélique se révolte,Romance historique
-L111,Juliette Benzoni,Catherine,Romance historique
-L112,Jeanne Bourin,La Chambre des dames,Romance historique
-L113,Juliette Benzoni,La Florentine,Romance historique
+L104,Anna Gavalda,"Ensemble, c'est tout",romance
+L105,Frédéric Beigbeder,L'Amour dure trois ans,romance / Comédie
+L106,Anne Golon,"Angélique, marquise des anges",romance historique
+L107,Anne Golon,Le chemin de Versailles,romance historique
+L108,Anne Golon,Angélique et le Roy,romance historique
+L109,Anne Golon,Indomptable Angélique,romance historique
+L110,Anne Golon,Angélique se révolte,romance historique
+L111,Juliette Benzoni,Catherine,romance historique
+L112,Jeanne Bourin,La Chambre des dames,romance historique
+L113,Juliette Benzoni,La Florentine,romance historique
 L114,Stephen King,Christine,horreur
 L115,Jean Bruce,OSS 117 : Atout coeur à Tokyo,espionnage
 L116,Jean Bruce,OSS 117 : Gâchis à Karachi,espionnage
