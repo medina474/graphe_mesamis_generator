@@ -19,7 +19,7 @@ membershipRunner.load("data/clubs.json");
 membershipRunner.run(population);
 const librariesRunner = new LibrariesRunner(graph);
 await librariesRunner.load("data/books.csv", "data/libraries.json");
-librariesRunner.run();
+librariesRunner.run(population);
 const friendshipRunner = new FriendshipRunner(graph);
 friendshipRunner.run(population);
 /* Export

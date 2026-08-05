@@ -3,6 +3,7 @@ import { Book, Library } from "../models/Book.js";
 import { LibrariesGenerator } from "../generators/LibrariesGenerator.js";
 import { BooksLoader } from "../loaders/BooksLoader.js";
 import { JsonLoader } from "../loaders/JsonLoader.js";
+import { Person } from "../models/Person.js";
 
 interface TagInfo {
   id: string;
@@ -20,14 +21,6 @@ export class LibrariesRunner {
     this.addBooks();
 
     this.libraries = JsonLoader.load(librariesPath, Library);
-
-    for (const library of this.libraries) {
-      this.addLibrary(library);
-    }
-  }
-
-  public run(): void {
-    console.log(`----------------------------------------`);
 
     const uniqueTags = new Map<string, TagInfo>();
     let index = 1;
@@ -69,6 +62,12 @@ export class LibrariesRunner {
     for (const book of this.books) {
       this.writeBook(book, uniqueAuthors.get(book.author)!);
     }
+  }
+
+  public run(population: Person[]): void {
+    console.log(`----------------------------------------`);
+
+    const candidats = population.sort((a, b) => a.reading - b.reading)
 
     const librariesGenerator = new LibrariesGenerator(
       this.books,
@@ -76,9 +75,10 @@ export class LibrariesRunner {
     );
     librariesGenerator.generateAll();
 
-    for (const library of this.libraries) {
+    for (const library of this.libraries.sort((a, b) => a.size - b.size)) {
+      const candidat = candidats.splice(0, 1)[0];
       for (const book of library.books) {
-        this.addOwnership(book, library);
+        this.addOwnership(book, candidat);
       }
     }
   }
@@ -148,8 +148,8 @@ export class LibrariesRunner {
     });
   }
 
-  addOwnership(book: Book, library: Library): void {
-    this.graph.addEdge(book.id, library.id, {
+  addOwnership(book: Book, person: Person): void {
+    this.graph.addEdge(book.id, person.id, {
       relation: "own",
       category: "book",
       weight: 3,
