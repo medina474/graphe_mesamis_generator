@@ -3,17 +3,17 @@ B001,Alain-Fournier,Le Grand Meaulnes,roman
 B002,Albert Camus,L'Étranger,roman
 B003,Albert Camus,La Peste,roman
 B004,Alexandre Dumas,Les Trois Mousquetaires,aventure
-B005,Alexandre Dumas,Le comte de Monte-Cristo,roman
+B005,Alexandre Dumas,Le comte de Monte-Cristo,classique|aventure
 B006,Alexiane Thill,Le dernier conte,romance|romantasy
 B007,André Malraux,La Condition humaine,roman
 B008,Anna Gavalda,"Ensemble, c'est tout",romance
 B009,Anna Gavalda,Je voudrais que quelqu'un m'attende quelque part,romance|Nouvelles
-B010,Anne Golon,Le Chemin de Versailles,romance|historique
-B011,Anne Golon,Marquise des Anges,romance|historique
-B012,Anne Golon,La Fiancée vendue,romance|historique
-B013,Anne Golon,Fêtes royales,romance|historique
-B014,Anne Golon,Le Supplicié de Notre-Dame,romance|historique
-B015,Anne Golon,Ombres et Lumières,romance|historique
+B010,Anne Golon,Angélique : Le Chemin de Versailles,romance|historique
+B011,Anne Golon,Angélique : Marquise des Anges,romance|historique
+B012,Anne Golon,Angélique : La Fiancée vendue,romance|historique
+B013,Anne Golon,Angélique : Fêtes royales,romance|historique
+B014,Anne Golon,Angélique : Le Supplicié de Notre-Dame,romance|historique
+B015,Anne Golon,Angélique : Ombres et Lumières,romance|historique
 B016,Anne Rice,Entretien avec un vampire,bitlit|vampire
 B017,Antoine de Saint-Exupéry,Le Petit Prince,conte
 B018,Antoine de Saint-Exupéry,Terre des hommes,Récit
@@ -22,7 +22,7 @@ B020,Ayerdhal,Mytale,science-fiction
 B021,Bernard Werber,Les Fourmis,science-fiction
 B022,Boris Vian,L'Écume des jours,roman
 B023,Charles Baudelaire,Les Fleurs du mal,Poésie
-B024,Chloé Wallerand,Jamais plus,dark romance
+B024,Chloé Wallerand,The Devil's Sons,dark romance
 B025,Colleen Hoover,Jamais plus,dark romance
 B026,Dan Brown,Da Vinci Code,thriller
 B027,Edmond Rostand,Cyrano de Bergerac,Théâtre
@@ -46,11 +46,11 @@ B044,Gustave Flaubert,L'Éducation sentimentale,roman
 B045,Gustave Le Rouge,Le Mystérieux Docteur Cornélius,aventure|fantastique
 B046,Guy de Maupassant,Le Horla,Fantastique
 B047,Guy de Maupassant,Bel-Ami,roman
-B048,Henri Vernes,La Vallée infernale,aventure
-B049,Henri Vernes,Le Sultan de Jarawak,aventure
-B050,Henri Vernes,La Couronne de Golconde,aventure
-B051,Henri Vernes,Les guerriers de l'Ombre Jaune,aventure
-B052,Henri Vernes,Terreur à la Manicouagan,aventure
+B048,Henri Vernes,Bob Morane : La Vallée infernale,aventure
+B049,Henri Vernes,Bob Morane : Le Sultan de Jarawak,aventure
+B050,Henri Vernes,Bob Morane : La Couronne de Golconde,aventure
+B051,Henri Vernes,Bob Morane : Les guerriers de l'Ombre Jaune,aventure
+B052,Henri Vernes,Bob Morane : Terreur à la Manicouagan,aventure
 B053,Honoré de Balzac,Le Père Goriot,roman
 B054,Honoré de Balzac,Eugénie Grandet,roman
 B055,Isaac Asimov,Fondation,science-fiction
@@ -62,10 +62,10 @@ B060,Jean Bruce,OSS 117 : Gâchis à Karachi,espionnage
 B061,Jean Bruce,OSS 117 : Les monstres du Holy Loch,espionnage
 B062,Jean Bruce,OSS 117 : Cache cache au Cachemire,espionnage
 B063,Jean Bruce,OSS 117 : Lila de Calcutta,espionnage
-B064,Jean Ray,Harry Dickson – La Chambre 113,policier|fantastique
-B065,Jean Ray,Harry Dickson – Le Théâtre de la peur,policier|fantastique
+B064,Jean Ray,Harry Dickson : La Chambre 113,policier|fantastique
+B065,Jean Ray,Harry Dickson : Le Théâtre de la peur,policier|fantastique
 B066,Jean-Christophe Grangé,Les Rivières pourpres,thriller
-B067,Jean-Christophe Grangé,Les Rivières pourpres,thriller
+B067,Jean-Christophe Grangé,Le Concile de pierre,thriller
 B068,Jeanne Bourin,La Chambre des dames,romance|historique
 B069,John Ajvide Lindqvist,Laisse-moi entrer,horreur|vampire
 B070,Joyce Kitten,Borderline,dark romance
@@ -102,7 +102,7 @@ B100,Pierre Lemaitre,Au revoir là-haut,roman
 B101,Pierre Lemaitre,Alex,thriller|policier
 B102,Raymond Queneau,Zazie dans le métro,roman
 B103,Régine Deforges,La bicyclette bleue,romance|historique
-B104,René Barjavel,La Nuit des temps,romance|science-fiction
+B104,Stephen King,Salem,horreur|vampire
 B105,Richard Matheson,Je suis une Légende,science-fiction|vampire
 B106,Robin Hobb,L'Assassin royal,fantasy
 B107,Romain Benassaya,Pyramide,science-fiction
