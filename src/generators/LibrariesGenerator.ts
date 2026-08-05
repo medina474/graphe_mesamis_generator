@@ -1,9 +1,7 @@
 import { Book, Library } from "../models/Book.js";
-import { DirectedGraph } from "graphology";
 
 export class LibrariesGenerator {
   constructor(
-    private graph: DirectedGraph,
     private readonly books: Book[],
     private readonly libraries: Library[],
   ) {}

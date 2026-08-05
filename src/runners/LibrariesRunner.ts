@@ -4,41 +4,53 @@ import { LibrariesGenerator } from "../generators/LibrariesGenerator.js";
 import { BooksLoader } from "../loaders/BooksLoader.js";
 import { JsonLoader } from "../loaders/JsonLoader.js";
 
+interface TagInfo {
+  id: string;
+  count: number;
+}
+
 export class LibrariesRunner {
   private books: Book[] = [];
+  private libraries: Library[] = [];
 
   constructor(private readonly graph: DirectedGraph) {}
 
-  public async load(booksPath: string): Promise<void> {
+  public async load(booksPath: string, librariesPath: string): Promise<void> {
     this.books = await BooksLoader.load(booksPath);
     this.addBooks();
+
+    this.libraries = JsonLoader.load(librariesPath, Library);
+
+    for (const library of this.libraries) {
+      this.addLibrary(library);
+    }
   }
 
   public run(): void {
     console.log(`----------------------------------------`);
 
-    const uniqueTags = new Map<string, [string, number]>();
+    const uniqueTags = new Map<string, TagInfo>();
     let index = 1;
     for (const b of this.books) {
       for (const tag of b.tags) {
-        if (uniqueTags.has(tag)) {
-          uniqueTags.set(tag, [
-            uniqueTags.get(tag)![0],
-            (uniqueTags.get(tag)![1] ?? 0) + 1,
-          ]);
+        const info = uniqueTags.get(tag);
+
+        if (info) {
+          info.count++;
         } else {
-          uniqueTags.set(tag, [`T${index++}`, 1]);
+          uniqueTags.set(tag, {
+            id: `T${index++}`,
+            count: 1,
+          });
         }
       }
     }
 
-    for (let tag of uniqueTags) {
-      this.addTag(tag);
-    }
+    this.addTags(uniqueTags);
 
     for (const book of this.books) {
       for (const tag of book.tags) {
-        this.tagBook(book.id, uniqueTags.get(tag)![0]);
+        this.tagBook(book.id, uniqueTags.get(tag)!.id);
       }
     }
 
@@ -58,20 +70,13 @@ export class LibrariesRunner {
       this.writeBook(book, uniqueAuthors.get(book.author)!);
     }
 
-    const libraries = JsonLoader.load("data/libraries.json", Library);
-
-    for (const library of libraries) {
-      this.addLibrary(library);
-    }
-
     const librariesGenerator = new LibrariesGenerator(
-      this.graph,
       this.books,
-      libraries,
+      this.libraries,
     );
     librariesGenerator.generateAll();
 
-    for (const library of libraries) {
+    for (const library of this.libraries) {
       for (const book of library.books) {
         this.addOwnership(book, library);
       }
@@ -95,13 +100,19 @@ export class LibrariesRunner {
     });
   }
 
-  addTag(tag: [string, [string, number]]): void {
-    this.graph.addNode(tag[1][0], {
+  addTags(tags: Map<string, TagInfo>) {
+    for (let tag of tags) {
+      this.addTag(tag);
+    }
+  }
+
+  addTag(tag: [string, TagInfo]): void {
+    this.graph.addNode(tag[1].id, {
       category: "tag",
       label: tag[0],
       x: Math.random() * 100,
       y: Math.random() * 100,
-      size: Math.ceil(tag[1][1] / 3.0),
+      size: Math.ceil(tag[1].count / 3.0),
       color: "#940b0b",
     });
   }

@@ -16,13 +16,11 @@ import { LastnameLoader } from "../loaders/LastnameLoader.js";
  */
 export class PopulationRunner {
   private pyramid: AgePyramidStat;
-  private firstnames: FirstnameStat[];
-  private lastnames: LastnameStat[];
+  private firstnames: FirstnameStat[] = [];
+  private lastnames: LastnameStat[] = [];
 
   constructor(private readonly graph: DirectedGraph) {
     this.pyramid = new AgePyramidStat([]);
-    this.lastnames = [];
-    this.firstnames = [];
   }
 
   public async load(

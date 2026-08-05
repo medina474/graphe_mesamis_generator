@@ -18,7 +18,7 @@ const membershipRunner = new MembershipRunner(graph);
 membershipRunner.load("data/clubs.json");
 membershipRunner.run(population);
 const librariesRunner = new LibrariesRunner(graph);
-await librariesRunner.load("data/books.csv");
+await librariesRunner.load("data/books.csv", "data/libraries.json");
 librariesRunner.run();
 const friendshipRunner = new FriendshipRunner(graph);
 friendshipRunner.run(population);

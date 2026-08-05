@@ -1,6 +1,6 @@
 import { Distribution } from "./Distribution.js";
 import { Person } from "../models/Person.js";
-import { BetaDistribution } from "../stats/BetaDistribution.js";
+import { Random } from "../stats/Random.js";
 
 export class ReadingDistribution
     implements Distribution<number>{
@@ -24,7 +24,7 @@ export class ReadingDistribution
         const b = Math.max((1 - meanRead) * 7, 0.5);
 
         // Tirage aléatoire
-        const reading = BetaDistribution.sample(a, b);
+        const reading = Random.beta(a, b);
 
         return reading;
     }

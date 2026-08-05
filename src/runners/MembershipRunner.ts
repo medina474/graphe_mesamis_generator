@@ -5,17 +5,14 @@ import { Club } from "../models/Club.js";
 import { ClubMembershipGenerator } from "../generators/ClubMembershipGenerator.js";
 
 export class MembershipRunner {
-  
-  private clubs: Club[];
+  private clubs: Club[] = [];
 
-  constructor(private readonly graph: DirectedGraph) {
-    this.clubs = [];
-  }
+  constructor(private readonly graph: DirectedGraph) {}
 
   /**
    * Charge la liste des clubs depuis un fichier json.
    * Ajoute les clubs au graphe.
-   * @param clubsPath 
+   * @param clubsPath
    */
   public load(clubsPath: string) {
     this.clubs = JsonLoader.load(clubsPath, Club);
@@ -32,7 +29,7 @@ export class MembershipRunner {
     );
 
     clubMembershipGenerator.generate();
-    
+
     this.updateClubs(this.clubs);
   }
 

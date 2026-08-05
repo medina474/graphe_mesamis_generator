@@ -1,6 +1,6 @@
 import { Distribution } from "./Distribution.js";
 import { Person } from "../models/Person.js";
-import { BetaDistribution } from "../stats/BetaDistribution.js";
+import { Random } from "../stats/Random.js";
 
 export class MusicDistribution
     implements Distribution<number>{
@@ -11,6 +11,6 @@ export class MusicDistribution
      */
     sample(person:Partial<Person>):number{
 
-        return BetaDistribution.sample(2, 2)
+        return Random.beta(2, 2)
     }
 }

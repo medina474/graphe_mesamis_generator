@@ -1,4 +1,4 @@
-import { BetaDistribution } from "../stats/BetaDistribution.js";
+import { Random } from "../stats/Random.js";
 export class ReadingDistribution {
     sample(person) {
         // Base : 15% + effet de l'éducation + effet de l'âge
@@ -15,7 +15,7 @@ export class ReadingDistribution {
         const a = Math.max(meanRead * 7, 0.5);
         const b = Math.max((1 - meanRead) * 7, 0.5);
         // Tirage aléatoire
-        const reading = BetaDistribution.sample(a, b);
+        const reading = Random.beta(a, b);
         return reading;
     }
 }

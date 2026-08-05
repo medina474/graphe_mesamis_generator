@@ -1,4 +1,4 @@
-import { BetaDistribution } from "../stats/BetaDistribution.js";
+import { Random } from "../stats/Random.js";
 export class SportDistribution {
     sample(person) {
         // Moyenne de sport qui diminue avec l’âge
@@ -9,7 +9,7 @@ export class SportDistribution {
         const a = Math.max(meanSport * 6, 0.5);
         const b = Math.max((1 - meanSport) * 6, 0.5);
         // Tirage aléatoire selon Beta(a, b)
-        const sport = BetaDistribution.sample(a, b);
+        const sport = Random.beta(a, b);
         return sport;
     }
 }
