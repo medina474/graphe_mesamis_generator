@@ -5,19 +5,21 @@ import { BooksLoader } from "../loaders/BooksLoader.js";
 import { JsonLoader } from "../loaders/JsonLoader.js";
 
 export class LibrariesRunner {
+  private books: Book[] = [];
+
   constructor(private readonly graph: DirectedGraph) {}
 
-  public async run(): Promise<void> {
-    console.log(`----------------------------------------`);
-    const books = await BooksLoader.load("data/books.csv");
+  public async load(booksPath: string): Promise<void> {
+    this.books = await BooksLoader.load(booksPath);
+    this.addBooks();
+  }
 
-    for (const book of books) {
-      this.addBook(book);
-    }
+  public run(): void {
+    console.log(`----------------------------------------`);
 
     const uniqueTags = new Map<string, [string, number]>();
     let index = 1;
-    for (const b of books) {
+    for (const b of this.books) {
       for (const tag of b.tags) {
         if (uniqueTags.has(tag)) {
           uniqueTags.set(tag, [
@@ -34,7 +36,7 @@ export class LibrariesRunner {
       this.addTag(tag);
     }
 
-    for (const book of books) {
+    for (const book of this.books) {
       for (const tag of book.tags) {
         this.tagBook(book.id, uniqueTags.get(tag)![0]);
       }
@@ -42,7 +44,7 @@ export class LibrariesRunner {
 
     const uniqueAuthors = new Map<string, string>();
     let authorIndex = 1;
-    for (const book of books) {
+    for (const book of this.books) {
       if (!uniqueAuthors.has(book.author)) {
         uniqueAuthors.set(book.author, `A${authorIndex++}`);
       }
@@ -52,7 +54,7 @@ export class LibrariesRunner {
       this.addAuthor(author, authorId);
     }
 
-    for (const book of books) {
+    for (const book of this.books) {
       this.writeBook(book, uniqueAuthors.get(book.author)!);
     }
 
@@ -73,6 +75,12 @@ export class LibrariesRunner {
       for (const book of library.books) {
         this.addOwnership(book, library);
       }
+    }
+  }
+
+  addBooks() {
+    for (const book of this.books) {
+      this.addBook(book);
     }
   }
 

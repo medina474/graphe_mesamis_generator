@@ -5,22 +5,35 @@ import { Club } from "../models/Club.js";
 import { ClubMembershipGenerator } from "../generators/ClubMembershipGenerator.js";
 
 export class MembershipRunner {
-  constructor(private readonly graph: DirectedGraph) {}
+  
+  private clubs: Club[];
+
+  constructor(private readonly graph: DirectedGraph) {
+    this.clubs = [];
+  }
+
+  /**
+   * Charge la liste des clubs depuis un fichier json.
+   * Ajoute les clubs au graphe.
+   * @param clubsPath 
+   */
+  public load(clubsPath: string) {
+    this.clubs = JsonLoader.load(clubsPath, Club);
+    this.addClubs(this.clubs);
+  }
 
   public run(population: Person[]): void {
     console.log(`----------------------------------------`);
-    const clubs = JsonLoader.load("data/clubs.json", Club);
-
-    this.addClubs(clubs);
 
     const clubMembershipGenerator = new ClubMembershipGenerator(
       this.graph,
       population,
-      clubs,
+      this.clubs,
     );
 
     clubMembershipGenerator.generate();
-    this.updateClubs(clubs);
+    
+    this.updateClubs(this.clubs);
   }
 
   addClubs(clubs: Club[]): void {

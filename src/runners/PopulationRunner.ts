@@ -10,6 +10,9 @@ import { AgePyramidLoader } from "../loaders/AgePyramidLoader.js";
 import { FirstnameLoader } from "../loaders/FirstnameLoader.js";
 import { LastnameLoader } from "../loaders/LastnameLoader.js";
 
+/**
+ * Crée une population d'individus
+ */
 export class PopulationRunner {
   private pyramid: AgePyramid;
   private firstnames: FirstnameGeneration[];
@@ -21,10 +24,14 @@ export class PopulationRunner {
     this.firstnames = [];
   }
 
-  public async load() {
-    this.pyramid = AgePyramidLoader.load("data/age-pyramid-guyane.json");
-    this.firstnames = FirstnameLoader.load("data/prenoms.json");
-    this.lastnames = await LastnameLoader.load("data/noms.csv");
+  public async load(
+    pyramidStatPath: string,
+    firstnameStatPath: string,
+    lastnameStatPath: string,
+  ) {
+    this.pyramid = AgePyramidLoader.load(pyramidStatPath);
+    this.firstnames = FirstnameLoader.load(firstnameStatPath);
+    this.lastnames = await LastnameLoader.load(lastnameStatPath);
   }
 
   public run(minAge: number, maxAge = Number.MAX_SAFE_INTEGER): Person[] {
