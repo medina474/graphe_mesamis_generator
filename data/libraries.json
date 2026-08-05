@@ -11,7 +11,7 @@
   { "id":"L10", "taille": 19, "tags": ["romance", "historique"] },
   { "id":"L11", "taille": 11, "tags": ["aventure", "policier"] },
   { "id":"L12", "taille": 16, "tags": ["fantastique", "science-fiction"] },
-  { "id":"L13", "taille": 6,  "tags": ["romance"] },
+  { "id":"L13", "taille": 6,  "tags": ["dark romance"], "affinite": { "genre": "F"} },
   { "id":"L14", "taille": 20, "tags": ["classique", "policier"] },
   { "id":"L15", "taille": 13, "tags": ["autobiographie", "historique"] },
   { "id":"L16", "taille": 9,  "tags": ["aventure"] },

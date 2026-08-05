@@ -8,7 +8,8 @@ export class FriendshipRunner {
         private readonly graph: DirectedGraph
     ) {}
 
-    public run(population: Person[]) {
+    public run(population: Person[]):void {
+        console.log(`----------------------------------------`);
         const friendsGenerator = new FriendsGenerator(this.graph, population);
         friendsGenerator.generate();
         this.updatePersons(population);
