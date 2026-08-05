@@ -1,5 +1,6 @@
-import fs from 'fs';
+import fs from "fs";
 import { PopulationRunner } from "./runners/PopulationRunner.js";
+import { FamilyRunner } from "./runners/FamilyRunner.js";
 import { FriendshipRunner } from "./runners/FriendshipRunner.js";
 import { LibrariesRunner } from "./runners/LibrariesRunner.js";
 import { MembershipRunner } from "./runners/MembershipRunner.js";
@@ -7,15 +8,18 @@ import { WorkRunner } from "./runners/WorkRunner.js";
 import { DirectedGraph } from "graphology";
 const graph = new DirectedGraph();
 const populationRunner = new PopulationRunner(graph);
-await populationRunner.load();
+await populationRunner.load("data/age-pyramid-guyane.json", "data/prenoms.json", "data/noms.csv");
 const population = populationRunner.run(1, 85);
-/* Familles */
+const familyRunner = new FamilyRunner(graph);
+familyRunner.run(population);
 const workRunner = new WorkRunner(graph);
 workRunner.run(population);
 const membershipRunner = new MembershipRunner(graph);
+membershipRunner.load("data/clubs.json");
 membershipRunner.run(population);
 const librariesRunner = new LibrariesRunner(graph);
-await librariesRunner.run();
+await librariesRunner.load("data/books.csv");
+librariesRunner.run();
 const friendshipRunner = new FriendshipRunner(graph);
 friendshipRunner.run(population);
 /* Export

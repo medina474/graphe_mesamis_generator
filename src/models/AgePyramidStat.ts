@@ -1,4 +1,8 @@
-import { AgePyramidEntry } from "./AgePyramidEntry.js";
+export interface AgePyramidEntry {
+    age: number;
+    male: number;
+    female: number;
+}
 
 /**
  * https://www.insee.fr/fr/outil-interactif/5014911/pyramide.htm?#!t=2&c=971
