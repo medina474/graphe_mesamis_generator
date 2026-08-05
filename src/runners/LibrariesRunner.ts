@@ -66,7 +66,7 @@ export class LibrariesRunner {
 
     const librariesGenerator = new LibrariesGenerator(
       this.graph,
-      books,
+      this.books,
       libraries,
     );
     librariesGenerator.generateAll();

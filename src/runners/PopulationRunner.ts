@@ -1,10 +1,11 @@
 import { DirectedGraph } from "graphology";
 import { PersonGenerator } from "../generators/PersonGenerator.js";
 import { Person, Gender } from "../models/Person.js";
-import { FirstnameGeneration } from "../models/Family.js";
-import { Lastname } from "../models/Family.js";
 
-import { AgePyramid } from "../stats/AgePyramid.js";
+import { FirstnameStat } from "../models/PersonStat.js";
+import { LastnameStat } from "../models/PersonStat.js";
+
+import { AgePyramidStat } from "../models/AgePyramidStat.js";
 
 import { AgePyramidLoader } from "../loaders/AgePyramidLoader.js";
 import { FirstnameLoader } from "../loaders/FirstnameLoader.js";
@@ -14,12 +15,12 @@ import { LastnameLoader } from "../loaders/LastnameLoader.js";
  * Crée une population d'individus
  */
 export class PopulationRunner {
-  private pyramid: AgePyramid;
-  private firstnames: FirstnameGeneration[];
-  private lastnames: Lastname[];
+  private pyramid: AgePyramidStat;
+  private firstnames: FirstnameStat[];
+  private lastnames: LastnameStat[];
 
   constructor(private readonly graph: DirectedGraph) {
-    this.pyramid = new AgePyramid([]);
+    this.pyramid = new AgePyramidStat([]);
     this.lastnames = [];
     this.firstnames = [];
   }

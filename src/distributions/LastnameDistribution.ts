@@ -1,7 +1,7 @@
 import { Distribution } from "./Distribution.js";
 import { Person } from "../models/Person.js";
 import { Random } from "../stats/Random.js";
-import { Lastname } from "../models/Family.js";
+import { LastnameStat } from "../models/PersonStat.js";
 
 export class LastnameDistribution
     implements Distribution<string>{
@@ -9,7 +9,7 @@ export class LastnameDistribution
     private values: string[];
     private weights: number[];
 
-    constructor (lastnames: Lastname[]) {
+    constructor (lastnames: LastnameStat[]) {
         this.values = lastnames.map((e) => e.name);
         this.weights = lastnames.map((e) => e.count);
     }

@@ -1,9 +1,9 @@
-import { AgePyramidEntry } from "../models/AgePyramidEntry.js";
+import { AgePyramidEntry } from "./AgePyramidEntry.js";
 
 /**
  * https://www.insee.fr/fr/outil-interactif/5014911/pyramide.htm?#!t=2&c=971
  */
-export class AgePyramid {
+export class AgePyramidStat {
   public readonly ages: number[];
   public readonly weights: number[];
 

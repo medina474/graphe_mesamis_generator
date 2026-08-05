@@ -1,5 +1,5 @@
 import { Distribution } from "./Distribution.js";
-import { AgePyramid } from "../stats/AgePyramid.js";
+import { AgePyramidStat } from "../models/AgePyramidStat.js";
 import { Person } from "../models/Person.js";
 import { Random } from "../stats/Random.js";
 
@@ -8,7 +8,7 @@ export class AgeDistribution implements Distribution<number> {
   private readonly weights: number[];
 
   constructor(
-    private readonly pyramid: AgePyramid,
+    private readonly pyramid: AgePyramidStat,
     minAge = 18,
     maxAge = Number.MAX_SAFE_INTEGER,
   ) {

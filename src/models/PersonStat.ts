@@ -1,20 +1,20 @@
-class Firstname {
+class FirstnameCount {
     constructor(
         public readonly firstname: string,
         public readonly count: number
     ) {}
 }
 
-export class FirstnameGeneration {
+export class FirstnameStat {
 
     constructor(
         public readonly maxAge: number,
         public readonly genre: string,
-        public readonly firstnames: Firstname[]
+        public readonly firstnames: FirstnameCount[]
     ) {}
 }
 
-export class Lastname {
+export class LastnameStat {
 
     constructor(
         public readonly name: string,

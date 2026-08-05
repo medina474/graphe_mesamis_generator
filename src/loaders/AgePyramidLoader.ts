@@ -1,14 +1,14 @@
 import { readFileSync } from "node:fs";
 
-import { AgePyramid } from "../stats/AgePyramid.js";
+import { AgePyramidStat } from "../models/AgePyramidStat.js";
 import { AgePyramidEntry } from "../models/AgePyramidEntry.js";
 
 export class AgePyramidLoader {
-  static load(path: string): AgePyramid {
+  static load(path: string): AgePyramidStat {
     const json = readFileSync(path, "utf8");
 
     const entries = JSON.parse(json) as AgePyramidEntry[];
 
-    return new AgePyramid(entries);
+    return new AgePyramidStat(entries);
   }
 }
