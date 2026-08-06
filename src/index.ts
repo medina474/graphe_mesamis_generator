@@ -34,7 +34,7 @@ await librariesRunner.load("data/books.csv", "data/libraries.json");
 librariesRunner.run(population);
 
 const addressRunner = new AddressRunner(graph);
-await addressRunner.load("data/voies.json");
+await addressRunner.load("data/voies.json", "data/adresses.csv");
 addressRunner.run(population);
 
 const friendshipRunner = new FriendshipRunner(graph);

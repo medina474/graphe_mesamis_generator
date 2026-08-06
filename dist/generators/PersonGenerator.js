@@ -61,6 +61,7 @@ export class PersonGenerator {
             sport: 0,
             music: 0,
             reading: 0,
+            isHoused: false
         };
         // Caractéristiques démographiques
         person.age = this.ageDistribution.sample(person);

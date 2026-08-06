@@ -1,3 +1,4 @@
+import { Address } from "./Address.js";
 import { Club } from "./Club.js";
 
 export enum Gender {
@@ -41,7 +42,9 @@ export interface Person {
     edges: number;
     isMarried: boolean;
     isChild: boolean;
+    isHoused: boolean;
 
     clubs: Club[];
+    address?: Address;
     tags: Set<string>;
 }
