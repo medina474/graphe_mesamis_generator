@@ -5,6 +5,7 @@ import { FriendshipRunner } from "./runners/FriendshipRunner.js";
 import { LibrariesRunner } from "./runners/LibrariesRunner.js";
 import { MembershipRunner } from "./runners/MembershipRunner.js";
 import { WorkRunner } from "./runners/WorkRunner.js";
+import { AddressRunner } from "./runners/AddressRunner.js";
 import { CsvPersonExporter } from "./exporters/CsvPersonExporter.js";
 import { DirectedGraph } from "graphology";
 
@@ -31,6 +32,10 @@ membershipRunner.run(population);
 const librariesRunner = new LibrariesRunner(graph);
 await librariesRunner.load("data/books.csv", "data/libraries.json");
 librariesRunner.run(population);
+
+const addressRunner = new AddressRunner(graph);
+await addressRunner.load("data/voies.json");
+addressRunner.run(population);
 
 const friendshipRunner = new FriendshipRunner(graph);
 friendshipRunner.run(population);

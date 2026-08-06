@@ -1,9 +1,10 @@
 import { DirectedGraph } from "graphology";
-import { Book, Library } from "../models/Book.js";
+import { Book, Exemplaire, Library } from "../models/Book.js";
 import { LibrariesGenerator } from "../generators/LibrariesGenerator.js";
 import { BooksLoader } from "../loaders/BooksLoader.js";
 import { JsonLoader } from "../loaders/JsonLoader.js";
 import { Person } from "../models/Person.js";
+import { BorrowGenerator, Pret } from "../generators/BorrowGenerator.js";
 
 interface TagInfo {
   id: string;
@@ -13,6 +14,7 @@ interface TagInfo {
 export class LibrariesRunner {
   private books: Book[] = [];
   private libraries: Library[] = [];
+  private exemplaires: Exemplaire[] = [];
 
   constructor(private readonly graph: DirectedGraph) {}
 
@@ -67,19 +69,36 @@ export class LibrariesRunner {
   public run(population: Person[]): void {
     console.log(`----------------------------------------`);
 
-    const candidats = population.sort((a, b) => a.reading - b.reading)
+    const candidats = population.sort((a, b) => a.reading - b.reading);
 
     const librariesGenerator = new LibrariesGenerator(
       this.books,
       this.libraries,
     );
+    //Affecter les oeuvres aux bibliothèques
     librariesGenerator.generateAll();
 
+    for (const book of this.books) {
+      let nb = this.libraries.reduce((a:number, l) => a + ((l.books.some(b => b.id == book.id)) ? 1 : 0), 0)
+      if (nb==0) console.log(`${book.title} : ${nb} (${book.tags})`)
+    }
+
+    let index = 1;
     for (const library of this.libraries.sort((a, b) => a.size - b.size)) {
       const candidat = candidats.splice(0, 1)[0];
       for (const book of library.books) {
         this.addOwnership(book, candidat);
+        const exemplaire = new Exemplaire(`X${index++}`, book, candidat);
+        this.addExemplaire(exemplaire);
+        this.exemplaires.push(exemplaire);
+        this.addPublication(exemplaire, book)
       }
+    }
+    
+    const borrowGenerator = new BorrowGenerator(population, this.exemplaires);
+    const prets = borrowGenerator.generer(150, new Date(2026, 0, 1));
+    for(const pret of prets) {
+      this.addHold(pret);
     }
   }
 
@@ -97,6 +116,17 @@ export class LibrariesRunner {
       y: Math.random() * 100,
       size: 1,
       color: "#ff3535",
+    });
+  }
+
+  addExemplaire(exemplaire: Exemplaire): void {
+    this.graph.addNode(exemplaire.id, {
+      category: "exemplaire",
+      label: `${exemplaire.oeuvre.title} ${exemplaire.id}`,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: 1,
+      color: "#77fffd",
     });
   }
 
@@ -151,6 +181,24 @@ export class LibrariesRunner {
   addOwnership(book: Book, person: Person): void {
     this.graph.addEdge(book.id, person.id, {
       relation: "own",
+      category: "book",
+      weight: 3,
+    });
+  }
+
+  addHold(pret: Pret): void {
+    this.graph.addEdge(pret.exemplaire.id, pret.emprunteur.id, {
+      relation: "hold",
+      dateDebut: pret.debut,
+      dateFin: pret.fin,
+      category: "book",
+      weight: 3,
+    });
+  }
+
+  addPublication(exemplaire: Exemplaire, book: Book): void {
+    this.graph.addEdge(exemplaire.id, book.id, {
+      relation: "publication",
       category: "book",
       weight: 3,
     });

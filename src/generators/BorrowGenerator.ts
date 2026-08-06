@@ -1,5 +1,5 @@
 import { Person } from "../models/Person.js";
-import { Exemplaire } from "../models/Exemplaire.js";
+import { Exemplaire } from "../models/Book.js";
 
 export interface Pret {
   readonly exemplaire: Exemplaire;
@@ -9,7 +9,7 @@ export interface Pret {
   readonly fin: Date;
 }
 
-export class PretGenerator {
+export class BorrowGenerator {
 
   constructor(
     private readonly personnes: Person[],
@@ -21,6 +21,7 @@ export class PretGenerator {
     dateDebut: Date = new Date(),
   ): Pret[] {
 
+    console.log('************');
     const prets: Pret[] = [];
 
     /*
@@ -77,6 +78,7 @@ export class PretGenerator {
       );
     }
 
+    console.log(oeuvresLues.keys.length)
     let maintenant = new Date(dateDebut);
 
     for (let i = 0; i < nombrePrets; i++) {
@@ -94,6 +96,7 @@ export class PretGenerator {
       );
 
       if (candidats.length === 0) {
+        console.log('Aucun candidat');
         /*
          * Aucun candidat maintenant.
          *
@@ -160,6 +163,7 @@ export class PretGenerator {
         fin,
       };
 
+      console.log(`${pret.exemplaire.id} | ${pret.exemplaire.oeuvre.title} : ${pret.preteur.firstname} -> ${pret.emprunteur.firstname}`)
       prets.push(pret);
 
       /*
@@ -234,7 +238,7 @@ export class PretGenerator {
       /*
        * Une personne qui ne lit pas n'est pas candidate.
        */
-      if (personne.lecture <= 0) {
+      if (personne.reading <= 0) {
         return false;
       }
 
@@ -295,7 +299,7 @@ export class PretGenerator {
 
     const total = personnes.reduce(
       (somme, personne) =>
-        somme + personne.lecture,
+        somme + personne.reading,
       0,
     );
 
@@ -303,7 +307,7 @@ export class PretGenerator {
 
     for (const personne of personnes) {
 
-      tirage -= personne.lecture;
+      tirage -= personne.reading;
 
       if (tirage <= 0) {
         return personne;

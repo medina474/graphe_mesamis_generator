@@ -17,15 +17,15 @@ B015,Anne Golon,Angélique : Ombres et Lumières,romance|historique
 B016,Anne Rice,Entretien avec un vampire,bitlit|vampire
 B017,Antoine de Saint-Exupéry,Le Petit Prince,conte
 B018,Antoine de Saint-Exupéry,Terre des hommes,Récit
-B019,Arthur Rimbaud,Une saison en enfer,Poésie
+B019,Arthur Rimbaud,Une saison en enfer,poesie
 B020,Ayerdhal,Mytale,science-fiction
 B021,Bernard Werber,Les Fourmis,science-fiction
 B022,Boris Vian,L'Écume des jours,roman
-B023,Charles Baudelaire,Les Fleurs du mal,Poésie
+B023,Charles Baudelaire,Les Fleurs du mal,poesie
 B024,Chloé Wallerand,The Devil's Sons,dark romance
 B025,Colleen Hoover,Jamais plus,dark romance
 B026,Dan Brown,Da Vinci Code,thriller
-B027,Edmond Rostand,Cyrano de Bergerac,Théâtre
+B027,Edmond Rostand,Cyrano de Bergerac,theatre
 B028,Émile Querbalec,Quitter les monts d'automne,science-fiction
 B029,Émile Zola,Germinal,roman
 B030,Émile Zola,L'Assommoir,roman
@@ -33,10 +33,10 @@ B031,Emily Brontë,Les Hauts de Hurle-Vent,roman|dark romance
 B032,François Rabelais,Gargantua,roman
 B033,Françoise Chandernagor,L'Allée du roi,romance|historique
 B034,Françoise Sagan,Bonjour tristesse,roman
-B035,Fred Vargas,Pars vite et reviens tard,policier|Enquête
-B036,Fred Vargas,L'Homme aux cercles bleus,policier|Enquête
+B035,Fred Vargas,Pars vite et reviens tard,policier|enquête
+B036,Fred Vargas,L'Homme aux cercles bleus,policier|enquête
 B037,Frédéric Beigbeder,L'Amour dure trois ans,romance|comédie
-B038,Gaston Leroux,Le Mystère de la chambre jaune,Enquête
+B038,Gaston Leroux,Le Mystère de la chambre jaune,enquête
 B039,Gaston Leroux,Le Fantôme de l'Opéra,Mystère
 B040,George Orwell,1984,science-fiction
 B041,Georges Simenon,Le Chien jaune,policier
@@ -63,7 +63,7 @@ B061,Jean Bruce,OSS 117 : Les monstres du Holy Loch,espionnage
 B062,Jean Bruce,OSS 117 : Cache cache au Cachemire,espionnage
 B063,Jean Bruce,OSS 117 : Lila de Calcutta,espionnage
 B064,Jean Ray,Harry Dickson : La Chambre 113,policier|fantastique
-B065,Jean Ray,Harry Dickson : Le Théâtre de la peur,policier|fantastique
+B065,Jean Ray,Harry Dickson : Le theatre de la peur,policier|fantastique
 B066,Jean-Christophe Grangé,Les Rivières pourpres,thriller
 B067,Jean-Christophe Grangé,Le Concile de pierre,thriller
 B068,Jeanne Bourin,La Chambre des dames,romance|historique
@@ -88,7 +88,7 @@ B086,Michel Zévaco,Les Pardaillan,aventure historique
 B087,Michel Zévaco,Le Capitan,aventure historique
 B088,Mireille Calmel,Le Lit d'Aliénor,romance|historique
 B089,Mireille Calmel,Lady Pirate,romance|historique
-B090,Molière,L'Avare,Théâtre
+B090,Molière,L'Avare,theatre
 B091,Neal Stephenson,L'Âge de diamant,science-fiction
 B092,Olivier Norek,Dans les brumes de Capelans,policier
 B093,Orson Scott Card,La Stratégie Ender,science-fiction
@@ -97,7 +97,7 @@ B095,Paul Féval,Le Bossu,aventure historique
 B096,Paul Féval,Les Habits noirs,aventure|policier
 B097,Pierre Bordage,Les guerriers du silence,science-fiction
 B098,Pierre Boulle,La planète des singes,science-fiction
-B099,Pierre Corneille,Le Cid,Théâtre
+B099,Pierre Corneille,Le Cid,theatre
 B100,Pierre Lemaitre,Au revoir là-haut,roman
 B101,Pierre Lemaitre,Alex,thriller|policier
 B102,Raymond Queneau,Zazie dans le métro,roman
@@ -117,7 +117,7 @@ B115,Tom Clancy,Octobre rouge,espionnage
 B116,Umberto Eco,Le Nom de la rose,policier
 B117,Vernor Vinge,Au tréfonds du ciel,science-fiction
 B118,Victor Dixen,Vampyria,bitlit|vampire
-B119,Victor Hugo,Les Misérables,roman
+B119,Victor Hugo,Les Misérables,classique|historique
 B120,Victor Hugo,Notre-Dame de Paris,roman
 B121,Voltaire,Candide,conte philosophique
 B122,William Gibson,Neuromancien,science-fiction

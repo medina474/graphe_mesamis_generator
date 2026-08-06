@@ -1,9 +1,20 @@
+import { Person } from './Person.js';
+
 export class Book {
     constructor(
         public readonly id:string,
         public readonly author:string,
         public readonly title:string,
         public readonly tags:string[],
+    ) {
+    }
+}
+
+export class Exemplaire {
+    constructor(
+        public readonly id: string,
+        public readonly oeuvre: Book,
+        public readonly proprietaire: Person,
     ) {
     }
 }
