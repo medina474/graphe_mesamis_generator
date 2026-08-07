@@ -71,17 +71,19 @@ export class LibrariesRunner {
   }
 
   public run(population: Person[]): void {
-    console.log(`----------------------------------------`);
-
-    const candidats = population.sort((a, b) => a.reading - b.reading);
+    
+    const candidats = population.sort((a, b) => b.reading - a.reading);
 
     const librariesGenerator = new LibrariesGenerator(
       this.books,
       this.libraries,
     );
+
     //Affecter les oeuvres aux bibliothèques
     librariesGenerator.generateAll();
 
+    console.log(`Oeuvres sans exemplaire.`);
+    console.log(`----------------------------------------`);
     for (const book of this.books) {
       let nb = this.libraries.reduce((a:number, l) => a + ((l.books.some(b => b.id == book.id)) ? 1 : 0), 0)
       if (nb==0) console.log(`${book.title} : ${nb} (${book.tags})`)

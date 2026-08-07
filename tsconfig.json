@@ -7,6 +7,7 @@
 
     "outDir": "dist",
     "rootDir": "src",
+    "sourceMap": true,
 
     "types": ["node"],
     "lib": ["ES2024"]

@@ -21,7 +21,8 @@ export class BorrowGenerator {
     dateDebut: Date = new Date(),
   ): Pret[] {
 
-    console.log('************');
+    console.log(`Prêts`)
+    console.log(`----------------------------------------`);
     const prets: Pret[] = [];
 
     /*
@@ -78,7 +79,8 @@ export class BorrowGenerator {
       );
     }
 
-    console.log(oeuvresLues.keys.length)
+    console.log(`Oeuvres lues: ${oeuvresLues.keys.length}`);
+
     let maintenant = new Date(dateDebut);
 
     for (let i = 0; i < nombrePrets; i++) {
