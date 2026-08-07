@@ -20,10 +20,10 @@ export class LibrariesRunner {
 
   constructor(private readonly graph: DirectedGraph) {}
 
-  public async load(seriesPath: string, booksPath: string, librariesPath: string): Promise<void> {
+  public load(seriesPath: string, booksPath: string, librariesPath: string): void {
     
-    this.series = await SeriesLoader.load(seriesPath);
-    this.books = await BooksLoader.load(booksPath);
+    this.series = SeriesLoader.load(seriesPath);
+    this.books = BooksLoader.load(booksPath);
     this.addBooks();
 
     this.libraries = JsonLoader.load(librariesPath, Library);

@@ -1,12 +1,11 @@
-import * as fs from 'fs/promises';
+import * as fs from 'fs';
 import { parse } from 'csv/sync';
 
 import { LastnameStat } from "../models/PersonStat.js";
-import { NOMEM } from 'dns';
 
 export class LastnameLoader {
-  static async load(path: string): Promise<LastnameStat[]> {
-    const contenu = await fs.readFile(path, 'utf-8');
+  static load(path: string): LastnameStat[] {
+    const contenu = fs.readFileSync(path, 'utf-8');
     
     const records = parse(contenu, {
       columns: true,           

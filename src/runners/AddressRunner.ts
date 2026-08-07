@@ -19,7 +19,7 @@ export class AddressRunner {
     private lon0 = -4,
   ) {}
 
-  public async load(voiePath: string, addressPath: string) {
+  public load(voiePath: string, addressPath: string) {
     this.voies = JsonLoader.load(voiePath, Voie);
     this.addVoies(this.voies);
 

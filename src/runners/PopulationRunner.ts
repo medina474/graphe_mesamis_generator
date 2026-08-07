@@ -23,14 +23,14 @@ export class PopulationRunner {
     this.pyramid = new AgePyramidStat([]);
   }
 
-  public async load(
+  public load(
     pyramidStatPath: string,
     firstnameStatPath: string,
     lastnameStatPath: string,
   ) {
     this.pyramid = AgePyramidLoader.load(pyramidStatPath);
     this.firstnames = FirstnameLoader.load(firstnameStatPath);
-    this.lastnames = await LastnameLoader.load(lastnameStatPath);
+    this.lastnames = LastnameLoader.load(lastnameStatPath);
   }
 
   public run(nb: number, minAge: number, maxAge = Number.MAX_SAFE_INTEGER): Person[] {

@@ -12,7 +12,7 @@ import { DirectedGraph } from "graphology";
 const graph: DirectedGraph = new DirectedGraph();
 
 const populationRunner = new PopulationRunner(graph);
-await populationRunner.load(
+populationRunner.load(
   "data/age-pyramid-guyane.json",
   "data/prenoms.json",
   "data/noms.csv",
@@ -30,11 +30,11 @@ membershipRunner.load("data/clubs.json");
 membershipRunner.run(population);
 
 const librariesRunner = new LibrariesRunner(graph);
-await librariesRunner.load("data/serie.csv", "data/books.csv", "data/libraries.json");
+librariesRunner.load("data/serie.csv", "data/books.csv", "data/libraries.json");
 librariesRunner.run(population.filter(p => p.age > 18));
 
 const addressRunner = new AddressRunner(graph);
-await addressRunner.load("data/voies.json", "data/adresses.csv");
+addressRunner.load("data/voies.json", "data/adresses.csv");
 addressRunner.run(population);
 
 const friendshipRunner = new FriendshipRunner(graph);
