@@ -62,7 +62,7 @@ export class FriendsGenerator {
         a.edges++;
         b.edges++;
 
-        console.log(`${idA} -> ${idB}`);
+        //console.log(`${idA} -> ${idB}`);
         this.graph.addEdge(idA, idB, {
           relation: "friends",
           category: "friends",

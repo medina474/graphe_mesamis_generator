@@ -33,7 +33,7 @@ export class PopulationRunner {
     this.lastnames = await LastnameLoader.load(lastnameStatPath);
   }
 
-  public run(minAge: number, maxAge = Number.MAX_SAFE_INTEGER): Person[] {
+  public run(nb: number, minAge: number, maxAge = Number.MAX_SAFE_INTEGER): Person[] {
     console.log(`----------------------------------------`);
     const generator = new PersonGenerator(
       this.pyramid,
@@ -43,7 +43,7 @@ export class PopulationRunner {
       maxAge,
     );
 
-    const population = generator.generateMany(250);
+    const population = generator.generateMany(nb);
 
     this.addPersons(population);
 
@@ -58,7 +58,11 @@ export class PopulationRunner {
       age: person.age,
       x: Math.random() * 100,
       y: Math.random() * 100,
-      label: `${person.firstname} ${person.lastname} ${person.age}`,
+      reading_orig: person.reading,
+      reading: person.reading,
+      wealth_orig: person.wealth,
+      wealth: person.wealth,
+      label: `${person.firstname} ${person.lastname} (${person.age})`,
       size: 3,
       color: person.gender === Gender.Male ? "#4A90E2" : "#FF69B4",
     });

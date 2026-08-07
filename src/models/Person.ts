@@ -44,7 +44,10 @@ export interface Person {
     spouse?: Person
     isMarried: boolean;
     isChild: boolean;
-
+    father?: Person;
+    mother?: Person;
+    children: Person[];
+     
     address?: Address
 
     clubs: Club[];

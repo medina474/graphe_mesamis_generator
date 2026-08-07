@@ -79,8 +79,7 @@ export class Random {
             u = Random.next();
         while (v === 0)
             v = Random.next();
-        const z = Math.sqrt(-2 * Math.log(u))
-            * Math.cos(2 * Math.PI * v);
+        const z = Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
         return mean + sigma * z;
     }
     /**
@@ -115,5 +114,13 @@ export class Random {
             throw new Error("Les paramètres alpha et beta doivent être strictement positifs");
         }
         return jstat.beta.sample(alpha, beta);
+    }
+    static around(x, y, radius) {
+        const angle = Math.random() * Math.PI * 2;
+        const distance = Math.random() * radius;
+        return {
+            x: x + Math.cos(angle) * distance,
+            y: y + Math.sin(angle) * distance,
+        };
     }
 }

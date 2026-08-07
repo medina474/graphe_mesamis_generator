@@ -73,6 +73,7 @@ export class PersonGenerator {
       sport: 0,
       music: 0,
       reading: 0,
+      children: [],
     } as Person;
 
     // Caractéristiques démographiques
@@ -90,15 +91,12 @@ export class PersonGenerator {
     // Caractéristiques sociales
 
     person.education = this.educationDistribution.sample(person);
-
     person.wealth = this.wealthDistribution.sample(person);
 
     // Centres d'intérêt
 
     person.sport = this.sportDistribution.sample(person);
-
     person.reading = this.readingDistribution.sample(person);
-
     person.music = this.musicDistribution.sample(person);
 
     return person;

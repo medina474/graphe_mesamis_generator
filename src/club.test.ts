@@ -24,6 +24,7 @@ describe("Club", () => {
           sport: 1,
           music: 0,
           reading: 0,
+          children: [],
           age: 0,
         } as Person;
     

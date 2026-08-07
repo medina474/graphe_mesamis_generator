@@ -40,7 +40,7 @@ export class AddressRunner {
         });
 
         const { x, y } = this.geoToGraph(p.address.lat, p.address.lon);
-        const position = Random.around(x, y, 0.5);
+        const position = Random.around(x, y, 0.25);
 
         this.graph.mergeNodeAttributes(p.id, {
           x: position.x,
@@ -99,8 +99,6 @@ export class AddressRunner {
       size: 1,
       color: "#540303",
     });
-
-    console.log(address);
 
     this.graph.addEdge(address.id, address.voie.id, {
       relation: "place",
