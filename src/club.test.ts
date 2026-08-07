@@ -25,7 +25,6 @@ describe("Club", () => {
           music: 0,
           reading: 0,
           age: 0,
-          isHoused: false,
         } as Person;
     
     person.tags.add("sport")

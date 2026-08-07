@@ -174,6 +174,9 @@ export class FamilyGenerator {
       });
 
       // Une personne ne peut être marié qu'une fois
+      epoux.spouse = femme
+      femme.spouse = epoux
+      
       epoux.isMarried = true;
       femme.isMarried = true;
       nombreCouples++;

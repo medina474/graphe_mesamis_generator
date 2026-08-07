@@ -40,11 +40,13 @@ export interface Person {
     music: number;
 
     edges: number;
+
+    spouse?: Person
     isMarried: boolean;
     isChild: boolean;
-    isHoused: boolean;
+
+    address?: Address
 
     clubs: Club[];
-    address?: Address;
     tags: Set<string>;
 }

@@ -18,7 +18,7 @@ export class FriendshipRunner {
     updatePersons(personnes: Person[]): void {
         for (const personne of personnes) {
             this.graph.mergeNodeAttributes(personne.id, {
-                size: Math.ceil(personne.edges / 1.0),
+                size: 1.0,
             });
         }
     }

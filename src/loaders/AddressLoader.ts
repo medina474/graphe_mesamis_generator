@@ -24,6 +24,7 @@ export class AddressLoader {
 
     for (const r of records) {
       const voie = voies.find((v) => v.id == r.id_voie);
+
       if (r.appartement == 1) {
         const id = `${r.id_voie}_${r.numero.padStart(5, "0")}`;
         result.push(

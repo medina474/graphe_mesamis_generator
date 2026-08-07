@@ -7,8 +7,8 @@ export class Address {
         public readonly numero:string,
         public readonly label:string,
         public readonly voie: Voie,
-        public readonly lat: number,
         public readonly lon: number,
+        public readonly lat: number,
     ) {
     }
 }
