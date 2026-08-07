@@ -72,7 +72,7 @@ export class LibrariesRunner {
 
   public run(population: Person[]): void {
     
-    const candidats = population.sort((a, b) => b.reading - a.reading);
+    const candidats = [...population.sort((a, b) => b.reading - a.reading)];
 
     const librariesGenerator = new LibrariesGenerator(
       this.books,
@@ -92,6 +92,13 @@ export class LibrariesRunner {
     let index = 1;
     for (const library of this.libraries.sort((a, b) => a.size - b.size)) {
       const candidat = candidats.splice(0, 1)[0];
+      
+      if (!candidat)  {
+        console.log(`Plus de candidat disponible: destruction de la bibliothèque ${library.id}`)
+        library.books.splice(0);
+        continue;
+      }
+
       for (const book of library.books) {
         this.addOwnership(book, candidat);
         const exemplaire = new Exemplaire(`X${index++}`, book, candidat);
