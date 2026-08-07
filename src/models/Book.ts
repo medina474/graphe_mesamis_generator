@@ -1,4 +1,14 @@
+import { SerializedError } from 'vitest';
 import { Person } from './Person.js';
+
+export class Serie {
+    constructor(
+        public readonly id:string,
+        public readonly label:string,
+        public readonly ordre:boolean,
+    ) {
+    }
+}
 
 export class Book {
     constructor(
@@ -6,6 +16,8 @@ export class Book {
         public readonly author:string,
         public readonly title:string,
         public readonly tags:string[],
+        public readonly serie?: Serie,
+        public readonly ordre?: number,
     ) {
     }
 }

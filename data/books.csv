@@ -46,11 +46,11 @@ B044,Gustave Flaubert,L'Éducation sentimentale,roman,,
 B045,Gustave Le Rouge,Le Mystérieux Docteur Cornélius,aventure|fantastique,,
 B046,Guy de Maupassant,Le Horla,fantastique,,
 B047,Guy de Maupassant,Bel-Ami,roman,,
-B048,Henri Vernes,La Vallée infernale,aventure,S003,
-B049,Henri Vernes,Le Sultan de Jarawak,aventure,S003,
-B050,Henri Vernes,La Couronne de Golconde,aventure,S003,
-B051,Henri Vernes,Les guerriers de l'Ombre Jaune,aventure,S003,
-B052,Henri Vernes,Terreur à la Manicouagan,aventure,S003,
+B048,Henri Vernes,La Vallée infernale,aventure,S003,1
+B049,Henri Vernes,Le Sultan de Jarawak,aventure,S003,8
+B050,Henri Vernes,La Couronne de Golconde,aventure,S003,33
+B051,Henri Vernes,Les guerriers de l'Ombre Jaune,aventure,S003,35
+B052,Henri Vernes,Terreur à la Manicouagan,aventure,S003,71
 B053,Honoré de Balzac,Le Père Goriot,roman,,
 B054,Honoré de Balzac,Eugénie Grandet,roman,,
 B055,Isaac Asimov,Fondation,science-fiction,,
@@ -58,12 +58,12 @@ B056,Isabelle Lesteplume,La guerre des ombres,romance|romantasy,,
 B057,J. K. Rowling,Harry Potter à l'école des sorciers,fantasy,S004,1
 B058,J.R.R. Tolkien,Le Seigneur des anneaux,fantasy,,
 B059,Jean Bruce,Atout coeur à Tokyo,espionnage,S002,
-B060,Jean Bruce,Gâchis à Karachi,espionnage,S002,
-B061,Jean Bruce,Les monstres du Holy Loch,espionnage,S002,
-B062,Jean Bruce,Cache cache au Cachemire,espionnage,S002,
-B063,Jean Bruce,Lila de Calcutta,espionnage,S002,
-B064,Jean Ray,La Chambre 113,policier|fantastique,S008,
-B065,Jean Ray,Le theatre de la peur,policier|fantastique,S008,
+B060,Jean Bruce,Gâchis à Karachi,espionnage,S002,65
+B061,Jean Bruce,Les monstres du Holy Loch,espionnage,S002,89
+B062,Jean Bruce,Cache cache au Cachemire,espionnage,S002,40
+B063,Jean Bruce,Lila de Calcutta,espionnage,S002,74
+B064,Jean Ray,La Chambre 113,policier|fantastique,S008,8
+B065,Jean Ray,La Maison du scorpion,policier|fantastique,S008,6
 B066,Jean-Christophe Grangé,Les Rivières pourpres,thriller,,
 B067,Jean-Christophe Grangé,Le Concile de pierre,thriller,,
 B068,Jeanne Bourin,La Chambre des dames,romance|historique,,
@@ -121,27 +121,45 @@ B119,Victor Hugo,Les Misérables,classique|historique,,
 B120,Victor Hugo,Notre-Dame de Paris,roman,,
 B121,Voltaire,Candide,conte philosophique,,
 B122,William Gibson,Neuromancien,science-fiction,,
-B123,Émile Zola,La Fortune des Rougon,roman,S001,1
-B124,Émile Zola,La Curée,S001,2
-B125,Émile Zola,Le Ventre de Paris,S001,3
-B126,Émile Zola,La Conquête de Plassans,S001,4
-B127,Émile Zola,La Faute de l'abbé Mouret,S001,5
-B128,Émile Zola,6,Son Excellence Eugène Rougon,S001,6
-B129,Émile Zola,8,Une page d'amour,S001,8
-B130,Émile Zola,9,Nana,S001,9
-B131,Émile Zola,10,Pot-Bouille,S001,10
-B132,Émile Zola,11,Au Bonheur des Dames,S001,11
-B133,Émile Zola,12,La Joie de vivre,S001,12
-B134,Émile Zola,14,L'Œuvre,S001,14
-B135,Émile Zola,15,La Terre,S001,15
-B136,Émile Zola,16,Le Rêve,S001,16
-B137,Émile Zola,17,La Bête humaine,S001,17
-B138,Émile Zola,18,L'Argent,S001,18
-B139,Émile Zola,19,La Débâcle,S001,19
-B140,Émile Zola,20,Le Docteur Pascal,S001,20
+B123,Émile Zola,La Fortune des Rougon,classique,S001,1
+B124,Émile Zola,La Curée,classique,S001,2
+B125,Émile Zola,Le Ventre de Paris,classique,S001,3
+B126,Émile Zola,La Conquête de Plassans,classique,S001,4
+B127,Émile Zola,La Faute de l'abbé Mouret,classique,S001,5
+B128,Émile Zola,Son Excellence Eugène Rougon,classique,S001,6
+B129,Émile Zola,Une page d'amour,classique,S001,8
+B130,Émile Zola,Nana,classique,S001,9
+B131,Émile Zola,Pot-Bouille,classique,S001,10
+B132,Émile Zola,Au Bonheur des Dames,classique,S001,11
+B133,Émile Zola,La Joie de vivre,classique,S001,12
+B134,Émile Zola,L'Œuvre,classique,S001,14
+B135,Émile Zola,La Terre,classique,S001,15
+B136,Émile Zola,Le Rêve,classique,S001,16
+B137,Émile Zola,La Bête humaine,classique,S001,17
+B138,Émile Zola,L'Argent,classique,S001,18
+B139,Émile Zola,La Débâcle,classique,S001,19
+B140,Émile Zola,Le Docteur Pascal,classique,S001,20
 B141,J. K. Rowling,Harry Potter et la Chambre des secrets,fantasy,S004,2
 B142,J. K. Rowling,Harry Potter et le Prisonnier d'Azkaban,fantasy,S004,3
 B143,J. K. Rowling,Harry Potter et la Coupe de feu,fantasy,S004,4
 B144,J. K. Rowling,Harry Potter et l'Ordre du Phénix,fantasy,S004,5
 B145,J. K. Rowling,Harry Potter et le Prince de sang-mêlé,fantasy,S004,6
 B146,J. K. Rowling,Harry Potter et les Reliques de la Mort,fantasy,S004,7
+B147,Christelle Dabos,Les Fiancés de l'hiver,fantasy,S006,1
+B148,Christelle Dabos,Les Disparus du Clairdelune,fantasy,S006,2
+B149,Christelle Dabos,La Mémoire de Babel,fantasy,S006,3
+B150,Christelle Dabos,La Tempête des échos,fantasy,S006,4
+B151,Frank Herbert,Dune,S005,science-fiction,1
+B152,Frank Herbert,Le Messie de Dunescience-fiction,,S005,2
+B153,Frank Herbert,Les Enfants de Dunescience-fiction,,S005,3
+B154,Frank Herbert,L'Empereur-Dieu de Dunescience-fiction,,S005,4
+B155,Frank Herbert,Les Hérétiques de Dunescience-fiction,,S005,5
+B156,Frank Herbert,La Maison des mèresscience-fiction,,S005,6
+B157,Stephen King,Le Pistolero,fantasy,S009,1
+B158,Stephen King,Les Trois Cartes,fantasy,S009,2
+B159,Stephen King,Terres perdues,fantasy,S009,3
+B160,Stephen King,Magie et Cristal,fantasy,S009,4
+B161,Stephen King,Les Loups de la Calla,fantasy,S009,5
+B162,Stephen King,Le Chant de Susannah,fantasy,S009,6
+B163,Stephen King,La Tour sombre,fantasy,S009,7
+B164,Stephen King,La Clé des vents,fantasy,S009,8

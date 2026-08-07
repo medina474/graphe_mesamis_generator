@@ -1,7 +1,8 @@
 import { DirectedGraph } from "graphology";
-import { Book, Exemplaire, Library } from "../models/Book.js";
+import { Serie, Book, Exemplaire, Library } from "../models/Book.js";
 import { LibrariesGenerator } from "../generators/LibrariesGenerator.js";
 import { BooksLoader } from "../loaders/BooksLoader.js";
+import { SeriesLoader } from "../loaders/SeriesLoader.js";
 import { JsonLoader } from "../loaders/JsonLoader.js";
 import { Person } from "../models/Person.js";
 import { BorrowGenerator, Pret } from "../generators/BorrowGenerator.js";
@@ -12,13 +13,16 @@ interface TagInfo {
 }
 
 export class LibrariesRunner {
+  private series: Serie[] = [];
   private books: Book[] = [];
   private libraries: Library[] = [];
   private exemplaires: Exemplaire[] = [];
 
   constructor(private readonly graph: DirectedGraph) {}
 
-  public async load(booksPath: string, librariesPath: string): Promise<void> {
+  public async load(seriesPath: string, booksPath: string, librariesPath: string): Promise<void> {
+    
+    this.series = await SeriesLoader.load(seriesPath);
     this.books = await BooksLoader.load(booksPath);
     this.addBooks();
 
