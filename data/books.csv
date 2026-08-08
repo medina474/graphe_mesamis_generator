@@ -27,8 +27,8 @@ B025,Colleen Hoover,Jamais plus,dark romance,,
 B026,Dan Brown,Da Vinci Code,thriller,,
 B027,Edmond Rostand,Cyrano de Bergerac,theatre,,
 B028,Émile Querbalec,Quitter les monts d'automne,science-fiction,,
-B029,Émile Zola,Germinal,roman,S001,13
-B030,Émile Zola,L'Assommoir,roman,S001,7
+B029,Émile Zola,Germinal,classique|roman naturaliste,S001,13
+B030,Émile Zola,L'Assommoir,classique|roman naturaliste,S001,7
 B031,Emily Brontë,Les Hauts de Hurle-Vent,roman|dark romance,,
 B032,François Rabelais,Gargantua,roman,,
 B033,Françoise Chandernagor,L'Allée du roi,romance|historique,,
@@ -121,24 +121,24 @@ B119,Victor Hugo,Les Misérables,classique|historique,,
 B120,Victor Hugo,Notre-Dame de Paris,roman,,
 B121,Voltaire,Candide,conte philosophique,,
 B122,William Gibson,Neuromancien,science-fiction,,
-B123,Émile Zola,La Fortune des Rougon,classique,S001,1
-B124,Émile Zola,La Curée,classique,S001,2
-B125,Émile Zola,Le Ventre de Paris,classique,S001,3
-B126,Émile Zola,La Conquête de Plassans,classique,S001,4
-B127,Émile Zola,La Faute de l'abbé Mouret,classique,S001,5
-B128,Émile Zola,Son Excellence Eugène Rougon,classique,S001,6
-B129,Émile Zola,Une page d'amour,classique,S001,8
-B130,Émile Zola,Nana,classique,S001,9
-B131,Émile Zola,Pot-Bouille,classique,S001,10
-B132,Émile Zola,Au Bonheur des Dames,classique,S001,11
-B133,Émile Zola,La Joie de vivre,classique,S001,12
-B134,Émile Zola,L'Œuvre,classique,S001,14
-B135,Émile Zola,La Terre,classique,S001,15
-B136,Émile Zola,Le Rêve,classique,S001,16
-B137,Émile Zola,La Bête humaine,classique,S001,17
-B138,Émile Zola,L'Argent,classique,S001,18
-B139,Émile Zola,La Débâcle,classique,S001,19
-B140,Émile Zola,Le Docteur Pascal,classique,S001,20
+B123,Émile Zola,La Fortune des Rougon,classique|roman naturaliste,S001,1
+B124,Émile Zola,La Curée,classique|roman naturaliste,S001,2
+B125,Émile Zola,Le Ventre de Paris,classique|roman naturaliste,S001,3
+B126,Émile Zola,La Conquête de Plassans,classique|roman naturaliste,S001,4
+B127,Émile Zola,La Faute de l'abbé Mouret,classique|roman naturaliste,S001,5
+B128,Émile Zola,Son Excellence Eugène Rougon,classique|roman naturaliste,S001,6
+B129,Émile Zola,Une page d'amour,classique|roman naturaliste,S001,8
+B130,Émile Zola,Nana,classique|roman naturaliste,S001,9
+B131,Émile Zola,Pot-Bouille,classique|roman naturaliste,S001,10
+B132,Émile Zola,Au Bonheur des Dames,classique|roman naturaliste,S001,11
+B133,Émile Zola,La Joie de vivre,classique|roman naturaliste,S001,12
+B134,Émile Zola,L'Œuvre,classique|roman naturaliste,S001,14
+B135,Émile Zola,La Terre,classique|roman naturaliste,S001,15
+B136,Émile Zola,Le Rêve,classique|roman naturaliste,S001,16
+B137,Émile Zola,La Bête humaine,classique|roman naturaliste,S001,17
+B138,Émile Zola,L'Argent,classique|roman naturaliste,S001,18
+B139,Émile Zola,La Débâcle,classique|roman naturaliste,S001,19
+B140,Émile Zola,Le Docteur Pascal,classique|roman naturaliste,S001,20
 B141,J. K. Rowling,Harry Potter et la Chambre des secrets,fantasy,S004,2
 B142,J. K. Rowling,Harry Potter et le Prisonnier d'Azkaban,fantasy,S004,3
 B143,J. K. Rowling,Harry Potter et la Coupe de feu,fantasy,S004,4

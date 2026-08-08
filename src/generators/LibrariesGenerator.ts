@@ -15,19 +15,24 @@ export class LibrariesGenerator {
     return this.tirerPondere(disponibles, library.tags, library.size);
   }
 
-  private peutAjouter(oeuvre: Book, resultat: Book[]): boolean {
-    const ordre = oeuvre.ordre;
+  /**
+   * Dernier tome d'une série
+   * @param oeuvre 
+   * @param resultat 
+   * @returns 
+   */
+  private premierTome(oeuvre: Book, resultat: Book[]): number {
 
     // L'oeuvre ne fait pas partie d'une série où l'ordre est important.
-    if (!oeuvre.serie || !oeuvre.serie.ordre || typeof ordre !== "number") {
-      return true;
+    if (!oeuvre.serie || !oeuvre.serie.ordre || typeof oeuvre.ordre !== "number") {
+      return -1;
     }
 
     const nbTomesPrecedents = resultat.filter(
-      (livre) => livre.serie?.id === oeuvre.serie!.id,
+      (book) => book.serie?.id === oeuvre.serie!.id,
     ).length;
 
-    return ordre === nbTomesPrecedents + 1;
+    return nbTomesPrecedents + 1;
   }
 
   private score(oeuvre: Book, tags: string[]): number {
@@ -42,6 +47,7 @@ export class LibrariesGenerator {
     const disponibles = [...oeuvres];
     const resultat: Book[] = [];
 
+    // Tant qu'il y a des livres disponibles et que la biblioyhèque n'est pas remplie
     while (disponibles.length > 0 && resultat.length < nombre) {
       const poids = disponibles.map((oeuvre) => this.score(oeuvre, tags));
 
@@ -53,15 +59,20 @@ export class LibrariesGenerator {
       for (; index < disponibles.length; index++) {
         tirage -= poids[index];
 
-        if (tirage < 0) {
+        if (tirage <= 0) {
           break;
         }
       }
 
-      const choix = disponibles[index];
-      if (!this.peutAjouter(choix, resultat)) {
-        disponibles.splice(index, 1);
-        continue;
+      let choix = disponibles[index];
+      const premierTome = this.premierTome(choix, resultat);
+
+      if (premierTome > 0 && choix.ordre != premierTome) {
+        // Le livre fait partie d'une série, il faut les ajouter dans l'ordre
+        // Il ne faut pas le retirer pour autant des livres disponibles
+        // Mais prendre le premier tome disponible de la série
+        index = disponibles.findIndex(d => d.serie?.id == choix.serie!.id && d.ordre == premierTome)!
+        choix = disponibles[index];
       }
 
       resultat.push(choix);

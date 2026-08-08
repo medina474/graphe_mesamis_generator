@@ -26,7 +26,7 @@ export class LibrariesRunner {
     
     // Importer les séries
     this.series = SeriesLoader.load(seriesPath);
-    this.addNodeSeries();
+    this.addNodesSeries();
 
     // Importer les livres (oeuvres)
     this.books = BooksLoader.load(booksPath, this.series);
@@ -54,7 +54,7 @@ export class LibrariesRunner {
       }
     }
 
-    this.addTags(uniqueTags);
+    this.addNodesTags(uniqueTags);
 
     for (const book of this.books) {
       for (const tag of book.tags) {
@@ -77,8 +77,9 @@ export class LibrariesRunner {
     }
 
     for (const book of this.books) {
-      const author = this.authors.find(a => a.label == )
-      this.writeBook(book, uniqueAuthors.get(book.author)!);
+      const author = this.authors.find(a => a.id == uniqueAuthors.get(book.author)!)
+      author?.books.push(book)
+      this.addEdgeWrite(book, author!);
       if (book.serie) {
         this.addEdgePartsOf(book)
       }
@@ -141,12 +142,12 @@ export class LibrariesRunner {
   }
 
   public update() {
-    this.updateLibrary();
-    this.updateSeries();
-    this.updateSeries();
+    this.updateNodesLibraries();
+    this.updateNodesSeries();
+    this.updateNodesAuthors();
   }
 
-  private updateAuthors() {
+  private updateNodesAuthors() {
     for (const author of this.authors) {
       this.graph.mergeNodeAttributes(author.id, {
         size: Math.ceil(author.books.length / 3.0),
@@ -154,7 +155,7 @@ export class LibrariesRunner {
     }
   }
 
-  private updateLibrary() {
+  private updateNodesLibraries() {
     for (const library of this.libraries) {
       this.graph.mergeNodeAttributes(library.id, {
         size: Math.ceil(library.books.length / 3.0),
@@ -162,7 +163,7 @@ export class LibrariesRunner {
     }
   }
 
-  private updateSeries() {
+  private updateNodesSeries() {
     for (const serie of this.series) {
       this.graph.mergeNodeAttributes(serie.id, {
         size: Math.ceil(serie.books.length / 3.0),
@@ -170,7 +171,7 @@ export class LibrariesRunner {
     }
   }
 
-  addNodeSeries() {
+  addNodesSeries() {
     for (const serie of this.series) {
       this.addNodeSerie(serie);
     }
@@ -189,11 +190,11 @@ export class LibrariesRunner {
 
   addBooks() {
     for (const book of this.books) {
-      this.addNodeBook(book);
+      this.addNodesBook(book);
     }
   }
 
-  addNodeBook(book: Book): void {
+  addNodesBook(book: Book): void {
     this.graph.addNode(book.id, {
       category: "book",
       label: book.title,
@@ -215,7 +216,7 @@ export class LibrariesRunner {
     });
   }
 
-  addTags(tags: Map<string, TagInfo>) {
+  addNodesTags(tags: Map<string, TagInfo>) {
     for (let tag of tags) {
       this.addNodeTag(tag);
     }
@@ -244,9 +245,10 @@ export class LibrariesRunner {
     });
   }
 
-  writeBook(book: Book, authorId: string): void {
-    this.graph.addEdge(authorId, book.id, {
-      relation: "write",
+  /* (Author) -- WRITE --> (Book) */
+  addEdgeWrite(book: Book, author: Author): void {
+    this.graph.addEdge(author.id, book.id, {
+      relation: "WRITE",
       category: "book",
       weight: 2,
     });
