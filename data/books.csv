@@ -30,7 +30,7 @@ B028,Émile Querbalec,Quitter les monts d'automne,science-fiction,,
 B029,Émile Zola,Germinal,classique|roman naturaliste,S001,13
 B030,Émile Zola,L'Assommoir,classique|roman naturaliste,S001,7
 B031,Emily Brontë,Les Hauts de Hurle-Vent,roman|dark romance,,
-B032,François Rabelais,Gargantua,roman,,
+B032,François Rabelais,Gargantua,classique,,
 B033,Françoise Chandernagor,L'Allée du roi,romance|historique,,
 B034,Françoise Sagan,Bonjour tristesse,roman,,
 B035,Fred Vargas,Pars vite et reviens tard,policier|enquête,,
@@ -38,7 +38,7 @@ B036,Fred Vargas,L'Homme aux cercles bleus,policier|enquête,,
 B037,Frédéric Beigbeder,L'Amour dure trois ans,romance|comédie,,
 B038,Gaston Leroux,Le Mystère de la chambre jaune,enquête,,
 B039,Gaston Leroux,Le Fantôme de l'Opéra,policier|mystère,,
-B040,George Orwell,1984,science-fiction,,
+B040,George Orwell,1984,science-fiction|dystopie,,
 B041,Georges Simenon,Le Chien jaune,policier,,
 B042,Georges Simenon,Pietr-le-Letton,policier,,
 B043,Gustave Flaubert,Madame Bovary,roman,,
@@ -92,7 +92,7 @@ B090,Molière,L'Avare,theatre,,
 B091,Neal Stephenson,L'Âge de diamant,science-fiction,,
 B092,Olivier Norek,Dans les brumes de Capelans,policier,,
 B093,Orson Scott Card,La Stratégie Ender,science-fiction,,
-B094,Paolo Bacigalupi,La Fille automate,science-fiction,,
+B094,Paolo Bacigalupi,La Fille automate,science-fiction|biopunk,,
 B095,Paul Féval,Le Bossu,aventure historique,,
 B096,Paul Féval,Les Habits noirs,aventure|policier,,
 B097,Pierre Bordage,Les guerriers du silence,science-fiction,,
@@ -107,7 +107,7 @@ B105,Richard Matheson,Je suis une Légende,science-fiction|vampire,,
 B106,Robin Hobb,L'Assassin royal,fantasy,,
 B107,Romain Benassaya,Pyramide,science-fiction,,
 B108,Romain Gary,La Promesse de l'aube,roman,,
-B109,Romain Lucazeau,Latium,science-fiction,,
+B109,Romain Lucazeau,Latium,science-fiction|robots,,
 B110,Sarah Rivens,Captive,dark romance,,
 B111,Stendhal,Le Rouge et le Noir,roman,,
 B112,Stendhal,La Chartreuse de Parme,roman,,
@@ -120,7 +120,7 @@ B118,Victor Dixen,Vampyria,bitlit|vampire,,
 B119,Victor Hugo,Les Misérables,classique|historique,,
 B120,Victor Hugo,Notre-Dame de Paris,roman,,
 B121,Voltaire,Candide,conte philosophique,,
-B122,William Gibson,Neuromancien,science-fiction,,
+B122,William Gibson,Neuromancien,science-fiction|cyberpunk,,
 B123,Émile Zola,La Fortune des Rougon,classique|roman naturaliste,S001,1
 B124,Émile Zola,La Curée,classique|roman naturaliste,S001,2
 B125,Émile Zola,Le Ventre de Paris,classique|roman naturaliste,S001,3
@@ -137,7 +137,7 @@ B135,Émile Zola,La Terre,classique|roman naturaliste,S001,15
 B136,Émile Zola,Le Rêve,classique|roman naturaliste,S001,16
 B137,Émile Zola,La Bête humaine,classique|roman naturaliste,S001,17
 B138,Émile Zola,L'Argent,classique|roman naturaliste,S001,18
-B139,Émile Zola,La Débâcle,classique|roman naturaliste,S001,19
+B139,Émile Zola,La Débâcle,classique|roman naturaliste|guerre,S001,19
 B140,Émile Zola,Le Docteur Pascal,classique|roman naturaliste,S001,20
 B141,J. K. Rowling,Harry Potter et la Chambre des secrets,fantasy,S004,2
 B142,J. K. Rowling,Harry Potter et le Prisonnier d'Azkaban,fantasy,S004,3
@@ -163,3 +163,20 @@ B161,Stephen King,Les Loups de la Calla,fantasy,S009,5
 B162,Stephen King,Le Chant de Susannah,fantasy,S009,6
 B163,Stephen King,La Tour sombre,fantasy,S009,7
 B164,Stephen King,La Clé des vents,fantasy,S009,8
+B165,Loïs McMaster Bujold,Opération Cay,science-fiction,S010,1
+B166,Loïs McMaster Bujold,Cordelia Vorkosigan,science-fiction,S010,2
+B167,Loïs McMaster Bujold,Barrayar,science-fiction,S010,3
+B168,Loïs McMaster Bujold,L'apprentissage du guerrier,science-fiction,S010,4
+B169,Loïs McMaster Bujold,Miles Vorkosigan,science-fiction,S010,5
+B170,Loïs McMaster Bujold,Cetaganda,science-fiction,S010,6
+B171,Loïs McMaster Bujold,Ethan d'Athos,science-fiction,S010,7
+B172,Loïs McMaster Bujold,Les Frontières de l'infini,science-fiction,S010,8
+B173,Loïs McMaster Bujold,Un Clone encombrant,science-fiction,S010,9
+B174,Loïs McMaster Bujold,La danse du miroir,science-fiction,S010,10
+B175,Loïs McMaster Bujold,Memory,science-fiction,S010,11
+B176,Loïs McMaster Bujold,Komarr,science-fiction,S010,12
+B177,Loïs McMaster Bujold,Ekaterin,science-fiction,S010,13
+B178,Loïs McMaster Bujold,Immunité diplomatique,science-fiction,S010,14
+B179,Loïs McMaster Bujold,Cryoburn,science-fiction,S010,15
+B180,Loïs McMaster Bujold,L'alliance,science-fiction,S010,16
+B181,Loïs McMaster Bujold,La Reine rouge,science-fiction,S010,17

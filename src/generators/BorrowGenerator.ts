@@ -38,10 +38,11 @@ export class BorrowGenerator {
      */
     const personneDisponibleLe = new Map<string, Date>();
 
-    /* Au départ le détenteur est le propriétaire du livre */
+    /* Au départ le détenteur est le propriétaire du livre 
+     * Le livre est immédiatement disponible
+     */
     for (const exemplaire of this.exemplaires) {
       detenteurs.set(exemplaire.id, exemplaire.proprietaire);
-
       exemplaireDisponibleLe.set(exemplaire.id, dateDebut);
     }
 
@@ -56,22 +57,26 @@ export class BorrowGenerator {
       oeuvresLues.get(exemplaire.proprietaire.id)!.add(exemplaire.oeuvre.id);
     }
 
-    let maintenant = new Date(dateDebut);
-    let currentDayStart = this.startOfDay(maintenant);
+    const maintenant = new Date(dateDebut);
+    let currentDay = this.startOfDay(maintenant);
+    let backupDay = this.startOfDay(maintenant);
     let pretsToday = 0;
     let dailyQuota = this.dailyPrets();
 
     while (prets.length < nombrePrets) {
-      const jourActuel = this.startOfDay(maintenant);
-
-      if (jourActuel.getTime() !== currentDayStart.getTime()) {
-        currentDayStart = jourActuel;
+      
+      // Nouveau jour, recalcul d'un quota pour la journée.
+      // Retour éventuels des prêts
+      if (currentDay.getTime() !== backupDay.getTime()) {
         pretsToday = 0;
         dailyQuota = this.dailyPrets();
       }
 
       if (pretsToday >= dailyQuota) {
-        maintenant = this.startOfNextDay(maintenant);
+        currentDay = this.startOfNextDay(currentDay);
+
+        
+
         continue;
       }
 
@@ -88,23 +93,9 @@ export class BorrowGenerator {
 
       if (candidats.length === 0) {
         console.log("Aucun candidat");
-        /*
-         * Aucun candidat maintenant.
-         *
-         * On avance jusqu'au prochain moment
-         * où une personne ou un exemplaire devient disponible.
-         */
-        const prochaineDate = this.prochaineDisponibilite(
-          maintenant,
-          personneDisponibleLe,
-          exemplaireDisponibleLe,
-        );
 
-        if (!prochaineDate) {
-          break;
-        }
-
-        maintenant = prochaineDate;
+        // Aucun candidat pour l'instant : avancer d'un jour.
+        currentDay = this.startOfNextDay(currentDay);
         continue;
       }
 
@@ -124,7 +115,7 @@ export class BorrowGenerator {
       if (!exemplaire) {
         /*
          * Cette personne ne dispose finalement d'aucun livre compatible.
-         * Attendre 7 jours pour être de nouveau disponible
+         * Elle doit attendre 7 jours pour être de nouveau disponible et laisser la chance à d'autres
          */
         personneDisponibleLe.set(emprunteur.id, new Date(maintenant.getTime() + Random.int(3, 8)));
         continue;
@@ -134,13 +125,13 @@ export class BorrowGenerator {
 
       const duree = this.dureePret();
 
-      const fin = new Date(maintenant.getTime() + duree);
+      const fin = new Date(currentDay.getTime() + duree);
 
       const pret: Pret = {
         exemplaire,
         preteur,
         emprunteur,
-        debut: new Date(maintenant),
+        debut: new Date(currentDay),
         fin,
       };
 
@@ -183,12 +174,6 @@ export class BorrowGenerator {
         emprunteur.interestTags[tag] =
           (emprunteur.interestTags[tag] ?? 0) + 1;
       }
-
-      /*
-       * On conserve le moment courant et on laisse
-       * la boucle avancer seulement si plus aucun
-       * candidat n'est disponible.
-       */
     }
 
     return prets;
@@ -333,21 +318,5 @@ export class BorrowGenerator {
   private dailyPrets(): number {
     return 2 + Math.floor(Math.random() * 4);
   }
-
-  private prochaineDisponibilite(
-    maintenant: Date,
-    personneDisponibleLe: Map<string, Date>,
-    exemplaireDisponibleLe: Map<string, Date>,
-  ): Date | null {
-    const dates = [
-      ...personneDisponibleLe.values(),
-      ...exemplaireDisponibleLe.values(),
-    ].filter((date) => date > maintenant);
-
-    if (dates.length === 0) {
-      return null;
-    }
-
-    return new Date(Math.min(...dates.map((date) => date.getTime())));
-  }
 }
+

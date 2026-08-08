@@ -28,7 +28,7 @@ export class LibrariesRunner {
 
   private exemplaires: Exemplaire[] = [];
 
-  constructor(private readonly graph: DirectedGraph) {}
+  constructor(private readonly graph: DirectedGraph, private readonly population: Person[]) {}
 
   public load(
     seriesPath: string,
@@ -146,10 +146,9 @@ export class LibrariesRunner {
       this.addManage(candidat, library);
 
       for (const book of library.books) {
-        candidat.books.push(book)
+        candidat.books.push(book);
         for (const tag of book.genres) {
-          candidat.interestTags[tag] =
-            (candidat.interestTags[tag] ?? 0) + 1;
+          candidat.interestTags[tag] = (candidat.interestTags[tag] ?? 0) + 1;
         }
       }
 
@@ -172,12 +171,13 @@ export class LibrariesRunner {
     /* Mettre à jour la propriété reading des personnes */
     let total = 0;
     for (const person of population) {
-      person.emprunts = this.prets.filter(p => p.emprunteur.id == person.id)
-      total = Math.max(total, person.books.length + person.emprunts.length)
+      person.emprunts = this.prets.filter((p) => p.emprunteur.id == person.id);
+      total = Math.max(total, person.books.length + person.emprunts.length);
     }
 
     for (const person of population) {
-      person.reading = total / person.books.length;
+      person.reading = (person.books.length + person.emprunts.length) / total;
+
     }
   }
 
@@ -186,6 +186,7 @@ export class LibrariesRunner {
     this.updateNodesSeries();
     this.updateNodesAuthors();
     this.updateNodesExemplaires();
+    this.updateNodesPerson();
   }
 
   /**
@@ -232,6 +233,17 @@ export class LibrariesRunner {
       this.graph.mergeNodeAttributes(exemplaire.id, {
         nbPrets: nb,
         size: Math.ceil(nb / 3.0),
+      });
+    }
+  }
+
+  /**
+   * La taille est proportionnelle au nombre de livres contenues dans la série
+   */
+  private updateNodesPerson() {
+    for (const person of this.population) {
+      this.graph.mergeNodeAttributes(person.id, {
+        reading: person.reading,
       });
     }
   }
