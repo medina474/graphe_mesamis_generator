@@ -26,7 +26,7 @@ export class Book {
         public readonly id:string,
         public readonly author:string,
         public readonly title:string,
-        public readonly tags:string[],
+        public readonly genres:string[],
         public readonly serie?: Serie,
         public readonly ordre?: number,
     ) {
@@ -59,7 +59,7 @@ export class Library {
     constructor(
         public readonly id:string,
         public readonly size:number,
-        public readonly tags:string[],
+        public readonly genres:string[],
     ) {
         this.books = []
     }

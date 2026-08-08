@@ -1,5 +1,6 @@
 import { Person } from "../models/Person.js";
 import { Exemplaire, Pret } from "../models/Book.js";
+import { Random } from "../stats/Random.js";
 
 export class BorrowGenerator {
   constructor(
@@ -122,11 +123,10 @@ export class BorrowGenerator {
 
       if (!exemplaire) {
         /*
-         * Cette personne ne dispose finalement
-         * d'aucun livre compatible.
+         * Cette personne ne dispose finalement d'aucun livre compatible.
+         * Attendre 7 jours pour être de nouveau disponible
          */
-        personneDisponibleLe.set(emprunteur.id, maintenant);
-
+        personneDisponibleLe.set(emprunteur.id, new Date(maintenant.getTime() + Random.int(3, 8)));
         continue;
       }
 
@@ -175,13 +175,13 @@ export class BorrowGenerator {
        */
       oeuvresLues.get(emprunteur.id)!.add(exemplaire.oeuvre.id);
 
-      if (!emprunteur.borrowedByGenre) {
-        emprunteur.borrowedByGenre = {};
+      if (!emprunteur.interestTags) {
+        emprunteur.interestTags = {};
       }
 
       for (const tag of exemplaire.oeuvre.tags) {
-        emprunteur.borrowedByGenre[tag] =
-          (emprunteur.borrowedByGenre[tag] ?? 0) + 1;
+        emprunteur.interestTags[tag] =
+          (emprunteur.interestTags[tag] ?? 0) + 1;
       }
 
       /*
@@ -282,7 +282,7 @@ export class BorrowGenerator {
     emprunteur: Person,
     exemplaire: Exemplaire,
   ): number {
-    const counts = emprunteur.borrowedByGenre ?? {};
+    const counts = emprunteur.interestTags ?? {};
 
     return (
       1 +

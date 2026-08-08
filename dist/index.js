@@ -20,7 +20,7 @@ membershipRunner.run(population);
 */
 const librariesRunner = new LibrariesRunner(graph);
 librariesRunner.load("data/serie.csv", "data/books.csv", "data/libraries.json");
-librariesRunner.run(500, population.filter(p => p.age > 18));
+librariesRunner.run(100, population.filter(p => p.age > 18));
 librariesRunner.update();
 /*
 const addressRunner = new AddressRunner(graph);

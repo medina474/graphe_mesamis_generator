@@ -39,7 +39,7 @@ export interface Person {
   reading: number;
   music: number;
 
-  borrowedByGenre: Record<string, number>;
+  interestTags: Record<string, number>;
 
   edges: number;
 

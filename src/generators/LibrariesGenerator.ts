@@ -9,10 +9,10 @@ export class LibrariesGenerator {
   generate(library: Library): Book[] {
     // Au moins un des tags fait partie de la liste des tags de la bibliothèque
     const disponibles = this.books.filter((oeuvre) =>
-      oeuvre.tags.some((tag) => library.tags.includes(tag)),
+      oeuvre.tags.some((tag) => library.genres.includes(tag)),
     );
 
-    return this.tirerPondere(disponibles, library.tags, library.size);
+    return this.tirerPondere(disponibles, library.genres, library.size);
   }
 
   /**
