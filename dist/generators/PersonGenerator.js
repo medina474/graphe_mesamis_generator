@@ -61,6 +61,7 @@ export class PersonGenerator {
             sport: 0,
             music: 0,
             reading: 0,
+            borrowedByGenre: {},
             children: [],
         };
         // Caractéristiques démographiques

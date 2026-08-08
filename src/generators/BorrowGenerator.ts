@@ -175,6 +175,15 @@ export class BorrowGenerator {
        */
       oeuvresLues.get(emprunteur.id)!.add(exemplaire.oeuvre.id);
 
+      if (!emprunteur.borrowedByGenre) {
+        emprunteur.borrowedByGenre = {};
+      }
+
+      for (const tag of exemplaire.oeuvre.tags) {
+        emprunteur.borrowedByGenre[tag] =
+          (emprunteur.borrowedByGenre[tag] ?? 0) + 1;
+      }
+
       /*
        * On conserve le moment courant et on laisse
        * la boucle avancer seulement si plus aucun
@@ -231,6 +240,7 @@ export class BorrowGenerator {
     exemplaireDisponibleLe: Map<string, Date>,
     oeuvresLues: Map<string, Set<string>>,
   ): Exemplaire | null {
+    // Les oeuvres sont celles qui sont disponibles à l'instant et qui n'ont pas été lues par l'emprunteur
     const candidats = this.exemplaires.filter((exemplaire) => {
       const disponible = exemplaireDisponibleLe.get(exemplaire.id)!;
 
@@ -245,7 +255,42 @@ export class BorrowGenerator {
       return null;
     }
 
-    return candidats[Math.floor(Math.random() * candidats.length)];
+    const poids = candidats.map((exemplaire) =>
+      this.scoreExemplaire(emprunteur, exemplaire),
+    );
+
+    const total = poids.reduce((somme, poids) => somme + poids, 0);
+    let tirage = Math.random() * total;
+    let index = 0;
+
+    for (; index < candidats.length; index++) {
+      tirage -= poids[index];
+
+      if (tirage < 0) {
+        break;
+      }
+    }
+
+    if (index >= candidats.length) {
+      index = candidats.length - 1;
+    }
+
+    return candidats[index];
+  }
+
+  private scoreExemplaire(
+    emprunteur: Person,
+    exemplaire: Exemplaire,
+  ): number {
+    const counts = emprunteur.borrowedByGenre ?? {};
+
+    return (
+      1 +
+      exemplaire.oeuvre.tags.reduce(
+        (somme, tag) => somme + (counts[tag] ?? 0),
+        0,
+      )
+    );
   }
 
   private tirerPersonne(personnes: Person[]): Person {
@@ -286,7 +331,7 @@ export class BorrowGenerator {
   }
 
   private dailyPrets(): number {
-    return 5 + Math.floor(Math.random() * 4);
+    return 2 + Math.floor(Math.random() * 4);
   }
 
   private prochaineDisponibilite(

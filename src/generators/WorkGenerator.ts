@@ -67,6 +67,8 @@ export class WorkGenerator {
           poste: emploi.poste,
         });
 
+        candidat.work = emploi.enterprise
+
         if (emploi.poste.richesse) {
           candidat.wealth = this.tirerRichesse(emploi.poste.richesse);
         }

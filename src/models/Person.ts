@@ -1,55 +1,59 @@
 import { Address } from "./Address.js";
 import { Club } from "./Club.js";
+import { Enterprise } from "./Enterprise.js";
 
 export enum Gender {
-    Male = "M",
-    Female = "F",
-    Unknown = "X"
+  Male = "M",
+  Female = "F",
+  Unknown = "X",
 }
 
 export enum Education {
-    None,
-    CAP,
-    Bac,
-    Superior
+  None,
+  CAP,
+  Bac,
+  Superior,
 }
 
 export enum Wealth {
-    Low,
-    Medium,
-    High,
-    VeryHigh
+  Low,
+  Medium,
+  High,
+  VeryHigh,
 }
 
 export interface Person {
+  id: string;
 
-    id: string;
+  firstname: string;
+  lastname: string;
 
-    firstname: string;
-    lastname: string;
+  gender: Gender;
 
-    gender: Gender;
+  age: number;
 
-    age: number;
+  education: Education;
+  wealth: Wealth;
 
-    education: Education;
-    wealth: Wealth;
+  sport: number;
+  reading: number;
+  music: number;
 
-    sport: number;
-    reading: number;
-    music: number;
+  borrowedByGenre: Record<string, number>;
 
-    edges: number;
+  edges: number;
 
-    spouse?: Person
-    isMarried: boolean;
-    isChild: boolean;
-    father?: Person;
-    mother?: Person;
-    children: Person[];
-     
-    address?: Address
+  spouse?: Person;
+  isMarried: boolean;
+  isChild: boolean;
+  father?: Person;
+  mother?: Person;
+  children: Person[];
 
-    clubs: Club[];
-    tags: Set<string>;
+  address?: Address;
+  work?: Enterprise;
+
+  clubs: Club[];
+  tags: Set<string>; /* tag pour les type de clubs auxquels la psonne est déja membre */
+
 }

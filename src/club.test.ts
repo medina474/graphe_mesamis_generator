@@ -26,6 +26,7 @@ describe("Club", () => {
           reading: 0,
           children: [],
           age: 0,
+          borrowedByGenre: {},
         } as Person;
     
     person.tags.add("sport")
