@@ -75,6 +75,8 @@ export class PersonGenerator {
       reading: 0,
       interestTags: {},
       children: [],
+      books: [],
+      emprunts: [],
     } as Person;
 
     // Caractéristiques démographiques

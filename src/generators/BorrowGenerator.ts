@@ -179,7 +179,7 @@ export class BorrowGenerator {
         emprunteur.interestTags = {};
       }
 
-      for (const tag of exemplaire.oeuvre.tags) {
+      for (const tag of exemplaire.oeuvre.genres) {
         emprunteur.interestTags[tag] =
           (emprunteur.interestTags[tag] ?? 0) + 1;
       }
@@ -286,8 +286,8 @@ export class BorrowGenerator {
 
     return (
       1 +
-      exemplaire.oeuvre.tags.reduce(
-        (somme, tag) => somme + (counts[tag] ?? 0),
+      exemplaire.oeuvre.genres.reduce(
+        (somme, genre) => somme + (counts[genre] ?? 0),
         0,
       )
     );

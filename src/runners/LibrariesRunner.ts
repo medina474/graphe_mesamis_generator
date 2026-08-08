@@ -146,6 +146,7 @@ export class LibrariesRunner {
       this.addManage(candidat, library);
 
       for (const book of library.books) {
+        candidat.books.push(book)
         for (const tag of book.genres) {
           candidat.interestTags[tag] =
             (candidat.interestTags[tag] ?? 0) + 1;
@@ -166,6 +167,17 @@ export class LibrariesRunner {
     this.prets = borrowGenerator.generer(nb, new Date(2026, 0, 1));
     for (const pret of this.prets) {
       this.addHold(pret);
+    }
+
+    /* Mettre à jour la propriété reading des personnes */
+    let total = 0;
+    for (const person of population) {
+      person.emprunts = this.prets.filter(p => p.emprunteur.id == person.id)
+      total = Math.max(total, person.books.length + person.emprunts.length)
+    }
+
+    for (const person of population) {
+      person.reading = total / person.books.length;
     }
   }
 

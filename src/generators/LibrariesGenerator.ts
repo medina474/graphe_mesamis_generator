@@ -9,7 +9,7 @@ export class LibrariesGenerator {
   generate(library: Library): Book[] {
     // Au moins un des tags fait partie de la liste des tags de la bibliothèque
     const disponibles = this.books.filter((oeuvre) =>
-      oeuvre.tags.some((tag) => library.genres.includes(tag)),
+      oeuvre.genres.some((genre) => library.genres.includes(genre)),
     );
 
     return this.tirerPondere(disponibles, library.genres, library.size);
@@ -35,8 +35,8 @@ export class LibrariesGenerator {
     return nbTomesPrecedents + 1;
   }
 
-  private score(oeuvre: Book, tags: string[]): number {
-    return oeuvre.tags.filter((tag) => tags.includes(tag)).length;
+  private score(oeuvre: Book, genres: string[]): number {
+    return oeuvre.genres.filter((genre) => genres.includes(genre)).length;
   }
 
   private tirerPondere(

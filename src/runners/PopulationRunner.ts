@@ -52,19 +52,23 @@ export class PopulationRunner {
 
   addPerson(person: Person): void {
     this.graph.addNode(person.id, {
-      category: "person",
+      category: "Person",
       firstname: person.firstname,
       lastname: person.lastname,
+      genre: person.gender,
       age: person.age,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
+      sport: person.sport,
       reading_orig: person.reading,
       reading: person.reading,
+      music: person.music,
+      education: person.education,
       wealth_orig: person.wealth,
       wealth: person.wealth,
       label: `${person.firstname} ${person.lastname} (${person.age})`,
-      size: 3,
       color: person.gender === Gender.Male ? "#4A90E2" : "#FF69B4",
+      size: 1,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
     });
   }
 

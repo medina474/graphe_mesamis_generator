@@ -27,6 +27,8 @@ describe("Club", () => {
           children: [],
           age: 0,
           interestTags: {},
+          books: [],
+          emprunts: [],
         } as Person;
     
     person.tags.add("sport")
