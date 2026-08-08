@@ -17,8 +17,8 @@ populationRunner.load(
   "data/prenoms.json",
   "data/noms.csv",
 );
-const population = populationRunner.run(2000, 1, 85);
-
+const population = populationRunner.run(20, 1, 85);
+/*
 const familyRunner = new FamilyRunner(graph);
 familyRunner.run(population);
 
@@ -28,14 +28,16 @@ workRunner.run(population);
 const membershipRunner = new MembershipRunner(graph);
 membershipRunner.load("data/clubs.json");
 membershipRunner.run(population);
-
+*/
 const librariesRunner = new LibrariesRunner(graph);
 librariesRunner.load("data/serie.csv", "data/books.csv", "data/libraries.json");
 librariesRunner.run(population.filter(p => p.age > 18));
-
+librariesRunner.update();
+/*
 const addressRunner = new AddressRunner(graph);
 addressRunner.load("data/voies.json", "data/adresses.csv");
 addressRunner.run(population);
+*/
 
 const friendshipRunner = new FriendshipRunner(graph);
 friendshipRunner.run(population);

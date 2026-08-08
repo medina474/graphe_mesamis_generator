@@ -1,11 +1,22 @@
-import { SerializedError } from 'vitest';
 import { Person } from './Person.js';
 
 export class Serie {
+    public readonly books: Book[] = [];
+
     constructor(
         public readonly id:string,
         public readonly label:string,
-        public readonly ordre:boolean,
+        public readonly ordre:boolean, /* L'ordre des tomes est important */
+    ) {
+    }
+}
+
+export class Author {
+    public readonly books: Book[] = [];
+
+    constructor(
+        public readonly id:string,
+        public readonly label:string
     ) {
     }
 }

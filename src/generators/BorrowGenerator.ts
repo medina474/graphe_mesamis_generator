@@ -153,7 +153,7 @@ export class BorrowGenerator {
       };
 
       console.log(
-        `${pret.exemplaire.id} | ${pret.exemplaire.oeuvre.title} : ${pret.preteur.firstname} -> ${pret.emprunteur.firstname}`,
+        `${pret.exemplaire.id} | ${pret.exemplaire.oeuvre.title} : ${pret.preteur.firstname} -> ${pret.emprunteur.firstname} ${maintenant.toLocaleDateString()}`,
       );
       prets.push(pret);
       pretsToday++;

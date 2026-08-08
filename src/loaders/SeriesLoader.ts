@@ -16,7 +16,7 @@ export class SeriesLoader {
         new Serie(
           record.id, 
           record.serie, 
-          record.ordre.trim(), 
+          record.ordre.trim() === '1', 
         )
       )
   }

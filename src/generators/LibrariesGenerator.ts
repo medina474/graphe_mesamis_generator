@@ -7,12 +7,27 @@ export class LibrariesGenerator {
   ) {}
 
   generate(library: Library): Book[] {
-    // Au moins un des tags fait partie de la luste des tags de la bibliothèque
+    // Au moins un des tags fait partie de la liste des tags de la bibliothèque
     const disponibles = this.books.filter((oeuvre) =>
       oeuvre.tags.some((tag) => library.tags.includes(tag)),
     );
 
     return this.tirerPondere(disponibles, library.tags, library.size);
+  }
+
+  private peutAjouter(oeuvre: Book, resultat: Book[]): boolean {
+    const ordre = oeuvre.ordre;
+
+    // L'oeuvre ne fait pas partie d'une série où l'ordre est important.
+    if (!oeuvre.serie || !oeuvre.serie.ordre || typeof ordre !== "number") {
+      return true;
+    }
+
+    const nbTomesPrecedents = resultat.filter(
+      (livre) => livre.serie?.id === oeuvre.serie!.id,
+    ).length;
+
+    return ordre === nbTomesPrecedents + 1;
   }
 
   private score(oeuvre: Book, tags: string[]): number {
@@ -43,7 +58,13 @@ export class LibrariesGenerator {
         }
       }
 
-      resultat.push(disponibles[index]);
+      const choix = disponibles[index];
+      if (!this.peutAjouter(choix, resultat)) {
+        disponibles.splice(index, 1);
+        continue;
+      }
+
+      resultat.push(choix);
       disponibles.splice(index, 1);
     }
 
