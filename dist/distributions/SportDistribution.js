@@ -13,3 +13,4 @@ export class SportDistribution {
         return sport;
     }
 }
+//# sourceMappingURL=SportDistribution.js.map

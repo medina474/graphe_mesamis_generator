@@ -11,3 +11,4 @@ export class GenderDistribution {
             : Gender.Female;
     }
 }
+//# sourceMappingURL=GenderDistribution.js.map

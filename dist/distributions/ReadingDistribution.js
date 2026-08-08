@@ -19,3 +19,4 @@ export class ReadingDistribution {
         return reading;
     }
 }
+//# sourceMappingURL=ReadingDistribution.js.map

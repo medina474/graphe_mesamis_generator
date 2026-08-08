@@ -18,3 +18,4 @@ export var Wealth;
     Wealth[Wealth["High"] = 2] = "High";
     Wealth[Wealth["VeryHigh"] = 3] = "VeryHigh";
 })(Wealth || (Wealth = {}));
+//# sourceMappingURL=Person.js.map

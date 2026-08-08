@@ -1,11 +1,11 @@
 import { DirectedGraph } from "graphology";
-import { Serie, Book, Exemplaire, Library, Author } from "../models/Book.js";
+import { Serie, Book, Exemplaire, Library, Author, Pret } from "../models/Book.js";
 import { LibrariesGenerator } from "../generators/LibrariesGenerator.js";
 import { BooksLoader } from "../loaders/BooksLoader.js";
 import { SeriesLoader } from "../loaders/SeriesLoader.js";
 import { JsonLoader } from "../loaders/JsonLoader.js";
 import { Person } from "../models/Person.js";
-import { BorrowGenerator, Pret } from "../generators/BorrowGenerator.js";
+import { BorrowGenerator } from "../generators/BorrowGenerator.js";
 
 interface TagInfo {
   id: string;
@@ -17,6 +17,7 @@ export class LibrariesRunner {
   private books: Book[] = [];
   private libraries: Library[] = [];
   private authors: Author[] = [];
+  private prets: Pret[] = [];
 
   private exemplaires: Exemplaire[] = [];
 
@@ -30,7 +31,7 @@ export class LibrariesRunner {
 
     // Importer les livres (oeuvres)
     this.books = BooksLoader.load(booksPath, this.series);
-    this.addBooks();
+    this.addNodesBooks();
 
     // importer la définition des bibliothèques
     this.libraries = JsonLoader.load(librariesPath, Library);
@@ -86,7 +87,7 @@ export class LibrariesRunner {
     }
   }
 
-  public run(population: Person[]): void {
+  public run(nb: number, population: Person[]): void {
     
     const librariesGenerator = new LibrariesGenerator(
       this.books,
@@ -95,7 +96,8 @@ export class LibrariesRunner {
 
     //Affecter les livres (oeuvres) aux bibliothèques
     librariesGenerator.generateAll();
-    
+
+    /*
     for (const l of this.libraries) {
       console.log(`${l.id}`)
       for (const b of l.books)
@@ -103,7 +105,8 @@ export class LibrariesRunner {
         console.log(`${b.title} ${b.serie?.label ?? ''} ${b.ordre}`)
       }
     }
-    
+    */
+
     console.log(`Oeuvres sans exemplaire.`);
     console.log(`----------------------------------------`);
     for (const book of this.books) {
@@ -124,8 +127,10 @@ export class LibrariesRunner {
         continue;
       }
 
+      this.addManage(candidat, library);
+    
       for (const book of library.books) {
-        this.addOwnership(book, candidat); // Redondant
+        //this.addOwnership(book, candidat); // Redondant
         const exemplaire = new Exemplaire(`X${index++}`, book, candidat);
         this.addNodeExemplaire(exemplaire);
         this.exemplaires.push(exemplaire);
@@ -135,8 +140,8 @@ export class LibrariesRunner {
     }
     
     const borrowGenerator = new BorrowGenerator(population, this.exemplaires);
-    const prets = borrowGenerator.generer(50, new Date(2026, 0, 1));
-    for(const pret of prets) {
+    this.prets = borrowGenerator.generer(nb, new Date(2026, 0, 1));
+    for(const pret of this.prets) {
       this.addHold(pret);
     }
   }
@@ -145,8 +150,12 @@ export class LibrariesRunner {
     this.updateNodesLibraries();
     this.updateNodesSeries();
     this.updateNodesAuthors();
+    this.updateNodesExemplaires();
   }
 
+  /**
+   * La taille est proportionnelle au nombre de livres écrits par l'auteur
+   */
   private updateNodesAuthors() {
     for (const author of this.authors) {
       this.graph.mergeNodeAttributes(author.id, {
@@ -155,6 +164,9 @@ export class LibrariesRunner {
     }
   }
 
+  /**
+   * La taille est proportionnelle au nombre de livres contenues dans la bibliothèque
+   */
   private updateNodesLibraries() {
     for (const library of this.libraries) {
       this.graph.mergeNodeAttributes(library.id, {
@@ -163,10 +175,25 @@ export class LibrariesRunner {
     }
   }
 
+  /**
+   * La taille est proportionnelle au nombre de livres contenues dans la série
+   */
   private updateNodesSeries() {
     for (const serie of this.series) {
       this.graph.mergeNodeAttributes(serie.id, {
         size: Math.ceil(serie.books.length / 3.0),
+      });
+    }
+  }
+
+  /**
+   * La taille est proportionnelle au nombre de prêts de l'exemplaire
+   */
+  private updateNodesExemplaires() {
+    for (const exemplaire of this.exemplaires) {
+      const nb = this.prets.filter(p => p.exemplaire.id == exemplaire.id).length
+      this.graph.mergeNodeAttributes(exemplaire.id, {
+        size: Math.ceil(nb / 3.0),
       });
     }
   }
@@ -188,13 +215,13 @@ export class LibrariesRunner {
     });
   }
 
-  addBooks() {
+  addNodesBooks() {
     for (const book of this.books) {
-      this.addNodesBook(book);
+      this.addNodeBook(book);
     }
   }
 
-  addNodesBook(book: Book): void {
+  addNodeBook(book: Book): void {
     this.graph.addNode(book.id, {
       category: "book",
       label: book.title,
@@ -254,6 +281,7 @@ export class LibrariesRunner {
     });
   }
 
+  /* (Book) -- PARTS-OF --> (Serie) */
   addEdgePartsOf(book: Book): void {
     this.graph.addEdge(book.id, book.serie!.id, {
       relation: "parts-of",
@@ -279,17 +307,29 @@ export class LibrariesRunner {
     });
   }
 
+  /* (Person) -- OWN --> (Book) 
+  Plutôt un exemplaire
+  */
   addOwnership(book: Book, person: Person): void {
     this.graph.addEdge(book.id, person.id, {
-      relation: "own",
+      relation: "OWN",
       category: "book",
       weight: 3,
     });
   }
 
   addHold(pret: Pret): void {
+    
     this.graph.addEdge(pret.exemplaire.id, pret.emprunteur.id, {
-      relation: "hold",
+      relation: "emprunte",
+      dateDebut: pret.debut,
+      dateFin: pret.fin,
+      category: "book",
+      weight: 3,
+    });
+
+    this.graph.addEdge(pret.exemplaire.id, pret.preteur.id, {
+      relation: "prete",
       dateDebut: pret.debut,
       dateFin: pret.fin,
       category: "book",
@@ -305,9 +345,19 @@ export class LibrariesRunner {
     });
   }
 
+  /* (Exemplaire) -- -−> (Library) */
   addBelongsTo(exemplaire: Exemplaire, library: Library): void {
     this.graph.addEdge(exemplaire.id, library.id, {
       relation: "belongs-to",
+      category: "book",
+      weight: 3,
+    });
+  }
+
+  /* (Person) -- -−> (Library) */
+  addManage(person: Person, library: Library): void {
+    this.graph.addEdge(person.id, library.id, {
+      relation: "MANAGE",
       category: "book",
       weight: 3,
     });

@@ -17,3 +17,4 @@ export class FirstnameDistribution {
         return Random.weightedChoice(values, weights);
     }
 }
+//# sourceMappingURL=FirstnameDistribution.js.map

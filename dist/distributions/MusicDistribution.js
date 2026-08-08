@@ -8,3 +8,4 @@ export class MusicDistribution {
         return Random.beta(2, 2);
     }
 }
+//# sourceMappingURL=MusicDistribution.js.map

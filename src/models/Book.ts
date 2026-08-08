@@ -42,6 +42,16 @@ export class Exemplaire {
     }
 }
 
+export class Pret {
+    constructor(
+        public readonly exemplaire: Exemplaire,
+        public readonly preteur: Person,
+        public readonly emprunteur: Person,
+        public readonly debut: Date,
+        public readonly fin: Date,
+    ) { }
+}
+
 export class Library {
 
     public books: Book[]

@@ -7,9 +7,9 @@ import { MembershipRunner } from "./runners/MembershipRunner.js";
 import { WorkRunner } from "./runners/WorkRunner.js";
 import { AddressRunner } from "./runners/AddressRunner.js";
 import { CsvPersonExporter } from "./exporters/CsvPersonExporter.js";
-import { DirectedGraph } from "graphology";
+import { MultiDirectedGraph } from "graphology";
 
-const graph: DirectedGraph = new DirectedGraph();
+const graph: MultiDirectedGraph = new MultiDirectedGraph();
 
 const populationRunner = new PopulationRunner(graph);
 populationRunner.load(
@@ -31,7 +31,7 @@ membershipRunner.run(population);
 */
 const librariesRunner = new LibrariesRunner(graph);
 librariesRunner.load("data/serie.csv", "data/books.csv", "data/libraries.json");
-librariesRunner.run(population.filter(p => p.age > 18));
+librariesRunner.run(500, population.filter(p => p.age > 18));
 librariesRunner.update();
 /*
 const addressRunner = new AddressRunner(graph);

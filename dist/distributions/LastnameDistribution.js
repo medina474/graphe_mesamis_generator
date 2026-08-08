@@ -10,3 +10,4 @@ export class LastnameDistribution {
         return Random.weightedChoice(this.values, this.weights);
     }
 }
+//# sourceMappingURL=LastnameDistribution.js.map

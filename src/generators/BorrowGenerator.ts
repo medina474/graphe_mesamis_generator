@@ -1,13 +1,5 @@
 import { Person } from "../models/Person.js";
-import { Exemplaire } from "../models/Book.js";
-
-export interface Pret {
-  readonly exemplaire: Exemplaire;
-  readonly preteur: Person;
-  readonly emprunteur: Person;
-  readonly debut: Date;
-  readonly fin: Date;
-}
+import { Exemplaire, Pret } from "../models/Book.js";
 
 export class BorrowGenerator {
   constructor(

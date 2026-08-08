@@ -15,3 +15,4 @@ export class AgeDistribution {
         return Random.weightedChoice(this.ages, this.weights);
     }
 }
+//# sourceMappingURL=AgeDistribution.js.map

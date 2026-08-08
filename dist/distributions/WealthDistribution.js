@@ -20,3 +20,4 @@ export class WealthDistribution {
         return wealth;
     }
 }
+//# sourceMappingURL=WealthDistribution.js.map

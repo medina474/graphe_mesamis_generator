@@ -16,3 +16,4 @@ export class EducationDistribution {
         ], probs);
     }
 }
+//# sourceMappingURL=EducationDistribution.js.map
