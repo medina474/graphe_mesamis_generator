@@ -6,11 +6,10 @@ export class FriendsGenerator {
   constructor(
     private readonly graph: UndirectedGraph,
     private readonly individus: Person[],
-    private readonly iterations = 5000,
   ) {}
 
-  generate(): void {
-    for (let k = 0; k < this.iterations; k++) {
+  generate(iterations: number): void {
+    for (let k = 0; k < iterations; k++) {
       const a = this.randomPerson();
       const b = this.preferentialPerson(a);
 
@@ -62,7 +61,7 @@ export class FriendsGenerator {
         a.edges++;
         b.edges++;
 
-        //console.log(`${idA} -> ${idB}`);
+        console.log(`${idA} -> ${idB}`);
         this.graph.addEdge(idA, idB, {
           relation: "friends",
           category: "friends",

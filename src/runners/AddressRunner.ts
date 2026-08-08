@@ -34,17 +34,19 @@ export class AddressRunner {
     for (const p of population) {
       if (p.address) {
         this.graph.addEdge(p.id, p.address.id, {
-          relation: "habite",
-          category: "address",
+          relation: "LIVE",
           weight: 1,
         });
 
+        // 20 mètres autour
         const { x, y } = this.geoToGraph(p.address.lat, p.address.lon);
-        const position = Random.around(x, y, 0.25);
+        const position = Random.around(x, y, 0.1);
 
         this.graph.mergeNodeAttributes(p.id, {
           x: position.x,
           y: position.y,
+          x_orig: position.x,
+          y_orig: position.y,
         });
       }
     }
@@ -73,7 +75,7 @@ export class AddressRunner {
 
   addVoie(voie: Voie): void {
     this.graph.addNode(voie.id, {
-      category: "address",
+      category: "Way",
       label: voie.voie,
       x: Math.random() * 100,
       y: Math.random() * 100,
@@ -92,17 +94,18 @@ export class AddressRunner {
     const { x, y } = this.geoToGraph(address.lat, address.lon);
 
     this.graph.addNode(address.id, {
-      category: "address",
+      category: "Address",
       label: address.label,
       x,
       y,
+      x_orig: x,
+      y_orig: y,
       size: 1,
       color: "#540303",
     });
 
     this.graph.addEdge(address.id, address.voie.id, {
       relation: "place",
-      category: "address",
       weight: 1,
     });
   }

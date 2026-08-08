@@ -11,7 +11,7 @@ export class FriendshipRunner {
     public run(population: Person[]):void {
         console.log(`----------------------------------------`);
         const friendsGenerator = new FriendsGenerator(this.graph, population);
-        friendsGenerator.generate();
+        friendsGenerator.generate(5000);
         this.updatePersons(population);
     }
 
