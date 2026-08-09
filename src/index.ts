@@ -28,9 +28,9 @@ const membershipRunner = new MembershipRunner(graph);
 membershipRunner.load("data/clubs.json");
 membershipRunner.run(population);
 
-const librariesRunner = new LibrariesRunner(graph);
+const librariesRunner = new LibrariesRunner(graph, population.filter(p => p.age > 18));
 librariesRunner.load("data/serie.csv", "data/books.csv", "data/libraries.json");
-librariesRunner.run(500, population.filter(p => p.age > 18));
+librariesRunner.run(500);
 librariesRunner.update();
 
 const addressRunner = new AddressRunner(graph);

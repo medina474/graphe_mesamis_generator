@@ -105,6 +105,12 @@ export class Random {
     return mean + sigma * z;
   }
 
+  static normalRange(min: number, max: number): number {
+    const mean = (min + max) / 2;
+    const sigma = (max - min) / (2 * 2.3);
+
+    return Random.normal(mean, sigma)
+  }
   /**
    *
    * @param a Simularité cosinus entre deux vecteurs.

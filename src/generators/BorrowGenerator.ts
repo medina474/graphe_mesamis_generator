@@ -38,22 +38,20 @@ export class BorrowGenerator {
      */
     const personneDisponibleLe = new Map<string, Date>();
 
-    /* Au départ le détenteur est le propriétaire du livre 
+    /* Au départ toutes les personnes sont disponibles
+     */
+    for (const personne of this.personnes) {
+      personneDisponibleLe.set(personne.id, dateDebut);
+      oeuvresLues.set(personne.id, new Set());
+    }
+
+    /* Au départ le détenteur est le propriétaire du livre
      * Le livre est immédiatement disponible
+     * Les propriétaires ont déja lus leurs livres
      */
     for (const exemplaire of this.exemplaires) {
       detenteurs.set(exemplaire.id, exemplaire.proprietaire);
       exemplaireDisponibleLe.set(exemplaire.id, dateDebut);
-    }
-
-    for (const personne of this.personnes) {
-      personneDisponibleLe.set(personne.id, dateDebut);
-
-      oeuvresLues.set(personne.id, new Set());
-    }
-
-    // Les propriétaires ont déja lus leurs livres
-    for (const exemplaire of this.exemplaires) {
       oeuvresLues.get(exemplaire.proprietaire.id)!.add(exemplaire.oeuvre.id);
     }
 
@@ -64,35 +62,57 @@ export class BorrowGenerator {
     let dailyQuota = this.dailyPrets();
 
     while (prets.length < nombrePrets) {
-      
-      // Nouveau jour, recalcul d'un quota pour la journée.
+
+      // Nouveau jour ? Recalcul d'un quota pour la journée.
       // Retour éventuels des prêts
       if (currentDay.getTime() !== backupDay.getTime()) {
         pretsToday = 0;
         dailyQuota = this.dailyPrets();
+        backupDay = this.startOfDay(currentDay); // Copie la valeur pas la référence
       }
 
+      // Quota journalier de prêts atteint ? On incrémente d'un jour
+      // Retour des exemplaires à leur propriétaire
       if (pretsToday >= dailyQuota) {
         currentDay = this.startOfNextDay(currentDay);
 
-        
+        for (const [idExemplaire, dateDisponible] of exemplaireDisponibleLe) {
+          if (dateDisponible <= currentDay) {
+            const exemplaire: Exemplaire = this.exemplaires.find(
+              (x) => idExemplaire == x.id,
+            )!;
+
+            if (detenteurs.get(idExemplaire) != exemplaire?.proprietaire && Math.random() < 0.25) {
+              console.log('Retour au propriétaire');
+              detenteurs.set(idExemplaire, exemplaire?.proprietaire);
+            }
+          }
+        }
 
         continue;
       }
+
+      /*
+       * Quels sont les exemplaires disponible aujourd'hui ?
+       */
+      const exemplairesDisponible = this.exemplaires.filter((exemplaire) => {
+        const dateDisponible = exemplaireDisponibleLe.get(exemplaire.id)!;
+        return (dateDisponible <= currentDay) 
+      });
 
       /*
        * On cherche les personnes qui peuvent
        * emprunter à cet instant.
        */
       const candidats = this.getCandidats(
-        maintenant,
+        currentDay,
         personneDisponibleLe,
-        exemplaireDisponibleLe,
+        exemplairesDisponible,
         oeuvresLues,
       );
 
       if (candidats.length === 0) {
-        console.log("Aucun candidat");
+        console.log("Aucun candidat disponible");
 
         // Aucun candidat pour l'instant : avancer d'un jour.
         currentDay = this.startOfNextDay(currentDay);
@@ -107,8 +127,7 @@ export class BorrowGenerator {
 
       const exemplaire = this.choisirExemplaire(
         emprunteur,
-        maintenant,
-        exemplaireDisponibleLe,
+        exemplairesDisponible,
         oeuvresLues,
       );
 
@@ -117,7 +136,10 @@ export class BorrowGenerator {
          * Cette personne ne dispose finalement d'aucun livre compatible.
          * Elle doit attendre 7 jours pour être de nouveau disponible et laisser la chance à d'autres
          */
-        personneDisponibleLe.set(emprunteur.id, new Date(maintenant.getTime() + Random.int(3, 8)));
+        personneDisponibleLe.set(
+          emprunteur.id,
+          new Date(currentDay.getTime() + Random.int(3, 8)),
+        );
         continue;
       }
 
@@ -136,7 +158,7 @@ export class BorrowGenerator {
       };
 
       console.log(
-        `${pret.exemplaire.id} | ${pret.exemplaire.oeuvre.title} : ${pret.preteur.firstname} -> ${pret.emprunteur.firstname} ${maintenant.toLocaleDateString()}`,
+        `${pret.exemplaire.id} | ${pret.exemplaire.oeuvre.title} : ${pret.preteur.firstname} -> ${pret.emprunteur.firstname} ${currentDay.toLocaleDateString()}`,
       );
       prets.push(pret);
       pretsToday++;
@@ -171,8 +193,7 @@ export class BorrowGenerator {
       }
 
       for (const tag of exemplaire.oeuvre.genres) {
-        emprunteur.interestTags[tag] =
-          (emprunteur.interestTags[tag] ?? 0) + 1;
+        emprunteur.interestTags[tag] = (emprunteur.interestTags[tag] ?? 0) + 1;
       }
     }
 
@@ -180,9 +201,9 @@ export class BorrowGenerator {
   }
 
   private getCandidats(
-    maintenant: Date,
+    currentDay: Date,
     personneDisponibleLe: Map<string, Date>,
-    exemplaireDisponibleLe: Map<string, Date>,
+    exemplairesDisponible: Exemplaire[],
     oeuvresLues: Map<string, Set<string>>,
   ): Person[] {
     return this.personnes.filter((personne) => {
@@ -191,7 +212,7 @@ export class BorrowGenerator {
        */
       const disponible = personneDisponibleLe.get(personne.id)!;
 
-      if (disponible > maintenant) {
+      if (disponible > currentDay) {
         return false;
       }
 
@@ -204,43 +225,33 @@ export class BorrowGenerator {
       }
 
       /*
-       * Elle doit avoir au moins un exemplaire
+       * Il doit y avoir au moins un exemplaire
        * disponible d'une œuvre qu'elle n'a jamais lue.
        */
-      return this.exemplaires.some((exemplaire) => {
-        const dateDisponible = exemplaireDisponibleLe.get(exemplaire.id)!;
-
-        if (dateDisponible > maintenant) {
-          return false;
-        }
-
-        return !oeuvresLues.get(personne.id)!.has(exemplaire.oeuvre.id);
+      const oeuvresLuesPerson = oeuvresLues.get(personne.id)!
+      return exemplairesDisponible.some((exemplaire) => {
+        return !oeuvresLuesPerson.has(exemplaire.oeuvre.id);
       });
     });
   }
 
   private choisirExemplaire(
     emprunteur: Person,
-    maintenant: Date,
-    exemplaireDisponibleLe: Map<string, Date>,
+    exemplairesDisponible: Exemplaire[],
     oeuvresLues: Map<string, Set<string>>,
   ): Exemplaire | null {
-    // Les oeuvres sont celles qui sont disponibles à l'instant et qui n'ont pas été lues par l'emprunteur
-    const candidats = this.exemplaires.filter((exemplaire) => {
-      const disponible = exemplaireDisponibleLe.get(exemplaire.id)!;
-
-      if (disponible > maintenant) {
-        return false;
-      }
-
-      return !oeuvresLues.get(emprunteur.id)!.has(exemplaire.oeuvre.id);
+    // Les oeuvres sont celles qui sont disponibles à l'instant 
+    // et qui n'ont pas été lues par l'emprunteur
+    const oeuvresLuesPerson = oeuvresLues.get(emprunteur.id)!
+    const selection = exemplairesDisponible.filter((exemplaire) => {
+      return !oeuvresLuesPerson.has(exemplaire.oeuvre.id);
     });
 
-    if (candidats.length === 0) {
+    if (selection.length === 0) {
       return null;
     }
 
-    const poids = candidats.map((exemplaire) =>
+    const poids = selection.map((exemplaire) =>
       this.scoreExemplaire(emprunteur, exemplaire),
     );
 
@@ -248,7 +259,7 @@ export class BorrowGenerator {
     let tirage = Math.random() * total;
     let index = 0;
 
-    for (; index < candidats.length; index++) {
+    for (; index < selection.length; index++) {
       tirage -= poids[index];
 
       if (tirage < 0) {
@@ -256,17 +267,14 @@ export class BorrowGenerator {
       }
     }
 
-    if (index >= candidats.length) {
-      index = candidats.length - 1;
+    if (index >= selection.length) {
+      index = selection.length - 1;
     }
 
-    return candidats[index];
+    return selection[index];
   }
 
-  private scoreExemplaire(
-    emprunteur: Person,
-    exemplaire: Exemplaire,
-  ): number {
+  private scoreExemplaire(emprunteur: Person, exemplaire: Exemplaire): number {
     const counts = emprunteur.interestTags ?? {};
 
     return (
@@ -301,7 +309,7 @@ export class BorrowGenerator {
     /*
      * Entre 7 et 21 jours inclus.
      */
-    const jours = 7 + Math.floor(Math.random() * 15);
+    const jours = Random.normalRange(7, 21);
 
     return jours * 24 * 60 * 60 * 1000;
   }
@@ -319,4 +327,3 @@ export class BorrowGenerator {
     return 2 + Math.floor(Math.random() * 4);
   }
 }
-

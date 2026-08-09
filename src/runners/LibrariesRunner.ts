@@ -99,7 +99,7 @@ export class LibrariesRunner {
     }
   }
 
-  public run(nb: number, population: Person[]): void {
+  public run(nb: number): void {
     const librariesGenerator = new LibrariesGenerator(
       this.books,
       this.libraries,
@@ -129,7 +129,7 @@ export class LibrariesRunner {
     }
 
     // Affecter une personne à une bibliothèque
-    const candidats = [...population.sort((a, b) => b.reading - a.reading)];
+    const candidats = [...this.population.sort((a, b) => b.reading - a.reading)];
 
     let index = 1;
     for (const library of this.libraries.sort((a, b) => b.size - a.size)) {
@@ -162,7 +162,7 @@ export class LibrariesRunner {
       }
     }
 
-    const borrowGenerator = new BorrowGenerator(population, this.exemplaires);
+    const borrowGenerator = new BorrowGenerator(this.population, this.exemplaires);
     this.prets = borrowGenerator.generer(nb, new Date(2026, 0, 1));
     for (const pret of this.prets) {
       this.addHold(pret);
@@ -170,14 +170,13 @@ export class LibrariesRunner {
 
     /* Mettre à jour la propriété reading des personnes */
     let total = 0;
-    for (const person of population) {
+    for (const person of this.population) {
       person.emprunts = this.prets.filter((p) => p.emprunteur.id == person.id);
       total = Math.max(total, person.books.length + person.emprunts.length);
     }
 
-    for (const person of population) {
+    for (const person of this.population) {
       person.reading = (person.books.length + person.emprunts.length) / total;
-
     }
   }
 
