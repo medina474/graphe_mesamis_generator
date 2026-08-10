@@ -148,7 +148,7 @@ export class LibrariesRunner {
       }
 
       for (const book of library.books) {
-        const exemplaire = new Copy(`X${index++}`, book, candidat);
+        const exemplaire = new Copy(`X${index++}`, book, candidat, candidat, new Date());
         this.addNodeCopy(exemplaire);
         this.exemplaires.push(exemplaire);
         this.addEdgeContain(library, exemplaire);

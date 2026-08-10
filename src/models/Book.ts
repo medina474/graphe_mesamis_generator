@@ -38,6 +38,8 @@ export class Copy {
         public readonly id: string,
         public readonly book: Book,
         public readonly owner: Person,
+        public holder: Person,
+        public availableAt: Date,
     ) {
     }
 }

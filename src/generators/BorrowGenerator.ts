@@ -14,14 +14,6 @@ export class BorrowGenerator {
     const prets: Loan[] = [];
 
     /*
-     * Détenteur actuel de chaque exemplaire.
-     *
-     * Au début de la simulation, le détenteur
-     * est le propriétaire.
-     */
-    const detenteurs = new Map<string, Person>();
-
-    /*
      * Historique des œuvres déjà lues par personne.
      */
     const oeuvresLues = new Map<string, Set<string>>();
@@ -50,7 +42,6 @@ export class BorrowGenerator {
      * Les propriétaires ont déja lus leurs livres
      */
     for (const exemplaire of this.copies) {
-      detenteurs.set(exemplaire.id, exemplaire.owner);
       exemplaireDisponibleLe.set(exemplaire.id, dateDebut);
       oeuvresLues.get(exemplaire.owner.id)!.add(exemplaire.book.id);
     }
@@ -83,9 +74,9 @@ export class BorrowGenerator {
               (x) => idExemplaire == x.id,
             )!;
 
-            if (detenteurs.get(idExemplaire) != exemplaire?.owner && Math.random() < 0.25) {
+            if (exemplaire.holder != exemplaire.owner && Math.random() < 0.25) {
               console.log('Retour au propriétaire');
-              detenteurs.set(idExemplaire, exemplaire?.owner);
+              exemplaire.holder = exemplaire.owner;
             }
           }
         }
@@ -144,7 +135,7 @@ export class BorrowGenerator {
         continue;
       }
 
-      const preteur = detenteurs.get(exemplaire.id)!;
+      const preteur = exemplaire.holder;
 
       const duree = this.dureePret();
 
@@ -152,7 +143,8 @@ export class BorrowGenerator {
 
       let pret_precedent = null
       if (preteur != exemplaire.owner) {
-        pret_precedent = detenteurs.get(exemplaire.id)
+        pret_precedent = prets.filter(p => p.exemplaire == exemplaire)!
+        .sort((a, b) => b.end.getTime() - a.end.getTime())[0]
       }
 
       const pret: Loan = {
@@ -173,7 +165,7 @@ export class BorrowGenerator {
       /*
        * Le livre change de détenteur.
        */
-      detenteurs.set(exemplaire.id, emprunteur);
+      exemplaire.holder = emprunteur;
 
       /*
        * Le livre ne pourra pas être repris
