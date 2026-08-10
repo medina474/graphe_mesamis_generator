@@ -15,7 +15,7 @@ describe("LibrariesGenerator", () => {
     const resultat = generator.generate(library);
 
     expect(resultat).toHaveLength(1);
-    expect(resultat[0].ordre).toBe(1);
+    expect(resultat[0].order).toBe(1);
     expect(resultat[0].id).toBe("B1");
   });
 

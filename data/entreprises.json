@@ -16,7 +16,7 @@
                 "name": "cadre"
             },
             {
-                "effectif": 25,
+                "effectif": 30,
                 "richesse": { "min": 0, "max": 1 },
                 "name": "ouvrier"
             }
@@ -105,7 +105,7 @@
                 "name": "cuisinier"
             },
             {
-                "effectif": 5,
+                "effectif": 6,
                 "richesse": { "min": 0, "max": 1 },
                 "name": "serveur"
             }
@@ -195,7 +195,7 @@
                 "name": "ouvrier spécialisé"
             },
             {
-                "effectif": 13,
+                "effectif": 20,
                 "richesse": { "min": 0, "max": 1 },
                 "name": "ouvrier"
             }

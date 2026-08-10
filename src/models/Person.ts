@@ -1,6 +1,6 @@
 import { Address } from "./Address.js";
 import { Club } from "./Club.js";
-import { Book, Pret } from "./Book.js";
+import { Book, Loan } from "./Book.js";
 import { Enterprise } from "./Enterprise.js";
 
 export enum Gender {
@@ -41,7 +41,7 @@ export interface Person {
   music: number;
 
   books: Book[];
-  emprunts: Pret[];
+  emprunts: Loan[];
 
   interestTags: Record<string, number>;
   

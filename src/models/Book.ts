@@ -6,7 +6,7 @@ export class Serie {
     constructor(
         public readonly id:string,
         public readonly label:string,
-        public readonly ordre:boolean, /* L'ordre des tomes est important */
+        public readonly ordered:boolean, /* L'ordre des tomes est important */
     ) {
     }
 }
@@ -16,7 +16,7 @@ export class Author {
 
     constructor(
         public readonly id:string,
-        public readonly label:string
+        public readonly name:string
     ) {
     }
 }
@@ -28,27 +28,28 @@ export class Book {
         public readonly title:string,
         public readonly genres:string[],
         public readonly serie?: Serie,
-        public readonly ordre?: number,
+        public readonly order?: number,
     ) {
     }
 }
 
-export class Exemplaire {
+export class Copy {
     constructor(
         public readonly id: string,
-        public readonly oeuvre: Book,
-        public readonly proprietaire: Person,
+        public readonly book: Book,
+        public readonly owner: Person,
     ) {
     }
 }
 
-export class Pret {
+export class Loan {
     constructor(
-        public readonly exemplaire: Exemplaire,
+        public readonly id: string,
+        public readonly exemplaire: Copy,
         public readonly preteur: Person,
         public readonly emprunteur: Person,
-        public readonly debut: Date,
-        public readonly fin: Date,
+        public readonly start: Date,
+        public readonly end: Date,
     ) { }
 }
 

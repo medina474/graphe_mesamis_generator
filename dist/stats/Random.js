@@ -82,6 +82,11 @@ export class Random {
         const z = Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
         return mean + sigma * z;
     }
+    static normalRange(min, max) {
+        const mean = (min + max) / 2;
+        const sigma = (max - min) / (2 * 2.3);
+        return Random.normal(mean, sigma);
+    }
     /**
      *
      * @param a Simularité cosinus entre deux vecteurs.

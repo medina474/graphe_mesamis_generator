@@ -24,5 +24,9 @@
   { "id":"L23", "taille": 12, "tags": ["classique", "romance"] },
   { "id":"L24", "taille": 18, "tags": ["aventure", "fantastique"] },
   { "id":"L25", "taille": 14, "tags": ["historique", "romance", "aventure"] },
-  { "id":"L26", "taille": 12, "tags": ["conte", "poesie"] }
+  { "id":"L26", "taille": 12, "tags": ["conte", "poesie"] },
+  { "id":"L27", "taille": 30, "tags": ["science-fiction"] },
+  { "id":"L28", "taille": 20, "tags": ["horreur"] },
+  { "id":"L29", "taille": 20, "tags": ["roman"] },
+  { "id":"L30", "taille": 20, "tags": ["policier"] }
 ]

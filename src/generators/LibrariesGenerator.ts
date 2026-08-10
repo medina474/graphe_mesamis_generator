@@ -24,7 +24,7 @@ export class LibrariesGenerator {
   private premierTome(oeuvre: Book, resultat: Book[]): number {
 
     // L'oeuvre ne fait pas partie d'une série où l'ordre est important.
-    if (!oeuvre.serie || !oeuvre.serie.ordre || typeof oeuvre.ordre !== "number") {
+    if (!oeuvre.serie || !oeuvre.serie.ordered || typeof oeuvre.order !== "number") {
       return -1;
     }
 
@@ -67,11 +67,11 @@ export class LibrariesGenerator {
       let choix = disponibles[index];
       const premierTome = this.premierTome(choix, resultat);
 
-      if (premierTome > 0 && choix.ordre != premierTome) {
+      if (premierTome > 0 && choix.order != premierTome) {
         // Le livre fait partie d'une série, il faut les ajouter dans l'ordre
         // Il ne faut pas le retirer pour autant des livres disponibles
         // Mais prendre le premier tome disponible de la série
-        index = disponibles.findIndex(d => d.serie?.id == choix.serie!.id && d.ordre == premierTome)!
+        index = disponibles.findIndex(d => d.serie?.id == choix.serie!.id && d.order == premierTome)!
         choix = disponibles[index];
       }
 

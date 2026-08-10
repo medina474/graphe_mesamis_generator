@@ -1,17 +1,17 @@
 import { Person } from "../models/Person.js";
-import { Exemplaire, Pret } from "../models/Book.js";
+import { Copy, Loan } from "../models/Book.js";
 import { Random } from "../stats/Random.js";
 
 export class BorrowGenerator {
   constructor(
     private readonly personnes: Person[],
-    private readonly exemplaires: Exemplaire[],
+    private readonly exemplaires: Copy[],
   ) {}
 
-  generer(nombrePrets: number, dateDebut: Date = new Date()): Pret[] {
+  generer(nombrePrets: number, dateDebut: Date = new Date()): Loan[] {
     console.log(`Prêts`);
     console.log(`----------------------------------------`);
-    const prets: Pret[] = [];
+    const prets: Loan[] = [];
 
     /*
      * Détenteur actuel de chaque exemplaire.
@@ -50,9 +50,9 @@ export class BorrowGenerator {
      * Les propriétaires ont déja lus leurs livres
      */
     for (const exemplaire of this.exemplaires) {
-      detenteurs.set(exemplaire.id, exemplaire.proprietaire);
+      detenteurs.set(exemplaire.id, exemplaire.owner);
       exemplaireDisponibleLe.set(exemplaire.id, dateDebut);
-      oeuvresLues.get(exemplaire.proprietaire.id)!.add(exemplaire.oeuvre.id);
+      oeuvresLues.get(exemplaire.owner.id)!.add(exemplaire.book.id);
     }
 
     const maintenant = new Date(dateDebut);
@@ -60,6 +60,7 @@ export class BorrowGenerator {
     let backupDay = this.startOfDay(maintenant);
     let pretsToday = 0;
     let dailyQuota = this.dailyPrets();
+    let index = 1;
 
     while (prets.length < nombrePrets) {
 
@@ -78,13 +79,13 @@ export class BorrowGenerator {
 
         for (const [idExemplaire, dateDisponible] of exemplaireDisponibleLe) {
           if (dateDisponible <= currentDay) {
-            const exemplaire: Exemplaire = this.exemplaires.find(
+            const exemplaire: Copy = this.exemplaires.find(
               (x) => idExemplaire == x.id,
             )!;
 
-            if (detenteurs.get(idExemplaire) != exemplaire?.proprietaire && Math.random() < 0.25) {
+            if (detenteurs.get(idExemplaire) != exemplaire?.owner && Math.random() < 0.25) {
               console.log('Retour au propriétaire');
-              detenteurs.set(idExemplaire, exemplaire?.proprietaire);
+              detenteurs.set(idExemplaire, exemplaire?.owner);
             }
           }
         }
@@ -149,16 +150,17 @@ export class BorrowGenerator {
 
       const fin = new Date(currentDay.getTime() + duree);
 
-      const pret: Pret = {
+      const pret: Loan = {
+        id: `loan_${index++}`,
         exemplaire,
         preteur,
         emprunteur,
-        debut: new Date(currentDay),
-        fin,
+        start: new Date(currentDay),
+        end: fin,
       };
 
       console.log(
-        `${pret.exemplaire.id} | ${pret.exemplaire.oeuvre.title} : ${pret.preteur.firstname} -> ${pret.emprunteur.firstname} ${currentDay.toLocaleDateString()}`,
+        `${pret.exemplaire.id} | ${pret.exemplaire.book.title} : ${pret.preteur.firstname} -> ${pret.emprunteur.firstname} ${currentDay.toLocaleDateString()}`,
       );
       prets.push(pret);
       pretsToday++;
@@ -186,13 +188,13 @@ export class BorrowGenerator {
        * Important : on utilise oeuvre.id et non
        * exemplaire.id.
        */
-      oeuvresLues.get(emprunteur.id)!.add(exemplaire.oeuvre.id);
+      oeuvresLues.get(emprunteur.id)!.add(exemplaire.book.id);
 
       if (!emprunteur.interestTags) {
         emprunteur.interestTags = {};
       }
 
-      for (const tag of exemplaire.oeuvre.genres) {
+      for (const tag of exemplaire.book.genres) {
         emprunteur.interestTags[tag] = (emprunteur.interestTags[tag] ?? 0) + 1;
       }
     }
@@ -203,7 +205,7 @@ export class BorrowGenerator {
   private getCandidats(
     currentDay: Date,
     personneDisponibleLe: Map<string, Date>,
-    exemplairesDisponible: Exemplaire[],
+    exemplairesDisponible: Copy[],
     oeuvresLues: Map<string, Set<string>>,
   ): Person[] {
     return this.personnes.filter((personne) => {
@@ -230,21 +232,21 @@ export class BorrowGenerator {
        */
       const oeuvresLuesPerson = oeuvresLues.get(personne.id)!
       return exemplairesDisponible.some((exemplaire) => {
-        return !oeuvresLuesPerson.has(exemplaire.oeuvre.id);
+        return !oeuvresLuesPerson.has(exemplaire.book.id);
       });
     });
   }
 
   private choisirExemplaire(
     emprunteur: Person,
-    exemplairesDisponible: Exemplaire[],
+    exemplairesDisponible: Copy[],
     oeuvresLues: Map<string, Set<string>>,
-  ): Exemplaire | null {
+  ): Copy | null {
     // Les oeuvres sont celles qui sont disponibles à l'instant 
     // et qui n'ont pas été lues par l'emprunteur
     const oeuvresLuesPerson = oeuvresLues.get(emprunteur.id)!
     const selection = exemplairesDisponible.filter((exemplaire) => {
-      return !oeuvresLuesPerson.has(exemplaire.oeuvre.id);
+      return !oeuvresLuesPerson.has(exemplaire.book.id);
     });
 
     if (selection.length === 0) {
@@ -274,12 +276,12 @@ export class BorrowGenerator {
     return selection[index];
   }
 
-  private scoreExemplaire(emprunteur: Person, exemplaire: Exemplaire): number {
+  private scoreExemplaire(emprunteur: Person, exemplaire: Copy): number {
     const counts = emprunteur.interestTags ?? {};
 
     return (
       1 +
-      exemplaire.oeuvre.genres.reduce(
+      exemplaire.book.genres.reduce(
         (somme, genre) => somme + (counts[genre] ?? 0),
         0,
       )

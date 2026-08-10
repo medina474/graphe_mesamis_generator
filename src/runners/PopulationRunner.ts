@@ -67,8 +67,8 @@ export class PopulationRunner {
       label: `${person.firstname} ${person.lastname} (${person.age})`,
       color: person.gender === Gender.Male ? "#4A90E2" : "#FF69B4",
       size: 1,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
+      x_orig: Math.random() * 100,
+      y_orig: Math.random() * 100,
     });
   }
 

@@ -2,10 +2,10 @@ import { DirectedGraph } from "graphology";
 import {
   Serie,
   Book,
-  Exemplaire,
+  Copy,
   Library,
   Author,
-  Pret,
+  Loan,
 } from "../models/Book.js";
 import { LibrariesGenerator } from "../generators/LibrariesGenerator.js";
 import { BooksLoader } from "../loaders/BooksLoader.js";
@@ -24,11 +24,14 @@ export class LibrariesRunner {
   private books: Book[] = [];
   private libraries: Library[] = [];
   private authors: Author[] = [];
-  private prets: Pret[] = [];
+  private prets: Loan[] = [];
 
-  private exemplaires: Exemplaire[] = [];
+  private exemplaires: Copy[] = [];
 
-  constructor(private readonly graph: DirectedGraph, private readonly population: Person[]) {}
+  constructor(
+    private readonly graph: DirectedGraph,
+    private readonly population: Person[],
+  ) {}
 
   public load(
     seriesPath: string,
@@ -48,16 +51,16 @@ export class LibrariesRunner {
     this.addNodesLibraries();
 
     // Extraire les tags depuis la liste des livres
-    const uniqueTags = new Map<string, TagInfo>();
+    const uniquesGenres = new Map<string, TagInfo>();
     let index = 1;
     for (const b of this.books) {
-      for (const tag of b.genres) {
-        const info = uniqueTags.get(tag);
+      for (const genre of b.genres) {
+        const info = uniquesGenres.get(genre);
 
         if (info) {
           info.count++;
         } else {
-          uniqueTags.set(tag, {
+          uniquesGenres.set(genre, {
             id: `T${index++}`,
             count: 1,
           });
@@ -65,11 +68,11 @@ export class LibrariesRunner {
       }
     }
 
-    this.addNodesTags(uniqueTags);
+    this.addNodesGenres(uniquesGenres);
 
     for (const book of this.books) {
       for (const tag of book.genres) {
-        this.tagBook(book.id, uniqueTags.get(tag)!.id);
+        this.addEdgeClassify(book, uniquesGenres.get(tag)!.id);
       }
     }
 
@@ -92,7 +95,7 @@ export class LibrariesRunner {
         (a) => a.id == uniqueAuthors.get(book.author)!,
       );
       author?.books.push(book);
-      this.addEdgeWrite(book, author!);
+      this.addEdgeWrite(author!, book);
       if (book.serie) {
         this.addEdgePartsOf(book);
       }
@@ -108,16 +111,6 @@ export class LibrariesRunner {
     //Affecter les livres (oeuvres) aux bibliothèques
     librariesGenerator.generateAll();
 
-    /*
-    for (const l of this.libraries) {
-      console.log(`${l.id}`)
-      for (const b of l.books)
-      {
-        console.log(`${b.title} ${b.serie?.label ?? ''} ${b.ordre}`)
-      }
-    }
-    */
-
     console.log(`Oeuvres sans exemplaire.`);
     console.log(`----------------------------------------`);
     for (const book of this.books) {
@@ -129,7 +122,9 @@ export class LibrariesRunner {
     }
 
     // Affecter une personne à une bibliothèque
-    const candidats = [...this.population.sort((a, b) => b.reading - a.reading)];
+    const candidats = [
+      ...this.population.sort((a, b) => b.reading - a.reading),
+    ];
 
     let index = 1;
     for (const library of this.libraries.sort((a, b) => b.size - a.size)) {
@@ -143,7 +138,7 @@ export class LibrariesRunner {
         continue;
       }
 
-      this.addManage(candidat, library);
+      this.addEdgeManage(candidat, library);
 
       for (const book of library.books) {
         candidat.books.push(book);
@@ -153,19 +148,21 @@ export class LibrariesRunner {
       }
 
       for (const book of library.books) {
-        //this.addOwnership(book, candidat); // Redondant
-        const exemplaire = new Exemplaire(`X${index++}`, book, candidat);
-        this.addNodeExemplaire(exemplaire);
+        const exemplaire = new Copy(`X${index++}`, book, candidat);
+        this.addNodeCopy(exemplaire);
         this.exemplaires.push(exemplaire);
-        this.addBelongsTo(exemplaire, library);
-        this.addPublication(exemplaire, book);
+        this.addEdgeContain(library, exemplaire);
+        this.addEdgeRepresent(exemplaire, book);
       }
     }
 
-    const borrowGenerator = new BorrowGenerator(this.population, this.exemplaires);
+    const borrowGenerator = new BorrowGenerator(
+      this.population,
+      this.exemplaires,
+    );
     this.prets = borrowGenerator.generer(nb, new Date(2026, 0, 1));
     for (const pret of this.prets) {
-      this.addHold(pret);
+      this.addLoan(pret);
     }
 
     /* Mettre à jour la propriété reading des personnes */
@@ -189,7 +186,9 @@ export class LibrariesRunner {
   }
 
   /**
-   * La taille est proportionnelle au nombre de livres écrits par l'auteur
+   * La taille est proportionnelle au nombre de livres écrits par l'auteur.
+   * Calculer la taille lors de la visualisation. Suivant la projection
+   * la taille est représenté par une propriété différente
    */
   private updateNodesAuthors() {
     for (const author of this.authors) {
@@ -200,7 +199,9 @@ export class LibrariesRunner {
   }
 
   /**
-   * La taille est proportionnelle au nombre de livres contenues dans la bibliothèque
+   * La taille est proportionnelle au nombre de livres contenues dans la bibliothèque.
+   * Calculer la taille lors de la visualisation. Suivant la projection
+   * la taille est représenté par une propriété différente
    */
   private updateNodesLibraries() {
     for (const library of this.libraries) {
@@ -211,7 +212,9 @@ export class LibrariesRunner {
   }
 
   /**
-   * La taille est proportionnelle au nombre de livres contenues dans la série
+   * La taille est proportionnelle au nombre de livres contenues dans la série.
+   * Calculer la taille lors de la visualisation. Suivant la projection
+   * la taille est représenté par une propriété différente
    */
   private updateNodesSeries() {
     for (const serie of this.series) {
@@ -223,6 +226,8 @@ export class LibrariesRunner {
 
   /**
    * La taille est proportionnelle au nombre de prêts de l'exemplaire
+   * Calculer la taille lors de la visualisation. Suivant la projection
+   * la taille est représenté par une propriété différente
    */
   private updateNodesExemplaires() {
     for (const exemplaire of this.exemplaires) {
@@ -238,6 +243,8 @@ export class LibrariesRunner {
 
   /**
    * La taille est proportionnelle au nombre de livres contenues dans la série
+   * Calculer la taille lors de la visualisation. Suivant la projection
+   * la taille est représenté par une propriété différente
    */
   private updateNodesPerson() {
     for (const person of this.population) {
@@ -255,10 +262,8 @@ export class LibrariesRunner {
 
   addNodeSerie(serie: Serie): void {
     this.graph.addNode(serie.id, {
-      category: "serie",
+      category: "Serie",
       label: serie.label,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
       size: 1,
       color: "#765959",
     });
@@ -272,38 +277,32 @@ export class LibrariesRunner {
 
   addNodeBook(book: Book): void {
     this.graph.addNode(book.id, {
-      category: "book",
+      category: "Book",
       label: book.title,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
       size: 1,
       color: "#ff3535",
     });
   }
 
-  addNodeExemplaire(exemplaire: Exemplaire): void {
+  addNodeCopy(exemplaire: Copy): void {
     this.graph.addNode(exemplaire.id, {
-      category: "exemplaire",
-      label: `${exemplaire.oeuvre.title} ${exemplaire.id}`,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
+      category: "Copy",
+      label: `${exemplaire.book.title} ${exemplaire.id}`,
       size: 1,
       color: "#77fffd",
     });
   }
 
-  addNodesTags(tags: Map<string, TagInfo>) {
-    for (let tag of tags) {
-      this.addNodeTag(tag);
+  addNodesGenres(genres: Map<string, TagInfo>) {
+    for (let genre of genres) {
+      this.addNodeGenre(genre);
     }
   }
 
-  addNodeTag(tag: [string, TagInfo]): void {
+  addNodeGenre(tag: [string, TagInfo]): void {
     this.graph.addNode(tag[1].id, {
-      category: "tag",
+      category: "Genre",
       label: tag[0],
-      x: Math.random() * 100,
-      y: Math.random() * 100,
       size: Math.ceil(tag[1].count / 3.0),
       color: "#940b0b",
     });
@@ -311,31 +310,11 @@ export class LibrariesRunner {
 
   addNodeAuthor(author: string, authorId: string): void {
     this.graph.addNode(authorId, {
-      category: "author",
+      category: "Author",
       label: author,
       name: author,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
       size: 1,
       color: "#35a8ff",
-    });
-  }
-
-  /* (Author) -- WRITE --> (Book) */
-  addEdgeWrite(book: Book, author: Author): void {
-    this.graph.addEdge(author.id, book.id, {
-      relation: "WRITE",
-      category: "book",
-      weight: 2,
-    });
-  }
-
-  /* (Book) -- PARTS-OF --> (Serie) */
-  addEdgePartsOf(book: Book): void {
-    this.graph.addEdge(book.id, book.serie!.id, {
-      relation: "parts-of",
-      category: "book",
-      weight: 3,
     });
   }
 
@@ -347,74 +326,137 @@ export class LibrariesRunner {
 
   addNodeLibrary(library: Library): void {
     this.graph.addNode(library.id, {
-      category: "library",
+      category: "Library",
       label: library.id,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
       size: 1,
       color: "#fff235",
     });
   }
 
-  /* (Person) -- OWN --> (Book) 
-  Plutôt un exemplaire
-  */
-  addOwnership(book: Book, person: Person): void {
-    this.graph.addEdge(book.id, person.id, {
-      relation: "OWN",
-      category: "book",
-      weight: 3,
+  /**
+   * (:Person)-[:REPRESENT]->(:Book)
+   * @param exemplaire
+   * @param book
+   */
+  addLoan(pret: Loan): void {
+
+    this.graph.addNode(pret.id, {
+      category: "Loan",
+      label: "Prêt",
+      size: 1,
+      color: "#503177",
+    });
+
+    this.addEdgeBorrow(pret.emprunteur, pret)
+    this.addEdgeLend(pret.preteur, pret)
+  }
+
+  /*
+   * Relations
+   */
+
+  /* (Author) -- WRITE --> (Book) */
+  addEdgeWrite(author: Author, book: Book): void {
+    this.graph.addEdge(author.id, book.id, {
+      relation: "WRITE",
+      weight: 1,
     });
   }
 
-  addHold(pret: Pret): void {
-    this.graph.addEdge(pret.exemplaire.id, pret.emprunteur.id, {
-      relation: "emprunte",
-      dateDebut: pret.debut,
-      dateFin: pret.fin,
-      category: "book",
-      weight: 3,
-    });
-
-    this.graph.addEdge(pret.exemplaire.id, pret.preteur.id, {
-      relation: "prete",
-      dateDebut: pret.debut,
-      dateFin: pret.fin,
-      category: "book",
-      weight: 3,
+  /**
+   * (:Book)-[:CLASSIFY-AS]->(:Genre)
+   * @param book
+   * @param genreId
+   */
+  addEdgeClassify(book: Book, genreId: string): void {
+    this.graph.addEdge(book.id, genreId, {
+      relation: "CLASSIFY-AS",
+      weight: 1,
     });
   }
 
-  addPublication(exemplaire: Exemplaire, book: Book): void {
+  /**
+   * (:Book)-[:PARTS-OF]->(:Serie)
+   * @param book
+   */
+  addEdgePartsOf(book: Book): void {
+    this.graph.addEdge(book.id, book.serie!.id, {
+      relation: "PARTS-OF",
+      weight: 1,
+    });
+  }
+
+  /**
+   * (:Copy)-[:REPRESENT]->(:Book)
+   * @param exemplaire
+   * @param book
+   */
+  addEdgeRepresent(exemplaire: Copy, book: Book): void {
     this.graph.addEdge(exemplaire.id, book.id, {
-      relation: "publication",
-      category: "book",
-      weight: 3,
+      relation: "REPRESENT",
+      weight: 1,
     });
   }
 
-  /* (Exemplaire) -- -−> (Library) */
-  addBelongsTo(exemplaire: Exemplaire, library: Library): void {
-    this.graph.addEdge(exemplaire.id, library.id, {
-      relation: "belongs-to",
-      category: "book",
-      weight: 3,
+  /**
+   * (:Library)-[:CONTAIN]->(:Copy)
+   * @param library
+   * @param exemplaire
+   */
+  addEdgeContain(library: Library, exemplaire: Copy): void {
+    this.graph.addEdge(library.id, exemplaire.id, {
+      relation: "CONTAIN",
+      weight: 1,
     });
   }
 
-  /* (Person) -- -−> (Library) */
-  addManage(person: Person, library: Library): void {
+  /**
+   * (:Person)-[:MANAGE]->(:Library)
+   * @param person
+   * @param library
+   */
+  addEdgeManage(person: Person, library: Library): void {
     this.graph.addEdge(person.id, library.id, {
       relation: "MANAGE",
-      category: "book",
-      weight: 3,
+      weight: 1,
     });
   }
 
-  tagBook(bookId: string, tagId: string): void {
-    this.graph.addEdge(bookId, tagId, {
-      relation: "tag",
-      category: "book",
+  addEdgeHold(person: Person, exemplaire: Copy) {
+    this.graph.addEdge(person.id, exemplaire.id, {
+      relation: "HOLD",
+      weight: 1,
+    });
+  }
+
+  addEdgeConcern(pret: Loan, exemplaire: Copy) {
+    this.graph.addEdge(pret.id, exemplaire.id, {
+      relation: "CONCERN",
+      weight: 1,
+    });
+  }
+
+  addEdgeLend(person: Person, pret: Loan) {
+    this.graph.addEdge(person.id, pret.id, {
+      relation: "LEND",
+      dateDebut: pret.start,
+      dateFin: pret.end,
+      weight: 1,
+    });
+  }
+
+  addEdgeBorrow(person: Person, pret: Loan) {
+    this.graph.addEdge(person.id, pret.id, {
+      relation: "BORROW",
+      dateDebut: pret.start,
+      dateFin: pret.end,
+      weight: 1,
+    });
+  }
+
+  addEdgeFollow(pret1: Loan, pret2: Loan) {
+    this.graph.addEdge(pret1.id, pret2.id, {
+      relation: "FOLLOW",
       weight: 1,
     });
   }
