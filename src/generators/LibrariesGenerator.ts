@@ -24,7 +24,7 @@ export class LibrariesGenerator {
   private premierTome(oeuvre: Book, resultat: Book[]): number {
 
     // L'oeuvre ne fait pas partie d'une série où l'ordre est important.
-    if (!oeuvre.serie || !oeuvre.serie.ordered || typeof oeuvre.order !== "number") {
+    if (!oeuvre.serie || !oeuvre.serie.isOrdered || typeof oeuvre.order !== "number") {
       return -1;
     }
 

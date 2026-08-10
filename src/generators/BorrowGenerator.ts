@@ -13,28 +13,10 @@ export class BorrowGenerator {
     console.log(`----------------------------------------`);
     const prets: Loan[] = [];
 
-    /*
-     * Historique des œuvres déjà lues par personne.
-     */
-    const oeuvresLues = new Map<string, Set<string>>();
-
-    /*
-     * Date à laquelle chaque exemplaire pourra
-     * être de nouveau prêté.
-     */
-    const exemplaireDisponibleLe = new Map<string, Date>();
-
-    /*
-     * Date à laquelle chaque personne pourra
-     * de nouveau emprunter.
-     */
-    const personneDisponibleLe = new Map<string, Date>();
-
     /* Au départ toutes les personnes sont disponibles
      */
     for (const personne of this.personnes) {
-      personneDisponibleLe.set(personne.id, dateDebut);
-      oeuvresLues.set(personne.id, new Set());
+      personne.availableAt = dateDebut;
     }
 
     /* Au départ le détenteur est le propriétaire du livre
@@ -42,8 +24,8 @@ export class BorrowGenerator {
      * Les propriétaires ont déja lus leurs livres
      */
     for (const exemplaire of this.copies) {
-      exemplaireDisponibleLe.set(exemplaire.id, dateDebut);
-      oeuvresLues.get(exemplaire.owner.id)!.add(exemplaire.book.id);
+      exemplaire.availableAt = dateDebut;
+      exemplaire.owner.oeuvresLues.add(exemplaire.book);
     }
 
     const maintenant = new Date(dateDebut);
@@ -54,7 +36,6 @@ export class BorrowGenerator {
     let index = 1;
 
     while (prets.length < nombrePrets) {
-
       // Nouveau jour ? Recalcul d'un quota pour la journée.
       // Retour éventuels des prêts
       if (currentDay.getTime() !== backupDay.getTime()) {
@@ -68,18 +49,18 @@ export class BorrowGenerator {
       if (pretsToday >= dailyQuota) {
         currentDay = this.startOfNextDay(currentDay);
 
-        for (const [idExemplaire, dateDisponible] of exemplaireDisponibleLe) {
-          if (dateDisponible <= currentDay) {
-            const exemplaire: Copy = this.copies.find(
-              (x) => idExemplaire == x.id,
-            )!;
-
-            if (exemplaire.holder != exemplaire.owner && Math.random() < 0.25) {
-              console.log('Retour au propriétaire');
-              exemplaire.holder = exemplaire.owner;
+        this.copies
+          .filter((c) => c.availableAt <= currentDay && c.holder != c.owner)
+          .forEach((c) => {
+            if (Math.random() < 0.25) {
+              console.log("Retour au propriétaire");
+              c.holder = c.owner;
+              let pret_precedent = this.dernierPret(prets, c);
+              if (pret_precedent) {
+                pret_precedent.returnedDate = currentDay;
+              }
             }
-          }
-        }
+          });
 
         continue;
       }
@@ -88,20 +69,14 @@ export class BorrowGenerator {
        * Quels sont les exemplaires disponible aujourd'hui ?
        */
       const exemplairesDisponible = this.copies.filter((exemplaire) => {
-        const dateDisponible = exemplaireDisponibleLe.get(exemplaire.id)!;
-        return (dateDisponible <= currentDay) 
+        return exemplaire.availableAt <= currentDay;
       });
 
       /*
        * On cherche les personnes qui peuvent
        * emprunter à cet instant.
        */
-      const candidats = this.getCandidats(
-        currentDay,
-        personneDisponibleLe,
-        exemplairesDisponible,
-        oeuvresLues,
-      );
+      const candidats = this.getCandidats(currentDay, exemplairesDisponible);
 
       if (candidats.length === 0) {
         console.log("Aucun candidat disponible");
@@ -120,7 +95,6 @@ export class BorrowGenerator {
       const exemplaire = this.choisirExemplaire(
         emprunteur,
         exemplairesDisponible,
-        oeuvresLues,
       );
 
       if (!exemplaire) {
@@ -128,9 +102,8 @@ export class BorrowGenerator {
          * Cette personne ne dispose finalement d'aucun livre compatible.
          * Elle doit attendre 7 jours pour être de nouveau disponible et laisser la chance à d'autres
          */
-        personneDisponibleLe.set(
-          emprunteur.id,
-          new Date(currentDay.getTime() + Random.int(3, 8)),
+        emprunteur.availableAt = new Date(
+          currentDay.getTime() + Random.int(3, 8),
         );
         continue;
       }
@@ -141,23 +114,23 @@ export class BorrowGenerator {
 
       const fin = new Date(currentDay.getTime() + duree);
 
-      let pret_precedent = null
+      let pret_precedent;
       if (preteur != exemplaire.owner) {
-        pret_precedent = prets.filter(p => p.exemplaire == exemplaire)!
-        .sort((a, b) => b.end.getTime() - a.end.getTime())[0]
+        pret_precedent = this.dernierPret(prets, exemplaire);
       }
 
       const pret: Loan = {
         id: `loan_${index++}`,
-        exemplaire,
+        copy: exemplaire,
         preteur,
         emprunteur,
         start: new Date(currentDay),
         end: fin,
+        previous: pret_precedent,
       };
 
       console.log(
-        `${pret.exemplaire.id} | ${pret.exemplaire.book.title} : ${pret.preteur.firstname} -> ${pret.emprunteur.firstname} ${currentDay.toLocaleDateString()}`,
+        `${pret.copy.id} | ${pret.copy.book.title} : ${pret.preteur.firstname} -> ${pret.emprunteur.firstname} ${currentDay.toLocaleDateString()}`,
       );
       prets.push(pret);
       pretsToday++;
@@ -171,13 +144,13 @@ export class BorrowGenerator {
        * Le livre ne pourra pas être repris
        * avant la fin du prêt.
        */
-      exemplaireDisponibleLe.set(exemplaire.id, fin);
+      exemplaire.availableAt = fin;
 
       /*
        * L'emprunteur ne pourra pas emprunter
        * un autre livre avant la fin de celui-ci.
        */
-      personneDisponibleLe.set(emprunteur.id, fin);
+      emprunteur.availableAt = fin;
 
       /*
        * L'œuvre est maintenant considérée comme lue.
@@ -185,7 +158,7 @@ export class BorrowGenerator {
        * Important : on utilise oeuvre.id et non
        * exemplaire.id.
        */
-      oeuvresLues.get(emprunteur.id)!.add(exemplaire.book.id);
+      emprunteur.oeuvresLues.add(exemplaire.book);
 
       if (!emprunteur.interestTags) {
         emprunteur.interestTags = {};
@@ -201,17 +174,13 @@ export class BorrowGenerator {
 
   private getCandidats(
     currentDay: Date,
-    personneDisponibleLe: Map<string, Date>,
     exemplairesDisponible: Copy[],
-    oeuvresLues: Map<string, Set<string>>,
   ): Person[] {
     return this.personnes.filter((personne) => {
       /*
        * La personne doit avoir terminé son prêt précédent.
        */
-      const disponible = personneDisponibleLe.get(personne.id)!;
-
-      if (disponible > currentDay) {
+      if (personne.availableAt > currentDay) {
         return false;
       }
 
@@ -227,9 +196,8 @@ export class BorrowGenerator {
        * Il doit y avoir au moins un exemplaire
        * disponible d'une œuvre qu'elle n'a jamais lue.
        */
-      const oeuvresLuesPerson = oeuvresLues.get(personne.id)!
       return exemplairesDisponible.some((exemplaire) => {
-        return !oeuvresLuesPerson.has(exemplaire.book.id);
+        return !personne.oeuvresLues.has(exemplaire.book);
       });
     });
   }
@@ -237,13 +205,11 @@ export class BorrowGenerator {
   private choisirExemplaire(
     emprunteur: Person,
     exemplairesDisponible: Copy[],
-    oeuvresLues: Map<string, Set<string>>,
   ): Copy | null {
-    // Les oeuvres sont celles qui sont disponibles à l'instant 
+    // Les oeuvres sont celles qui sont disponibles à l'instant
     // et qui n'ont pas été lues par l'emprunteur
-    const oeuvresLuesPerson = oeuvresLues.get(emprunteur.id)!
     const selection = exemplairesDisponible.filter((exemplaire) => {
-      return !oeuvresLuesPerson.has(exemplaire.book.id);
+      return !emprunteur.oeuvresLues.has(exemplaire.book);
     });
 
     if (selection.length === 0) {
@@ -311,6 +277,13 @@ export class BorrowGenerator {
     const jours = Random.normalRange(7, 21);
 
     return jours * 24 * 60 * 60 * 1000;
+  }
+
+  private dernierPret(prets: Loan[], exemplaire: Copy): Loan | undefined {
+    const finds = prets
+      .filter((p) => p.copy == exemplaire)
+      .sort((a, b) => b.end.getTime() - a.end.getTime());
+    return finds.length > 0 ? finds[0] : undefined;
   }
 
   private startOfDay(date: Date): Date {

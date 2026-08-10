@@ -41,7 +41,8 @@ export class Person {
 
   books: Book[] = [];
   emprunts: Loan[] = [];
-
+  availableAt: Date;
+  oeuvresLues: Set<Book>;
   interestTags: Record<string, number>;
   
   edges: number = 0;
@@ -60,6 +61,8 @@ export class Person {
   constructor(public readonly id: string) {
     this.tags = new Set<string>();
     this.interestTags = {};
+    this.availableAt = new Date()
+    this.oeuvresLues = new Set<Book>;
   }
 
   public isMarried(): boolean {

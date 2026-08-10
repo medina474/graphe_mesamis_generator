@@ -267,7 +267,10 @@ export class LibrariesRunner {
 
     this.addEdgeBorrow(pret.emprunteur, pret)
     this.addEdgeLend(pret.preteur, pret)
-    this.addEdgeConcern(pret, pret.exemplaire)
+    this.addEdgeConcern(pret, pret.copy)
+    if (pret.previous) {
+      this.addEdgeFollow(pret, pret.previous)
+    }
   }
 
   /*

@@ -6,7 +6,7 @@ export class Serie {
     constructor(
         public readonly id:string,
         public readonly label:string,
-        public readonly ordered:boolean, /* L'ordre des tomes est important */
+        public readonly isOrdered:boolean, /* L'ordre des tomes est important */
     ) {
     }
 }
@@ -47,11 +47,13 @@ export class Copy {
 export class Loan {
     constructor(
         public readonly id: string,
-        public readonly exemplaire: Copy,
+        public readonly copy: Copy,
         public readonly preteur: Person,
         public readonly emprunteur: Person,
         public readonly start: Date,
         public readonly end: Date,
+        public readonly previous?: Loan,
+        public returnedDate?: Date,
     ) { }
 }
 

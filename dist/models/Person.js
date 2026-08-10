@@ -31,6 +31,8 @@ export class Person {
     music = 0;
     books = [];
     emprunts = [];
+    availableAt;
+    oeuvresLues;
     interestTags;
     edges = 0;
     spouse;
@@ -45,6 +47,8 @@ export class Person {
         this.id = id;
         this.tags = new Set();
         this.interestTags = {};
+        this.availableAt = new Date();
+        this.oeuvresLues = new Set;
     }
     isMarried() {
         return this.spouse != null;
