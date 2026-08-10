@@ -5,7 +5,7 @@ import { Random } from "../stats/Random.js";
 export class BorrowGenerator {
   constructor(
     private readonly personnes: Person[],
-    private readonly exemplaires: Copy[],
+    private readonly copies: Copy[],
   ) {}
 
   generer(nombrePrets: number, dateDebut: Date = new Date()): Loan[] {
@@ -49,7 +49,7 @@ export class BorrowGenerator {
      * Le livre est immédiatement disponible
      * Les propriétaires ont déja lus leurs livres
      */
-    for (const exemplaire of this.exemplaires) {
+    for (const exemplaire of this.copies) {
       detenteurs.set(exemplaire.id, exemplaire.owner);
       exemplaireDisponibleLe.set(exemplaire.id, dateDebut);
       oeuvresLues.get(exemplaire.owner.id)!.add(exemplaire.book.id);
@@ -79,7 +79,7 @@ export class BorrowGenerator {
 
         for (const [idExemplaire, dateDisponible] of exemplaireDisponibleLe) {
           if (dateDisponible <= currentDay) {
-            const exemplaire: Copy = this.exemplaires.find(
+            const exemplaire: Copy = this.copies.find(
               (x) => idExemplaire == x.id,
             )!;
 
@@ -96,7 +96,7 @@ export class BorrowGenerator {
       /*
        * Quels sont les exemplaires disponible aujourd'hui ?
        */
-      const exemplairesDisponible = this.exemplaires.filter((exemplaire) => {
+      const exemplairesDisponible = this.copies.filter((exemplaire) => {
         const dateDisponible = exemplaireDisponibleLe.get(exemplaire.id)!;
         return (dateDisponible <= currentDay) 
       });
@@ -149,6 +149,11 @@ export class BorrowGenerator {
       const duree = this.dureePret();
 
       const fin = new Date(currentDay.getTime() + duree);
+
+      let pret_precedent = null
+      if (preteur != exemplaire.owner) {
+        pret_precedent = detenteurs.get(exemplaire.id)
+      }
 
       const pret: Loan = {
         id: `loan_${index++}`,

@@ -110,7 +110,7 @@ export class FamilyGenerator {
 
     // Chercher des femmes non mariées
     const femmes = this.femmes.filter(
-      (f) => f.isMarried === false && f.age >= minAge && f.age < maxAge,
+      (f) => f.isMarried() === false && f.age >= minAge && f.age < maxAge,
     );
 
     console.log(`Nombre de femmes dans la population : ${femmes.length}`);
@@ -178,13 +178,10 @@ export class FamilyGenerator {
       // Une personne ne peut être marié qu'une fois
       epoux.spouse = femme
       femme.spouse = epoux
-      
-      epoux.isMarried = true;
-      femme.isMarried = true;
       nombreCouples++;
     }
 
-    const celibataires = femmes.filter((f) => !f.isMarried).length;
+    const celibataires = femmes.filter((f) => !f.isMarried()).length;
 
     const tauxCelibataires = celibataires / femmes.length;
 
@@ -236,7 +233,6 @@ export class FamilyGenerator {
       for (const enfant of enfants) {
         console.log(`* ${enfant.firstname} (${enfant.age} ans)`);
 
-        enfant.isChild = true;
         enfant.lastname = epoux.lastname;
         enfant.father = epoux
         enfant.mother = femme;

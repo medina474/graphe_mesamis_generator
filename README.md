@@ -20,7 +20,7 @@ Relations
 (:Book)-[:CLASSIFY-AS]->(:Genre)
 (:Book)-[:PARTS-OF]->(:Serie)
 
-(:Copy)-[:REPRESENT]->(:Book)
+(:Copy)-[:COPY-OF]->(:Book)
 (:Library)-[:CONTAIN]->(:Copy)
 (:Person)-[:MANAGE]->(:Library)
 

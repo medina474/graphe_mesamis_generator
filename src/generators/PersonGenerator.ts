@@ -57,27 +57,7 @@ export class PersonGenerator {
      * Les distributions peuvent utiliser
      * les propriétés déjà présentes.
      */
-    const person = {
-      id,
-      edges: 0,
-      isMarried: false,
-      isChild: false,
-      clubs: [],
-      tags: new Set<string>(),
-      firstname: "",
-      lastname: "",
-      gender: Gender.Unknown,
-      age: 0,
-      education: 0,
-      wealth: 0,
-      sport: 0,
-      music: 0,
-      reading: 0,
-      interestTags: {},
-      children: [],
-      books: [],
-      emprunts: [],
-    } as Person;
+    const person = new Person (id);
 
     // Caractéristiques démographiques
 

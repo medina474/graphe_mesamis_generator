@@ -23,41 +23,50 @@ export enum Wealth {
   VeryHigh,
 }
 
-export interface Person {
-  id: string;
+export class Person {
 
-  firstname: string;
-  lastname: string;
+  firstname: string = "";
+  lastname: string = "";
 
-  gender: Gender;
+  gender: Gender = Gender.Unknown;
 
-  age: number;
+  age: number = 0;
 
-  education: Education;
-  wealth: Wealth;
+  education: Education = 0;
+  wealth: Wealth = 0;
 
-  sport: number;
-  reading: number;
-  music: number;
+  sport: number = 0;
+  reading: number = 0;
+  music: number = 0;
 
-  books: Book[];
-  emprunts: Loan[];
+  books: Book[] = [];
+  emprunts: Loan[] = [];
 
   interestTags: Record<string, number>;
   
-  edges: number;
+  edges: number = 0;
 
   spouse?: Person;
-  isMarried: boolean;
-  isChild: boolean;
   father?: Person;
   mother?: Person;
-  children: Person[];
+  children: Person[] = [];
 
   address?: Address;
   work?: Enterprise;
 
-  clubs: Club[];
+  clubs: Club[] = [];
   tags: Set<string>; /* tag pour les type de clubs auxquels la psonne est déja membre */
 
+  constructor(public readonly id: string) {
+    this.tags = new Set<string>();
+    this.interestTags = {};
+  }
+
+  public isMarried(): boolean {
+    return this.spouse != null
+  }
+
+  public isChild(): boolean {
+    return this.mother != null
+  }
 }

@@ -152,7 +152,7 @@ export class LibrariesRunner {
         this.addNodeCopy(exemplaire);
         this.exemplaires.push(exemplaire);
         this.addEdgeContain(library, exemplaire);
-        this.addEdgeRepresent(exemplaire, book);
+        this.addEdgeCopyOf(exemplaire, book);
       }
     }
 
@@ -177,82 +177,7 @@ export class LibrariesRunner {
     }
   }
 
-  public update() {
-    this.updateNodesLibraries();
-    this.updateNodesSeries();
-    this.updateNodesAuthors();
-    this.updateNodesExemplaires();
-    this.updateNodesPerson();
-  }
-
-  /**
-   * La taille est proportionnelle au nombre de livres écrits par l'auteur.
-   * Calculer la taille lors de la visualisation. Suivant la projection
-   * la taille est représenté par une propriété différente
-   */
-  private updateNodesAuthors() {
-    for (const author of this.authors) {
-      this.graph.mergeNodeAttributes(author.id, {
-        size: Math.ceil(author.books.length / 3.0),
-      });
-    }
-  }
-
-  /**
-   * La taille est proportionnelle au nombre de livres contenues dans la bibliothèque.
-   * Calculer la taille lors de la visualisation. Suivant la projection
-   * la taille est représenté par une propriété différente
-   */
-  private updateNodesLibraries() {
-    for (const library of this.libraries) {
-      this.graph.mergeNodeAttributes(library.id, {
-        size: Math.ceil(library.books.length / 3.0),
-      });
-    }
-  }
-
-  /**
-   * La taille est proportionnelle au nombre de livres contenues dans la série.
-   * Calculer la taille lors de la visualisation. Suivant la projection
-   * la taille est représenté par une propriété différente
-   */
-  private updateNodesSeries() {
-    for (const serie of this.series) {
-      this.graph.mergeNodeAttributes(serie.id, {
-        size: Math.ceil(serie.books.length / 3.0),
-      });
-    }
-  }
-
-  /**
-   * La taille est proportionnelle au nombre de prêts de l'exemplaire
-   * Calculer la taille lors de la visualisation. Suivant la projection
-   * la taille est représenté par une propriété différente
-   */
-  private updateNodesExemplaires() {
-    for (const exemplaire of this.exemplaires) {
-      const nb = this.prets.filter(
-        (p) => p.exemplaire.id == exemplaire.id,
-      ).length;
-      this.graph.mergeNodeAttributes(exemplaire.id, {
-        nbPrets: nb,
-        size: Math.ceil(nb / 3.0),
-      });
-    }
-  }
-
-  /**
-   * La taille est proportionnelle au nombre de livres contenues dans la série
-   * Calculer la taille lors de la visualisation. Suivant la projection
-   * la taille est représenté par une propriété différente
-   */
-  private updateNodesPerson() {
-    for (const person of this.population) {
-      this.graph.mergeNodeAttributes(person.id, {
-        reading: person.reading,
-      });
-    }
-  }
+  /* Noeuds */
 
   addNodesSeries() {
     for (const serie of this.series) {
@@ -264,7 +189,6 @@ export class LibrariesRunner {
     this.graph.addNode(serie.id, {
       category: "Serie",
       label: serie.label,
-      size: 1,
       color: "#765959",
     });
   }
@@ -279,7 +203,6 @@ export class LibrariesRunner {
     this.graph.addNode(book.id, {
       category: "Book",
       label: book.title,
-      size: 1,
       color: "#ff3535",
     });
   }
@@ -288,7 +211,6 @@ export class LibrariesRunner {
     this.graph.addNode(exemplaire.id, {
       category: "Copy",
       label: `${exemplaire.book.title} ${exemplaire.id}`,
-      size: 1,
       color: "#77fffd",
     });
   }
@@ -303,7 +225,6 @@ export class LibrariesRunner {
     this.graph.addNode(tag[1].id, {
       category: "Genre",
       label: tag[0],
-      size: Math.ceil(tag[1].count / 3.0),
       color: "#940b0b",
     });
   }
@@ -313,7 +234,6 @@ export class LibrariesRunner {
       category: "Author",
       label: author,
       name: author,
-      size: 1,
       color: "#35a8ff",
     });
   }
@@ -328,7 +248,6 @@ export class LibrariesRunner {
     this.graph.addNode(library.id, {
       category: "Library",
       label: library.id,
-      size: 1,
       color: "#fff235",
     });
   }
@@ -343,12 +262,12 @@ export class LibrariesRunner {
     this.graph.addNode(pret.id, {
       category: "Loan",
       label: "Prêt",
-      size: 1,
       color: "#503177",
     });
 
     this.addEdgeBorrow(pret.emprunteur, pret)
     this.addEdgeLend(pret.preteur, pret)
+    this.addEdgeConcern(pret, pret.exemplaire)
   }
 
   /*
@@ -387,13 +306,13 @@ export class LibrariesRunner {
   }
 
   /**
-   * (:Copy)-[:REPRESENT]->(:Book)
+   * (:Copy)-[:COPY-OF]->(:Book)
    * @param exemplaire
    * @param book
    */
-  addEdgeRepresent(exemplaire: Copy, book: Book): void {
+  addEdgeCopyOf(exemplaire: Copy, book: Book): void {
     this.graph.addEdge(exemplaire.id, book.id, {
-      relation: "REPRESENT",
+      relation: "COPY-OF",
       weight: 1,
     });
   }
@@ -418,13 +337,6 @@ export class LibrariesRunner {
   addEdgeManage(person: Person, library: Library): void {
     this.graph.addEdge(person.id, library.id, {
       relation: "MANAGE",
-      weight: 1,
-    });
-  }
-
-  addEdgeHold(person: Person, exemplaire: Copy) {
-    this.graph.addEdge(person.id, exemplaire.id, {
-      relation: "HOLD",
       weight: 1,
     });
   }

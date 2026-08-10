@@ -9,27 +9,7 @@ describe("Club", () => {
   it("exclut les personnes ayant une catégorie du club", () => {
     const graph = new DirectedGraph()
 
-    const person = {
-          id: "1",
-          edges: 0,
-          isMarried: false,
-          isChild: false,
-          clubs: [],
-          tags: new Set<string>(),
-          firstname: 'Marc',
-          lastname: 'Machin',
-          gender: Gender.Male,
-          education: 0,
-          wealth: 0,
-          sport: 1,
-          music: 0,
-          reading: 0,
-          children: [],
-          age: 0,
-          interestTags: {},
-          books: [],
-          emprunts: [],
-        } as Person;
+    const person = new Person("1")
     
     person.tags.add("sport")
     const persons: Person[] = [person];
