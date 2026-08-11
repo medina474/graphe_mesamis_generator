@@ -210,5 +210,15 @@
                  "name": "-"
             }
          ]
+    },
+    {
+        "id": "ent-jardins",
+        "name": "Jardins de Cocagne",
+         "postes": [
+            {
+                "effectif": 25,
+                 "name": "-"
+            }
+         ]
     }
 ]
