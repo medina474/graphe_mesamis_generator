@@ -1,5 +1,5 @@
 import { DirectedGraph } from "graphology";
-import { Person } from "../models/Person.js";
+import { Person, Gender } from "../models/Person.js";
 import { Address } from "../models/Address.js";
 import { Random } from "../stats/Random.js";
 
@@ -33,7 +33,7 @@ export class AddressGenerator {
             if (Math.random() <= 0.95) {
                 person.spouse.address = address
                 if (person.gender == Gender.Female) {
-                    withChildren = (Math.Random() <= 0.90)
+                    withChildren = (Math.random() <= 0.90)
                 }
             }
         

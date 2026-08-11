@@ -137,7 +137,7 @@ export class FamilyGenerator {
       // ToDo : ajouter le niveau d'étude qui est très déterminant.
       const candidats = this.hommes
         .filter(
-          (h) => !h.isMarried && !this.sontApparentes(femme, h) && h.age > 20,
+          (h) => !h.isMarried() && !this.sontApparentes(femme, h) && h.age > 20,
         )
         .map((homme) => ({
           homme,
@@ -197,7 +197,7 @@ export class FamilyGenerator {
     );
     console.log(`----------------------------------------`);
 
-    const femmesMariees = femmes.filter((femme) => femme.isMarried);
+    const femmesMariees = femmes.filter((femme) => femme.isMarried());
 
     let indexCouple = 1;
     let nbEnfants = 0;
@@ -211,7 +211,7 @@ export class FamilyGenerator {
 
       // Pas déja enfant d'une autre femme et age compatible
       const candidatsEnfants = this.individus.filter(
-        (c) => !c.isChild && c.age >= femme.age - 40 && c.age <= femme.age - 22,
+        (c) => !c.isChild() && c.age >= femme.age - 40 && c.age <= femme.age - 22,
       );
 
       console.log(

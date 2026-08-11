@@ -1,0 +1,62 @@
+book,award,year,place,categorie
+B151,award-hugo,1966,1,Best Novel
+B275,award-hugo,1980,1,Best Novel
+B249,award-hugo,1981,1,Best Novel
+B250,award-hugo,1982,1,Best Novel
+B278,award-hugo,1983,1,Best Novel
+B279,award-hugo,1984,1,Best Novel
+B122,award-hugo,1985,1,Best Novel
+B093,award-hugo,1986,1,Best Novel
+B280,award-hugo,1987,1,Best Novel
+B282,award-hugo,1988,1,Best Novel
+B251,award-hugo,1989,1,Best Novel
+B252,award-hugo,1990,1,Best Novel
+B169,award-hugo,1991,1,Best Novel
+B167,award-hugo,1992,1,Best Novel
+B288,award-hugo,1993,1,Best Novel
+B289,award-hugo,1993,1,Best Novel
+B273,award-hugo,1994,1,Best Novel
+B174,award-hugo,1995,1,Best Novel
+B091,award-hugo,1996,1,Best Novel
+B274,award-hugo,1997,1,Best Novel
+B291,award-hugo,1998,1,Best Novel
+B292,award-hugo,1999,1,Best Novel
+B117,award-hugo,2000,1,Best Novel
+B143,award-hugo,2001,1,Best Novel
+B293,award-hugo,2001,1,Best Novel
+B294,award-hugo,2007,1,Best Novel
+B094,award-hugo,2010,1,Best Novel
+B249,award-locus,1981,1,Best Science Fiction Novel
+B278,award-locus,1983,1,Best Science Fiction Novel
+B279,award-locus,1984,1,Best Science Fiction Novel
+B295,award-locus,1986,1,Best Science Fiction Novel
+B251,award-locus,1989,1,Best Science Fiction Novel
+B165,award-locus,1989,9,Best Science Fiction Novel
+B296,award-locus,1989,13,Best Science Fiction Novel
+B173,award-locus,1989,15,Best Science Fiction Novel
+B252,award-locus,1990,1,Best Science Fiction Novel
+B253,award-locus,1991,1,Best Science Fiction Novel
+B167,award-locus,1992,1,Best Science Fiction Novel
+B174,award-locus,1995,1,Best Science Fiction Novel
+B255,award-locus,1998,1,Best Science Fiction Novel
+B279,award-nebula,1983,1,Best Novel
+B122,award-nebula,1984,1,Best Novel
+B093,award-nebula,1985,1,Best Novel
+B280,award-nebula,1986,1,Best Novel
+B165,award-nebula,1988,1,Best Novel
+B288,award-nebula,1992,1,Best Novel
+B272,award-nebula,1993,1,Best Novel
+B263,award-nebula,1999,1,Best Novel
+B094,award-nebula,2009,1,Best Novel
+B224,award-apollo,1987,1,Meilleur roman
+B097,award-juliaverlanger,1994,1,Meilleur roman
+B267,award-bobmorane,2000,1,Meilleur roman étranger
+B268,award-bramstocker,1987,1,Best Novel
+B097,award-grandpriximaginaire,1994,1,Roman francophone
+B109,award-grandpriximaginaire,2017,1,Roman francophone
+B267,award-grandpriximaginaire,2001,1,Roman étranger
+B094,award-grandpriximaginaire,2013,1,Roman étranger
+B028,award-rosnyaine,2021,1,Meilleur roman
+B269,award-imaginales,2005,1,Prix Imaginales des lycéens
+B270,award-imaginales,2006,1,Prix Imaginales des lycéens
+B271,award-imaginales,2014,1,Meilleur roman francophone

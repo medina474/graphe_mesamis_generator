@@ -23,12 +23,13 @@ export class Author {
 
 export class Book {
     constructor(
-        public readonly id:string,
-        public readonly author:string,
-        public readonly title:string,
-        public readonly genres:string[],
+        public readonly id: string,
+        public readonly author: string,
+        public readonly title: string,
+        public readonly genres: string[],
         public readonly serie?: Serie,
         public readonly order?: number,
+        public readonly awards: AwardEdition[] = [], 
     ) {
     }
 }
@@ -92,13 +93,13 @@ export class Award {
     }
 }
 
-export class Nominee {
+export class AwardEdition {
     constructor(
         public readonly id:string,
         public readonly book:Book,
         public readonly award:Award,
         public readonly year: number,
-        public readonly place: string,
+        public readonly place: number,
         public readonly categorie: string,
     ) {
     }

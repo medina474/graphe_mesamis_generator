@@ -8,12 +8,14 @@ import {
   Loan,
   GenreInfo,
   Award,
-  Nominee
+  AwardEdition
 } from "../models/Book.js";
+
 import { LibrariesGenerator } from "../generators/LibrariesGenerator.js";
 import { BooksLoader } from "../loaders/BooksLoader.js";
 import { SeriesLoader } from "../loaders/SeriesLoader.js";
 import { AwardsLoader } from "../loaders/AwardsLoader.js";
+import { AwardsEditionsLoader } from "../loaders/AwardsEditionsLoader.js";
 import { JsonLoader } from "../loaders/JsonLoader.js";
 import { Person } from "../models/Person.js";
 import { LoanGenerator } from "../generators/LoanGenerator.js";
@@ -25,6 +27,7 @@ export class LibrariesRunner {
   private authors: Author[] = [];
   private prets: Loan[] = [];
   private awards: Award[] = [];
+  private awardsEditions: AwardEdition[] = [];
 
   private exemplaires: Copy[] = [];
   private genres: Record<string, GenreInfo> = {};
@@ -39,6 +42,7 @@ export class LibrariesRunner {
     booksPath: string,
     librariesPath: string,
     awardsPath: string,
+    awardsEditionsPath: string,
   ): void {
     // Importer les séries
     this.series = SeriesLoader.load(seriesPath);
@@ -55,6 +59,10 @@ export class LibrariesRunner {
     // importer la définition des bibliothèques
     this.awards = AwardsLoader.load(awardsPath);
     this.addNodesAwards();
+
+    // importer la définition des bibliothèques
+    this.awardsEditions = AwardsEditionsLoader.load(awardsEditionsPath, this.books, this.awards);
+    this.addNodesAwardsEdition();
 
     // Extraire les tags depuis la liste des livres
     let index = 1;
@@ -266,7 +274,7 @@ export class LibrariesRunner {
     this.graph.addNode(award.id, {
       category: "Award",
       label: award.award,
-      color: "#35a8ff",
+      color: "#093455",
     });
   }
 
@@ -276,17 +284,20 @@ export class LibrariesRunner {
     }
   }
 
-  addNodeNominee(nominee: Nominee): void {
-    this.graph.addNode(nominee.id, {
-      category: "Award",
-      label: nominee.year,
+  addNodeAwardEdition(awardEdition: AwardEdition): void {
+    this.graph.addNode(awardEdition.id, {
+      category: "AwardEdition",
+      label: ` ${awardEdition.award.award} ${awardEdition.year}`,
       color: "#35a8ff",
     });
+
+    this.addEdgeBelong(awardEdition, awardEdition.award);
+    this.addEdgeAwardEdition(awardEdition, awardEdition.book);
   }
 
-  addNodesNominees() {
-    for (const nominee of this.nominees) {
-      this.addNodeNominee(nominee);
+  addNodesAwardsEdition() {
+    for (const awardEdition of this.awardsEditions) {
+      this.addNodeAwardEdition(awardEdition);
     }
   }
 
@@ -434,11 +445,18 @@ export class LibrariesRunner {
     });
   }
 
-  addEdgeAward1(book: Book, award: Award): void {
-    this.graph.addEdge(book.id, award.id, {
-      relation: "WIN",
+  addEdgeBelong(awardEdition: AwardEdition, award: Award): void {
+    this.graph.addEdge(awardEdition.id, award.id, {
+      relation: "BELONG",
       weight: 1,
     });
   }
-  
+
+  addEdgeAwardEdition(awardEdition: AwardEdition, book: Book): void {
+    this.graph.addEdge(awardEdition.id, book.id, {
+      relation: (awardEdition.place == 1) ? "REWARD" : "NOMINATE",
+      categorie: awardEdition.categorie,
+      weight: 1,
+    });
+  }
 }

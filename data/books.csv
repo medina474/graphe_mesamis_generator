@@ -91,7 +91,7 @@ B089,Mireille Calmel,Lady Pirate,romance|historique,,
 B090,Molière,L'Avare,theatre,,
 B091,Neal Stephenson,L'Âge de diamant,science-fiction,,
 B092,Olivier Norek,Dans les brumes de Capelans,policier,,
-B093,Orson Scott Card,La Stratégie Ender,science-fiction,,
+B093,Orson Scott Card,La Stratégie Ender,science-fiction,S020,1
 B094,Paolo Bacigalupi,La Fille automate,science-fiction|biopunk,,
 B095,Paul Féval,Le Bossu,aventure historique,,
 B096,Paul Féval,Les Habits noirs,aventure|policier,,
@@ -115,7 +115,7 @@ B113,Stephen King,Ça,horreur,,
 B114,Stephen King,Christine,horreur,,
 B115,Tom Clancy,Octobre rouge,espionnage|sous-marin,,
 B116,Umberto Eco,Le Nom de la rose,policier|médiéval,,
-B117,Vernor Vinge,Au tréfonds du ciel,science-fiction,,
+B117,Vernor Vinge,Au tréfonds du ciel,science-fiction,S022,3
 B118,Victor Dixen,Vampyria,bitlit|vampire,,
 B119,Victor Hugo,Les Misérables,classique|historique,,
 B120,Victor Hugo,Notre-Dame de Paris,roman,,
@@ -245,6 +245,51 @@ B245,Camilla Läckberg,La Princesse des glaces,polar|polar nordique,,
 B246,Jo Nesbø,L'Homme chauve-souris,polar|polar nordique,,
 B247,Jussi Adler-Olsen,Miséricorde,polar|polar nordique,,
 B248,Arnaldur Indriðason,La Femme en vert,polar|polar nordique,,
-B249,Joan D. Vinge,La Reine des neiges,science-fiction,,
+B249,Joan D. Vinge,La Reine des neiges,science-fiction,S017,1
 B250,C. J. Cherryh,Forteresse des étoiles,science-fiction,,
 B251,C. J. Cherryh,Cyteen,science-fiction,,
+B252,Dan Simmons,Hypérion,science-fiction,S014,1
+B253,Dan Simmons,La chute d'Hypérion,science-fiction,S014,2
+B254,Dan Simmons,Endymion,science-fiction,S014,3
+B255,Dan Simmons,L'Éveil d'Endymion,science-fiction,S014,4
+B256,Dan Simmons,La mort du Centaure,science-fiction,S014,5
+B257,Dan Simmons,Les orphelins de l'Hélice,science-fiction,S014,6
+B258,Octavia E. Butler,La Parabole du semeur,science-fiction,,
+B259,Octavia E. Butler,Liens de sang,science-fiction,,
+B260,Octavia E. Butler,L'Aube,science-fiction,S015,1
+B261,Octavia E. Butler,L'initiation,science-fiction,S015,2
+B262,Octavia E. Butler,Imago,science-fiction,S015,3
+B263,Octavia E. Butler,La Parabole des talents,science-fiction,,
+B264,Octavia E. Butler,Novice,science-fiction|vampire,,
+B265,Émile Querbalec,Les Chants de Nüying,science-fiction,,
+B266,Émile Querbalec,Les Jardins du temps,science-fiction,,
+B267,Andreas Eschbach,Des milliards de tapis de cheveux,science-fiction,,
+B268,Stephen King,Misery,thriller,,
+B269,Pierre Bordage,Les Fables de l'Humpur,science-fiction,,
+B270,Alain Damasio,La Horde du Contrevent,science-fiction,,
+B271,Jean-Philippe Jaworski,Même pas mort,fantasy,,
+B272,Kim Stanley Robinson,Mars la Rouge,science-fiction,S016,1
+B273,Kim Stanley Robinson,Mars la Verte,science-fiction,S016,2
+B274,Kim Stanley Robinson,Mars la Bleue,science-fiction,S016,3
+B275,Arthur C. Clarke,Les fontaines du Paradis,science-fiction,,
+B276,Joan D. Vinge,Finismonde,science-fiction,S017,2
+B277,Joan D. Vinge,La reine de l'été,science-fiction,S017,3
+B278,Isaac Asimov,Fondation foudroyée,science-fiction,S018,6
+B279,David Brin,Marée stellaire,science-fiction,S019,2
+B280,Orson Scott Card,La Voix des morts,science-fiction,S020,2
+B281,David Brin,Jusqu'au coeur du Soleil,science-fiction,S019,1
+B282,David Brin,Elévation,science-fiction,S019,3
+B283,David Brin,Le Monde de l'exil,science-fiction,S021,4
+B284,David Brin,Le Monde de l'oubli,science-fiction,S021,5
+B285,David Brin,Le Chemin des bannis,science-fiction,S021,6
+B286,David Brin,Les Rives de l'Infini,science-fiction,S021,7
+B287,David Brin,Le grand défi,science-fiction,S021,8
+B288,Connie Willis,Le grand livre,science-fiction,,
+B289,Vernor Vinge,Un feu sur l'abîme,science-fiction,S022,1
+B290,Vernor Vinge,Les enfants du ciel,science-fiction,S022,2
+B291,Joe Haldeman,La Paix éternelle,science-fiction,,
+B292,Connie Willis,Sans parler du chien,science-fiction,,
+B293,Neil Gaiman,American Gods,science-fiction,,
+B294,Vernor Vinge,Rainbows End,science-fiction,,
+B295,David Brin,Le facteur,science-fiction,,
+B296,Joan D. Vinge,Cat le Psion,science-fiction,,
