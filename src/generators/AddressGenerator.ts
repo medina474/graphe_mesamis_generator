@@ -20,21 +20,27 @@ export class AddressGenerator {
         // Si c'est le cas traiter le cas des enfants
 
         if (this.addressesDisponibles.length == 0) {
-            console.log('Aucune adresse disponible pour cette personne')
+            console.warn('Aucune adresse disponible pour cette personne')
             return;
         }
 
         const index = Random.int(0, this.addressesDisponibles.length)
         const address = this.addressesDisponibles.splice(index, 1)[0];
         person.address = address;
-    
-        if (person.spouse) {
-            person.spouse.address = address
-        }
 
-        if (person.children) {
-            for (const child of person.children.filter(c => c.age < 21)) {
-                child.address = address
+        if (person.spouse) {
+            let withChildren: boolean = true;
+            if (Math.random() <= 0.95) {
+                person.spouse.address = address
+                if (person.gender == Gender.Female) {
+                    withChildren = (Math.Random() <= 0.90)
+                }
+            }
+        
+            if (withChildren && person.children) {
+                for (const child of person.children.filter(c => c.age < 21)) {
+                    child.address = address
+                }
             }
         }
     }
