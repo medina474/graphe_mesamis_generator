@@ -31,7 +31,7 @@ membershipRunner.run(population);
 */
 
 const librariesRunner = new LibrariesRunner(graph, population.filter(p => p.age >= 18));
-librariesRunner.load("data/serie.csv", "data/books.csv", "data/libraries.json");
+librariesRunner.load("data/serie.csv", "data/books.csv", "data/libraries.json", "data/awards.csv");
 librariesRunner.run(2000);
 
 /*

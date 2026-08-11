@@ -6,11 +6,14 @@ import {
   Library,
   Author,
   Loan,
-  TagInfo
+  GenreInfo,
+  Award,
+  Nominee
 } from "../models/Book.js";
 import { LibrariesGenerator } from "../generators/LibrariesGenerator.js";
 import { BooksLoader } from "../loaders/BooksLoader.js";
 import { SeriesLoader } from "../loaders/SeriesLoader.js";
+import { AwardsLoader } from "../loaders/AwardsLoader.js";
 import { JsonLoader } from "../loaders/JsonLoader.js";
 import { Person } from "../models/Person.js";
 import { LoanGenerator } from "../generators/LoanGenerator.js";
@@ -21,9 +24,10 @@ export class LibrariesRunner {
   private libraries: Library[] = [];
   private authors: Author[] = [];
   private prets: Loan[] = [];
+  private awards: Award[] = [];
 
   private exemplaires: Copy[] = [];
-  private genres: Record<string, TagInfo> = {};
+  private genres: Record<string, GenreInfo> = {};
 
   constructor(
     private readonly graph: DirectedGraph,
@@ -34,6 +38,7 @@ export class LibrariesRunner {
     seriesPath: string,
     booksPath: string,
     librariesPath: string,
+    awardsPath: string,
   ): void {
     // Importer les séries
     this.series = SeriesLoader.load(seriesPath);
@@ -47,8 +52,11 @@ export class LibrariesRunner {
     this.libraries = JsonLoader.load(librariesPath, Library);
     this.addNodesLibraries();
 
+    // importer la définition des bibliothèques
+    this.awards = AwardsLoader.load(awardsPath);
+    this.addNodesAwards();
+
     // Extraire les tags depuis la liste des livres
-    this.genres = new Map<string, TagInfo>();
     let index = 1;
     for (const b of this.books) {
       for (const genre of b.genres) {
@@ -60,6 +68,7 @@ export class LibrariesRunner {
           this.genres[genre] = {
             id: `T${index++}`,
             count: 1,
+            countInLibrary: 0
           };
         }
       }
@@ -120,12 +129,12 @@ export class LibrariesRunner {
 
     console.log(`Genres sans copie.`);
     console.log(`----------------------------------------`);
-    for (const genre of this.genres.keys()) {
+    for (const [genre, info] of Object.entries(this.genres)) {
       let nb = this.libraries.reduce(
         (a: number, l) => a + (l.books.some((b) => b.genres.includes(genre)) ? 1 : 0),
         0,
       );
-      genre.countInLibrary = nb
+      info.countInLibrary = nb
       if (nb == 0) console.log(`${genre} : ${nb} (${genre})`);
     }
 
@@ -164,12 +173,12 @@ export class LibrariesRunner {
       }
     }
 
-    const borrowGenerator = new LoanGenerator(
+    const loanGenerator = new LoanGenerator(
       this.population,
       this.exemplaires,
       this.genres,
     );
-    this.prets = borrowGenerator.generer(nb, new Date(2026, 0, 1));
+    this.prets = loanGenerator.generer(nb, new Date(2026, 0, 1));
     for (const pret of this.prets) {
       this.addLoan(pret);
     }
@@ -224,13 +233,13 @@ export class LibrariesRunner {
     });
   }
 
-  addNodesGenres(genres: Record<string, TagInfo>) {
+  addNodesGenres(genres: Record<string, GenreInfo>) {
     for (const [cle, valeur] of Object.entries(genres)) {
       this.addNodeGenre(cle, valeur);
     }
   }
 
-  addNodeGenre(genre: string, info: TagInfo): void {
+  addNodeGenre(genre: string, info: GenreInfo): void {
     this.graph.addNode(info.id, {
       category: "Genre",
       label: genre,
@@ -250,6 +259,34 @@ export class LibrariesRunner {
   addNodesLibraries() {
     for (const library of this.libraries) {
       this.addNodeLibrary(library);
+    }
+  }
+
+  addNodeAward(award: Award): void {
+    this.graph.addNode(award.id, {
+      category: "Award",
+      label: award.award,
+      color: "#35a8ff",
+    });
+  }
+
+  addNodesAwards() {
+    for (const award of this.awards) {
+      this.addNodeAward(award);
+    }
+  }
+
+  addNodeNominee(nominee: Nominee): void {
+    this.graph.addNode(nominee.id, {
+      category: "Award",
+      label: nominee.year,
+      color: "#35a8ff",
+    });
+  }
+
+  addNodesNominees() {
+    for (const nominee of this.nominees) {
+      this.addNodeNominee(nominee);
     }
   }
 

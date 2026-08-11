@@ -78,8 +78,28 @@ export class Library {
   }
 }
 
-export interface TagInfo {
+export interface GenreInfo {
   id: string;
   count: number;
   countInLibrary: number;
+}
+
+export class Award {
+    constructor(
+        public readonly id:string,
+        public readonly award:string,
+    ) {
+    }
+}
+
+export class Nominee {
+    constructor(
+        public readonly id:string,
+        public readonly book:Book,
+        public readonly award:Award,
+        public readonly year: number,
+        public readonly place: string,
+        public readonly categorie: string,
+    ) {
+    }
 }

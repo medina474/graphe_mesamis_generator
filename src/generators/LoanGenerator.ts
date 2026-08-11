@@ -1,5 +1,5 @@
 import { Person } from "../models/Person.js";
-import { Copy, Loan, TagInfo } from "../models/Book.js";
+import { Copy, Loan, GenreInfo } from "../models/Book.js";
 import { Random } from "../stats/Random.js";
 
 export class LoanGenerator {
@@ -8,14 +8,14 @@ export class LoanGenerator {
   constructor(
     private readonly personnes: Person[],
     private readonly copies: Copy[],
-    private readonly genres: Map<string, TagInfo>
+    private readonly genres: Record<string, GenreInfo>
   ) {
-    const genresNames = [...genres.entries()];
+    const genresNames = Object.keys(genres);
     this.personnes
       .filter((p) => Object.keys(p.interestTags).length === 0)
       .forEach((p) => {
-        const [key, value] = genresNames[Math.floor(Math.random() * genresNames.length)];
-        p.interestTags[key] = 1;
+        const genre = genresNames[Math.floor(Math.random() * genresNames.length)];
+        p.interestTags[genre] = 1;
       });
   }
 
@@ -117,14 +117,15 @@ export class LoanGenerator {
        */
       const emprunteur = this.tirerPersonne(candidats);
 
-      const exemplaire = this.rExemplaire(emprunteur);
+      const exemplaire = this.choisirExemplaire(emprunteur);
 
       if (!exemplaire) {
         /*
          * Cette personne ne dispose finalement d'aucun livre compatible.
          * Elle doit attendre 7 jours pour être de nouveau disponible et laisser la chance à d'autres
          */
-        console.log(`Pas de copie compatible pour ${emprunteur.firstname}`)
+        
+        console.log(`Pas de copie compatible pour ${emprunteur.firstname} ${Object.keys(emprunteur.interestTags).join(', ')}`)
         emprunteur.availableAt = new Date(
           currentDay.getTime() + Random.int(3, 8),
         );
