@@ -1,5 +1,5 @@
 import { Person } from "../models/Person.js";
-import { Copy, Loan } from "../models/Book.js";
+import { Copy, Loan, TagInfo } from "../models/Book.js";
 import { Random } from "../stats/Random.js";
 
 export class LoanGenerator {
@@ -8,7 +8,16 @@ export class LoanGenerator {
   constructor(
     private readonly personnes: Person[],
     private readonly copies: Copy[],
-  ) {}
+    private readonly genres: Map<string, TagInfo>
+  ) {
+    this.personnes
+      .filter((p) => p.interestTags.length == 0)
+      .forEach((p) => {
+        const entries = [...genres.entries()];
+        const [key, value] = entries[Math.floor(Math.random() * entries.length)];
+        p.interestTags[key] = 1;
+      });
+  }
 
   generer(nombrePrets: number, dateDebut: Date = new Date()): Loan[] {
     console.log(`Prêts`);
@@ -58,7 +67,9 @@ export class LoanGenerator {
           return exemplaire.availableAt <= currentDay;
         });
 
-        console.log(`${currentDay.toLocaleDateString("fr-FR")} : ${dailyQuota} copies prévues | ${this.copiesAvalaiblesCurrentDay.length} copies disponibles.`);
+        console.log(
+          `${currentDay.toLocaleDateString("fr-FR")} : ${dailyQuota} copies prévues | ${this.copiesAvalaiblesCurrentDay.length} copies disponibles.`,
+        );
       }
 
       /*
@@ -210,7 +221,8 @@ export class LoanGenerator {
     // Les oeuvres sont celles qui sont disponibles ce jour
     // et qui n'ont pas été lues par l'emprunteur
     const selection = this.copiesAvalaiblesCurrentDay.filter((copy) => {
-      return !emprunteur.oeuvresLues.has(copy.book);
+      return !emprunteur.oeuvresLues.has(copy.book) && 
+        Object.keys(emprunteur.interestTags).some(t => t in copy.book.genres);
     });
 
     if (selection.length === 0) {
@@ -241,11 +253,11 @@ export class LoanGenerator {
   }
 
   /**
-   * Le score est calculé à partir du nombre de genres en commun entre 
+   * Le score est calculé à partir du nombre de genres en commun entre
    * la personne et le livre
-   * @param emprunteur 
-   * @param exemplaire 
-   * @returns 
+   * @param emprunteur
+   * @param exemplaire
+   * @returns
    */
   private scoreExemplaire(emprunteur: Person, exemplaire: Copy): number {
     return (

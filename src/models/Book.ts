@@ -77,3 +77,8 @@ export class Library {
     );
   }
 }
+
+export interface TagInfo {
+  id: string;
+  count: number;
+}

@@ -6,6 +6,7 @@ import {
   Library,
   Author,
   Loan,
+  TagInfo
 } from "../models/Book.js";
 import { LibrariesGenerator } from "../generators/LibrariesGenerator.js";
 import { BooksLoader } from "../loaders/BooksLoader.js";
@@ -13,11 +14,6 @@ import { SeriesLoader } from "../loaders/SeriesLoader.js";
 import { JsonLoader } from "../loaders/JsonLoader.js";
 import { Person } from "../models/Person.js";
 import { LoanGenerator } from "../generators/LoanGenerator.js";
-
-interface TagInfo {
-  id: string;
-  count: number;
-}
 
 export class LibrariesRunner {
   private series: Serie[] = [];
@@ -27,6 +23,7 @@ export class LibrariesRunner {
   private prets: Loan[] = [];
 
   private exemplaires: Copy[] = [];
+  private genres: Map<string, TagInfo> = new Map<string, TagInfo>();
 
   constructor(
     private readonly graph: DirectedGraph,
@@ -51,16 +48,16 @@ export class LibrariesRunner {
     this.addNodesLibraries();
 
     // Extraire les tags depuis la liste des livres
-    const uniquesGenres = new Map<string, TagInfo>();
+    this.genres = new Map<string, TagInfo>();
     let index = 1;
     for (const b of this.books) {
       for (const genre of b.genres) {
-        const info = uniquesGenres.get(genre);
+        const info = this.genres.get(genre);
 
         if (info) {
           info.count++;
         } else {
-          uniquesGenres.set(genre, {
+          this.genres.set(genre, {
             id: `T${index++}`,
             count: 1,
           });
@@ -68,11 +65,11 @@ export class LibrariesRunner {
       }
     }
 
-    this.addNodesGenres(uniquesGenres);
+    this.addNodesGenres(this.genres);
 
     for (const book of this.books) {
       for (const tag of book.genres) {
-        this.addEdgeClassify(book, uniquesGenres.get(tag)!.id);
+        this.addEdgeClassify(book, this.genres.get(tag)!.id);
       }
     }
 
@@ -159,6 +156,7 @@ export class LibrariesRunner {
     const borrowGenerator = new LoanGenerator(
       this.population,
       this.exemplaires,
+      this.genres,
     );
     this.prets = borrowGenerator.generer(nb, new Date(2026, 0, 1));
     for (const pret of this.prets) {
