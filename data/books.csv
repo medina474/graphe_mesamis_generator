@@ -105,7 +105,7 @@ B103,Régine Deforges,La bicyclette bleue,romance|historique,,
 B104,Stephen King,Salem,horreur|vampire,,
 B105,Richard Matheson,Je suis une Légende,science-fiction|vampire,,
 B106,Robin Hobb,L'Assassin royal,fantasy,,
-B107,Romain Benassaya,Pyramide,science-fiction,,
+B107,Romain Benassaya,Pyramide,science-fiction|vaisseau générationnel,,
 B108,Romain Gary,La Promesse de l'aube,roman,,
 B109,Romain Lucazeau,Latium,science-fiction|robots,,
 B110,Sarah Rivens,Captive,dark romance,,
@@ -113,8 +113,8 @@ B111,Stendhal,Le Rouge et le Noir,roman,,
 B112,Stendhal,La Chartreuse de Parme,roman,,
 B113,Stephen King,Ça,horreur,,
 B114,Stephen King,Christine,horreur,,
-B115,Tom Clancy,Octobre rouge,espionnage,,
-B116,Umberto Eco,Le Nom de la rose,policier,,
+B115,Tom Clancy,Octobre rouge,espionnage|sous-marin,,
+B116,Umberto Eco,Le Nom de la rose,policier|médiéval,,
 B117,Vernor Vinge,Au tréfonds du ciel,science-fiction,,
 B118,Victor Dixen,Vampyria,bitlit|vampire,,
 B119,Victor Hugo,Les Misérables,classique|historique,,
@@ -205,7 +205,7 @@ B204,Jules Vernes,Le Tour du monde en quatre-vingts jours,roman,,
 B205,Jules Vernes,L'Île mystérieuse,roman|île,,
 B206,Jules Vernes,Michel Strogoff,roman,,
 B207,Jules Vernes,Les Tribulations d'un Chinois en Chine,roman,,
-B208,Jules Vernes,Les Révoltés de la Bounty,roman,,
+B208,Jules Vernes,Les Révoltés de la Bounty,roman|île,,
 B209,Jules Vernes,Deux Ans de vacances,roman|île,,
 B210,Jules Vernes,L'École des Robinsons,roman|île,,
 B211,Jules Vernes,Les Cinq Cents Millions de la Bégum,roman,,
@@ -233,3 +233,16 @@ B232,Tim Powers,À deux pas du néant,science-fiction,,
 B233,Tim Powers,Parmi les tombes,science-fiction,,
 B234,Tim Powers,Earthquake Weather,science-fiction,,
 B235,Tim Powers,Medusa's Web,science-fiction,,
+B236,Stieg Larsson,Les hommes qui n'aimaient pas les femmes,polar|polar nordique,,1
+B237,Stieg Larsson,La fille qui rêvait d'un bidon d'essence et d'une allumette,polar|polar nordique,,2
+B238,Stieg Larsson,La reine dans le palais des courants d'air,polar|polar nordique,,3
+B239,Stieg Larsson,Ce qui ne me tue pas,polar|polar nordique,,4
+B240,Stieg Larsson,La fille qui rendait coup pour coup,polar|polar nordique,,5
+B241,Stieg Larsson,La fille qui devait mourir,polar|polar nordique,,6
+B242,Stieg Larsson,La Fille dans les serres de l'aigle,polar|polar nordique,,7
+B244,Stieg Larsson,La Fille dans les griffes du lynx,polar|polar nordique,,8
+B245,Camilla Läckberg,La Princesse des glaces,polar|polar nordique,,
+Jo Nesbø,
+Jussi Adler-Olsen,
+Arnaldur Indriðason,
+
