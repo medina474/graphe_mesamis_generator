@@ -16,7 +16,7 @@ populationRunner.load(
   "data/prenoms.json",
   "data/noms.csv",
 );
-const population = populationRunner.run(20, 1, 85);
+const population = populationRunner.run(200, 1, 85);
 
 /*
 const familyRunner = new FamilyRunner(graph);
@@ -32,7 +32,7 @@ membershipRunner.run(population);
 
 const librariesRunner = new LibrariesRunner(graph, population.filter(p => p.age >= 18));
 librariesRunner.load("data/serie.csv", "data/books.csv", "data/libraries.json");
-librariesRunner.run(20);
+librariesRunner.run(2000);
 
 /*
 const addressRunner = new AddressRunner(graph);

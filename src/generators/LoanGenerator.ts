@@ -2,7 +2,7 @@ import { Person } from "../models/Person.js";
 import { Copy, Loan } from "../models/Book.js";
 import { Random } from "../stats/Random.js";
 
-export class BorrowGenerator {
+export class LoanGenerator {
   constructor(
     private readonly personnes: Person[],
     private readonly copies: Copy[],
@@ -50,14 +50,15 @@ export class BorrowGenerator {
         currentDay = this.startOfNextDay(currentDay);
 
         this.copies
-          .filter((c) => c.availableAt <= currentDay && c.holder != c.owner)
+          .filter((c) => c.availableAt < currentDay && c.holder != c.owner)
           .forEach((c) => {
-            if (Math.random() < 0.25) {
-              console.log("Retour au propriétaire");
+            if (Math.random() < 0.005) {
               c.holder = c.owner;
               let pret_precedent = this.dernierPret(prets, c);
               if (pret_precedent) {
                 pret_precedent.returnedDate = currentDay;
+              } else {
+                console.warn(`Retour sans prêt`)
               }
             }
           });

@@ -12,7 +12,7 @@ import { BooksLoader } from "../loaders/BooksLoader.js";
 import { SeriesLoader } from "../loaders/SeriesLoader.js";
 import { JsonLoader } from "../loaders/JsonLoader.js";
 import { Person } from "../models/Person.js";
-import { BorrowGenerator } from "../generators/BorrowGenerator.js";
+import { LoanGenerator } from "../generators/LoanGenerator.js";
 
 interface TagInfo {
   id: string;
@@ -156,7 +156,7 @@ export class LibrariesRunner {
       }
     }
 
-    const borrowGenerator = new BorrowGenerator(
+    const borrowGenerator = new LoanGenerator(
       this.population,
       this.exemplaires,
     );
@@ -268,8 +268,13 @@ export class LibrariesRunner {
     this.addEdgeBorrow(pret.emprunteur, pret)
     this.addEdgeLend(pret.preteur, pret)
     this.addEdgeConcern(pret, pret.copy)
+    
     if (pret.previous) {
       this.addEdgeFollow(pret, pret.previous)
+    }
+
+    if (pret.returnedDate) {
+      this.addEdgeReturnTo(pret)
     }
   }
 
@@ -372,6 +377,13 @@ export class LibrariesRunner {
   addEdgeFollow(pret1: Loan, pret2: Loan) {
     this.graph.addEdge(pret1.id, pret2.id, {
       relation: "FOLLOW",
+      weight: 1,
+    });
+  }
+
+  addEdgeReturnTo(pret: Loan) {
+    this.graph.addEdge(pret.id, pret.copy.owner.id, {
+      relation: "RETURN-TO",
       weight: 1,
     });
   }
