@@ -433,4 +433,12 @@ export class LibrariesRunner {
       weight: 1,
     });
   }
+
+  addEdgeAward1(book: Book, award: Award): void {
+    this.graph.addEdge(book.id, award.id, {
+      relation: "WIN",
+      weight: 1,
+    });
+  }
+  
 }
