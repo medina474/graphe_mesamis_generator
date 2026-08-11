@@ -200,5 +200,15 @@
                 "name": "ouvrier"
             }
         ]
+    },
+    {
+        "id": "ent-poissonnerie",
+        "name": "Poissonnerie du Port",
+         "postes": [
+            {
+                "effectif": 8,
+                 "name": "-"
+            }
+         ]
     }
 ]
