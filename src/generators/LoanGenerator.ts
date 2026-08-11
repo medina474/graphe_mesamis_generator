@@ -10,11 +10,11 @@ export class LoanGenerator {
     private readonly copies: Copy[],
     private readonly genres: Map<string, TagInfo>
   ) {
+    const genresNames = [...genres.entries()];
     this.personnes
-      .filter((p) => p.interestTags.length == 0)
+      .filter((p) => Object.keys(p.interestTags).length === 0)
       .forEach((p) => {
-        const entries = [...genres.entries()];
-        const [key, value] = entries[Math.floor(Math.random() * entries.length)];
+        const [key, value] = genresNames[Math.floor(Math.random() * genresNames.length)];
         p.interestTags[key] = 1;
       });
   }
@@ -41,7 +41,7 @@ export class LoanGenerator {
 
     const maintenant = new Date(dateDebut);
     let currentDay = this.startOfDay(maintenant);
-    let backupDayTime = currentDay.getTime();
+    let backupDayTime = currentDay.getTime() - 1;
     let pretsToday = 0;
     let dailyQuota = this.dailyPrets();
     let index = 1;
@@ -117,13 +117,14 @@ export class LoanGenerator {
        */
       const emprunteur = this.tirerPersonne(candidats);
 
-      const exemplaire = this.choisirExemplaire(emprunteur);
+      const exemplaire = this.rExemplaire(emprunteur);
 
       if (!exemplaire) {
         /*
          * Cette personne ne dispose finalement d'aucun livre compatible.
          * Elle doit attendre 7 jours pour être de nouveau disponible et laisser la chance à d'autres
          */
+        console.log(`Pas de copie compatible pour ${emprunteur.firstname}`)
         emprunteur.availableAt = new Date(
           currentDay.getTime() + Random.int(3, 8),
         );
@@ -222,7 +223,7 @@ export class LoanGenerator {
     // et qui n'ont pas été lues par l'emprunteur
     const selection = this.copiesAvalaiblesCurrentDay.filter((copy) => {
       return !emprunteur.oeuvresLues.has(copy.book) && 
-        Object.keys(emprunteur.interestTags).some(t => t in copy.book.genres);
+        Object.keys(emprunteur.interestTags).some(t => copy.book.genres.includes(t));
     });
 
     if (selection.length === 0) {
