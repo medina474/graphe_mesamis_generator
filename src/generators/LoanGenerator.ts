@@ -3,6 +3,8 @@ import { Copy, Loan } from "../models/Book.js";
 import { Random } from "../stats/Random.js";
 
 export class LoanGenerator {
+  private copiesAvalaiblesCurrentDay: Copy[] = [];
+
   constructor(
     private readonly personnes: Person[],
     private readonly copies: Copy[],
@@ -30,22 +32,40 @@ export class LoanGenerator {
 
     const maintenant = new Date(dateDebut);
     let currentDay = this.startOfDay(maintenant);
-    let backupDay = this.startOfDay(maintenant);
+    let backupDayTime = currentDay.getTime();
     let pretsToday = 0;
     let dailyQuota = this.dailyPrets();
     let index = 1;
 
     while (prets.length < nombrePrets) {
-      // Nouveau jour ? Recalcul d'un quota pour la journée.
-      // Retour éventuels des prêts
-      if (currentDay.getTime() !== backupDay.getTime()) {
+      /*
+       * Nouveau jour ?
+       * Recalcul d'un quota pour la journée.
+       *  Retour éventuels des prêts
+       */
+      if (currentDay.getTime() !== backupDayTime) {
         pretsToday = 0;
+        /*
+         * Combien de prêts sont prévus ce jour  ?
+         */
         dailyQuota = this.dailyPrets();
-        backupDay = this.startOfDay(currentDay); // Copie la valeur pas la référence
+        backupDayTime = currentDay.getTime(); // Copie la valeur pas la référence
+
+        /*
+         * Quels sont les exemplaires disponible aujourd'hui ?
+         */
+        this.copiesAvalaiblesCurrentDay = this.copies.filter((exemplaire) => {
+          return exemplaire.availableAt <= currentDay;
+        });
+
+        console.log(`${currentDay.toLocaleDateString("fr-FR")} : ${dailyQuota} copies prévues | ${this.copiesAvalaiblesCurrentDay.length} copies disponibles.`);
       }
 
-      // Quota journalier de prêts atteint ? On incrémente d'un jour
-      // Retour des exemplaires à leur propriétaire
+      /*
+       * Quota journalier de prêts atteint ?
+       * On incrémente d'un jour
+       * Retour des exemplaires à leur propriétaire
+       */
       if (pretsToday >= dailyQuota) {
         currentDay = this.startOfNextDay(currentDay);
 
@@ -58,7 +78,7 @@ export class LoanGenerator {
               if (pret_precedent) {
                 pret_precedent.returnedDate = currentDay;
               } else {
-                console.warn(`Retour sans prêt`)
+                console.warn(`Retour sans prêt`);
               }
             }
           });
@@ -67,20 +87,13 @@ export class LoanGenerator {
       }
 
       /*
-       * Quels sont les exemplaires disponible aujourd'hui ?
-       */
-      const exemplairesDisponible = this.copies.filter((exemplaire) => {
-        return exemplaire.availableAt <= currentDay;
-      });
-
-      /*
        * On cherche les personnes qui peuvent
        * emprunter à cet instant.
        */
-      const candidats = this.getCandidats(currentDay, exemplairesDisponible);
+      const candidats = this.getCandidats(currentDay);
 
       if (candidats.length === 0) {
-        console.log("Aucun candidat disponible");
+        console.info("Aucun candidat disponible");
 
         // Aucun candidat pour l'instant : avancer d'un jour.
         currentDay = this.startOfNextDay(currentDay);
@@ -93,10 +106,7 @@ export class LoanGenerator {
        */
       const emprunteur = this.tirerPersonne(candidats);
 
-      const exemplaire = this.choisirExemplaire(
-        emprunteur,
-        exemplairesDisponible,
-      );
+      const exemplaire = this.choisirExemplaire(emprunteur);
 
       if (!exemplaire) {
         /*
@@ -131,7 +141,7 @@ export class LoanGenerator {
       };
 
       console.log(
-        `${pret.copy.id} | ${pret.copy.book.title} : ${pret.preteur.firstname} -> ${pret.emprunteur.firstname} ${currentDay.toLocaleDateString()}`,
+        `${pret.copy.id} | ${pret.copy.book.title} | ${pret.preteur.firstname} -> ${pret.emprunteur.firstname} ${pret.emprunteur.reading}`,
       );
       prets.push(pret);
       pretsToday++;
@@ -161,10 +171,6 @@ export class LoanGenerator {
        */
       emprunteur.oeuvresLues.add(exemplaire.book);
 
-      if (!emprunteur.interestTags) {
-        emprunteur.interestTags = {};
-      }
-
       for (const tag of exemplaire.book.genres) {
         emprunteur.interestTags[tag] = (emprunteur.interestTags[tag] ?? 0) + 1;
       }
@@ -173,10 +179,7 @@ export class LoanGenerator {
     return prets;
   }
 
-  private getCandidats(
-    currentDay: Date,
-    exemplairesDisponible: Copy[],
-  ): Person[] {
+  private getCandidats(currentDay: Date): Person[] {
     return this.personnes.filter((personne) => {
       /*
        * La personne doit avoir terminé son prêt précédent.
@@ -194,23 +197,20 @@ export class LoanGenerator {
       }
 
       /*
-       * Il doit y avoir au moins un exemplaire
-       * disponible d'une œuvre qu'elle n'a jamais lue.
+       * Existe-t-il au moins une copie disponible (some)
+       * d'une œuvre jamais lue par la personne
        */
-      return exemplairesDisponible.some((exemplaire) => {
-        return !personne.oeuvresLues.has(exemplaire.book);
-      });
+      return this.copiesAvalaiblesCurrentDay.some(
+        (copy) => !personne.oeuvresLues.has(copy.book),
+      );
     });
   }
 
-  private choisirExemplaire(
-    emprunteur: Person,
-    exemplairesDisponible: Copy[],
-  ): Copy | null {
-    // Les oeuvres sont celles qui sont disponibles à l'instant
+  private choisirExemplaire(emprunteur: Person): Copy | null {
+    // Les oeuvres sont celles qui sont disponibles ce jour
     // et qui n'ont pas été lues par l'emprunteur
-    const selection = exemplairesDisponible.filter((exemplaire) => {
-      return !emprunteur.oeuvresLues.has(exemplaire.book);
+    const selection = this.copiesAvalaiblesCurrentDay.filter((copy) => {
+      return !emprunteur.oeuvresLues.has(copy.book);
     });
 
     if (selection.length === 0) {
@@ -240,13 +240,18 @@ export class LoanGenerator {
     return selection[index];
   }
 
+  /**
+   * Le score est calculé à partir du nombre de genres en commun entre 
+   * la personne et le livre
+   * @param emprunteur 
+   * @param exemplaire 
+   * @returns 
+   */
   private scoreExemplaire(emprunteur: Person, exemplaire: Copy): number {
-    const counts = emprunteur.interestTags ?? {};
-
     return (
       1 +
       exemplaire.book.genres.reduce(
-        (somme, genre) => somme + (counts[genre] ?? 0),
+        (somme, genre) => somme + (emprunteur.interestTags[genre] ?? 0),
         0,
       )
     );
