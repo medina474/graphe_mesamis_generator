@@ -23,7 +23,7 @@ export class LibrariesRunner {
   private prets: Loan[] = [];
 
   private exemplaires: Copy[] = [];
-  private genres: Map<string, TagInfo> = new Map<string, TagInfo>();
+  private genres: Record<string, TagInfo> = {};
 
   constructor(
     private readonly graph: DirectedGraph,
@@ -52,15 +52,15 @@ export class LibrariesRunner {
     let index = 1;
     for (const b of this.books) {
       for (const genre of b.genres) {
-        const info = this.genres.get(genre);
+        const info = this.genres[genre];
 
         if (info) {
           info.count++;
         } else {
-          this.genres.set(genre, {
+          this.genres[genre] = {
             id: `T${index++}`,
             count: 1,
-          });
+          };
         }
       }
     }
@@ -69,7 +69,7 @@ export class LibrariesRunner {
 
     for (const book of this.books) {
       for (const tag of book.genres) {
-        this.addEdgeClassify(book, this.genres.get(tag)!.id);
+        this.addEdgeClassify(book, this.genres[tag]!.id);
       }
     }
 
@@ -125,6 +125,7 @@ export class LibrariesRunner {
         (a: number, l) => a + (l.books.some((b) => b.genres.includes(genre)) ? 1 : 0),
         0,
       );
+      genre.countInLibrary = nb
       if (nb == 0) console.log(`${genre} : ${nb} (${genre})`);
     }
 
@@ -223,16 +224,16 @@ export class LibrariesRunner {
     });
   }
 
-  addNodesGenres(genres: Map<string, TagInfo>) {
-    for (let genre of genres) {
-      this.addNodeGenre(genre);
+  addNodesGenres(genres: Record<string, TagInfo>) {
+    for (const [cle, valeur] of Object.entries(genres)) {
+      this.addNodeGenre(cle, valeur);
     }
   }
 
-  addNodeGenre(tag: [string, TagInfo]): void {
-    this.graph.addNode(tag[1].id, {
+  addNodeGenre(genre: string, info: TagInfo): void {
+    this.graph.addNode(info.id, {
       category: "Genre",
-      label: tag[0],
+      label: genre,
       color: "#940b0b",
     });
   }
