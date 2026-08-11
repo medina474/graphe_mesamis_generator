@@ -118,6 +118,16 @@ export class LibrariesRunner {
       if (nb == 0) console.log(`${book.title} : ${nb} (${book.genres})`);
     }
 
+    console.log(`Genres sans copie.`);
+    console.log(`----------------------------------------`);
+    for (const genre of this.genres.keys()) {
+      let nb = this.libraries.reduce(
+        (a: number, l) => a + (l.books.some((b) => b.genres.includes(genre)) ? 1 : 0),
+        0,
+      );
+      if (nb == 0) console.log(`${genre} : ${nb} (${genre})`);
+    }
+
     // Affecter une personne à une bibliothèque
     const candidats = [
       ...this.population.sort((a, b) => b.reading - a.reading),
