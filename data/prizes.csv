@@ -1,11 +1,11 @@
 id,prize
-prize-1,Hugo
-prize-2,Nebula
-prize-3,Bram Stoker
-prize-4,Grand Prix de l'Imaginaire
-prize-5,Apollo
-prize-6,Locus
-prize-7,Rosny aîné
-prize-8,Imaginales du roman francophone
-prize-9,Julia-Verlanger 
-prize-10,Bob Morane
+award-hugo,Hugo Awards
+award-nebula,Nebula
+award-bramstocker,Bram Stoker
+award-grandpriximaginaire,Grand Prix de l'Imaginaire
+award-apollo,Apollo
+award-locus,Locus
+award-rosnyaine,Rosny aîné
+award-imaginales,Imaginales
+award-juliaverlanger,Julia-Verlanger 
+award-bobmorane,Bob Morane
