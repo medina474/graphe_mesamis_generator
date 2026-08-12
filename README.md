@@ -4,13 +4,13 @@ Génération d'une population d'individus pour les Travaux pratiques sur les gra
 
 ### Nœuds
 
-Person — un individu (propriétaire, emprunteur, prêteur)
-Library — une bibliothèque personnelle
-Book — l'œuvre (le titre, indépendant du support physique)
-Author — un auteur
-Genre — un genre littéraire
-Copy — l'exemplaire physique, l'objet qui circule réellement
-Loan — un événement de prêt (nœud, pas une simple relation, j'explique pourquoi plus bas)
+- Person — un individu (propriétaire, emprunteur, prêteur)
+- Library — une bibliothèque personnelle
+- Book — l'œuvre (le titre, indépendant du support physique)
+- Author — un auteur
+- Genre — un genre littéraire
+- Copy — l'exemplaire physique, l'objet qui circule réellement
+- Loan — un événement de prêt (nœud, pas une simple relation, j'explique pourquoi plus bas)
 
 ### Relations
 

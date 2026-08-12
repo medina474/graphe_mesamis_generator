@@ -229,8 +229,13 @@
         "nace": "01.13",
          "postes": [
             {
-                "effectif": 25,
-                 "name": "-"
+                "effectif": 5,
+                "name": "encadrant"
+            },
+            {
+                "effectif": 20,
+                "richesse": 0,
+                "name": "ouvrier"
             }
          ]
     },

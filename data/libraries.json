@@ -3,7 +3,7 @@
   { "id":"L02", "taille": 12, "tags": ["policier", "horreur"] },
   { "id":"L03", "taille": 8,  "tags": ["romance"] },
   { "id":"L04", "taille": 22, "tags": ["aventure", "historique", "roman"] },
-  { "id":"L05", "taille": 15, "tags": ["science-fiction", "horreur"], "affinite": { "genre": "H"} },
+  { "id":"L05", "taille": 15, "tags": ["science-fiction", "horreur"], "affinite": { "genre": "M"} },
   { "id":"L06", "taille": 10, "tags": ["theatre", "classique"] },
   { "id":"L07", "taille": 25, "tags": ["classique", "aventure", "historique"] },
   { "id":"L08", "taille": 14, "tags": ["policier", "thriller"] },
