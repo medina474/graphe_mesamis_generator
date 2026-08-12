@@ -2,6 +2,7 @@
     { 
         "id": "ent-conserverie",
         "name": "Conserverie",
+        "nace": "10.20",
         "postes": [
             {
                 "effectif": 1,
@@ -301,6 +302,7 @@
     {
         "id": "ent-fromagerie",
         "name": "Fromagerie du lac",
+        "nace": "1051",
         "postes": [
             {
                 "effectif": 4,
@@ -321,10 +323,11 @@
     },
     {
         "id": "ent-cremerie",
-        "name": "Crémerie",
+        "name": "Crémerie ambulante",
+        "nace": "47.81"
         "postes": [
             {
-                "effectif": 4,
+                "effectif": 2,
                  "name": "-"
             }
          ]
