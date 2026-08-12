@@ -329,7 +329,7 @@
     {
         "id": "ent-cremerie",
         "name": "Crémerie ambulante",
-        "nace": "47.81"
+        "nace": "47.81",
         "postes": [
             {
                 "effectif": 2,

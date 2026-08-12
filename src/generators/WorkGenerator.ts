@@ -74,8 +74,7 @@ export class WorkGenerator {
         }
 
         this.graph.addEdge(candidat.id, emploi.enterprise.id, {
-          relation: "work",
-          category: "work",
+          relation: "WORK",
           weight: 1,
         });
 

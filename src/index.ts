@@ -40,10 +40,10 @@ addressRunner.load("data/voies.json", "data/adresses.csv");
 addressRunner.run(population);
 
 const friendshipRunner = new FriendshipRunner(graph);
-friendshipRunner.run(population, 20000);
+friendshipRunner.run(population, 3000);
 
 
-await fs.writeFile(
+await fs.writeFileSync(
   "./output/relationships.json",
   JSON.stringify(graph.export(), null, 2),
   (err) => err && console.error(err),

@@ -86,8 +86,7 @@ export class ClubMembershipGenerator {
         }
 
         this.graph.addEdge(r.personne.id, club.id, {
-            relation: "member",
-            category: "club",
+            relation: "MEMBER",
             weight: 1,
           });
 

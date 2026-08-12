@@ -51,7 +51,8 @@ export class FriendsGenerator {
       /*
        * Probabilité finale
        */
-      const p = 0.3 * affinity * opportunity;
+      const z = -2 + 3 * similarity + 1.5 * age + 1 * gender + 2 * interaction + 2 * triadic;
+      const p = 1 / (1 + Math.exp(-z));
 
       //console.log(`affinity = ${affinity.toFixed(2)} : ${similarity.toFixed(2)} * ${age.toFixed(2)} * ${gender.toFixed(2)}`);
       //console.log(`opportunity = ${opportunity.toFixed(2)} : 1 + ${interaction.toFixed(2)} * 2 + ${triadic.toFixed(2)} * 2`);
@@ -61,7 +62,6 @@ export class FriendsGenerator {
         a.edges++;
         b.edges++;
 
-        console.log(`${idA} -> ${idB}`);
         this.graph.addEdge(idA, idB, {
           relation: "friends",
           category: "friends",
@@ -85,23 +85,19 @@ export class FriendsGenerator {
       return null;
     }
 
-    const weights = candidates.map((person) =>
-      Math.pow(
-        this.graph.degree(person.id) + 1,
-        0.5, // alpha
-      ),
-    );
+    const weights = candidates.map((person) => {
+      const degreeWeight = Math.pow(this.graph.degree(person.id) + 1, 0.5);
+      const homophilyWeight = this.contextAffinity(exclude, person); // ex: 1 + bonus clubs/travail/age
+
+      return degreeWeight * homophilyWeight;
+    });
 
     const total = weights.reduce((sum, weight) => sum + weight, 0);
-
     let random = Math.random() * total;
 
     for (let i = 0; i < candidates.length; i++) {
       random -= weights[i];
-
-      if (random <= 0) {
-        return candidates[i];
-      }
+      if (random <= 0) return candidates[i];
     }
 
     return candidates[candidates.length - 1];
@@ -122,6 +118,11 @@ export class FriendsGenerator {
     const vb = this.vector(b);
 
     return Random.cosineSimilarity(va, vb);
+  }
+
+  private contextAffinity(a: Person, b: Person): number {
+    const difference = Math.abs(a.age - b.age);
+    return Math.exp(-difference / 15);
   }
 
   private ageAffinity(a: Person, b: Person): number {
@@ -157,7 +158,7 @@ export class FriendsGenerator {
     const result = new Set<string>();
 
     for (const neighbor of this.graph.neighbors(personId)) {
-      if (this.graph.getNodeAttribute(neighbor, "category") === category) {
+      if (this.graph.getNodeAttribute(neighbor, "relation") === category) {
         result.add(neighbor);
       }
     }
@@ -185,17 +186,17 @@ export class FriendsGenerator {
       const relation = this.graph.getEdgeAttribute(a, b, "relation");
 
       if (
-        relation === "parent" ||
-        relation === "child" ||
-        relation === "siblings"
+        relation === "mother" ||
+        relation === "father" ||
+        relation === "child"
       ) {
         score += 0.6;
       }
     }
 
     // Clubs communs
-    const clubsA = this.getNeighborsByCategory(a, "club");
-    const clubsB = this.getNeighborsByCategory(b, "club");
+    const clubsA = this.getNeighborsByCategory(a, "MEMBER");
+    const clubsB = this.getNeighborsByCategory(b, "MEMBER");
 
     const commonClubs = this.intersectionSize(clubsA, clubsB);
 
@@ -204,9 +205,8 @@ export class FriendsGenerator {
     }
 
     // Entreprise commune
-    const enterprisesA = this.getNeighborsByCategory(a, "enterprise");
-
-    const enterprisesB = this.getNeighborsByCategory(b, "enterprise");
+    const enterprisesA = this.getNeighborsByCategory(a, "WORK");
+    const enterprisesB = this.getNeighborsByCategory(b, "WORK");
 
     const commonEnterprises = this.intersectionSize(enterprisesA, enterprisesB);
 
