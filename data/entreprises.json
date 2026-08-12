@@ -59,6 +59,7 @@
     { 
         "id": "ent-coiffeur",
         "name": "Coiffeur",
+        "nace": "96.21",
         "postes": [
             {
                 "effectif": 1,
@@ -181,6 +182,7 @@
     {
         "id": "ent-chantier",
         "name": "Chantier naval",
+        "nace": "30.11"
         "postes": [
             {
                 "effectif": 1,
@@ -220,5 +222,117 @@
                  "name": "-"
             }
          ]
-    }
+    },
+    {
+        "id": "ent-moulin",
+        "name": "Moulin des quatre vents",
+         "postes": [
+            {
+                "effectif": 2,
+                 "name": "-"
+            }
+         ]
+    },
+    {
+        "id": "ent-biscuiterie",
+        "name": "Biscuiterie de l'île",
+         "postes": [
+            {
+                "effectif": 10,
+                 "name": "-"
+            }
+         ]
+    },
+    {
+        "id": "ent-avicole",
+        "name": "Élevage de la plume",
+        "nace": "01.47",
+         "postes": [
+            {
+                "effectif": 5,
+                 "name": "-"
+            }
+         ]
+    },
+    {
+        "id": "ent-verger",
+        "name": "Verger de la falaise",
+         "postes": [
+            {
+                "effectif": 4,
+                 "name": "-"
+            }
+         ]
+    },
+    {
+        "id": "ent-bovin",
+        "name": "Élevage du sabot",
+         "postes": [
+            {
+                "effectif": 4,
+                 "name": "-"
+            }
+         ]
+    },
+    {
+        "id": "ent-laiterie",
+        "name": "Laiterie",
+         "postes": [
+            {
+                "effectif": 12,
+                 "name": "-"
+            }
+         ]
+    },
+    {
+        "id": "ent-fromagerie",
+        "name": "Fromagerie du lac",
+         "postes": [
+            {
+                "effectif": 4,
+                 "name": "-"
+            }
+         ]
+    },
+    {
+        "id": "ent-laiterie",
+        "name": "Laiterie",
+         "postes": [
+            {
+                "effectif": 8,
+                 "name": "-"
+            }
+         ]
+    },
+    {
+        "id": "ent-cremerie",
+        "name": "Crémerie",
+         "postes": [
+            {
+                "effectif": 4,
+                 "name": "-"
+            }
+         ]
+    },
+    {
+        "id": "ent-glacier",
+        "name": "Glacier du port",
+         "postes": [
+            {
+                "effectif": 6,
+                 "name": "-"
+            }
+         ]
+    },
+    {
+        "id": "ent-aqua",
+        "name": "Ferme aquamarine",
+        "nace": "03.21",
+         "postes": [
+            {
+                "effectif": 14,
+                 "name": "-"
+            }
+         ]
+    },
 ]
