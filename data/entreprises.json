@@ -25,6 +25,7 @@
     { 
         "id": "ent-boulangerie",
         "name": "Au Pain Levant",
+        "nace": "47.24",
         "postes": [
             {
                 "effectif": 1,
@@ -148,6 +149,7 @@
     {
         "id": "ent-engineering",
         "name": "Cabinet d'ingénierie",
+        "nace": "6419",
         "postes": [
             {
                 "effectif": 7,
@@ -162,6 +164,7 @@
     {
         "id": "ent-banque-ouest",
         "name": "Banque de l'Ouest",
+        "nace": "6419",
         "postes": [
             {
                 "effectif": 5,
@@ -206,6 +209,7 @@
     {
         "id": "ent-poissonnerie",
         "name": "Poissonnerie du Port",
+        "nace": "47.23",
          "postes": [
             {
                 "effectif": 8,
@@ -216,6 +220,7 @@
     {
         "id": "ent-jardins",
         "name": "Jardins de Cocagne",
+        "nace": "01.13",
          "postes": [
             {
                 "effectif": 25,
@@ -226,6 +231,7 @@
     {
         "id": "ent-moulin",
         "name": "Moulin des quatre vents",
+        "nace": "10.61",
          "postes": [
             {
                 "effectif": 2,
@@ -236,6 +242,7 @@
     {
         "id": "ent-biscuiterie",
         "name": "Biscuiterie de l'île",
+        "nace": "10.72",
          "postes": [
             {
                 "effectif": 10,
@@ -338,6 +345,7 @@
     {
         "id": "ent-apiculteur",
         "name": "Apiculteur",
+        "nace": "01.48",
          "postes": [
             {
                 "effectif": 1,
@@ -348,6 +356,7 @@
     {
         "id": "ent-epicerie",
         "name": "Épicerie",
+        "nace": "47.27",
          "postes": [
             {
                 "effectif": 3,
@@ -358,6 +367,7 @@
     {
         "id": "ent-librairie",
         "name": "Librairie du pavé",
+        "nace": "47.61",
          "postes": [
             {
                 "effectif": 3,
@@ -368,6 +378,7 @@
     {
         "id": "ent-hotel",
         "name": "Hôtel",
+        "nace": "55.10"
          "postes": [
             {
                 "effectif": 3,
@@ -400,6 +411,7 @@
     {
         "id": "ent-veterinaire",
         "name": "Clinique des animaux",
+        "nace": "75.00",
          "postes": [
             {
                 "effectif": 3,
@@ -407,4 +419,44 @@
             }
          ]
     },
+    {
+        "id": "ent-blanchisserie",
+        "name": "Blanchisserie",
+        "nace": "96.10",
+         "postes": [
+            {
+                "effectif": 3,
+                 "name": "-"
+            }
+         ]
+    },
+    {
+        "id": "ent-camping",
+        "name": "Camping",
+        "nace": "55.30",
+         "postes": [
+            {
+                "effectif": 3,
+                 "name": "-"
+            }
+         ]
+    },
+    {
+        "id": "ent-sae",
+        "name": "Software Architecture Évolution",
+        "nace": "62.10",
+         "postes": [
+            {
+                "effectif": 1,
+                "richesse": 0,
+                "education": 0,
+                "ageMaximum": 21,
+                "name": "apprenti"
+            },
+            {
+                "effectif": 10,
+                 "name": "-"
+            }
+         ]
+    }    
 ]
