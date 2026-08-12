@@ -335,4 +335,76 @@
             }
          ]
     },
+    {
+        "id": "ent-apiculteur",
+        "name": "Apiculteur",
+         "postes": [
+            {
+                "effectif": 1,
+                 "name": "-"
+            }
+         ]
+    },
+    {
+        "id": "ent-epicerie",
+        "name": "Épicerie",
+         "postes": [
+            {
+                "effectif": 3,
+                 "name": "-"
+            }
+         ]
+    },
+    {
+        "id": "ent-librairie",
+        "name": "Librairie du pavé",
+         "postes": [
+            {
+                "effectif": 3,
+                 "name": "-"
+            }
+         ]
+    },
+    {
+        "id": "ent-hotel",
+        "name": "Hôtel",
+         "postes": [
+            {
+                "effectif": 3,
+                 "name": "-"
+            }
+         ]
+    },
+    {
+        "id": "ent-bergerie",
+        "name": "Bergerie des dunes",
+        "nace": "01.45",
+         "postes": [
+            {
+                "effectif": 3,
+                 "name": "-"
+            }
+         ]
+    },
+    {
+        "id": "ent-ecurie",
+        "name": "Écurie de la plage",
+        "nace": "01.43",
+         "postes": [
+            {
+                "effectif": 3,
+                 "name": "-"
+            }
+         ]
+    },
+    {
+        "id": "ent-veterinaire",
+        "name": "Clinique des animaux",
+         "postes": [
+            {
+                "effectif": 3,
+                 "name": "-"
+            }
+         ]
+    },
 ]
